@@ -8,6 +8,7 @@ class StaticPagesController < ApplicationController
       cart.save
     end
     @notifications = Notification.where(display_flag: true).order(created_at: "ASC")
+    @reservations = Reservation.includes(:guest)
   end
   
   def notification

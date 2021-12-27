@@ -4,7 +4,7 @@
     ハンバーガーメニュー
     トップへスクロールボタン
     タブ切替
-    アコーディオン
+    ヘッダーメニュー固定
 =============*/
 
 $(document).on('turbolinks:load', function() {
@@ -146,5 +146,43 @@ $(document).on('turbolinks:load', function() {
       var hashName = location.hash; //リンク元の指定されたURLのハッシュタグを取得
       GethashID (hashName);//設定したタブの読み込み
     });
+  // -----
+
+  // ヘッダーメニュー固定用
+    let start_position = 0,     //初期位置0
+    window_position,
+    $window = $(window),
+    $header = $('.header-menu');
+
+    // スクロールイベントを設定
+    $window.on( 'scroll' , function(){
+        // スクロール量の取得
+        window_position = $(this).scrollTop();
+        this_position = $(this).scrollTop();
+        
+        // スクロール量が初期位置より小さければ，
+        // 上にスクロールしているのでヘッダーフッターを出現させる
+        var scroll = $(window).scrollTop(); //スクロール値を取得
+        var headerPos =  $header.offset().top; //headerの位置を取得
+        var windowWidth = window.innerWidth;
+        if(windowWidth >= 600){
+          if(scroll >= 70) {
+            if (window_position <= start_position) {
+              $header.css('top','0');
+              $header.css('position','fixed');
+            } else {
+              $header.css('top','-70px');
+            }
+          } else {
+            $header.css('top','70px');
+            $header.css('position','static');
+          }
+        }
+        // 現在の位置を更新する
+        start_position = window_position;
+        
+    });
+    // 中途半端なところでロードされても良いようにスクロールイベントを発生させる
+    $window.trigger('scroll');
   // -----
 });

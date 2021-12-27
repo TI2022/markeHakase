@@ -178,7 +178,7 @@
       width: 60%;
       padding: 10px 15px;
       margin-top: 0;
-      z-index: 1; // ハンバーガーメニューモーダルより下
+      z-index: 50; // ハンバーガーメニューモーダルより下
     }
   }
 
@@ -200,6 +200,13 @@
     text-decoration: none;
     background: rgba(102, 128, 37, 0.75);
     box-shadow: 0 0 10px 3px rgba(100, 100, 100, 0.2);
+  }
+
+  .reservation-form h5 {
+    font-size: 1rem;
+    @media (max-width: 600px) {
+      font-size: 0.9em;
+    }
   }
 
   // カレンダースマホ対応
@@ -246,7 +253,8 @@
   }
 
   .calendar-wrap {
-    margin-bottom: 6rem;
+    margin-top: 30px;
+    margin-bottom: 100px;
   }
 
   #reservation_course {

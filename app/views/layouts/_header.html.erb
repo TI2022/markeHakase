@@ -1,6 +1,6 @@
 <header class='header DownMove'>
   <div class="header-logo">
-    <%= link_to image_tag("/logo1.jpg", height: '100%'), root_path %>
+    <%= link_to image_tag("/logo1.jpg", height: '100%'), root_path, 'data-turbolinks': false %>
   </div>
   <div class="pc-guest-nav">
     <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
@@ -44,7 +44,7 @@
     <% end %>
   </div>
 
-  <div class="header-menu row">
+  <div class="header-menu">
     <div class="border-r col-3"><%= link_to '店舗のご案内', stores_path, class: "link-lightgray" %></div>
     <div class="border-r col-3"><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "link-lightgray" %></div>
     <div class="border-r col-3"><%= link_to '商品情報', items_path, class: "link-lightgray" %></div>
@@ -106,6 +106,7 @@
         <ul class="phone-list-link">
           <li><%= link_to '店舗のご案内', stores_path, class: "link-black" %></li>
           <li><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "link-black" %></li>
+          <li><%= link_to '施術ご予約', reservations_path, 'data-turbolinks': false, class: "link-black" %></li>
           <li><%= link_to '商品情報', items_path, class: "link-black" %></li>
           <li><%= link_to 'イベント情報', events_path, class: "link-black" %></li>
         </ul>
@@ -122,9 +123,13 @@
             </button>
             <div class="dropdown-menu">
               <% if staff_signed_in? %>
-                <%= link_to 'スタッフ専用ページ', staffs_account_path, class: 'dropdown-item link-black' %>
                 <%= link_to '申請予約承認', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
                 <%= link_to '予約管理', reservation_management_reservations_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+                <%= link_to 'お知らせ記事一覧', notifications_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+                <%= link_to '未決済商品一覧', orders_path, class: 'dropdown-item link-black' %>
+                <%= link_to '未決済イベント一覧', event_orders_path, class: 'dropdown-item link-black' %>
+                <%= link_to 'お客様一覧', users_index_path, class: 'dropdown-item link-black' %>
+                <%= link_to 'スタッフ一覧', staffs_index_path, class: 'dropdown-item link-black' %>
                 <%= link_to '施術メニュー管理', menus_path, class: 'dropdown-item link-black' %>
                 <div class="dropdown-divider"></div>
                 <%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'dropdown-item link-black' %>
@@ -134,7 +139,7 @@
             </div>
           </div>
           <% if staff_signed_in? %>
-            <div><%= link_to 'スタッフ専用ページ', staffs_account_path, class: "btn btn-sm btn-outline-dark" %></div>
+            <div class="mt-1"><%= link_to 'スタッフ専用ページ', staffs_account_path, class: "btn btn-sm btn-outline-dark" %></div>
           <% end %>
         </div>
       </div>

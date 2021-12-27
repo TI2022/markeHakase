@@ -23,11 +23,11 @@ document.addEventListener("turbolinks:load", function() {
     timeZone: 'Asia/Tokyo',
     headerToolbar: {
       start: '',
-      center: 'title',
+      center: '',
       end: 'today prev,next'
     },
     titleFormat: function() {
-      return "予約状況";
+      return "現在の空き状況";
     },
     selectable: true,
     slotMinTime: '10:00:00',
@@ -50,17 +50,8 @@ document.addEventListener("turbolinks:load", function() {
     height: "auto",
     events: "/reservations.json",
     eventDidMount: function (info) {
-      if (info.event._def.title=='予約確定') {
-        info.el.style.background='green' ;
-      }
-      if (info.event._def.title=='仮予約') {
-        info.el.style.background='gray' ;
-      }
       if (info.event._def.title=='×') {
         info.el.style.background='darkgray' ;
-      }
-      if (info.event._def.title=='施術完了') {
-        info.el.style.background='blue' ;
       }
     }
   });

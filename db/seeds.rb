@@ -282,6 +282,34 @@ Menu.create!(
   store_id: 1
 )
 
+Top.create!(
+  reserve_title: "Web予約手順",
+  reserve_text: "①下記項目にご入力いただき、ご確認後、入力内容を送信します。",
+  reserve_text_caution: "※この時点では仮の予約となります。予約は確定ではありません。",
+  reserve_text2: "②スタッフが申請予約を確認後、折り返しメールにて予約確定の案内を差し上げます。",
+  reserve_text2_caution: "※メールが届いた時点で予約が確定になります。",
+  reserve_comfirm_title: "○ご確認事項",
+  reserve_comfirm_text: "※すでに、スケジュールが埋まっている場合もございます。ご了承ください。
+※スケジュールを調整した上、改めてこちらからご連絡いたします。
+※送信していただく情報は、ご予約・お問い合わせ対応以外の目的で使用することはありません。
+※送信いただいた内容に詳しくお返事するために、メールでなくお電話でご連絡させていただく場合もございます。",
+  calendar_title: "現在の予約空き状況",
+  introduction_title: "サロン紹介",
+  introduction_text: "巻き爪、タコ、ウオノメのケアを中心としたボディケアサロンです。
+巻き爪ケアは痛みが少なく短い爪でも補正ができ、ご好評をいただいています！
+皆様のご来店をお待ちしています。",
+  introduction_address: "〒254-0034 神奈川県平塚市宝町9-14 平塚スポーツケアセンター2階",
+  introduction_time: "11:00〜20:00(18:00最終受付)",
+  introduction_holiday: "日曜日",
+  introduction_tel: "0463-27-2008",
+  slide_number: 0,
+  image_order: 1,
+  slide_image_count: 3,
+  introduction_image_count: 2,
+  image_text: "一番目の画像",
+  store_id: 1
+)
+
 10.times do |n|
   name  = Faker::Name.name
   email = "sample-#{n+1}@email.com"

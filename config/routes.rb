@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
   get 'static_pages/notification', to: 'static_pages#notification'
+  resources :tops, only: [:new, :create, :edit, :update, :show, :index]
   resources :menus do
     collection do
       get :treatment_menu #ユーザーメニュー一覧画面
     end
   end
+
   resources :reservations do
     collection do
       get :management_new
@@ -57,7 +59,6 @@ Rails.application.routes.draw do
     passwords:     'staffs/passwords',
     registrations: 'staffs/registrations'
   }
-  resources :reservations
   resources :stores
   resources :items do
     collection do

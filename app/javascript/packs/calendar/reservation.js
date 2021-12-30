@@ -32,7 +32,7 @@ document.addEventListener("turbolinks:load", function() {
     selectable: true,
     slotMinTime: '10:00:00',
     slotMaxTime: '20:00:00',
-    slotDuration: '00:20:00',
+    slotDuration: '00:10:00',
     slotLabelInterval: '01:00:00',
     slotLabelFormat: {
       hour: 'numeric',

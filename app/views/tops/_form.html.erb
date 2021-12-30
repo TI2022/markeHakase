@@ -1,0 +1,122 @@
+
+  <%= form_with(model: @top, local: true) do |f| %>
+
+      <table class="table">
+        <tr>
+          <%= f.label :image %><br>
+          <%= f.file_field :image, id: :top_img%>
+          <% if @top.image.present? %>
+            <%= image_tag @top.image.url, width: "100%", class: "image-border", id: :top_img_prev %>
+          <% else %>
+            <%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :top_img_prev %>
+          <% end %>
+        </tr>
+        <tr>
+          <td><%= f.label :reserve_title %></td>
+          <td><%= f.text_field :reserve_title, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :reserve_text %></td>
+          <td><%= f.text_field :reserve_text, class: "form-control" %></td>
+        </tr>
+        <tr>
+        <td><%= f.label :reserve_text_caution %></td>
+        <td><%= f.text_field :reserve_text_caution, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :reserve_text2 %></td>
+          <td><%= f.text_field :reserve_text2, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :reserve_text2_caution %></td>
+          <td><%= f.text_field :reserve_text2_caution, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :reserve_comfirm_title %></td>
+          <td><%= f.text_field :reserve_comfirm_title, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :reserve_comfirm_text %></td>
+          <td><%= f.text_area :reserve_comfirm_text, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :calendar_title %></td>
+          <td><%= f.text_field :calendar_title, class: "form-control" %></td>
+        </tr>
+        <tr>
+        <td><%= f.label :introduction_title %></td>
+        <td><%= f.text_field :introduction_title, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :introduction_text %></td>
+          <td><%= f.text_area :introduction_text, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :introduction_address %></td>
+          <td><%= f.text_field :introduction_address, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :introduction_time %></td>
+          <td><%= f.text_field :introduction_time, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :introduction_holiday %></td>
+          <td><%= f.text_field :introduction_holiday, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :introduction_tel %></td>
+          <td><%= f.text_field :introduction_tel, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :slide_number %></td>
+          <td><%= f.number_field :slide_number, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :image_order %></td>
+          <td><%= f.number_field :image_order, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :image_text %></td>
+          <td><%= f.text_field :image_text, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :slide_image_count %></td>
+          <td><%= f.number_field :slide_image_count, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :introduction_image_count %></td>
+          <td><%= f.number_field :introduction_image_count, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :main_slide_flag %></td>
+          <td>表示する場合はチェックを入れる<%= f.check_box :main_slide_flag %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :reserve_image_flag %></td>
+          <td>表示する場合はチェックを入れる<%= f.check_box :reserve_image_flag %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :introduction_image_flag %></td>
+          <td>表示する場合はチェックを入れる<%= f.check_box :introduction_image_flag %></td>
+        </tr>
+      </table>
+    <%= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>
+    <%= link_to 'キャンセル', tops_path, class: "link-gray" %>
+  <% end %>
+
+  <script type="text/javascript">
+    $(function() {
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+      $('#top_img_prev').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+          }
+      }
+      $("#top_img").change(function(){
+          readURL(this);
+      });
+    });
+  </script>

@@ -9,6 +9,11 @@ class StaticPagesController < ApplicationController
     end
     @notifications = Notification.where(display_flag: true).order(created_at: "ASC")
     @reservations = Reservation.includes(:guest)
+    @tops = Top.where(main_slide_flag: 1).order(image_order: :asc)
+    @top1 = Top.find(1)
+    
+    @reserve_top = Top.find_by(reserve_image_flag: 1)
+    @introduce_top = Top.find_by(introduction_image_flag: 1)
   end
   
   def notification

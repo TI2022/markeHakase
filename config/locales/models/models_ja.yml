@@ -1,12 +1,37 @@
 ja:
   activerecord:
     models:
+      top: トップ
       item: 商品
       order: 注文
       event: イベント
       store: 店舗
       reservation: 予約
     attributes:
+      top:
+        reserve_title: 予約タイトル
+        reserve_text: 予約テキスト
+        reserve_text_caution: 予約テキスト注意書き
+        reserve_text2: 予約テキスト２
+        reserve_text2_caution: 予約テキスト注意書き２
+        reserve_comfirm_title: 予約確認タイトル
+        reserve_comfirm_text: 予約確認テキスト
+        calendar_title: カレンダータイトル
+        introduction_title: サロン紹介タイトル
+        introduction_text: サロン紹介テキスト
+        introduction_address: サロン紹介住所
+        introduction_time: サロン紹介営業時間
+        introduction_holiday: サロン紹介定休日
+        introduction_tel: サロン紹介電話番号
+        image_text: 画像テキスト
+        slide_number: スライド画像番号
+        image_order: 画像順番
+        introduction_image_count: サロン紹介画像表示枚数
+        slide_image_count: メインスライド表示枚数
+        main_slide_flag: メインスライド画像表示
+        reserve_image_flag: 予約説明画像表示
+        introduction_image_flag: 紹介画像表示
+        image: 画像
       item:
         id: ID
         name: 商品名

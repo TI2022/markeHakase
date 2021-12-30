@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :search, :show, :admin_new, :admin_create, :admin_edit, :admin_update, :admin_destroy]
   skip_before_action :authenticate_staff!, only: [:account] # 抜けていたので追記しました
   before_action :set_q, only: [:index, :search]
-  before_action :set_payment_q, only: :account
 
   def index
     @users = User.all.page(params[:page]).per(10).order(id: "ASC")
@@ -66,6 +65,7 @@ class UsersController < ApplicationController
     @users = User.where(id: current_user.id)
     @reservations = Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where.not(status: 3)
     @completed_reservations= Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where(status: 3)
+    @q = current_user.cart.payments.ransack(params[:q]) if current_user.cart.payments.present?
     @payments = @q.result.page(params[:page]).per(5).order(id: "DESC") if current_user.cart.payments.present?
   end
 
@@ -87,7 +87,5 @@ class UsersController < ApplicationController
     @q = User.ransack(params[:q])
   end
 
-  def set_payment_q
-    @q = current_user.cart.payments.ransack(params[:q]) if current_user.cart.payments.present?
-  end
+  @q = current_user.cart.payments.ransack(params[:q]) if current_user.cart.payments.present?
 end

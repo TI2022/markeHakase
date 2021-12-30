@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_123508) do
+ActiveRecord::Schema.define(version: 2021_12_27_134723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,35 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.time "last_order_time"
     t.string "non_business_day"
     t.integer "working_staff"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tops", force: :cascade do |t|
+    t.integer "store_id", default: 1
+    t.string "reserve_title"
+    t.string "reserve_text"
+    t.string "reserve_text_caution"
+    t.string "reserve_text2"
+    t.string "reserve_text2_caution"
+    t.string "reserve_comfirm_title"
+    t.string "reserve_comfirm_text"
+    t.string "calendar_title"
+    t.string "introduction_title"
+    t.string "introduction_text"
+    t.string "introduction_address"
+    t.string "introduction_time"
+    t.string "introduction_holiday"
+    t.string "introduction_tel"
+    t.string "image_text"
+    t.integer "image_order"
+    t.integer "slide_number"
+    t.integer "slide_image_count"
+    t.integer "introduction_image_count"
+    t.integer "main_slide_flag", default: 0
+    t.integer "introduction_image_flag", default: 0
+    t.integer "reserve_image_flag", default: 0
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

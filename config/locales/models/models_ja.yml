@@ -63,10 +63,13 @@ ja:
         category_title: カテゴリータイトル
         title_order: カテゴリータイトル順番
         title: 施術メニュー
+        full_title: 予約メニュー
         description: 施術内容
         charge: 料金
         treatment_time: 施術時間
         course_number: コース番号
+        image_number: 画像番号
+        image: 画像
       reservation:
         start_time: 開始時間
         end_time: 終了時間

@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(version: 2021_12_27_134723) do
     t.integer "treatment_time"
     t.integer "course_number", default: 0
     t.integer "store_id", default: 1
+    t.integer "image_number"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -4,6 +4,17 @@
 </div>
 <table class="table table-striped">
   <tbody>
+    <tr>
+      <div class="store-card-container">
+        <div class="store-card-item">
+          <% if @menu.image? %>
+            <%= link_to image_tag(@menu.image.url, width: '100%', class: "image-border border-radius-menu"), menu_path(@menu) %>
+          <% else %>
+            <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-menu"), menu_path(@menu) %>
+          <% end %>
+        </div>
+      </div>
+    </tr>
     <tr class="center">
       <th>カテゴリー</th>
     </tr>

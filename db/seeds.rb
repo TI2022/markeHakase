@@ -269,7 +269,7 @@ Menu.create!(
 )
 
 Menu.create!(
-  category: "Topping　~トッピング~",
+  category: "Topping  ~トッピング~",
   category_order: 3,
   category_title: "全身",
   title_order: 1,

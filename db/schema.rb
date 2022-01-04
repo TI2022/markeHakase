@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
   enable_extension "plpgsql"
 
   create_table "carts", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "store_id"
+    t.integer "store_id", default: 1
     t.string "name"
     t.string "description"
     t.integer "price"
@@ -102,11 +102,14 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.bigint "cart_id", null: false
+    t.bigint "cart_id"
+    t.bigint "item_id"
     t.integer "quantity"
     t.datetime "paid_at"
     t.integer "payment_id"
+    t.integer "adult_count"
+    t.integer "child_count"
+    t.time "shipped_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"
@@ -114,18 +117,20 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.bigint "cart_id", null: false
+    t.bigint "cart_id"
     t.integer "subtotal"
     t.integer "tax"
     t.integer "shipping_fee"
     t.integer "total"
+    t.time "checked_at"
+    t.time "all_shipped_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_payments_on_cart_id"
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "store_id"
+    t.integer "store_id", default: 1
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "title_for_guest"
@@ -136,7 +141,11 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.integer "staff_id"
     t.integer "guest_id"
     t.datetime "reservation_time"
-    t.boolean "holiday_flag", default: false
+    t.integer "holiday_flag", default: 0
+    t.integer "cancel_flag", default: 0
+    t.string "treatment_menu"
+    t.integer "treatment_time_menu"
+    t.integer "charge_menu"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -149,10 +158,11 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "store_id"
+    t.bigint "store_id", default: 1
     t.integer "authority"
     t.string "name"
     t.string "kana"
+    t.string "phone"
     t.integer "sex"
     t.datetime "birthday"
     t.string "address"
@@ -166,7 +176,17 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
 
   create_table "stores", force: :cascade do |t|
     t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.string "line_id"
     t.string "address"
+    t.string "description"
+    t.time "opening_time"
+    t.time "closing_time"
+    t.time "last_order_time"
+    t.string "non_business_day"
+    t.integer "working_staff"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -181,12 +201,14 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", default: "", null: false
     t.string "kana"
+    t.string "phone"
     t.integer "sex"
     t.datetime "birthday"
     t.datetime "enter_date"
     t.datetime "exit_date"
     t.boolean "flag", default: false, null: false
-    t.bigint "store_id"
+    t.integer "cart_id"
+    t.bigint "store_id", default: 1
     t.string "provider"
     t.string "uid"
     t.integer "postal_code"

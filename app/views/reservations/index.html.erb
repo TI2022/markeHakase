@@ -5,7 +5,12 @@
 
 <% unless user_signed_in? %>
   <font size="2rem" color="red">※WEB予約をご利用になる際はログインが必要になります。</font>
-  <%= link_to 'アカウントを登録する', new_user_registration_path, class: "btn btn-sm btn-outline-info" %>
+  <%= link_to 'ログインする', new_user_session_path, class: "btn btn-sm btn-outline-info" %>
+  <%= link_to 'アカウントを登録する', new_user_registration_path, class: "btn btn-sm btn-outline-primary" %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "ご予約はこちら", new_reservation_path, remote: true, class: "btn btn-outline-info" %>
 <% end %>
 
 <div class="calendar-wrap">

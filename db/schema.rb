@@ -83,9 +83,16 @@ ActiveRecord::Schema.define(version: 2021_12_27_134723) do
     t.integer "charge"
     t.string "description"
     t.integer "treatment_time"
-    t.integer "course_number", default: 0
+    t.integer "course_number"
+    t.integer "select_tab_number"
+    t.string "select_tab_name"
+    t.integer "image_flag", default: 0
+    t.integer "menu_flag", default: 0
+    t.integer "reserve_flag", default: 0
+    t.integer "topping_number"
+    t.integer "add_nail_number"
+    t.integer "add_nail_count"
     t.integer "store_id", default: 1
-    t.integer "image_number"
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -148,6 +155,10 @@ ActiveRecord::Schema.define(version: 2021_12_27_134723) do
     t.string "treatment_menu"
     t.integer "treatment_time_menu"
     t.integer "charge_menu"
+    t.integer "topping_menu"
+    t.integer "add_nail_count"
+    t.integer "full_treatment_time_menu"
+    t.integer "full_charge_menu"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

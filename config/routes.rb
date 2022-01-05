@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       get :confirm_reservation
       get :reservation_management
       post :reservation_management_create
+      get :guest_reservation
+      post :guest_reservation_create
     end
     member do
       get :edit_reserve

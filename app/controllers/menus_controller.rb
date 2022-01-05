@@ -51,7 +51,7 @@ class MenusController < ApplicationController
 
   private
     def menu_params
-      params.require(:menu).permit(:category, :category_order, :category_title, :title_order, :title, :full_title, :charge, :description, :treatment_time, :course_number, :store_id, :image_number, :image)
+      params.require(:menu).permit(:category, :category_order, :category_title, :title_order, :title, :full_title, :charge, :description, :treatment_time, :course_number, :store_id, :select_tab_number, :select_tab_name, :image_flag, :menu_flag, :reserve_flag, :topping_number, :add_nail_number, :add_nail_count, :image)
     end
 
     def set_menus

@@ -17,7 +17,6 @@ Store.create!(
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
   non_business_day: "水曜日",
-  working_staff: "1",
   image: File.open("app/assets/images/store1.jpg")
 )
 
@@ -32,7 +31,6 @@ Store.create!(
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
   non_business_day: "水曜日",
-  working_staff: "1",
   image: File.open("app/assets/images/store1.jpg")
 )
 
@@ -47,7 +45,6 @@ Store.create!(
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
   non_business_day: "水曜日",
-  working_staff: "1",
   image: File.open("app/assets/images/store1.jpg")
 )
 
@@ -62,7 +59,6 @@ Store.create!(
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
   non_business_day: "水曜日",
-  working_staff: "1",
   image: File.open("app/assets/images/event_site1.jpg")
 )
 
@@ -139,6 +135,8 @@ Menu.create!(
   ・角質除去・座りダコ",
   treatment_time: 40,
   course_number: 1,
+  select_tab_number: 1,
+  select_tab_name: "初回",
   store_id: 1
 )
 
@@ -153,6 +151,8 @@ Menu.create!(
   description: "足全体のお手入れ",
   treatment_time: 60,
   course_number: 2,
+  select_tab_number: 1,
+  select_tab_name: "初回",
   store_id: 1
 )
 
@@ -167,6 +167,8 @@ Menu.create!(
   description: "（爪のカット・甘皮ケア・爪溝のゴミ除去・コーティング）",
   treatment_time: 40,
   course_number: 3,
+  select_tab_number: 2,
+  select_tab_name: "フットケア",
   store_id: 1
 )
 
@@ -181,6 +183,24 @@ Menu.create!(
   description: "（タコ、ウオノメ、角質除去・スクラブトリートメント・保湿ケア）",
   treatment_time: 40,
   course_number: 4,
+  select_tab_number: 2,
+  select_tab_name: "フットケア",
+  store_id: 1
+)
+
+Menu.create!(
+  category: "Foot Care  ~フットケア~",
+  category_order: 1,
+  category_title: "通常",
+  title_order: 2,
+  title: "スペシャルセット 40分",
+  full_title: "通常 スペシャルセット 40分",
+  charge: 6000,
+  description: "（ネイルケア＋フットケアのスペシャルセットケア）",
+  treatment_time: 40,
+  course_number: 5,
+  select_tab_number: 4,
+  select_tab_name: "スペシャル",
   store_id: 1
 )
 
@@ -194,7 +214,9 @@ Menu.create!(
   charge: 9000,
   description: "（ネイルケア＋フットケアのスペシャルセットケア）",
   treatment_time: 60,
-  course_number: 5,
+  course_number: 6,
+  select_tab_number: 4,
+  select_tab_name: "スペシャル",
   store_id: 1
 )
 
@@ -208,7 +230,8 @@ Menu.create!(
   charge: 3000,
   description: "※ネイルケアまたはフットケアとセットでご予約ください。",
   treatment_time: 0,
-  course_number: 6,
+  course_number: 7,
+  reserve_flag: 1,
   store_id: 1
 )
 
@@ -222,7 +245,9 @@ Menu.create!(
   charge: 8360,
   description: "※首や肩や腰など気になる部分を中心に揉みほぐします。",
   treatment_time: 80,
-  course_number: 7,
+  course_number: 8,
+  select_tab_number: 3,
+  select_tab_name: "ボディケア",
   store_id: 1
 )
 
@@ -236,7 +261,9 @@ Menu.create!(
   charge: 5170,
   description: "※首や肩や腰など気になる部分を中心に揉みほぐします。",
   treatment_time: 50,
-  course_number: 8,
+  course_number: 9,
+  select_tab_number: 3,
+  select_tab_name: "ボディケア",
   store_id: 1
 )
 
@@ -250,23 +277,27 @@ Menu.create!(
   charge: 4800,
   description: "※ふくらはぎや足裏の反射区をクリームを使ってしっかりと施術します。",
   treatment_time: 45,
-  course_number: 9,
+  course_number: 10,
+  select_tab_number: 3,
+  select_tab_name: "ボディケア",
   store_id: 1
 )
 
 Menu.create!(
-  category: "Body Care  ~ボディケア~",
-  category_order: 2,
+  category: "Topping  ~トッピング~",
+  category_order: 3,
   category_title: "足ツボ",
   title_order: 2,
   title: "足ツボ 30分",
-  full_title: "ボディケア 足ツボ 30分",
+  full_title: "トッピング 足ツボ 30分",
   charge: 3190,
   description: "※ひざから下をクリームを使って施術します。",
   treatment_time: 30,
-  course_number: 10,
+  course_number: 11,
+  reserve_flag: 1,
+  topping_number: 1,
   store_id: 1
-)
+) 
 
 Menu.create!(
   category: "Topping  ~トッピング~",
@@ -278,7 +309,43 @@ Menu.create!(
   charge: 3190,
   description: "※背中、肩など気になる部分を中心に圧してほぐします。",
   treatment_time: 30,
-  course_number: 11,
+  course_number: 12,
+  reserve_flag: 1,
+  topping_number: 2,
+  store_id: 1
+)
+
+Menu.create!(
+  category: "Foot Care  ~フットケア~",
+  category_order: 1,
+  category_title: "巻き爪補正",
+  title_order: 3,
+  title: "ネイル取り付け１本",
+  full_title: "ネイル取り付け１本",
+  charge: 3000,
+  description: "40分以上のコースと合わせてご予約ください。",
+  treatment_time: 0,
+  course_number: 13,
+  menu_flag: 1,
+  add_nail_number: 1,
+  add_nail_count: 1,
+  store_id: 1
+)
+
+Menu.create!(
+  category: "Foot Care  ~フットケア~",
+  category_order: 1,
+  category_title: "巻き爪補正",
+  title_order: 3,
+  title: "ネイル取り付け２本",
+  full_title: "ネイル取り付け２本",
+  charge: 3000,
+  description: "60分以上のコースと合わせてご予約ください。",
+  treatment_time: 0,
+  course_number: 14,
+  menu_flag: 1,
+  add_nail_number: 2,
+  add_nail_count: 2,
   store_id: 1
 )
 

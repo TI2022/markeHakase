@@ -98,6 +98,71 @@
         </div>
       </td>
     </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :select_tab_number %>
+          <%= f.number_field :select_tab_number, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :select_tab_name %>
+          <%= f.text_field :select_tab_name, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :image_flag %>
+          <%= f.number_field :image_flag, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :menu_flag %>
+          <%= f.number_field :menu_flag, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :reserve_flag %>
+          <%= f.number_field :reserve_flag, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :topping_number %>
+          <%= f.number_field :topping_number, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :add_nail_number %>
+          <%= f.number_field :add_nail_number, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :add_nail_count %>
+          <%= f.number_field :add_nail_count, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+
   </table>
   <div class="form-group">
     <%= f.submit yield(:button_text), class: "btn btn-md btn-primary" %>

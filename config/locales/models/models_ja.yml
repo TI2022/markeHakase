@@ -69,6 +69,14 @@ ja:
         treatment_time: 施術時間
         course_number: コース番号
         image_number: 画像番号
+        select_tab_number: 選択タブ番号
+        select_tab_name: 選択タブ名
+        image_flag: 施術メニュー画像表示/非表示
+        menu_flag: 施術メニュー表示/非表示
+        reserve_flag: 予約メニュー表示/非表示
+        topping_number: トッピング番号
+        add_nail_number: 爪取り付け番号
+        add_nail_count: 爪取り付け本数
         image: 画像
       reservation:
         start_time: 開始時間

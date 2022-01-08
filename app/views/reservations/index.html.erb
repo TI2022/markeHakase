@@ -16,4 +16,4 @@
 <%= link_to "ご予約画面表示", new_reservation_path, remote: true, class: "phone-reserve-show-btn", id: "phone-reservation-show-btn" %>
 
 <div id="new_reservation" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-<%= javascript_pack_tag 'calendar/reservation' %>
+<%= javascript_pack_tag 'reservations/index', 'data-turbolinks-track': 'reload' %>

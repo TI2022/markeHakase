@@ -34,11 +34,6 @@ RUN bundle install
 
 COPY . /app
 
-# アセットのプリコンパイル
-RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile \
- && yarn cache clean \
- && rm -rf node_modules tmp/cache
-
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]

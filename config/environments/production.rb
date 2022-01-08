@@ -1,15 +1,15 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  
+
   # 本番環境へのデプロイのために追加
   config.hosts << "genkinomoto.herokuapp.com"
   config.hosts << "localhost"
-  
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -31,15 +31,15 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   # false => true 動的コンパイルを有効化
   config.assets.compile = true
-  
+
   # Compress CSS using a preprocessor.
   # sass-rails gemを使用している場合コメントアウトを外す
   config.assets.css_compressor = :sass
-  
+
   #config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   # publicディレクトリ以下のアセットを返す設定
   config.public_file_server.enabled = true
-  
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = 'http://assets.example.com'
 

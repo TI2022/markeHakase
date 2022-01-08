@@ -39,7 +39,7 @@ gem 'carrierwave'
 gem 'ransack'
 gem 'payjp'
 gem 'quilljs-rails', :git => 'https://github.com/abhinavmathur/quilljs-rails.git' # エラーが出たのでhttpsに変更しました
-
+gem 'spring'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -51,7 +51,6 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
-  gem 'spring'
   gem 'spring-commands-rspec'
 end
 

@@ -80,6 +80,9 @@
   </div>
 
   <div id="account-payment" class="area">
+<%
+=begin
+%>
     <% if current_user.cart.payments.present? %>
       <%= paginate @payments %>
       <h2>>購入履歴 【 <%= current_user.name %> 様 】</h2>
@@ -142,6 +145,9 @@
       <h2>購入履歴 【 <%= current_user.name %> 様 】</h2>
       <p>お客様の注文履歴はありません。</p>
     <% end %>
+<%
+=end
+%>
   </div>
 </div>
 

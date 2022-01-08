@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     @users = User.where(id: current_user.id)
     @reservations = Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where.not(status: 3)
     @completed_reservations= Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where(status: 3)
-    @payments = @q.result.page(params[:page]).per(5).order(id: "DESC") if current_user.cart.payments.present?
+    # @payments = @q.result.page(params[:page]).per(5).order(id: "DESC") if current_user.cart.payments.present?
   end
 
   def out

@@ -32,6 +32,8 @@ Rails.application.configure do
   # false => true 動的コンパイルを有効化
   config.assets.compile = true
 
+  config.server_static_files = true
+
   # Compress CSS using a preprocessor.
   # sass-rails gemを使用している場合コメントアウトを外す
   config.assets.css_compressor = :sass

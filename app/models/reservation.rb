@@ -1,6 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :guest, class_name: 'User'
   belongs_to :staff, class_name: 'Staff'
+  has_many :reviews, dependent: :destroy
   validates :start_time, presence: true, reservation: true # reservation: trueを記述する事でreservation_validator.rbのバリデーションを有効にする
   validates :end_time, reservation: true # reservation: trueを記述する事でreservation_validator.rbのバリデーションを有効にする
   validates :course, presence: true

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   resources :reservations do
+    resources :reviews
     collection do
       get :management_new
       get :search

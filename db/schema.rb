@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_123508) do
+ActiveRecord::Schema.define(version: 2022_01_09_030802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,22 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "reservation_id", null: false
+    t.string "title"
+    t.text "content"
+    t.integer "total_score"
+    t.integer "menu_score"
+    t.integer "customer_score"
+    t.integer "atmosphere_score"
+    t.boolean "review_exists", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "staffs", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -229,6 +245,8 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "items"
   add_foreign_key "payments", "carts"
+  add_foreign_key "reviews", "reservations"
+  add_foreign_key "reviews", "users"
   add_foreign_key "staffs", "stores"
   add_foreign_key "users", "stores"
 end

@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
   def request_reservation_staff(user, reservation)
     @user = user
     @reservation = reservation
-    # mail(to: ENV["LOGIN_NAME"],
+    # mail(to: ENV["GMAIL_USERNAME"],
     mail(to: "motorsports46animals@gmail.com",#テスト用アドレスなので、本番では変更要(envファイルにて再設定してください）。
          subject: "予約申込みメール")
   end

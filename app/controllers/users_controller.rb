@@ -67,7 +67,6 @@ class UsersController < ApplicationController
     @completed_reservations= Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where(status: 3)
     # @payments = @q.result.page(params[:page]).per(5).order(id: "DESC") if current_user.cart.payments.present?
     @review_exists = Review.where(id: current_user.id).where(review_exists: true)
-
   end
 
   def out

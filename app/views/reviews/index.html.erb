@@ -54,6 +54,7 @@
           <% if current_user.id == review.user_id %>
             <tr>
               <td colspan="3" class="text-right">
+                <%= link_to "編集する", edit_reservation_review_path(@reservation, review), class:"btn btn-success" %>
                 <%#= link_to "編集する", edit_review_reservation_review_path(@reservation, review), remote: true, class:"btn btn-success" %>
                 <%= link_to "削除する", reservation_review_path(@reservation,review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
               </td>
@@ -66,4 +67,8 @@
   </div>
 </div>
 
-<div id="edit-review" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div> 
+<%
+=begin%>
+ <div id="edit-review" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>  
+<%
+=end%>

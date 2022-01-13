@@ -54,7 +54,7 @@
               <td><%= l reserve.start_time, format: :timeonly %> - <%= l (reserve.start_time + (reserve.treatment_time_menu * 60)), format: :timeonly %></td>
               <td><%= reserve.charge_menu %>円</td>
             </tr>
-            <% if !@review_exists.empty? %>
+            <% if @review_exists.empty? %>
               <tr>
                 <td colspan="4" class="text-right"><%= link_to "既にレビュー済みです", '#', class: "btn btn-secondary" %></td>
               </tr>

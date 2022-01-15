@@ -44,6 +44,7 @@ body {
 
 #c-body {
   min-height: 100vh;
+  margin-bottom: 80px;
 }
 .center {
   text-align: center;
@@ -99,6 +100,22 @@ body {
 
 .card {
   margin-bottom: 20px;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.font-bold {
+  font-weight: bold;
 }
 
 // devise設定

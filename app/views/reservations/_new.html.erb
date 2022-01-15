@@ -2,81 +2,422 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">予約画面</h5>
+      <h5 class="modal-title">
+        <i class="far fa-calendar-alt"></i>
+        施術予約
+      </h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body reservation-form row">
-      <div class="col-md-12">
-        <%= form_with(model: @reservation, url: reservations_path, method: :post) do |f| %>
-          <div id="error"></div>
-
-          <h5>日付</h5>
+    <div class="modal-body reservation-form">
+      <%= form_with(model: @reservation, url: reservations_path, method: :post) do |f| %>
+        <h5 class="pl-2 mt-3 mb-3 required">ご予約日時</h5>
+        <div class="card display-block bg-light p-3">
+          <h5 class="pl-2">日付</h5>
           <!-- 初期値は当日の現在時刻から２時間後 -->
           <!-- 時間の選択は10分単位 -->
           <%= f.datetime_select :start_time,
                                 {
                                 use_month_numbers: true,
-                                datetime_separator: '日<h5 class="mt-3">開始時間</h5><div><font size="2rem" color="red">※現在より２時間後からご予約が可能です。</font></div>',
+                                datetime_separator: '日<h5 class="pl-2 mt-3">開始時間</h5><font size="2rem" color="red"><div class="pl-2">※現在より２時間後からご予約が可能です。</div></font>',
                                 minute_step: 10,
                                 start_year: now.year,
                                 end_year: now.next_year.year
                                 },
                                 class: "form-control datetime-select-form"
           %>
+        </div>
 
-          <div class="card p-3">
+        <h5 class="pl-2 mt-3 mb-1 required">
+          <%= f.label :course, class: "col-form-label" %>
+        </h5>
+
+        <div class="card bg-light p-3">
+          <div class="all-open-btn btn btn-sm btn-info mb-3">全メニュー表示／非表示</div>
+          <% unless @first_time_guests.present? %>
             <div>
-              <%= f.check_box :add_nail_count %>
-              <%= label_tag :add_nail_count, "巻き爪補正１本", class: "mr-2"  %>
-              <%= f.check_box :add_nail_count %>
-              <%= label_tag :add_nail_count, "巻き爪補正２本", class: "mr-2"  %>
-            </div>
-
-            <div class="select_tab_name1 pt-3">
-              <span class="required"><%= f.label :course, class: "col-form-label" %></span>
-              <%= f.select :course, options_from_collection_for_select(@menu_title, :id, :full_title), :include_blank => true, class: "form-select-area", id: "select_name1" %>
-            </div>
-
-            <div class="pt-3">
-              追加オプション
-              <div class="bg-light pt-2 px-2">
-              <% @topping.each do |top| %>
-                <%= f.check_box :menu %>
-                <%= label_tag :menu, top.full_title, class: "mr-2" %>
-              <% end %>
+              <h5 class="py-1 category cursor-pointer">
+                <span class="pl-1"><%= image_tag("/wakaba.png", height: '15px') %></span>
+                <span class="px-1">初回</span>
+                <i class="fas fa-chevron-down"></i>
+              </h5>
+              <div class="py-2 reserve-white-bg">
+                <div class="menu-toggle ml-2 display-none">
+                  <% @first_menu.each do |menu| %>
+                    <div class="menu-btn btn btn-info m-2">
+                      <%= menu.title %>
+                    </div>
+                    <div class="m-2">
+                      <%= menu.description %>
+                    </div>
+                    <br />
+                  <% end %>
+                </div>
               </div>
             </div>
 
-            <div id="menu-title">ここに選択メニューが表示されます。</div>
-
-          </div>
+            <hr>
+          <% end %>
 
           <div>
-            <%= f.label :comment, class: "col-form-label" %>
-            <%= f.text_area :comment, class: "form-control" %>
+            <h5 class="py-1 category cursor-pointer">
+              <span class="px-1">フットケア／ネイルケア</span>
+              <i class="fas fa-chevron-down"></i>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="menu-toggle ml-2 display-none">
+                <% @foot_menu.each do |menu| %>
+                  <div class="menu-btn btn btn-info m-2">
+                    <%= menu.title %>
+                  </div>
+                  <div class="m-2">
+                    <%= menu.description %>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
           </div>
 
-          <%= f.hidden_field :guest_id, :value => current_user.id %>
-          <%= f.hidden_field :staff_id, :value => "1" %>
-          <%= f.hidden_field :reservation_time, :value => now %>
+          <hr>
 
-          <div class="center mt-3">
-            <%= f.submit "申込み", class: "btn btn-primary" %>
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-              キャンセル
-            </button>
+          <div>
+            <h5 class="py-1 category cursor-pointer">
+              <span class="px-1">ボディケア</span>
+              <i class="fas fa-chevron-down"></i>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="menu-toggle ml-2 display-none">
+                <% @body_menu.each do |menu| %>
+                  <div class="menu-btn btn btn-info m-2">
+                    <%= menu.title %>
+                  </div>
+                  <div class="m-2">
+                    <%= menu.description %>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
           </div>
-        <% end %>
-      </div>
+
+          <% if @guests_within_two_weeks.present? %>
+            <hr>
+
+            <div>
+              <h5 class="py-1 category cursor-pointer">
+                <span class="px-1">スペシャル</span>
+                <i class="fas fa-chevron-down"></i>
+              </h5>
+              <div class="py-2 reserve-white-bg">
+                <div class="menu-toggle ml-2 display-none">
+                  <% @special_menu.each do |menu| %>
+                    <div class="menu-btn btn btn-info m-2">
+                      <%= menu.title %>
+                    </div>
+                    <div class="m-2">
+                      <%= menu.description %>
+                    </div>
+                    <br />
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+          <hr>
+
+          <div>
+            <h5 class="py-1 category cursor-pointer">
+              <span class="px-1">DM</span>
+              <i class="fas fa-chevron-down"></i>
+              <span class="pl-2 font-red">※DMをお持ちの方</span>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="menu-toggle ml-2 display-none">
+                <% @DM_menu.each do |menu| %>
+                  <div class="menu-btn btn btn-info m-2">
+                    <%= menu.title %>
+                  </div>
+                  <div class="m-2">
+                    <%= menu.description %>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card bg-light p-3">
+          <div>
+            <h5 class="py-1 category cursor-pointer">
+              <span class="px-1">巻き爪補正</span>
+              <i class="fas fa-chevron-down"></i>
+              <span class="pl-2 font-red">※巻き爪補正をご希望の方</span>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="menu-toggle ml-2">
+                <% @add_nail_menu.each do |menu| %>
+                  <div class="add-nail-menu-btn btn btn-info m-2">
+                    <%= menu.title %>
+                  </div>
+                  <div class="m-2">
+                    <%= menu.description %>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% if @first_time_guests.present? %>
+        <div class="card bg-light p-3">
+          <div class="topping">
+            <h5 class="py-2 category cursor-pointer">
+              <span class="px-1">追加オプション</span>
+              <i class="fas fa-chevron-down"></i>
+              <span class="pl-2 font-red"></span>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="menu-toggle ml-2">
+                <% @topping_menu.each do |menu| %>
+                  <div class="topping-menu-btn btn btn-info m-2">
+                    <%= menu.full_title %>
+                  </div>
+                  <div class="m-2">
+                    <%= menu.description %>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+
+        <div class="mt-3 p-3 fixed-reserve-text-bg">
+          <button type="button" class="close fixed-text-close-btn">
+            <span>&times;</span>
+          </button>
+          <div class="font-bold">選択されたメニュー</div>
+          <div class="reserve-course-text"></div>
+          <div class="reserve-add-nail-text"></div>
+          <div class="reserve-topping-text"></div>
+        </div>
+
+        <div class="mt-3 p-3 reserve-text-bg">
+          <div class="font-bold">選択されたメニュー</div>
+          <div class="reserve-course-text"></div>
+          <div class="reserve-add-nail-text"></div>
+          <div class="reserve-topping-text"></div>
+        </div>
+
+        <div class="mt-3">
+          <%= f.label :comment, class: "col-form-label" %>
+          <%= f.text_area :comment, class: "form-control" %>
+        </div>
+
+        <%= f.hidden_field :guest_id, :value => current_user.id %>
+        <%= f.hidden_field :staff_id, :value => "1" %>
+        <%= f.hidden_field :reservation_time, :value => now %>
+
+        <div class="mt-3" id="error"></div>
+
+        <div class="center mt-3">
+          <%= f.submit "申込み", class: "btn btn-primary" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            キャンセル
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
 
 <script>
-  // 時間選択は11時〜19時まで
-  var options = $('.reservation-form form select#reservation_start_time_4i option');
+
+$('.fixed-reserve-text-bg').hide();
+
+// 各メニュータイトルのh5要素をクリックするとメニューボタンが表示される
+  $('h5.category').on('click', function() {
+    let open   = 'open'; // class
+    let $arrow = $(this).children();
+    if ( ! $arrow.hasClass( open ) ) {
+      $arrow.addClass( open );
+    } else {
+      $arrow.removeClass( open );
+    }
+    let $next_childern = $(this).next().children();
+    $next_childern.slideToggle("slow");
+  });
+// -----------------------------------------
+
+// 施術コースをクリックすると選んだコース名が施術コーステキスト欄に表示される
+  $('.menu-btn').on('click', function() {
+    let menu_text = $(this).text();
+    setTimeout(function() {
+      $('.reserve-course-text').text(menu_text);
+      $('.fixed-reserve-text-bg').show();
+    }, 300);
+  });
+// -----------------------------------------
+// 巻き爪補正メニューをクリックすると選んだメニュー名が巻き爪補正テキスト欄に表示される
+  $('.add-nail-menu-btn').on('click', function() {
+    let menu_text = $(this).text();
+    setTimeout(function() {
+      $('.reserve-add-nail-text').text(menu_text);
+      $('.fixed-reserve-text-bg').show();
+    }, 300);
+  });
+// -----------------------------------------
+// 追加オプションメニューをクリックすると選んだメニュー名が追加オプションテキスト欄に表示される
+  $('.topping-menu-btn').on('click', function() {
+    let menu_text = $(this).text();
+    setTimeout(function() {
+      $('.reserve-topping-text').text(menu_text);
+      $('.fixed-reserve-text-bg').show();
+    }, 300);
+  });
+// -----------------------------------------
+
+// 各メニューをクリックすると選んだメニュー名がテキスト欄に表示される
+  $('.all-open-btn').on('click', function() {
+    let open   = 'open'; // class
+    let $menu_toggle = $('.menu-toggle')
+    if ( ! $menu_toggle.hasClass( open ) ) {
+      $menu_toggle.addClass( open );
+      $menu_toggle.show("slow");
+    } else {
+      $menu_toggle.removeClass( open );
+      $menu_toggle.hide("slow");
+    }
+  });
+// -----------------------------------------
+
+// 各メニュータイトルのh5要素をクリックするとメニューボタンが表示される
+  $('.fixed-text-close-btn').on('click', function() {
+    $('.fixed-reserve-text-bg').hide();
+  });
+// -----------------------------------------
+
+
+
+
+  // // 巻き爪補正のチェックボックスチェック切替時の動作
+  //   // 巻き爪補正１本のチェックボックスチェック切替時の動作
+  //   $('#reservation_add_nail_count1').change(function() {
+  //     $('.default_select').show();
+  //     $('.add_nail2').hide();
+  //     let aryReserve = [];
+  //     $('[name="reservation[add_nail_count1]"]:checked').each(function(index, element){
+  //       aryReserve.push("巻き爪補正１本");
+  //     });
+  //     $('#reserve-add-nail-text').html(aryReserve.join(''));
+  //     if ($(this).prop('checked')) {
+  //       $('#reserve-selected-text2').html('');
+  //       $('.add_nail2 #reservation_course').prop("selectedIndex", 0);
+  //       $('[name="reservation[add_nail_count1]"]').val("1"); // 実際に送られるバリュー値を１に指定
+  //     }
+  //   });
+  //   // 巻き爪補正２本のチェックボックスチェック切替時の動作
+  //   $('[name="reservation[add_nail_count2]"]').change(function() {
+  //     let aryReserve = [];
+  //     $('[name="reservation[add_nail_count2]"]:checked').each(function(index, element){
+  //       aryReserve.push("巻き爪補正２本");
+  //     });
+  //     $('#reserve-add-nail-text').html(aryReserve.join(''));
+  //     if ($(this).prop('checked')) {
+  //       $('.add_nail2').show();
+  //       $('.default_select').hide();
+  //       $('#reserve-selected-text').html('');
+  //       $('.default_select #reservation_course').prop("selectedIndex", 0);
+  //       $('[name="reservation[add_nail_count2]"]').val("2"); // 実際に送られるバリュー値を１に指定
+  //     } else {
+  //       $('.add_nail2').hide();
+  //       $('.default_select').show();
+  //       $('#reserve-selected-text2').html('');
+  //     }
+  //   });
+  //   // 択一のチェックボックスにする
+  //   $('.checkGroup').on('click', function() {
+  //     if ($(this).prop('checked')){
+  //       // 一旦全てをクリアして再チェックする
+  //       $('.checkGroup').prop('checked', false);
+  //       $(this).prop('checked', true);
+  //     }
+  //   });
+  // // ---------------------------
+
+  // // selectフォームを変更した時に動作
+  //   $('.default_select #reservation_course').change(function() {
+  //     let aryReserve_text = [];
+  //     let reserveSelected = $('.default_select #reservation_course').children("option:selected");
+  //     let selectedText = reserveSelected.text();
+  //     let selectedCharge = reserveSelected.val();
+  //     $('.default_select #reservation_course').each(function(index, element){
+  //       aryReserve_text.push(selectedText);
+  //     });
+  //     $('#reserve-selected-text').html(aryReserve_text.join(''));
+  //   });
+
+  //   $('.add_nail2 #reservation_course').change(function() {
+  //     let aryReserve_text = [];
+  //     let reserveSelected = $('.add_nail2 #reservation_course').children("option:selected");
+  //     let selectedText = reserveSelected.text();
+  //     $('.add_nail2 #reservation_course').each(function(index, element){
+  //       aryReserve_text.push(selectedText);
+  //     });
+  //     $('#reserve-selected-text2').html(aryReserve_text.join(''));
+  //   });
+  // // ---------------------------
+
+  // // 追加オプションのチェックを変更した時に動作
+  //   $('[name="reservation[topping_menu][]"]').change(function() {
+  //     let aryAddReserve = [];
+  //     $('[name="reservation[topping_menu][]"]:checked').each(function(index, element){
+  //       let parent = $(element).parent();
+  //       let text = parent.text();
+  //       aryAddReserve.push(text);
+  //     });
+  //     $('#reserve-topping-text').html(aryAddReserve.join(' , '));
+  //   });
+  //   // 択一のチェックボックスにする
+  //   $('.topping_check_box input').on('click', function() {
+  //     if ($(this).prop('checked')){
+  //       // 一旦全てをクリアして再チェックする
+  //       $('.topping_check_box input').prop('checked', false);
+  //       $(this).prop('checked', true);
+  //     }
+  //   });
+  // // ---------------------------
+
+  // // submitボタンを押した時に、name要素を書き換える処理
+  //   $('[name="commit"]').on('click', function() {
+  //     // 巻き爪補正が選択されない場合は、.add_nail2 [name="reservation[course]"]をreservation[unpermitted_course]にする
+  //     $('.add_nail2 [name="reservation[course]"]').attr('name', 'reservation[unpermitted_course]');
+  //     if ($('#reservation_add_nail_count1').prop('checked')) {
+  //       $('[name="reservation[add_nail_count1]"]').attr('name', 'reservation[add_nail_count]');
+  //       $('[name="reservation[add_nail_count2]"]').attr('name', 'reservation[unpermitted_add_nail_count]');
+  //       // 同じname名だと後に記述したnameのvalueしか送信されない為、選択した方以外のname名をunpermit_courseとしてstrong_parameterで弾かれるようにする。
+  //       $('.add_nail2 [name="reservation[course]"]').attr('name', 'reservation[unpermitted_course]');
+  //     }
+  //     if ($('#reservation_add_nail_count2').prop('checked')) {
+  //       $('[name="reservation[add_nail_count2]"]').attr('name', 'reservation[add_nail_count]');
+  //       $('[name="reservation[add_nail_count1]"]').attr('name', 'reservation[unpermitted_add_nail_count]');
+  //       // 同じname名だと後に記述したnameのvalueしか送信されない為、選択した方以外のname名をunpermit_courseとしてstrong_parameterで弾かれるようにする。
+  //       $('.default_select [name="reservation[course]"]').attr('name', 'reservation[unpermitted_course]');
+  //       $('.add_nail2 [name="reservation[unpermitted_course]"]').attr('name', 'reservation[course]');
+  //     }
+  //   });
+  // ------------------------------------
+
+  // 時間選択は11時〜19時までに制限
+    var options = $('.reservation-form form select#reservation_start_time_4i option');
 
     for (var i = 0; i < options.length; i++) {
       if (options.eq(i).val() === "00") {
@@ -127,4 +468,6 @@
       options.eq(i).prop("selected", false);
     }
     options.eq(0).prop("selected", true);
+  // ------------------------------------
+
 </script>

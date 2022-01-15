@@ -13,7 +13,7 @@
           <div id="error"></div>
 
           <%= f.label :start_time, class: "col-form-label" %>
-          <%= f.datetime_field :start_time, value: @two_hours_later.strftime("%Y-%m-%dT%H:%M:00"), class: "form-control" %>
+          <%= f.datetime_field :start_time, class: "form-control" %>
 
           <%= f.label :course, class: "col-form-label" %>
           <%= f.select :course, options_from_collection_for_select(@menus, :id, :full_title), :include_blank => true, class: "form-select-area" %>

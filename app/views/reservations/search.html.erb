@@ -1,8 +1,8 @@
 <p>
   <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
   予約管理
-  　　　<%= link_to '申請予約承認画面へ  →', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'btn btn-info' %>
-  　　　<%= link_to "新規予約作成", management_new_reservations_path, remote: true, class: "btn btn-primary" %>
+        <%= link_to '申請予約承認画面へ  →', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'btn btn-info' %>
+        <%= link_to "新規予約作成", management_new_reservations_path, remote: true, class: "btn btn-primary" %>
 </p>
 <div class="center my-3">
   <%= search_form_for @q, url: search_reservations_path do |f| %>
@@ -14,24 +14,24 @@
   <thead>
     <tr class="center">
       <th>
-        <%= sort_link(@q, :id, "予約番号　↑↓") %>
+        <%= sort_link(@q, :id, "予約番号  ↑↓") %>
       </th>
       <th>
-        <%= sort_link(@q, :guest_id, "名前　↑↓") %>
+        <%= sort_link(@q, :guest_id, "名前  ↑↓") %>
       </th>
       <th>
-        <%= sort_link(@q, :start_time, "予約日　↑↓") %>
+        <%= sort_link(@q, :start_time, "予約日  ↑↓") %>
       </th>
       <th></th>
       <th>
-        <%= sort_link(@q, :treatment_menu, "コース名　↑↓") %>
+        <%= sort_link(@q, :treatment_menu, "コース名  ↑↓") %>
       </th>
       <th>
         <div>
-          <%= sort_link(@q, :status, "予約状態　↑↓") %>
+          <%= sort_link(@q, :status, "予約状態  ↑↓") %>
         </div>
         <div>
-          <%= sort_link(@q, :cancel_flag, "キャンセル　↑↓") %>
+          <%= sort_link(@q, :cancel_flag, "キャンセル  ↑↓") %>
         </div>
       </th>
       <th></th>
@@ -39,38 +39,49 @@
   </thead>
   <thead class="table-secondary">
     <tr>
-      <th scope="col">予約番号</th>
       <th scope="col">名前</th>
       <th scope="col">予約日</th>
       <th scope="col">予約時間</th>
       <th scope="col">コース名</th>
       <th scope="col">予約状態</th>
-      <th scope="col">編集/削除</th>
+      <th scope="col">編集/キャンセル</th>
+      <th scope="col"><div class="show_delete_btn danger_btn_close">削除↓</div></th>
     </tr>
   </thead>
   <tbody>
     <% if @search_reservations.present? %>
       <% @search_reservations.each do |reservation| %>
         <tr>
-          <th scope="row"><%= reservation.id %></th>
           <td><%= reservation.guest.name %>様</td>
           <td><%= l reservation.start_time, format: :dayonly %></td>
           <td><%= l reservation.start_time, format: :timeonly %> - <%= l reservation.end_time, format: :timeonly if reservation.end_time.present? %></td>
           <td><%= reservation.treatment_menu %></td>
           <% if reservation.cancel_flag == 1 %>
             <td style="color:red">キャンセル</td>
-        <% else %>
-          <td><%= reservation.status_i18n %></td>
-        <% end %>
-        <td>
-          <%= link_to '編集', edit_reserve_reservation_path(reservation), class: 'btn btn-sm btn-primary' %>
-          <% if reservation.cancel_flag == 0 %>
-            <%= link_to 'キャンセル', reservation_path(reservation), method: :delete,
-                data: { confirm: "#{reservation.guest.name}様の#{reservation.treatment_menu}をキャンセルしてもよろしいでしょうか?" },
-                class: "btn btn-sm btn-danger"
-            %>
+          <% else %>
+            <% if reservation.status_i18n === "施術完了" %>
+              <td class="font-green"><%= reservation.status_i18n %></td>
+            <% else %>
+              <td class="font-gray"><%= reservation.status_i18n %></td>
+            <% end %>
           <% end %>
-        </td>
+          <td>
+            <%= link_to '編集', edit_reserve_reservation_path(reservation), class: 'btn btn-sm btn-primary' %>
+            <% if reservation.cancel_flag == 0 %>
+              <%= link_to 'キャンセル', cancel_reserve_reservation_path(reservation), method: :post,
+                data: { confirm: "#{reservation.guest.name}様の#{reservation.treatment_menu}の予約をキャンセルしてもよろしいですか?" },
+                class: "btn btn-sm btn-warning"
+              %>
+            <% end %>
+          </td>
+          <td>
+            <div class="danger_btn">
+            <%= link_to '削除', reservation_path(reservation), method: :delete,
+              data: { confirm: "#{reservation.guest.name}様の#{reservation.treatment_menu}の予約を完全に削除してもよろしいですか?" },
+              class: "btn btn-sm btn-danger"
+            %>
+            </div>
+          </td>
         </tr>
       <% end %>
     <% else %>
@@ -83,3 +94,19 @@
 </table>
 
 <div id="management_new_reservation" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+<script>
+  if($('.show_delete_btn').hasClass('danger_btn_close')){
+    $('.danger_btn').hide();
+  }
+  $('.show_delete_btn').on('click', function() {
+    if($(this).hasClass('danger_btn_close')){
+      $(this).removeClass('danger_btn_close');
+      $(this).addClass('open');
+      $('.danger_btn').show(400);  
+    } else {
+      $(this).addClass('danger_btn_close');
+      $('.danger_btn').hide(400);
+    }
+  });
+</script>

@@ -3,13 +3,14 @@ class MenusController < ApplicationController
   skip_before_action :authenticate_user!
   #ログイン済/未に関係無くゲストは{treatment_menu}アクションのみアクセスできる
   skip_before_action :authenticate_staff!, only: :treatment_menu
-  before_action :set_menus, only: [:treatment_menu, :index]
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
   def treatment_menu
+    @menus = Menu.where(menu_flag: 0)
   end
 
   def index
+    @menus = Menu.all
   end
 
   def show
@@ -51,11 +52,27 @@ class MenusController < ApplicationController
 
   private
     def menu_params
-      params.require(:menu).permit(:category, :category_order, :category_title, :title_order, :title, :full_title, :charge, :description, :treatment_time, :course_number, :store_id, :select_tab_number, :select_tab_name, :image_flag, :menu_flag, :reserve_flag, :topping_number, :add_nail_number, :add_nail_count, :image)
-    end
-
-    def set_menus
-      @menus = Menu.all
+      params.require(:menu).permit(:category,
+                                    :category_number,
+                                    :category_order,
+                                    :category_title,
+                                    :category_title_number,
+                                    :category_title_order,
+                                    :title, :full_title,
+                                    :charge, :description,
+                                    :treatment_time,
+                                    :course_number,
+                                    :store_id,
+                                    :select_tab_number,
+                                    :select_tab_name,
+                                    :image_flag,
+                                    :menu_flag,
+                                    :reserve_flag,
+                                    :topping_number,
+                                    :add_nail_number,
+                                    :add_nail_count,
+                                    :image
+                                  )
     end
 
     def set_menu

@@ -8,8 +8,10 @@ window.$ = window.JQuery = jQuery;
 import "channels"
 import 'bootstrap'
 import '../src/application.scss'
+import '@fortawesome/fontawesome-free/js/all';
 
 require("../src/min.js")
+require("../src/quill.js")
 require("../src/common.js")
 
 //インストールしたファイルたちを呼び出します。

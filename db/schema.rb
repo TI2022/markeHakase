@@ -75,17 +75,17 @@ ActiveRecord::Schema.define(version: 2021_12_27_134723) do
 
   create_table "menus", force: :cascade do |t|
     t.string "category"
+    t.integer "category_number"
     t.integer "category_order"
     t.string "category_title"
-    t.integer "title_order"
+    t.integer "category_title_number"
+    t.integer "category_title_order"
     t.string "title"
     t.string "full_title"
     t.integer "charge"
     t.string "description"
     t.integer "treatment_time"
     t.integer "course_number"
-    t.integer "select_tab_number"
-    t.string "select_tab_name"
     t.integer "image_flag", default: 0
     t.integer "menu_flag", default: 0
     t.integer "reserve_flag", default: 0
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2021_12_27_134723) do
     t.string "treatment_menu"
     t.integer "treatment_time_menu"
     t.integer "charge_menu"
-    t.integer "topping_menu"
+    t.string "topping_menu"
     t.integer "add_nail_count"
     t.integer "full_treatment_time_menu"
     t.integer "full_charge_menu"

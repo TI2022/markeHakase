@@ -8,7 +8,7 @@
       <div class="block01 clearfix">
         <h4 id="menu_01"><%= menu.category %></h4>
         <ul class="menu_box clearfix">
-          <% @menus.where(category: menu.category).select(:category_title, :title_order).distinct.order(title_order: :asc).each do |title_menu| %>
+          <% @menus.where(category: menu.category).select(:category_title, :category_title_order).distinct.order(category_title_order: :asc).each do |title_menu| %>
             <li>
               <div class="title"><%= title_menu.category_title %></div>
               <div>

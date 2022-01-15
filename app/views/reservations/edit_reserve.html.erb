@@ -1,5 +1,5 @@
-<%= link_to '申請予約承認画面へ　→', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'btn btn-info mb-4' %><br>
-<%= link_to '予約管理画面へ　→', reservation_management_reservations_path, class: 'btn btn-info mb-4' %>
+<%= link_to '申請予約承認画面へ  →', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'btn btn-info mb-4' %><br>
+<%= link_to '予約管理画面へ  →', reservation_management_reservations_path, class: 'btn btn-info mb-4' %>
 <% now = Time.zone.now %>
 <h1>予約内容編集画面</h1>
 <div class="jumbotron">
@@ -25,7 +25,7 @@
         <%= f.label :status, class: "col-form-label" %>
         <%= f.select :status, Reservation.statuses.keys.map {|k| [I18n.t("enums.reservation.status.#{k}"), k]}, class: "form-select-area" %>
 
-        <div class="text-center my-4">キャンセル切替　：　チェックを入れるとキャンセルになります</div>
+        <div class="text-center my-4">キャンセル切替  ：  チェックを入れるとキャンセルになります</div>
         <div class="text-center"><%= f.check_box :cancel_flag, { style: 'transform: scale(2);' } %></div>
 
         <%= f.hidden_field :guest_id, :value => @reservation.guest.id %>

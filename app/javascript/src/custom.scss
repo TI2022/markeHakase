@@ -281,6 +281,28 @@ body {
   background-color: lightgray;
 }
 
+.item-card-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.item-card-item {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  border: 1px solid #dadada;
+  border-radius: 10px; /* 角丸指定 */
+}
+
+.item-card-title {
+  padding: 16px;
+  line-height: 1.2;
+}
+
 .event-card-container {
   display: grid; /* カードの横並び */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */

@@ -17,15 +17,15 @@
   </div>
   <p></p>
   <%= paginate @items %>
-  <div class="event-card-container">
+  <div class="item-card-container">
     <% @items.each do |item| %>
-      <div class="event-card-item">
+      <div class="item-card-item">
         <% if item.image? %>
           <%= link_to image_tag(item.image.url, width: '100%', class: "image-border border-radius-top"), item_path(item) %>
         <% else %>
           <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), item_path(item) %>
         <% end %>
-        <p class="event-card-title">
+        <p class="item-card-title">
           <ul>
             <li><%= link_to item.name, item_path(item), class: "link-black" %></li>
             <li><%= item.price %> 円 (税抜)</li>

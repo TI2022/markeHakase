@@ -4,10 +4,9 @@
 </p>
 
 <div class="container">
-  <div class="right">
+  <div>
     <% if staff_signed_in? %>
-      <p>スタッフ専用</p>
-      <%= link_to "新規商品登録", new_item_path, class: "btn btn-sm btn-outline-dark"%>
+      <p>[スタッフ専用]<%= link_to "新規商品登録", new_item_path, class: "btn btn-sm btn-outline-dark"%></p>
     <% end %>
   </div>
   <div class="center">
@@ -18,41 +17,32 @@
   </div>
   <p></p>
   <%= paginate @items %>
-  <table class="table">
-    <thead>
-      <tr class="center">
-        <th></th>
-        <th><%= sort_link(@q, :name, "↑↓") %></th>
-        <th><%= sort_link(@q, :price, "↑↓") %></th>
-        <th><%= sort_link(@q, :stock, "↑↓") %></th>
-        <% if staff_signed_in? %>
-          <th>スタッフ専用</th>
-        <% end %>
-      </tr>
-    </thead>
+  <div class="event-card-container">
     <% @items.each do |item| %>
-    <tbody>
-      <tr>
-        <td>
+      <div class="event-card-item">
         <% if item.image? %>
-          <%= link_to image_tag(item.image.url, width: 200, class: "image-border"), item_path(item) %>
+          <%= link_to image_tag(item.image.url, width: '100%', class: "image-border border-radius-top"), item_path(item) %>
         <% else %>
-          <%= link_to image_tag("/no_image2.png", width: 200, class: "image-border"), item_path(item) %>
+          <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), item_path(item) %>
         <% end %>
-        </td>
-        <td><%= link_to item.name, item_path(item), class: "link-black" %></td>
-        <td><%= item.price %> 円 (税抜)</td>
-        <td>在庫数: <%= item.stock %></td>
-        <% if staff_signed_in? %>
-          <td class="center">
-            <%= link_to '編集', edit_item_path(item), class: "btn btn-sm btn-outline-dark" %><br>
-            <br>
-            <%= link_to '削除', item_path(item), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
-          </td>
-        <% end %>
-      </tr>
-    </tbody>
+        <p class="event-card-title">
+          <ul>
+            <li><%= link_to item.name, item_path(item), class: "link-black" %></li>
+            <li><%= item.price %> 円 (税抜)</li>
+            <li>在庫数: <%= item.stock %></li>
+            <% if staff_signed_in? %>
+              <li>
+                <p></p>
+                スタッフ専用
+                <%= link_to '編集', edit_item_path(item), class: "btn btn-sm btn-outline-dark" %>
+                <%= link_to '削除', item_path(item), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+              </li>
+            <% end %>
+          </ul>
+        </p>
+      </div>
     <% end %>
-  </table>
+  </div>
+  <p></p>
   <%= paginate @items %>
 </div>

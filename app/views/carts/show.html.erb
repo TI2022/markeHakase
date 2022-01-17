@@ -28,9 +28,9 @@
             <td rowspan="3">
               <% item = Item.find(order.item_id) %>
               <% if item.image? %>
-                <%= link_to image_tag(item.image.url, width: 200, class: "image-border"), item_path(item) %>
+                <%= link_to image_tag(item.image.url, width: '100%', class: "image-border"), item_path(item) %>
               <% else %>
-                <%= link_to image_tag("/no_image2.png", width: 200, class: "image-border"), item_path(item) %>
+                <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border"), item_path(item) %>
               <% end %>
             </td>
             <td colspan="3"><%= link_to item.name, item_path(item), class: "link-black" %></td>

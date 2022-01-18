@@ -12,15 +12,15 @@
   </div>
 
   <div class="center">
-    <div class="store-card-container">
+    <div class="store-index-container">
       <% @stores.each do |store| %>
-        <div class="store-card-item">
+        <div class="store-index-body">
           <% if store.image? %>
             <%= link_to image_tag(store.image.url, width: '100%', class: "image-border border-radius-top"), store_path(store) %>
           <% else %>
             <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), store_path(store) %>
           <% end %>
-          <p class="store-card-title">
+          <p class="store-index-description">
             <ul>
               <li><%= link_to store.name, store_path(store), class: "link-black" %></li>
               <li><%= store.address %></li>
@@ -41,4 +41,5 @@
       <% end %>
     </div>
   </div>
+  <p></p>
 </div>

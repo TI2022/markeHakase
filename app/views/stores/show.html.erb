@@ -6,64 +6,51 @@
 <p></p>
 
 <div class="container">
-  <div class="container-wrapper">
-    <div class="split-content-left">
-      <table class="table">
-      
-        <tr>
-          <td>店舗名</td>
-          <td colspan="2"><%= @store.name %></td>
-        </tr>
-        <tr>
-          <td>住所</td>
-          <td colspan="2"><%= @store.address %></td>
-        </tr>
-        <tr>
-          <td>電話番号</td>
-          <td><%= @store.phone %></td>
-        </tr>
-        <tr>
-          <td>メール</td>
-          <td><%= @store.email %></td>
-        </tr>
-        <tr>
-          <td>営業時間</td>
-          <td>
-          <% if @store.opening_time.present? && @store.closing_time.present? %>
-            <%= @store.opening_time.strftime("%H:%M") %> から <%= @store.closing_time.strftime("%H:%M") %> まで
-          <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>ラストオーダー</td>
-          <td>
-            <% if @store.last_order_time.present? %>
-              <%= @store.last_order_time.strftime("%H:%M") %> まで受付
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <td>定休日</td>
-          <td><%= @store.non_business_day %></td>
-        </tr>
-        <tr>
-          <td>稼働スタッフ数</td>
-          <td><%= @store.working_staff %>人</td>
-        </tr>
-        <tr>
-          <td>店舗詳細</td>
-          <td><%= @store.description %></td>
-        </tr>
-      
-      </table>
-    </div>
-
-    <div class="split-content-right">
+  <div class="store-show-content-wrapper">
+    
+    <div class="store-show-content-image">
       <% if @store.image? %>
         <%= image_tag(@store.image.url, width: "100%", class: "image-border") %>
       <% else %>
         <%= image_tag("/no_image2.png", width: "100%", class: "image-border") %>
       <% end %>
     </div>
+
+    <div>
+      <ul>
+        <li>店舗名:</li>
+        <li><%= @store.name %></li>
+        <p></p>
+        <li>住所:</li>
+        <li><%= @store.address %></li>
+        <p></p>
+        <li>電話番号:</li>
+        <li><%= @store.phone %></li>
+        <p></p>
+        <li>メール:</li>
+        <li><%= @store.email %></li>
+        <p></p>
+        <li>営業時間:</li>
+        <% if @store.opening_time.present? && @store.closing_time.present? %>
+          <li><%= @store.opening_time.strftime("%H:%M") %> から <%= @store.closing_time.strftime("%H:%M") %> まで</li>
+        <% end %>
+        <p></p>
+        <li>ラストオーダー:</li>
+        <% if @store.last_order_time.present? %>
+          <li><%= @store.last_order_time.strftime("%H:%M") %> まで受付</li>
+        <% end %>
+        <p></p>
+        <li>定休日:</li>
+        <li><%= @store.non_business_day %></li>
+        <p></p>
+        <li>稼働スタッフ数:</li>
+        <li><%= @store.working_staff %> 名</li>
+        <p></p>
+        <li>店舗詳細:</li>
+        <li><%= @store.description %></li>
+        <p></p>
+      </ul>
+    </div>
+
   </div>
 </div>

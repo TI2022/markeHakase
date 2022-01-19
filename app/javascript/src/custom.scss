@@ -445,21 +445,17 @@ body {
 // -----------------------
 
 .staff-account-wrapper {
-  width: 100%;
-  display: flex; // position stickyに必要
-  align-items: baseline; // position stickyに必要
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
 }
 
-.staff-account-wrapper-left {
-  width: 65%;
-  margin-right: 5%;
+.staff-account-cards {
+  justify-content: space-around;
+  margin-right: 10px;
 }
 
-.staff-account-wrapper-right {
-  width: 30%;
-  align-self: baseline; // position stickyに必要
-  top: 6rem; // position stickyに必要 スクロールのときに上で止まる位置
-  position: sticky; // position stickyに必要
+.staff-info-table {
+  max-width: 500px;
 }
 
 .purchase-record-table {

@@ -10,14 +10,17 @@ class ReviewsController < ApplicationController
     @reservation = Reservation.find(params[:reservation_id])
     @review = @reservation.reviews.build(review_params)
     @review.user_id = current_user.id
-    # 1個の予約に対して、1個のレビューというvalidを作りたい
+    if true
+      # @reservation.is_review_exists = 2
+      @reservation.update(is_review_exists: 2)
+    end
     # review_count = Review.where(reservation_id: params[:reservation_id]).where(user_id: current_user.id).count
     if @review.save
       redirect_to reservation_reviews_url
       flash[:success] = "投稿に成功しました。"
     else
-      flash[:danger] = "投稿に失敗しました"
       render :new
+      flash[:danger] = "投稿に失敗しました。"
     end
   end
   
@@ -39,13 +42,14 @@ class ReviewsController < ApplicationController
 
   def index
     @reservation = Reservation.find(params[:reservation_id])
-    reviews = @reservation.reviews
-    @reviews = reviews.page(params[:page]).per(10).order(created_at: "ASC")
+    @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
     # @review_total_score = Review.where.not(total_score: nil)
     @review_total_score = @reviews.average(:total_score).round(1)
     @review_menu_score = @reviews.average(:menu_score).round(1)
     @review_customer_score = @reviews.average(:customer_score).round(1)
     @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
+    @review_answers = ReviewAnswer.new
+    @staff = Staff.all
   end
 
   # def show

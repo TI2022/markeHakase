@@ -32,7 +32,7 @@
     </tr>
 
     <tr>
-      <td rowspan="1">その他の評価</td>
+      <td rowspan="1">その他の評価<span class="required"></span></td>
       <td>
         <p>
           <span>メニュー・料金</span><%= f.select :menu_score, {'とても良かった': 5, 'まあまあ良かった': 4, '普通': 3, 'あまり良くなかった': 2, '良くなかった': 1 }, { include_blank: '選択してください' }, { class: 'form-control' } %>
@@ -47,12 +47,12 @@
     </tr>
 
     <tr>
-      <td><%= f.label :title %><span class="required"></span></td>
+      <td><%= f.label :title %></td>
       <td><%= f.text_field :title, class: "form-control", placeholder: "50文字以内で入力してください。", required: true %></td>
     </tr>
 
     <tr>
-      <td><%= f.label :content %><span class="required"></span></td>
+      <td><%= f.label :content %></td>
       <td><%= f.text_area :content, class: "form-control", rows: 6, placeholder: "10~1000文字内で入力してください。" %></td>
     </tr>
   </table>

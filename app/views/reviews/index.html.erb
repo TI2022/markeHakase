@@ -60,13 +60,6 @@
               </td>
             </tr>
           <% end %>
-          <% if current_staff %>
-            <tr>
-              <td colspan="3" class="text-center">
-                <%= link_to "レビューへ回答をする", new_reservation_review_review_answers_path(@reservation, review), class: "btn btn-primary" %>
-              </td>
-            </tr>
-          <% end %>
         <% end %>
       </table>
       <%= paginate(@reviews) %>

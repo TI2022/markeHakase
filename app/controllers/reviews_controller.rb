@@ -10,9 +10,9 @@ class ReviewsController < ApplicationController
     @reservation = Reservation.find(params[:reservation_id])
     @review = @reservation.reviews.build(review_params)
     @review.user_id = current_user.id
-    if true
-      # @reservation.is_review_exists = 2
-      @reservation.update(is_review_exists: 2)
+    if @reservation.is_review_exists == 1
+      @reservation.is_review_exists = 2
+      @reservation.save
     end
     # review_count = Review.where(reservation_id: params[:reservation_id]).where(user_id: current_user.id).count
     if @review.save
@@ -20,7 +20,6 @@ class ReviewsController < ApplicationController
       flash[:success] = "投稿に成功しました。"
     else
       render :new
-      flash[:danger] = "投稿に失敗しました。"
     end
   end
   
@@ -33,7 +32,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     if @review.update(review_params)
       redirect_to reservation_reviews_url
-      flash[:success] = "更新に成功しました。"
+      flash[:success] = "編集に成功しました。"
     else
       render :edit
       flash[:danger] = "更新に失敗しました。"
@@ -52,10 +51,10 @@ class ReviewsController < ApplicationController
     @staff = Staff.all
   end
 
-  # def show
-  #   @reservation = Reservation.find(params[:id])
-  #   @review = Review.find(params[:id])    
-  # end
+  def show
+    @reservation = Reservation.find(params[:id])
+    @review = Review.find(params[:id])    
+  end
 
   def destroy
     @review = Review.find(params[:id])

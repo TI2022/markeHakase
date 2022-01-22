@@ -1,10 +1,33 @@
 <div class="container">
   <h3 class="text-center mt-3">レビューへの返信を投稿</h3>
 
-  <%= @review.id %>
-  <%= @reservation.id %>
-  <%= @review.title %>
+  <p>投稿されたレビュー詳細</p>
+  <div>
+    <p><%= @review.title %></p>
+  </div>
+  <div>
+    <p><%= @review.content %></p>
+  </div>
+  <div>
+    <p>
+      <%= @review.total_score %>
+      <%= @review.menu_score %>
+      <%= @review.customer_score %>
+      <%= @review.atmosphere_score %>
+    </p>
+  </div>
+  <%#= form_with(model:[@review,@review_answer], url: reservation_review_review_answers_path local: true) do |f| %>
+  <%#= form_with(model:[@review,@review_answer], url: reservation_review_review_answers_path(@reservation, @review), local: true, method: :post) do |f| %>
+  <%= form_with(model:[@reservation,@review]) do |f| %>
+  <%= f.hidden_field :staff_id, value: current_staff.id %>
+    <div class="form-group">
+      <%= f.label :content %><br />
+      <%= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
+    </div>
 
-  <%#= form_with(model: [@review, ])  %>
-  
+    <div class="form-group">
+      <%= f.submit "投稿", class: "btn btn-primary btn-lg" %>&nbsp;
+      <%= link_to "戻る", staffs_account_path, class: "btn btn-secondary btn-lg" %>
+    </div>
+  <% end %>
 </div>

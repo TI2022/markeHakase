@@ -11,7 +11,7 @@ class ReviewAnswersController < ApplicationController
     @review_answer = ReviewAnswer.new(review_answer_params)
     @review = Review.find_by(review_exists: true)
     @review_id = @review.id
-    @review_answers.staff_id = current_staff.id
+    # @review_answers.staff_id = current_staff.id
     if @review_answer.save
       redirect_to reservation_reviews_url
       flash[:success] = "投稿に成功しました"
@@ -22,12 +22,18 @@ class ReviewAnswersController < ApplicationController
   end
 
   def edit
+    @review_answer = ReviewAnswer.find(params[:id])
   end
 
   def update
   end
 
   def destroy
+    @review_answer = ReviewAnswer.find(params[:id])
+    if @review_answer.destroy
+      redirect_to staffs_account_url
+      flash[:success] = "レビューへの投稿を削除いたしました。"
+    end
   end
 
   private

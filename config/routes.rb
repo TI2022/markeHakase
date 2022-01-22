@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
   end
   resources :reservations do
-    resources :reviews, except: %i[show] do
+    resources :reviews do
       resource :review_answers, except: %i[index show]
     end
     collection do
@@ -60,8 +60,8 @@ Rails.application.routes.draw do
     passwords:     'staffs/passwords',
     registrations: 'staffs/registrations'
   }
-  resources :reservations
-  resources :stores
+  # resources :reservations
+  # resources :stores
   resources :items do
     collection do
       get 'search'

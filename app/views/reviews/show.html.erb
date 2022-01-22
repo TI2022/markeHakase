@@ -1,0 +1,11 @@
+<div class="container">
+  <p>レビュー投稿内容</p>
+
+  <%= @reservation.treatment_menu %>
+
+  <% if current_staff %>
+    <p>
+      <%= link_to "レビューへ回答をする", new_reservation_review_review_answers_path(@reservation, @review), class: "btn btn-primary" %>
+    </p>
+  <% end %>
+</div>

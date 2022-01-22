@@ -1,9 +1,19 @@
 <div class="container">
-  <p>レビューを書く</p><hr>
+  <% if @review.errors.any? %>
+    <div class="alert alert-warning">
+      <ul>
+        <h5>入力に足りない箇所があります。再度ご入力をお願いいたします。</h5>
+        <% @review.errors.full_messages.each do |message| %>
+          <li class="ml-2">・<%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p class="mt-3">レビューを書く</p><hr>
   
 
+  <%= form_with(model:[@reservation,@review], local: true) do |f| %>
   <table class="table table-borderless reviews-table">
-  <%= form_with(model:[@reservation,@review]) do |f| %>
     <%#= f.hidden_field :reservation_id, value: @reservation.id %>
     <%= f.hidden_field :review_exists, value: true %>
     <%= f.hidden_field :total_score, id: "rating-value" %>
@@ -57,12 +67,15 @@
       <td><%= f.label :content %></td>
       <td><%= f.text_area :content, class: "form-control", rows: 6, placeholder: "10~1000文字内で入力してください。", required: true %></td>
     </tr>
+
+    <tr>
+      <td colspan="2" class="text-center">
+        <%= f.submit "投稿する", class: "btn btn-primary", 'data-turbolinks': false %>&nbsp;
+        <%= link_to "他のレビューを見る", reservation_reviews_path(@reservation), class: "btn btn-secondary" %>
+      </td>
+    </tr>
   </table>
-    <div class="text-center">
-      <%= f.submit "投稿する", class: "btn btn-primary", 'data-turbolinks': false %>&nbsp;
-      <%= link_to "他のレビューを見る", reservation_reviews_path(@reservation), class: "btn btn-secondary" %>
-    </div>
-    
   <% end %>
 </div>
+
 <%= javascript_pack_tag 'review/reviews' %>

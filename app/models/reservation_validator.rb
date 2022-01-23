@@ -30,9 +30,9 @@ class ReservationValidator < ActiveModel::EachValidator
     store = Store.find(record.store_id)
 
     if working_staff.count >= store.working_staff
-      record.errors.add(attribute, "稼働スタッフは#{store.working_staff}人です。") if working_staff.count >= store.working_staff # 同時刻予約はスタッフ稼働人数まで
+      record.errors.add(attribute, "エラー、稼働スタッフは#{store.working_staff}人です。") if working_staff.count >= store.working_staff # 同時刻予約はスタッフ稼働人数まで
     elsif not_own_periods.present?
-      record.errors.add(attribute, 'に重複があります') if not_own_periods.present?
+      record.errors.add(attribute, 'エラー、予約時間に重複があります。') if not_own_periods.present?
     end
 
   end

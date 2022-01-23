@@ -8,25 +8,34 @@
       <div class="block01 clearfix">
         <h4 id="menu_01"><%= menu.category %></h4>
         <ul class="menu_box clearfix">
-          <% @menus.where(category: menu.category).select(:category_title, :title_order).distinct.order(title_order: :asc).each do |title_menu| %>
+          <% @menus.where(category: menu.category).select(:category_title, :category_title_order).distinct.order(category_title_order: :asc).each do |title_menu| %>
             <li>
               <div class="title"><%= title_menu.category_title %></div>
-              <% @menus.where(category: menu.category).where(category_title: title_menu.category_title)
-                        .select(:title, :charge, :description, :course_number).distinct
-                        .order(course_number: :asc).each_with_index do |title, index|
-              %>
-                <% unless index == 0 %>
-                  <hr width=90% size=3>
-                <% end %>
-                <p>
-                  <%= title.title %>  <span class="float-right"><%= title.charge.to_s(:delimited) %>円
-                  <% if title_menu.category_title == "巻き爪補正" %>
-                    /１本
+              <div>
+                <% @menus.where(category: menu.category).where(category_title: title_menu.category_title)
+                          .order(course_number: :asc).each_with_index do |title, index|
+                %>
+                  <% unless index == 0 %>
+                    <hr width=90% size=3>
                   <% end %>
-                  </span>
-                </p>
-                <div class="course_box"><%=safe_join(title.description.split("\n"),tag(:br))%></div>
-              <% end %>
+                  <% if title.image.present? %>
+                    <% t = @menus.find(title.id) %>
+                    <% unless index == 0 %>
+                      <div class="center"><%= link_to image_tag(t.image.url, width: '90%', class: "rounded"), reservations_path, 'data-turbolinks': false %></div>
+                    <% else %>
+                      <div class="center mt-3"><%= link_to image_tag(t.image.url, width: '90%', class: "rounded"), reservations_path, 'data-turbolinks': false %></div>
+                    <% end %>
+                  <% end %>
+                  <p>
+                    <%= title.title %>  <span class="float-right"><%= title.charge.to_s(:delimited) %>円
+                    <% if title_menu.category_title == "巻き爪補正" %>
+                      ／１本
+                    <% end %>
+                    </span>
+                  </p>
+                  <div class="course_box"><%=safe_join(title.description.split("\n"),tag(:br))%></div>
+                <% end %>
+              </div>
             </li>
           <% end %>
         </ul>

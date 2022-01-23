@@ -11,6 +11,7 @@ import '../src/application.scss'
 
 require("../src/min.js")
 require("../src/common.js")
+require("../src/quill.js")
 
 //インストールしたファイルたちを呼び出します。
 import { Calendar } from '@fullcalendar/core';

@@ -1,0 +1,39 @@
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+  <%= link_to 'マイページ', users_account_path, class: "link-gray" %> ＞ 
+  <%= link_to '口コミ一覧', reservation_reviews_path(@reservation), class: "link-gray" %> ＞ 
+  口コミ詳細
+</p>
+<div class="container">
+  <h1 class="text-center">口コミ投稿内容</h1>
+
+  <div class="review-scores-show">
+    <ul>
+      <li>| お店への総合の評価 ★<%= @review.total_score %></li>&nbsp;
+      <li>| メニュー・料金に対する評価 ★<%= @review.menu_score %></li>&nbsp;
+      <li>| 接客・技術に関する評価 ★<%= @review.customer_score %></li>&nbsp;
+      <li>| 雰囲気に対する評価 ★<%= @review.atmosphere_score %></li>
+    </ul>
+  </div>
+
+  <div class="review-title-show mt-5">
+    <ul>
+      <li>口コミタイトル</li>
+      <li class="form-control"><%= @review.title %></li>
+    </ul>
+  </div>
+
+  <div class="reivew-content-show">
+    <ul>
+      <li>口コミ内容</li>
+      <li class="form-control"><%== @review.content %></li>
+    </ul>
+  </div>
+
+
+  <% if current_staff %>
+    <p class="text-center">
+      <%= link_to "口コミへ回答ページへ", new_reservation_review_review_answers_path(@reservation, @review), class: "btn btn-primary" %>
+    </p>
+  <% end %>
+</div>

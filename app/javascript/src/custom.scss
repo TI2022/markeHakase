@@ -236,8 +236,8 @@ body {
   top: 6rem; // position stickyに必要 スクロールのときに上で止まる位置
 }
 
-.cart-table-left {
-}
+// .cart-table-left {
+// }
 
 .cart-table-right {
   border: 10px orange solid;
@@ -257,8 +257,8 @@ body {
   margin-left: 0.3em;
 }
 
-.event-content-wrapper {
-}
+// .event-content-wrapper {
+// }
 
 .split-content-left {
   width: 50%;
@@ -388,6 +388,10 @@ body {
   }
 }
 
+.notification-body-form {
+  height: 250px;
+}
+
 #design-hr {
   height: 1px;
   background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#ccc), to(transparent));
@@ -423,3 +427,108 @@ body {
 .font-red {
   color: red;
 }
+
+// 星機能 ----
+.rating-box .ratings .fa {
+  font-size: 30px;
+  color: #fc0;
+  cursor: pointer;
+}
+
+.main-rating {
+  display: flex;
+}
+
+.rating-value-display {
+  font-size: 20px;
+  color: #999;
+}
+
+
+#reviews-item {
+  padding-top: 30px;
+}
+// ---
+
+// review-index ---
+
+// .star-rating-front {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   overflow: hidden;
+//   color: #ffcc33;
+// }
+// .star-rating-back {
+//   color: #ccc;
+// }
+
+// 星塗りつぶし --
+.average-score {
+  display: flex;// ★と点数を横並びにする
+  justify-content: flex-start;
+}
+
+.star-rating {
+  position: relative;
+  width: 5em;
+  height: 1em;
+  font-size: 17px;
+
+}
+.star-rating-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden; // 指定幅からはみ出した部分を隠す。
+  white-space: nowrap;// widthが足りない時に、折り返さないようにする。
+  color: #ffcc33;
+  // height: 25px;
+}
+.star-rating-back {
+  color: #ccc;
+}
+// --
+
+.reviews-container {
+  display: flex;
+  justify-content: center;
+}
+
+.reviewMainWrapper {
+  // padding-inline: 20px;
+  // width: 700px;
+  margin-top: 30px;
+  .reviews-table {
+    color: #64554A;
+    // display: flex;
+    // justify-content: center;
+  }
+  .reviews-content-header {
+    background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    border-top-left-radius: 10px;
+  }
+  // .reviews-content-top {
+    // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    // background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  // }
+  .reviews-content-body {
+    // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    min-height: 200px;
+  }
+}
+
+.total_score-top {
+  border: solid 1px #444;
+  height: 100px;
+  width: -webkit-fill-available;
+  .c-1 {
+    text-align-last: justify;
+  }
+}
+
+#total-score-review {
+  font-size: 1.4rem;
+}
+
+// ---

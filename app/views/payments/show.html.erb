@@ -59,57 +59,51 @@
     </div>
 
     <div>
-      <table class="table">
+      <div>
         <% @orders.each do |order| %>
-          <tr>
-            <td rowspan="2">
-              <% item = Item.find(order.item_id) %>
-              <% if item.image? %>
-                <%= link_to image_tag(item.image.url, width: 100, class: "image-border"), item_path(item) %>
-              <% else %>
-                <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), item_path(item) %>
-              <% end %>
-            </td>
-            <td colspan="2"><%= link_to item.name, item_path(item), class: "link-black" %></td>
+          <ul>
+            <% item = Item.find(order.item_id) %>
+            <% if item.image? %>
+              <li><%= link_to image_tag(item.image.url, width: 100, class: "image-border"), item_path(item) %></li>
+            <% else %>
+              <li><%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), item_path(item) %></li>
+            <% end %>
+            <li><%= link_to item.name, item_path(item), class: "link-black" %></li>
             <% if order.shipped_at.present? %>
-              <td>発送状況: 発送済み</td>
+              <li>発送状況: 発送済み</li>
             <% else %>
-              <td>発送状況: <span>発送準備中</span></td>
+              <li>発送状況: <span>発送準備中</span></li>
             <% end %>
-          </tr>
-          <tr>
-            <td><%= item.price %> 円(税抜)</td>
-            <td>数量: <%= order.quantity %></td>
-            <td><%= item.price*order.quantity %> 円(税抜)</td>
-          </tr>
+            <li><%= item.price %> 円(税抜)</li>
+            <li>数量: <%= order.quantity %></li>
+            <li><%= item.price*order.quantity %> 円(税抜)</li>
+          </ul>
         <% end %>
-      </table>
+      </div>
 
-      <table class="table">
+      <div>
         <% @event_orders.each do |event_order| %>
-          <tr>
-            <td rowspan="2">
-              <% event = Event.find(event_order.event_id) %>
-              <% if event.image? %>
-                <%= link_to image_tag(event.image.url, width: 100, class: "image-border"), event_path(event) %>
-              <% else %>
-                <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), event_path(event) %>
-              <% end %>
-            </td>
-            <td colspan="2"><%= link_to event.title, event_path(event), class: "link-black" %></td>
-            <% if event_order.shipped_at.present? %>
-              <td>発送状況: 発送済み</td>
+          <ul>
+            <% event = Event.find(event_order.event_id) %>
+            <% if event.image? %>
+              <li><%= link_to image_tag(event.image.url, width: 100, class: "image-border"), event_path(event) %></li>
             <% else %>
-              <td>発送状況: <span>発送準備中</span></td>
+              <li><%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), event_path(event) %></li>
             <% end %>
-          </tr>
-          <tr>
-            <td><%= event.price %> 円(税抜)</td>
-            <td>数量: <%= event_order.quantity %></td>
-            <td><%= event.price*event_order.quantity %> 円(税抜)</td>
-          </tr>
+            <li><%= link_to event.title, event_path(event), class: "link-black" %></li>
+            <% if event_order.shipped_at.present? %>
+              <li>発送状況: 発送済み</li>
+            <% else %>
+              <li>発送状況: <span>発送準備中</span></li>
+            <% end %>
+
+            <li><%= event.price %> 円(税抜)</li>
+            <li>数量: <%= event_order.quantity %></li>
+            <li><%= event.price*event_order.quantity %> 円(税抜)</li>
+          </ul>
         <% end %>
-      </table>
+      </div>
     </div>
+
   </div>
 </div>

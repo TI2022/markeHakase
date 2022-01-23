@@ -10,93 +10,98 @@
 <p></p>
 
 <div class="container">
-  <h1>注文内容 【 <%= current_user.name %> 様 】</h1>
   <div>
+  
+    <div>
+      <h1>注文内容 【 <%= current_user.name %> 様 】</h1>
+      <div>
+      </div>
+      <ul>
+        <li>注文日: <%= l @payment.created_at, format: :custom1 %></li>
+        <li>注文番号: <%= @payment.id %></li>
+        <% if @payment.all_shipped_at.present?  %>
+          <li>発送状況: 全て発送済み</li>
+        <% else %>
+          <li>発送状況: <span>発送準備中あり</span></li>
+        <% end %>
+      </ul>
+
+      <table class="table">
+        <tr><th>お届け先</th></tr>
+        <tr>
+          <td>
+            <%= current_user.name %> 様<br>
+            <%= current_user.postal_code %><br>
+            <%= current_user.prefecture_code %><br>
+            <%= current_user.city %><br>
+            <%= current_user.street %><br>
+            <%= current_user.other_address %><br>
+            <%= current_user.phone %><br>
+          </td>
+        </tr>
+        <tr><th>支払い方法</th></tr>
+        <tr><td>クレジットカード決済(PAY.JP)</td></tr>
+        <tr><th>領収書/購入明細書</th></tr>
+        <tr>
+          <td>
+            商品の小計: <%= @payment.subtotal %> 円<br>
+            送料: <%= @payment.shipping_fee %> 円<br>
+            消費税: <%= @payment.tax %> 円<br>
+            ご請求額(合計): <%= @payment.total %> 円<br>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="table">
+      <% @orders.each do |order| %>
+        <tr>
+          <td rowspan="2">
+            <% item = Item.find(order.item_id) %>
+            <% if item.image? %>
+              <%= link_to image_tag(item.image.url, width: 100, class: "image-border"), item_path(item) %>
+            <% else %>
+              <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), item_path(item) %>
+            <% end %>
+          </td>
+          <td colspan="2"><%= link_to item.name, item_path(item), class: "link-black" %></td>
+          <% if order.shipped_at.present? %>
+            <td>発送状況: 発送済み</td>
+          <% else %>
+            <td>発送状況: <span>発送準備中</span></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td><%= item.price %> 円(税抜)</td>
+          <td>数量: <%= order.quantity %></td>
+          <td><%= item.price*order.quantity %> 円(税抜)</td>
+        </tr>
+      <% end %>
+
+      <% @event_orders.each do |event_order| %>
+        <tr>
+          <td rowspan="2">
+            <% event = Event.find(event_order.event_id) %>
+            <% if event.image? %>
+              <%= link_to image_tag(event.image.url, width: 100, class: "image-border"), event_path(event) %>
+            <% else %>
+              <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), event_path(event) %>
+            <% end %>
+          </td>
+          <td colspan="2"><%= link_to event.title, event_path(event), class: "link-black" %></td>
+          <% if event_order.shipped_at.present? %>
+            <td>発送状況: 発送済み</td>
+          <% else %>
+            <td>発送状況: <span>発送準備中</span></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td><%= event.price %> 円(税抜)</td>
+          <td>数量: <%= event_order.quantity %></td>
+          <td><%= event.price*event_order.quantity %> 円(税抜)</td>
+        </tr>
+      <% end %>
+
+    </table>
   </div>
-  <ul>
-    <li>注文日: <%= l @payment.created_at, format: :custom1 %></li>
-    <li>注文番号: <%= @payment.id %></li>
-    <% if @payment.all_shipped_at.present?  %>
-      <li>発送状況: 全て発送済み</li>
-    <% else %>
-      <li>発送状況: <span>発送準備中あり</span></li>
-    <% end %>
-  </ul>
-
-  <table class="table">
-    <tr><th>お届け先</th></tr>
-    <tr>
-      <td>
-        <%= current_user.name %> 様<br>
-        <%= current_user.postal_code %><br>
-        <%= current_user.prefecture_code %><br>
-        <%= current_user.city %><br>
-        <%= current_user.street %><br>
-        <%= current_user.other_address %><br>
-        <%= current_user.phone %><br>
-      </td>
-    </tr>
-    <tr><th>支払い方法</th></tr>
-    <tr><td>クレジットカード決済(PAY.JP)</td></tr>
-    <tr><th>領収書/購入明細書</th></tr>
-    <tr>
-      <td>
-        商品の小計: <%= @payment.subtotal %> 円<br>
-        送料: <%= @payment.shipping_fee %> 円<br>
-        消費税: <%= @payment.tax %> 円<br>
-        ご請求額(合計): <%= @payment.total %> 円<br>
-      </td>
-    </tr>
-  </table>
-
-  <table class="table">
-    <% @orders.each do |order| %>
-      <tr>
-        <td rowspan="2">
-          <% item = Item.find(order.item_id) %>
-          <% if item.image? %>
-            <%= link_to image_tag(item.image.url, width: 100, class: "image-border"), item_path(item) %>
-          <% else %>
-            <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), item_path(item) %>
-          <% end %>
-        </td>
-        <td colspan="2"><%= link_to item.name, item_path(item), class: "link-black" %></td>
-        <% if order.shipped_at.present? %>
-          <td>発送状況: 発送済み</td>
-        <% else %>
-          <td>発送状況: <span>発送準備中</span></td>
-        <% end %>
-      </tr>
-      <tr>
-        <td><%= item.price %> 円(税抜)</td>
-        <td>数量: <%= order.quantity %></td>
-        <td><%= item.price*order.quantity %> 円(税抜)</td>
-      </tr>
-    <% end %>
-
-    <% @event_orders.each do |event_order| %>
-      <tr>
-        <td rowspan="2">
-          <% event = Event.find(event_order.event_id) %>
-          <% if event.image? %>
-            <%= link_to image_tag(event.image.url, width: 100, class: "image-border"), event_path(event) %>
-          <% else %>
-            <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), event_path(event) %>
-          <% end %>
-        </td>
-        <td colspan="2"><%= link_to event.title, event_path(event), class: "link-black" %></td>
-        <% if event_order.shipped_at.present? %>
-          <td>発送状況: 発送済み</td>
-        <% else %>
-          <td>発送状況: <span>発送準備中</span></td>
-        <% end %>
-      </tr>
-      <tr>
-        <td><%= event.price %> 円(税抜)</td>
-        <td>数量: <%= event_order.quantity %></td>
-        <td><%= event.price*event_order.quantity %> 円(税抜)</td>
-      </tr>
-    <% end %>
-
-  </table>
 </div>

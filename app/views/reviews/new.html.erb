@@ -1,3 +1,8 @@
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+  <%= link_to 'マイページ', users_account_path, class: "link-gray" %> ＞ 
+  口コミ新規投稿画面
+</p>
 <div class="container">
   <% if @review.errors.any? %>
     <div class="alert alert-warning">
@@ -9,9 +14,8 @@
       </ul>
     </div>
   <% end %>
-  <p class="mt-3">レビューを書く</p><hr>
+  <h1 class="text-center">口コミを書く</h1><hr>
   
-
   <%= form_with(model:[@reservation,@review], local: true) do |f| %>
   <table class="table table-borderless reviews-table">
     <%#= f.hidden_field :reservation_id, value: @reservation.id %>
@@ -71,7 +75,7 @@
     <tr>
       <td colspan="2" class="text-center">
         <%= f.submit "投稿する", class: "btn btn-primary", 'data-turbolinks': false %>&nbsp;
-        <%= link_to "他のレビューを見る", reservation_reviews_path(@reservation), class: "btn btn-secondary" %>
+        <%= link_to "他の口コミを見る", reservation_reviews_path(@reservation), class: "btn btn-secondary" %>
       </td>
     </tr>
   </table>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
   get 'static_pages/notification', to: 'static_pages#notification'
+  get 'static_pages/review_index', to: 'static_pages#review_index'
   resources :menus do
     collection do
       get :treatment_menu #ユーザーメニュー一覧画面

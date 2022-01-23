@@ -1,6 +1,6 @@
 module ReviewsHelper
-  def display_star(star)
-    "★" * star
+  def display_star(int)
+    "★" * int
   end
 
   def star_width(average)

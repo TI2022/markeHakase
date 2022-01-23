@@ -2,7 +2,8 @@ class ReviewsController < ApplicationController
   skip_before_action :authenticate_staff!
   
   def new
-    @reservation = Reservation.find_by(status: :completed)
+    @reservation = Reservation.find(params[:reservation_id])
+    # @reservation = Reservation.where(status: :completed, guest_id: current_user.id).order(id: :desc).first
     @review = Review.new
   end
   
@@ -14,7 +15,6 @@ class ReviewsController < ApplicationController
       @reservation.is_review_exists = 2
       @reservation.save
     end
-    # review_count = Review.where(reservation_id: params[:reservation_id]).where(user_id: current_user.id).count
     if @review.save
       redirect_to reservation_reviews_url
       flash[:success] = "投稿に成功しました。"
@@ -40,19 +40,20 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    @reservation = Reservation.find(params[:reservation_id])
-    @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
-    # @review_total_score = Review.where.not(total_score: nil)
+    @reservation = Reservation.where(is_review_exists: 2, guest_id: current_user.id) #投稿したユーザーの分だけを表示させる
+    @reservation_id = Reservation.find(params[:reservation_id])
+    @reviews = Review.includes(:reservation).where(user_id: current_user.id).page(params[:page]).per(10).order(created_at: "ASC")
     @review_total_score = @reviews.average(:total_score).round(1)
     @review_menu_score = @reviews.average(:menu_score).round(1)
     @review_customer_score = @reviews.average(:customer_score).round(1)
     @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
-    @review_answers = ReviewAnswer.new
-    @staff = Staff.all
+    # @review_answers = ReviewAnswer.new
+    # @staff = Staff.all
   end
 
   def show
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:reservation_id])
+    # @reservation = Reservation.where(is_review_exists: 2)
     @review = Review.find(params[:id])    
   end
 

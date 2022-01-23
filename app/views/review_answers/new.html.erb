@@ -1,33 +1,54 @@
-<div class="container">
-  <h3 class="text-center mt-3">レビューへの返信を投稿</h3>
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+  <%= link_to 'マイページ', users_account_path, class: "link-gray" %> ＞ 
+  <%= link_to '口コミ一覧', reservation_reviews_path(@reservation), class: "link-gray" %> ＞ 
+  口コミへの返答投稿
+</p>
 
-  <p>投稿されたレビュー詳細</p>
-  <div>
-    <p><%= @review.title %></p>
+<div class="container">
+  <h3 class="text-center mt-3">口コミへの返信を投稿</h3>
+
+  <p>投稿された口コミ詳細</p>
+  <hr>
+
+  <div class="review-scores-show">
+    <ul class="pl-0">
+      <li>| お店への総合の評価 ★<%= @review.total_score %></li>&nbsp;
+      <li>| メニュー・料金に対する評価 ★<%= @review.menu_score %></li>&nbsp;
+      <li>| 接客・技術に関する評価 ★<%= @review.customer_score %></li>&nbsp;
+      <li>| 雰囲気に対する評価 ★<%= @review.atmosphere_score %></li>
+    </ul>
   </div>
-  <div>
-    <p><%= @review.content %></p>
+
+  <div class="review-title-show mt-5">
+    <ul class="pl-0">
+      <li>口コミタイトル</li>
+      <li class="form-control"><%= @review.title %></li>
+    </ul>
   </div>
-  <div>
-    <p>
-      <%= @review.total_score %>
-      <%= @review.menu_score %>
-      <%= @review.customer_score %>
-      <%= @review.atmosphere_score %>
-    </p>
-  </div>
+
+  <div class="reivew-content-show">
+    <ul class="pl-0">
+      <li>口コミ内容</li>
+      <li class="form-control"><%== @review.content %></li>
+    </ul>
+  </div><br />
+  <hr>
+
   <%#= form_with(model:[@review,@review_answer], url: reservation_review_review_answers_path local: true) do |f| %>
   <%#= form_with(model:[@review,@review_answer], url: reservation_review_review_answers_path(@reservation, @review), local: true, method: :post) do |f| %>
-  <%= form_with(model:[@reservation,@review]) do |f| %>
-  <%= f.hidden_field :staff_id, value: current_staff.id %>
-    <div class="form-group">
-      <%= f.label :content %><br />
-      <%= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
-    </div>
+  <div class="review-answer-show>
+    <%= form_with(model:[@reservation,@review]) do |f| %>
+    <%= f.hidden_field :staff_id, value: current_staff.id %>
+      <div class="form-group">
+        <h4><%= f.label :"返答する内容" %></h4><br />
+        <%= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.submit "投稿", class: "btn btn-primary btn-lg" %>&nbsp;
-      <%= link_to "戻る", staffs_account_path, class: "btn btn-secondary btn-lg" %>
-    </div>
-  <% end %>
+      <div class="form-group text-center">
+        <%= f.submit "返信を投稿", class: "btn btn-primary btn-lg" %>&nbsp;
+        <%= link_to "戻る", :back, class: "btn btn-secondary btn-lg" %>
+      </div>
+    <% end %>
+  </div>
 </div>

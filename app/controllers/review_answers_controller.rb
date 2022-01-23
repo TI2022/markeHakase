@@ -2,15 +2,15 @@ class ReviewAnswersController < ApplicationController
   skip_before_action :authenticate_user!
 
   def new
-    @review = Review.find_by(review_exists: true)
-    @reservation = @review.reservation
+    @review = Review.find(params[:review_id])
+    @reservation = Reservation.where(status: :completed, guest_id: current_user.id).order(id: :desc).first
     @review_answer = ReviewAnswer.new
   end
 
   def create
     @review_answer = ReviewAnswer.new(review_answer_params)
-    @review = Review.find_by(review_exists: true)
-    @review_id = @review.id
+    # @review = Review.find_by(review_exists: true)
+    # @review_id = @review.id
     # @review_answers.staff_id = current_staff.id
     if @review_answer.save
       redirect_to reservation_reviews_url

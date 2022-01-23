@@ -388,6 +388,10 @@ body {
   }
 }
 
+.notification-body-form {
+  height: 250px;
+}
+
 #design-hr {
   height: 1px;
   background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#ccc), to(transparent));

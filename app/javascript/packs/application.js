@@ -11,8 +11,8 @@ import '../src/application.scss'
 import '@fortawesome/fontawesome-free/js/all';
 
 require("../src/min.js")
-require("../src/quill.js")
 require("../src/common.js")
+require("../src/quill.js")
 
 //インストールしたファイルたちを呼び出します。
 import { Calendar } from '@fullcalendar/core';

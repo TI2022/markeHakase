@@ -14,15 +14,14 @@
   <thead>
     <tr class="center">
       <th>
-        <%= sort_link(@q, :id, "予約番号  ↑↓") %>
-      </th>
-      <th>
         <%= sort_link(@q, :guest_id, "名前  ↑↓") %>
       </th>
       <th>
         <%= sort_link(@q, :start_time, "予約日  ↑↓") %>
       </th>
-      <th></th>
+      <th>
+        <%= sort_link(@q, :id, "予約時間  ↑↓") %>
+      </th>
       <th>
         <%= sort_link(@q, :treatment_menu, "コース名  ↑↓") %>
       </th>
@@ -45,7 +44,7 @@
       <th scope="col">コース名</th>
       <th scope="col">予約状態</th>
       <th scope="col">編集/キャンセル</th>
-      <th scope="col"><div class="show_delete_btn danger_btn_close">削除↓</div></th>
+      <th scope="col"><div class="show_delete_btn danger_btn_close cursor-pointer">削除↓</div></th>
     </tr>
   </thead>
   <tbody>

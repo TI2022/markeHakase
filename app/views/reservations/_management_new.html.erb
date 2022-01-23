@@ -7,34 +7,57 @@
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
-      <div class="col-md-12">
-        <%= form_with(model: @reservation, url: reservation_management_create_reservations_path, method: :post) do |f| %>
-          <div id="error"></div>
+    <div class="modal-body reservation-form">
+      <%= form_with(model: @reservation, url: reservation_management_create_reservations_path, method: :post) do |f| %>
+        <h5 class="pl-2 my-3 required">日付</h5>
+        <div class="card display-block bg-light p-3">
+          <%= f.datetime_field :start_time, value: Time.current.strftime('%Y-%m-%dT11:00:00'), class: "form-control" %>
+        </div>
 
-          <%= f.label :start_time, class: "col-form-label" %>
-          <%= f.datetime_field :start_time, class: "form-control" %>
-
+        <h5 class="pl-2 mt-3 mb-1">
           <%= f.label :course, class: "col-form-label" %>
-          <%= f.select :course, options_from_collection_for_select(@menus, :id, :full_title), :include_blank => true, class: "form-select-area" %>
+        </h5>
 
-          <%= f.label :comment, class: "col-form-label" %>
-          <%= f.text_area :comment, class: "form-control" %>
-
-          <%= f.label :staff_id, class: "col-form-label" %>
-          <%= f.select :staff_id, options_from_collection_for_select(@staffs, :id, :name, selected = @reservation.staff_id), :include_blank => true, class: "form-select-area" %>
-
-          <%= f.label :guest_id, class: "col-form-label" %>
-          <%= f.select :guest_id, options_from_collection_for_select(@users, :id, :name), :include_blank => true, class: "form-select-area" %>
-
-          <div class="center mt-3">
-            <%= f.submit "予約作成", class: "btn btn-primary" %>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              キャンセル
-            </button>
+        <div class="card bg-light p-3">
+          <h5 class="my-2 required">コース</h5>
+          <div class="my-3">
+            <%= f.select :course, options_from_collection_for_select(@courses, :id, :full_title), :include_blank => true, class: "form-select-area" %>
           </div>
-        <% end %>
-      </div>
+          <h5 class="my-2">巻き爪補正</h5>
+          <div class="my-3">
+            <%= f.select :add_nail_number_menu, options_from_collection_for_select(@add_nail_menus, :id, :full_title), :include_blank => true, class: "form-select--area" %>
+          </div>
+          <h5 class="my-2">トッピング</h5>
+          <div class="my-3">
+            <%= f.select :topping_number_menu, options_from_collection_for_select(@topping_menus, :id, :full_title), :include_blank => true, class: "form-select--area" %>
+          </div>
+        </div>
+
+
+        <div class="card bg-light p-3">
+          <h5 class="my-2 required"><%= f.label :guest_id, class: "col-form-label" %></h5>
+          <%= f.select :guest_id, options_from_collection_for_select(@users, :id, :name), :include_blank => true, class: "form-select-area" %>
+          
+          <h5 class="my-2 required"><%= f.label :staff_id, class: "col-form-label" %></h5>
+          <%= f.select :staff_id, options_from_collection_for_select(@staffs, :id, :name, selected = @reservation.staff_id), :include_blank => true, class: "form-select-area" %>
+          
+          <h5 class="my-2"><%= f.label :comment, class: "col-form-label" %></h5>
+          <%= f.text_area :comment, class: "form-control" %>
+        </div>
+        
+        <div class="error-wrap">
+          <div class="mt-4" id="error"></div>
+        </div>
+
+        <%= f.hidden_field :reservation_time, :value => now %>
+
+        <div class="center my-4">
+          <%= f.submit "予約作成", class: "btn btn-primary", id: "submit" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            キャンセル
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -85,31 +85,31 @@
       <th>施術メニュー画像表示／非表示</th>
     </tr>
     <tr class="center">
-      <td><%= @menu.image_flag %></td>
+      <% if @menu.image_flag == 0 %>
+        <td>表示</td>
+      <% else %>
+        <td>非表示</td>
+      <% end %>
     </tr>
     <tr class="center">
       <th>施術メニュー表示／非表示</th>
     </tr>
     <tr class="center">
-      <td><%= @menu.menu_flag %></td>
+      <% if @menu.menu_flag == 0 %>
+        <td>表示</td>
+      <% else %>
+        <td>非表示</td>
+      <% end %>
     </tr>
     <tr class="center">
       <th>予約メニュー表示／非表示</th>
     </tr>
     <tr class="center">
-      <td><%= @menu.reserve_flag %></td>
-    </tr>
-    <tr class="center">
-      <th>トッピング番号</th>
-    </tr>
-    <tr class="center">
-      <td><%= @menu.topping_number %></td>
-    </tr>
-    <tr class="center">
-      <th>巻き爪補正番号</th>
-    </tr>
-    <tr class="center">
-      <td><%= @menu.add_nail_number %></td>
+      <% if @menu.reserve_flag == 0 %>
+        <td>表示</td>
+      <% else %>
+        <td>非表示</td>
+      <% end %>
     </tr>
     <tr class="center">
       <th>巻き爪補正枚数</th>

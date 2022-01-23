@@ -298,7 +298,7 @@ Menu.create!(
   category_title_number: 2,
   category_title_order: 2,
   title: "フットケア／ネイルケア 40分",
-  full_title: "通常 フットケア／ネイルケア 40分",
+  full_title: "フットケア／ネイルケア 40分",
   charge: 6000,
   description: "（タコ、ウオノメ、角質除去・スクラブトリートメント・保湿ケア）",
   treatment_time: 40,
@@ -315,7 +315,7 @@ Menu.create!(
   category_title_number: 2,
   category_title_order: 2,
   title: "スペシャルセット 60分",
-  full_title: "通常 スペシャルセット 60分",
+  full_title: "スペシャルセット 60分",
   charge: 9000,
   description: "（ネイルケア＋フットケアのスペシャルセットケア）",
   treatment_time: 60,
@@ -333,8 +333,9 @@ Menu.create!(
   title: "スペシャルセット 40分",
   full_title: "2ヶ月以内 スペシャルセット 40分",
   charge: 5400,
-  description: "2ヶ月以内に再度フットケアをご予約のお客様は10％割引いたします。",
-  treatment_time: 60,
+  original_charge: 6000,
+  description: "2ヶ月以内に再度フットケアをご予約のお客様は、通常フットケア40分コースを10％割引いたします。",
+  treatment_time: 40,
   course_number: 7,
   menu_flag: 1,
   store_id: 1
@@ -350,13 +351,15 @@ Menu.create!(
   title: "スペシャルセット 60分",
   full_title: "2ヶ月以内 スペシャルセット 60分",
   charge: 7200,
-  description: "2ヶ月以内に再度フットケアをご予約のお客様は20％割引いたします。",
+  original_charge: 9000,
+  description: "2ヶ月以内に再度フットケアをご予約のお客様は、通常フットケア60分コースを20％割引いたします。",
   treatment_time: 60,
   course_number: 8,
   menu_flag: 1,
   store_id: 1
 )
 
+# ゲスト用メニュー表示用
 Menu.create!(
   category: "Foot Care  ~フットケア~",
   category_number: 1,
@@ -374,10 +377,11 @@ Menu.create!(
   store_id: 1
 )
 
+# 予約画面表示用
 Menu.create!(
-  category: "Foot Care  ~フットケア~",
-  category_number: 1,
-  category_order: 1,
+  category: "巻き爪補正",
+  category_number: 4,
+  category_order: 4,
   category_title: "巻き爪補正",
   category_title_number: 4,
   category_title_order: 3,
@@ -386,17 +390,17 @@ Menu.create!(
   charge: 3000,
   description: "40分以上のフットケアコースと合わせてご予約ください。",
   treatment_time: 0,
+  add_nail_count: 1,
   course_number: 10,
   menu_flag: 1,
-  add_nail_number: 1,
-  add_nail_count: 1,
   store_id: 1
 )
 
+# 予約画面表示用
 Menu.create!(
-  category: "Foot Care  ~フットケア~",
-  category_number: 1,
-  category_order: 1,
+  category: "巻き爪補正",
+  category_number: 4,
+  category_order: 4,
   category_title: "巻き爪補正",
   category_title_number: 4,
   category_title_order: 3,
@@ -405,10 +409,9 @@ Menu.create!(
   charge: 6000,
   description: "60分以上のフットケアコースと合わせてご予約ください。",
   treatment_time: 0,
+  add_nail_count: 2,
   course_number: 11,
   menu_flag: 1,
-  add_nail_number: 2,
-  add_nail_count: 2,
   store_id: 1
 )
 
@@ -489,7 +492,6 @@ Menu.create!(
   description: "※背中、肩など気になる部分を中心に圧してほぐします。",
   treatment_time: 30,
   course_number: 16,
-  topping_number: 1,
   store_id: 1
 )
 
@@ -503,9 +505,46 @@ Menu.create!(
   title: "スペシャル 60分",
   full_title: "DM スペシャル 60分",
   charge: 6300,
+  original_charge: 9000,
   description: "DM持参で通常スペシャル 60分コースを30%割引いたします。",
   treatment_time: 60,
   course_number: 17,
+  menu_flag: 1,
+  store_id: 1
+)
+
+# 予約画面表示用（２週間以内巻き爪補正単品）
+Menu.create!(
+  category: "Foot Care  ~フットケア~",
+  category_number: 1,
+  category_order: 1,
+  category_title: "巻き爪補正",
+  category_title_number: 4,
+  category_title_order: 3,
+  title: "ネイル貼り替え１本",
+  full_title: "フットケア ネイル貼り替え１本",
+  charge: 5000,
+  description: "フットケア ネイル貼り替え１本",
+  treatment_time: 0,
+  course_number: 18,
+  menu_flag: 1,
+  store_id: 1
+)
+
+# 予約画面表示用（２週間以内巻き爪補正単品）
+Menu.create!(
+  category: "Foot Care  ~フットケア~",
+  category_number: 1,
+  category_order: 1,
+  category_title: "巻き爪補正",
+  category_title_number: 4,
+  category_title_order: 3,
+  title: "ネイル貼り替え２本",
+  full_title: "フットケア ネイル貼り替え２本",
+  charge: 8000,
+  description: "フットケア ネイル貼り替え２本",
+  treatment_time: 0,
+  course_number: 19,
   menu_flag: 1,
   store_id: 1
 )

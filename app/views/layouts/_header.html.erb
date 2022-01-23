@@ -79,7 +79,7 @@
             <% end %>
           </div>
 
-          <div>
+          <div class="mt-3">
             <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <% if user_signed_in? %>
@@ -104,15 +104,15 @@
         </div>
 
         <ul class="phone-list-link">
-          <li><%= link_to '店舗のご案内', stores_path, class: "link-black" %></li>
-          <li><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "link-black" %></li>
-          <li><%= link_to '施術ご予約', reservations_path, 'data-turbolinks': false, class: "link-black" %></li>
-          <li><%= link_to '商品情報', items_path, class: "link-black" %></li>
-          <li><%= link_to 'イベント情報', events_path, class: "link-black" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-store-alt"></span></i><%= link_to '店舗のご案内', stores_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-bars"></i></span><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-calendar-alt"></i></span><%= link_to '施術ご予約', reservations_path, 'data-turbolinks': false, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-cart-arrow-down"></i></span><%= link_to '商品情報', items_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-campground"></i></span><%= link_to 'イベント情報', events_path, class: "pl-3" %></li>
         </ul>
 
         <div class="phone-staff-btn">
-          <div class="btn-group staff-button">
+          <div class="btn-group staff-button mt-5">
             <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <% if staff_signed_in? %>

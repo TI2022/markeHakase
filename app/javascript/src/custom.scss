@@ -110,6 +110,23 @@ body {
   display: block;
 }
 
+.text-decoration-line-through {
+  text-decoration: line-through;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center
+}
+
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -117,6 +134,16 @@ body {
 .font-bold {
   font-weight: bold;
 }
+
+.font-gray {
+  color: gray;
+}
+
+.font-deep-gray {
+  color: rgb(60, 60, 60);
+}
+
+
 
 // devise設定
   .container-login {

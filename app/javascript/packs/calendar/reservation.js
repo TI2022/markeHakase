@@ -7,10 +7,10 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 
 //<div id='calendar'></div>のidからオブジェクトを定義してカレンダーを作っていきます。
 document.addEventListener("turbolinks:load", function() {
-  var calendarEl = document.getElementById('calendar');
+  let calendarEl = document.getElementById('calendar');
 
   //カレンダーの中身を設定(月表示とか、クリックアクション起こしたいとか、googleCalendar使うととか)
-  var calendar = new Calendar(calendarEl, {
+  let calendar = new Calendar(calendarEl, {
     plugins: [ monthGridPlugin, interactionPlugin, googleCalendarApi, timeGridPlugin ],
 
     initialView: 'timeGridWeek',
@@ -48,7 +48,7 @@ document.addEventListener("turbolinks:load", function() {
     nowIndicator: true,
     allDayText: '終日',
     height: "auto",
-    events: "/reservations.json",
+    events: "/reservations/confirm_reservation.json",
     eventDidMount: function (info) {
       if (info.event._def.title=='予約確定') {
         info.el.style.background='green' ;
@@ -66,4 +66,5 @@ document.addEventListener("turbolinks:load", function() {
   });
   //カレンダー表示
   calendar.render();
+
 });

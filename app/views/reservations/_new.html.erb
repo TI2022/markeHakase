@@ -20,7 +20,13 @@
           <%= f.datetime_select :start_time,
                                 {
                                 use_month_numbers: true,
-                                datetime_separator: '日<h5 class="pl-2 mt-3">開始時間</h5><font size="2rem" color="red"><div class="pl-2">※現在より２時間後からご予約が可能です。</div></font>',
+                                datetime_separator: '日
+                                                      <h5 class="pl-2 mt-3">
+                                                        開始時間
+                                                      </h5>
+                                                      <font size="2rem" color="red">
+                                                        <div class="pl-2">※現在より２時間後からご予約が可能です。</div>
+                                                      </font>',
                                 minute_step: 10,
                                 start_year: now.year,
                                 end_year: now.next_year.year
@@ -34,22 +40,31 @@
         </h5>
 
         <div class="card bg-light p-3">
-          <div class="all-open-btn btn btn-sm btn-info mb-3">全メニュー表示／非表示</div>
           <% unless @first_time_guests.present? %>
             <div>
-              <h5 class="py-1 category cursor-pointer">
+              <h5 class="py-2 category">
                 <span class="pl-1"><%= image_tag("/wakaba.png", height: '15px') %></span>
                 <span class="px-1">初回</span>
-                <i class="fas fa-chevron-down"></i>
               </h5>
               <div class="py-2 reserve-white-bg">
-                <div class="menu-toggle ml-2 display-none">
+                <div class="toggle-btn cursor-pointer right my-2 px-3">
+                  <i class="fas fa-chevron-down open"></i>
+                </div>
+                <div class="menu-toggle mx-2">
                   <% @first_menu.each do |menu| %>
-                    <div class="menu-btn btn btn-info m-2">
-                      <%= menu.title %>
+                    <div class="menu-btn display-block btn btn-info m-2">
+                      <%= menu.full_title %>
                     </div>
                     <div class="m-2">
-                      <%= menu.description %>
+                      <div class="px-1 font-gray">
+                        <%= menu.description %>
+                      </div>
+                      <div class="right course-charge font-deep-gray pt-2 px-2">
+                        <%= menu.charge %>円
+                      </div>
+                      <div class="display-none course-id">
+                        <%= menu.id %>
+                      </div>
                     </div>
                     <br />
                   <% end %>
@@ -58,66 +73,101 @@
             </div>
 
             <hr>
+
           <% end %>
-
-          <div>
-            <h5 class="py-1 category cursor-pointer">
-              <span class="px-1">フットケア／ネイルケア</span>
-              <i class="fas fa-chevron-down"></i>
-            </h5>
-            <div class="py-2 reserve-white-bg">
-              <div class="menu-toggle ml-2 display-none">
-                <% @foot_menu.each do |menu| %>
-                  <div class="menu-btn btn btn-info m-2">
-                    <%= menu.title %>
-                  </div>
-                  <div class="m-2">
-                    <%= menu.description %>
-                  </div>
-                  <br />
-                <% end %>
-              </div>
-            </div>
-          </div>
-
-          <hr>
-
-          <div>
-            <h5 class="py-1 category cursor-pointer">
-              <span class="px-1">ボディケア</span>
-              <i class="fas fa-chevron-down"></i>
-            </h5>
-            <div class="py-2 reserve-white-bg">
-              <div class="menu-toggle ml-2 display-none">
-                <% @body_menu.each do |menu| %>
-                  <div class="menu-btn btn btn-info m-2">
-                    <%= menu.title %>
-                  </div>
-                  <div class="m-2">
-                    <%= menu.description %>
-                  </div>
-                  <br />
-                <% end %>
-              </div>
-            </div>
-          </div>
-
+          
           <% if @guests_within_two_weeks.present? %>
+            <div>
+              <h5 class="py-2 category">
+                <span class="px-1">ネイル貼り替え</span>
+              </h5>
+              <div class="py-2 reserve-white-bg">
+                <div class="toggle-btn cursor-pointer right my-2 px-3">
+                  <i class="fas fa-chevron-down open"></i>
+                </div>
+                <div class="menu-toggle mx-2">
+                  <% @change_nail_menu.each do |menu| %>
+                    <div class="menu-btn change-nail-btn display-block btn btn-info m-2">
+                      <%= menu.full_title %>
+                    </div>
+                    <div class="m-2">
+                      <div class="px-1 font-gray">
+                        <%= menu.description %>
+                      </div>
+                      <div class="right course-charge font-deep-gray pt-2 px-2">
+                        <%= menu.charge %>円
+                      </div>
+                      <div class="display-none course-id">
+                        <%= menu.id %>
+                      </div>
+                    </div>
+                    <br />
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
             <hr>
 
             <div>
-              <h5 class="py-1 category cursor-pointer">
-                <span class="px-1">スペシャル</span>
-                <i class="fas fa-chevron-down"></i>
+              <h5 class="py-2 category">
+                <span class="px-1">フットケア／ネイルケア</span>
+                <span class="pl-2 font-gray">※スペシャルメニュー</span>
               </h5>
               <div class="py-2 reserve-white-bg">
-                <div class="menu-toggle ml-2 display-none">
+                <div class="toggle-btn cursor-pointer right my-2 px-3">
+                  <i class="fas fa-chevron-down open"></i>
+                </div>
+                <div class="menu-toggle mx-2">
                   <% @special_menu.each do |menu| %>
-                    <div class="menu-btn btn btn-info m-2">
-                      <%= menu.title %>
+                    <div class="menu-btn display-block btn btn-info m-2">
+                      <%= menu.full_title %>
                     </div>
                     <div class="m-2">
-                      <%= menu.description %>
+                      <div class="px-1 font-gray">
+                        <%= menu.description %>
+                      </div>
+                      <div class="course-charge display-none">
+                        <%= menu.charge %>円
+                      </div>
+                      <div class="right font-red pt-2 px-2">
+                        <span class="font-gray text-decoration-line-through"><%= menu.original_charge %>円</span>
+                        <span class="font-deep-gray px-2">→</span>
+                        <%= menu.charge %>円
+                      </div>
+                      <div class="display-none course-id">
+                        <%= menu.id %>
+                      </div>
+                    </div>
+                    <br />
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% elsif !@guests_within_two_weeks.present? %>
+            <div>
+              <h5 class="py-2 category">
+                <span class="px-1">フットケア／ネイルケア</span>
+              </h5>
+              <div class="py-2 reserve-white-bg">
+                <div class="toggle-btn cursor-pointer right my-2 px-3">
+                  <i class="fas fa-chevron-down open"></i>
+                </div>
+                <div class="menu-toggle mx-2">
+                  <% @foot_menu.each do |menu| %>
+                    <div class="menu-btn display-block btn btn-info m-2">
+                      <%= menu.full_title %>
+                    </div>
+                    <div class="m-2">
+                      <div class="px-1 font-gray">
+                        <%= menu.description %>
+                      </div>
+                      <div class="right course-charge font-deep-gray pt-2 px-2">
+                        <%= menu.charge %>円
+                      </div>
+                      <div class="display-none course-id">
+                        <%= menu.id %>
+                      </div>
                     </div>
                     <br />
                   <% end %>
@@ -129,67 +179,100 @@
           <hr>
 
           <div>
-            <h5 class="py-1 category cursor-pointer">
-              <span class="px-1">DM</span>
-              <i class="fas fa-chevron-down"></i>
-              <span class="pl-2 font-red">※DMをお持ちの方</span>
+            <h5 class="py-2 category">
+              <span class="px-1">ボディケア</span>
             </h5>
             <div class="py-2 reserve-white-bg">
-              <div class="menu-toggle ml-2 display-none">
-                <% @DM_menu.each do |menu| %>
-                  <div class="menu-btn btn btn-info m-2">
-                    <%= menu.title %>
-                  </div>
-                  <div class="m-2">
-                    <%= menu.description %>
-                  </div>
-                  <br />
-                <% end %>
+              <div class="toggle-btn cursor-pointer right my-2 px-3">
+                <i class="fas fa-chevron-down"></i>
               </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="card bg-light p-3">
-          <div>
-            <h5 class="py-1 category cursor-pointer">
-              <span class="px-1">巻き爪補正</span>
-              <i class="fas fa-chevron-down"></i>
-              <span class="pl-2 font-red">※巻き爪補正をご希望の方</span>
-            </h5>
-            <div class="py-2 reserve-white-bg">
-              <div class="menu-toggle ml-2">
-                <% @add_nail_menu.each do |menu| %>
-                  <div class="add-nail-menu-btn btn btn-info m-2">
-                    <%= menu.title %>
-                  </div>
-                  <div class="m-2">
-                    <%= menu.description %>
-                  </div>
-                  <br />
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <% if @first_time_guests.present? %>
-        <div class="card bg-light p-3">
-          <div class="topping">
-            <h5 class="py-2 category cursor-pointer">
-              <span class="px-1">追加オプション</span>
-              <i class="fas fa-chevron-down"></i>
-              <span class="pl-2 font-red"></span>
-            </h5>
-            <div class="py-2 reserve-white-bg">
-              <div class="menu-toggle ml-2">
-                <% @topping_menu.each do |menu| %>
-                  <div class="topping-menu-btn btn btn-info m-2">
+              <div class="menu-toggle mx-2 display-none">
+                <% @body_menu.each do |menu| %>
+                  <div class="menu-btn display-block btn btn-info m-2">
                     <%= menu.full_title %>
                   </div>
                   <div class="m-2">
-                    <%= menu.description %>
+                    <div class="px-1 font-gray">
+                      <%= menu.description %>
+                    </div>
+                    <div class="right course-charge font-deep-gray pt-2 px-2">
+                      <%= menu.charge %>円
+                    </div>
+                    <div class="display-none course-id">
+                      <%= menu.id %>
+                    </div>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div>
+            <h5 class="py-2 category">
+              <span class="px-1">DM</span>
+              <span class="pl-2 font-gray">※DMをお持ちの方</span>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="toggle-btn cursor-pointer right my-2 px-3">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="menu-toggle mx-2 display-none">
+                <% @DM_menu.each do |menu| %>
+                  <div class="menu-btn display-block btn btn-info m-2">
+                    <%= menu.full_title %>
+                  </div>
+                  <div class="m-2">
+                    <div class="px-1 font-gray">
+                      <%= menu.description %>
+                    </div>
+                    <div class="course-charge display-none">
+                      <%= menu.charge %>
+                    </div>
+                    <div class="right font-red pt-2 px-2">
+                      <span class="font-gray text-decoration-line-through"><%= menu.original_charge %>円</span>
+                      <span class="font-deep-gray px-2">→</span>
+                      <%= menu.charge %>円
+                    </div>
+                    <div class="display-none course-id">
+                      <%= menu.id %>
+                    </div>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card bg-light p-3">
+          <div>
+            <h5 class="py-2 category">
+              <span class="px-1">巻き爪補正</span>
+              <span class="pl-2 font-gray">※ネイル取り付けをご希望の方</span>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="toggle-btn cursor-pointer right my-2 px-3">
+                <i class="fas fa-chevron-down open"></i>
+              </div>
+              <div class="menu-toggle mx-2">
+                <% @add_nail_menu.each do |menu| %>
+                  <div class="add-nail-menu-btn display-block btn btn-info m-2">
+                    <%= menu.full_title %>
+                  </div>
+                  <div class="m-2">
+                    <div class="px-1 font-gray">
+                      <%= menu.description %>
+                    </div>
+                    <div class="right add-nail-charge font-deep-gray pt-2 px-2">
+                      <%= menu.charge %>円
+                    </div>
+                    <div class="display-none add-nail-id">
+                      <%= menu.id %>
+                    </div>
                   </div>
                   <br />
                 <% end %>
@@ -197,277 +280,309 @@
             </div>
           </div>
         </div>
-      <% end %>
+
+        <div class="card bg-light p-3">
+          <div class="topping">
+            <h5 class="py-2 category">
+              <span class="px-1">トッピング</span>
+            </h5>
+            <div class="py-2 reserve-white-bg">
+              <div class="toggle-btn cursor-pointer right my-2 px-3">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="menu-toggle display-none mx-2">
+                <% @topping_menu.each do |menu| %>
+                  <div class="topping-menu-btn display-block btn btn-info m-2">
+                    <%= menu.full_title %>
+                  </div>
+                  <div class="m-2">
+                    <div class="px-1 font-gray">
+                      <%= menu.description %>
+                    </div>
+                      <div class="right topping-charge font-deep-gray pt-2 px-2">
+                      <%= menu.charge %>円
+                    </div>
+                    <div class="display-none topping-id">
+                      <%= menu.id %>
+                    </div>
+                  </div>
+                  <br />
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="all-open-btn btn btn-secondary display-block mb-4">全メニュー表示／非表示</div>
       
+        <div class="card bg-light p-3">
+          <%= f.label :comment, class: "col-form-label" %>
+          <%= f.text_area :comment, class: "form-control" %>
+        </div>
 
         <div class="mt-3 p-3 fixed-reserve-text-bg">
           <button type="button" class="close fixed-text-close-btn">
             <span>&times;</span>
           </button>
-          <div class="font-bold">選択されたメニュー</div>
-          <div class="reserve-course-text"></div>
-          <div class="reserve-add-nail-text"></div>
-          <div class="reserve-topping-text"></div>
+          <div class="font-bold font-deep-gray mb-2">選択されたメニュー</div>
+          <div class="reserve-course-text reserve-white-bg py-1 px-2 mt-1"></div>
+          <div class="reserve-add-nail-text reserve-white-bg py-1 px-2 mt-1"></div>
+          <% if @first_time_guests.present? %>
+            <div class="reserve-topping-text reserve-white-bg py-1 px-2 mt-1"></div>
+          <% end %>
         </div>
 
-        <div class="mt-3 p-3 reserve-text-bg">
-          <div class="font-bold">選択されたメニュー</div>
-          <div class="reserve-course-text"></div>
-          <div class="reserve-add-nail-text"></div>
-          <div class="reserve-topping-text"></div>
+        <div class="my-4 p-3 font-deep-gray reserve-text-bg">
+          <div class="font-bold font-deep-gray mb-2">選択されたメニュー</div>
+          <hr class="my-2">
+          <div class="font-bold font-deep-gray required course-title py-1 px-2 mt-1">施術コース</div>
+          <div class="reserve-course-text reserve-white-bg p-2 mt-1 mb-3"></div>
+          <div class="display-none right course-charge-text"></div>
+          <div class="font-bold font-deep-gray add-nail-title pt-1 px-2 mt-1">巻き爪補正</div>
+          <div class="reserve-add-nail-text reserve-white-bg p-2 mt-1 mb-3"></div>
+          <div class="display-none right add-nail-charge-text"></div>
+          <div class="font-bold font-deep-gray topping-title pt-1 px-2 mt-1">トッピング</div>
+          <div class="reserve-topping-text reserve-white-bg p-2 mt-1 mb-3"></div>
+          <div class="display-none right topping-charge-text"></div>
+          <hr>
+          <div class="right font-bold font-deep-gray mb-2">
+            合計 : <span class="full-charge font-bold font-deep-gray"></span>
+          </div>
         </div>
 
-        <div class="mt-3">
-          <%= f.label :comment, class: "col-form-label" %>
-          <%= f.text_area :comment, class: "form-control" %>
+        <div class="error-wrap">
+          <div class="mt-4" id="error"></div>
         </div>
+
+        <%= f.hidden_field :course, {value: "", id: "hidden-course"} %>
+        <%= f.hidden_field :add_nail_number_menu, {value: "", id: "hidden-add-nail"} %>
+        <%= f.hidden_field :topping_number_menu, {value: "", id: "hidden-topping"} %>
 
         <%= f.hidden_field :guest_id, :value => current_user.id %>
         <%= f.hidden_field :staff_id, :value => "1" %>
         <%= f.hidden_field :reservation_time, :value => now %>
 
-        <div class="mt-3" id="error"></div>
-
-        <div class="center mt-3">
-          <%= f.submit "申込み", class: "btn btn-primary" %>
+        <div class="center my-4">
+          <div class="submit-coution font-gray p-3">※施術コースを選択してください。</div>
+          <%= f.submit "申込み", class: "btn btn-primary", id: "submit" %>
           <button type="button" class="btn btn-default" data-dismiss="modal">
             キャンセル
           </button>
         </div>
+
       <% end %>
     </div>
   </div>
 </div>
 
 <script>
+  $(document).ready(function() {
 
-$('.fixed-reserve-text-bg').hide();
+    // 初期状態定義
+      // 送信ボタンを非活性化
+      $('#submit').prop('disabled',true);
 
-// 各メニュータイトルのh5要素をクリックするとメニューボタンが表示される
-  $('h5.category').on('click', function() {
-    let open   = 'open'; // class
-    let $arrow = $(this).children();
-    if ( ! $arrow.hasClass( open ) ) {
-      $arrow.addClass( open );
-    } else {
-      $arrow.removeClass( open );
-    }
-    let $next_childern = $(this).next().children();
-    $next_childern.slideToggle("slow");
+      // 動的にopenクラスを付与する為の変数を定義
+      let open   = 'open';
+
+      // 初期状態では固定テキストエリアは隠しておく
+      $('.fixed-reserve-text-bg').hide();
+    // -----------
+
+    // 各メニュータイトルの矢印をクリックするとそのメニューが表示される
+      $('.toggle-btn').on('click', function() {
+        let $arrow = $(this).children();
+        if ( ! $arrow.hasClass( open ) ) {
+          $arrow.addClass( open );
+        } else {
+          $arrow.removeClass( open );
+        }
+        let $menu_toggle = $(this).next();
+        $menu_toggle.slideToggle("slow");
+      });
+    // -----------------------------------------
+
+    // 施術コースをクリックすると選んだコース名が施術コーステキスト欄に表示される
+      $('.menu-btn').on('click', function() {
+        let menu_text = $(this).text();
+        let course_charge = $(this).next().children('.course-charge').text();
+        let course_id = $(this).next().children('.course-id').text();
+        if ( $(this).hasClass( open ) ) {
+          $(this).removeClass( open );
+          $('.reserve-course-text').text("");
+          $('#hidden-course').val("");
+          $('.full-charge').text(null);
+          $('#submit').prop('disabled',true);
+          $('.submit-coution').show();
+          $('.course-charge-text').text("");
+          let add_nail_charge_text = $('.add-nail-charge-text').text();
+          let topping_charge_text = $('.topping-charge-text').text();
+          let course_charge_text = $('.course-charge-text').text();
+          let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
+          $('.full-charge').text(full_charge + "円");
+        } else {
+          $('.menu-btn').removeClass( open );
+          $(this).addClass( open );
+          $('.reserve-course-text').text(menu_text);
+          $('.reserve-course-text, .course-title').show();  
+          $('.submit-coution').hide();
+          $('#hidden-course').val(course_id);                 // hidden_fieldのvalueに施術コースIDを代入
+          $('#submit').prop('disabled',false);                // 送信ボタンを有効にする
+          $('.course-charge-text').text(course_charge.replace(/[^0-9]/g, ''));
+          let add_nail_charge_text = $('.add-nail-charge-text').text();
+          let topping_charge_text = $('.topping-charge-text').text();
+          let course_charge_text = $('.course-charge-text').text();
+          let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
+          $('.full-charge').text(full_charge + "円");
+        }
+        $('.reserve-text-bg').show();
+        $('.fixed-reserve-text-bg').show();
+      });
+    // -----------------------------------------
+    // 巻き爪補正メニューをクリックすると選んだメニュー名が巻き爪補正テキスト欄に表示される
+      $('.add-nail-menu-btn').on('click', function() {
+        let menu_text = $(this).text();
+        let add_nail_charge = $(this).next().children('.add-nail-charge').text();
+        let course_id = $(this).next().children('.add-nail-id').text();
+        if ( $(this).hasClass( open ) ) {
+          $(this).removeClass( open );
+          $('.reserve-add-nail-text').text("");
+          $('#hidden-add-nail').val("");
+          $('.full-charge').text(null);
+          $('.add-nail-charge-text').text("");
+          let add_nail_charge_text = $('.add-nail-charge-text').text();
+          let topping_charge_text = $('.topping-charge-text').text();
+          let course_charge_text = $('.course-charge-text').text();
+          let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
+          $('.full-charge').text(full_charge + "円");
+        } else {
+          $('.add-nail-menu-btn').removeClass( open );
+          $(this).addClass( open );
+          $('.reserve-add-nail-text').text(menu_text);
+          $('.reserve-add-nail-text, .add-nail-title').show();
+          $('#hidden-add-nail').val(course_id);
+          $('.add-nail-charge-text').text(add_nail_charge.replace(/[^0-9]/g, ''));
+          let topping_charge_text = $('.topping-charge-text').text();
+          let course_charge_text = $('.course-charge-text').text();
+          let add_nail_charge_text = $('.add-nail-charge-text').text();
+          let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
+          $('.full-charge').text(full_charge + "円");
+        }
+        $('.reserve-text-bg').show();
+        $('.fixed-reserve-text-bg').show();
+      });
+    // -----------------------------------------
+    // 追加オプションメニューをクリックすると選んだメニュー名が追加オプションテキスト欄に表示される
+      $('.topping-menu-btn').on('click', function() {
+        let menu_text = $(this).text();
+        let topping_charge = $(this).next().children('.topping-charge').text();
+        let course_id = $(this).next().children('.topping-id').text();
+        if ( $(this).hasClass( open ) ) {
+          $(this).removeClass( open );
+          $('.reserve-topping-text').text("");
+          $('#hidden-topping').val("");
+          $('.full-charge').text(null);
+          $('.topping-charge-text').text("");
+          let add_nail_charge_text = $('.add-nail-charge-text').text();
+          let topping_charge_text = $('.topping-charge-text').text();
+          let course_charge_text = $('.course-charge-text').text();
+          let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
+          $('.full-charge').text(full_charge + "円");
+        } else {
+          $('.topping-menu-btn').removeClass( open );
+          $(this).addClass( open );
+          $('.reserve-topping-text').text(menu_text);
+          $('.reserve-topping-text, .topping-title').show();
+          $('#hidden-topping').val(course_id);
+          $('.topping-charge-text').text(topping_charge.replace(/[^0-9]/g, ''));
+          let topping_charge_text = $('.topping-charge-text').text();
+          let course_charge_text = $('.course-charge-text').text();
+          let add_nail_charge_text = $('.add-nail-charge-text').text();
+          let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
+          $('.full-charge').text(full_charge + "円");
+        }
+        $('.reserve-text-bg').show();
+        $('.fixed-reserve-text-bg').show();
+      });
+    // -----------------------------------------
+
+    // 全メニュー表示／非表示ボタンを押した時の制御
+      $('.all-open-btn').on('click', function() {
+        let $menu_toggle = $('.menu-toggle');
+        let $arrow= $('.fa-chevron-down');
+        if ( ! $arrow.hasClass( open ) ) {
+          $arrow.addClass( open );
+        } else {
+          $arrow.removeClass( open );
+        }
+        if ( ! $menu_toggle.hasClass( open ) ) {
+          $menu_toggle.addClass( open );
+          $menu_toggle.show("slow");
+        } else {
+          $menu_toggle.removeClass( open );
+          $menu_toggle.hide("slow");
+        }
+      });
+    // -----------------------------------------
+
+    // 固定テキストエリアの✖️ボタンを押すと固定テキストエリアを閉じる
+      $('.fixed-text-close-btn').on('click', function() {
+        $('.fixed-reserve-text-bg').hide();
+      });
+    // -----------------------------------------
+
+    // 時間選択は11時〜19時までに制限
+      var options = $('.reservation-form form select#reservation_start_time_4i option');
+
+      for (var i = 0; i < options.length; i++) {
+        if (options.eq(i).val() === "00") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "01") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "02") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "03") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "04") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "05") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "06") {
+          options.eq(i).wrap("<span>")
+        }
+        if (options.eq(i).val() === "07") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "08") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "09") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "10") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "20") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "21") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "22") {
+          options.eq(i).wrap("<span>");
+        }
+        if (options.eq(i).val() === "23") {
+          options.eq(i).wrap("<span>");
+        }
+        options.eq(i).prop("selected", false);
+      }
+      options.eq(0).prop("selected", true);
+    // ------------------------------------
   });
-// -----------------------------------------
-
-// 施術コースをクリックすると選んだコース名が施術コーステキスト欄に表示される
-  $('.menu-btn').on('click', function() {
-    let menu_text = $(this).text();
-    setTimeout(function() {
-      $('.reserve-course-text').text(menu_text);
-      $('.fixed-reserve-text-bg').show();
-    }, 300);
-  });
-// -----------------------------------------
-// 巻き爪補正メニューをクリックすると選んだメニュー名が巻き爪補正テキスト欄に表示される
-  $('.add-nail-menu-btn').on('click', function() {
-    let menu_text = $(this).text();
-    setTimeout(function() {
-      $('.reserve-add-nail-text').text(menu_text);
-      $('.fixed-reserve-text-bg').show();
-    }, 300);
-  });
-// -----------------------------------------
-// 追加オプションメニューをクリックすると選んだメニュー名が追加オプションテキスト欄に表示される
-  $('.topping-menu-btn').on('click', function() {
-    let menu_text = $(this).text();
-    setTimeout(function() {
-      $('.reserve-topping-text').text(menu_text);
-      $('.fixed-reserve-text-bg').show();
-    }, 300);
-  });
-// -----------------------------------------
-
-// 各メニューをクリックすると選んだメニュー名がテキスト欄に表示される
-  $('.all-open-btn').on('click', function() {
-    let open   = 'open'; // class
-    let $menu_toggle = $('.menu-toggle')
-    if ( ! $menu_toggle.hasClass( open ) ) {
-      $menu_toggle.addClass( open );
-      $menu_toggle.show("slow");
-    } else {
-      $menu_toggle.removeClass( open );
-      $menu_toggle.hide("slow");
-    }
-  });
-// -----------------------------------------
-
-// 各メニュータイトルのh5要素をクリックするとメニューボタンが表示される
-  $('.fixed-text-close-btn').on('click', function() {
-    $('.fixed-reserve-text-bg').hide();
-  });
-// -----------------------------------------
-
-
-
-
-  // // 巻き爪補正のチェックボックスチェック切替時の動作
-  //   // 巻き爪補正１本のチェックボックスチェック切替時の動作
-  //   $('#reservation_add_nail_count1').change(function() {
-  //     $('.default_select').show();
-  //     $('.add_nail2').hide();
-  //     let aryReserve = [];
-  //     $('[name="reservation[add_nail_count1]"]:checked').each(function(index, element){
-  //       aryReserve.push("巻き爪補正１本");
-  //     });
-  //     $('#reserve-add-nail-text').html(aryReserve.join(''));
-  //     if ($(this).prop('checked')) {
-  //       $('#reserve-selected-text2').html('');
-  //       $('.add_nail2 #reservation_course').prop("selectedIndex", 0);
-  //       $('[name="reservation[add_nail_count1]"]').val("1"); // 実際に送られるバリュー値を１に指定
-  //     }
-  //   });
-  //   // 巻き爪補正２本のチェックボックスチェック切替時の動作
-  //   $('[name="reservation[add_nail_count2]"]').change(function() {
-  //     let aryReserve = [];
-  //     $('[name="reservation[add_nail_count2]"]:checked').each(function(index, element){
-  //       aryReserve.push("巻き爪補正２本");
-  //     });
-  //     $('#reserve-add-nail-text').html(aryReserve.join(''));
-  //     if ($(this).prop('checked')) {
-  //       $('.add_nail2').show();
-  //       $('.default_select').hide();
-  //       $('#reserve-selected-text').html('');
-  //       $('.default_select #reservation_course').prop("selectedIndex", 0);
-  //       $('[name="reservation[add_nail_count2]"]').val("2"); // 実際に送られるバリュー値を１に指定
-  //     } else {
-  //       $('.add_nail2').hide();
-  //       $('.default_select').show();
-  //       $('#reserve-selected-text2').html('');
-  //     }
-  //   });
-  //   // 択一のチェックボックスにする
-  //   $('.checkGroup').on('click', function() {
-  //     if ($(this).prop('checked')){
-  //       // 一旦全てをクリアして再チェックする
-  //       $('.checkGroup').prop('checked', false);
-  //       $(this).prop('checked', true);
-  //     }
-  //   });
-  // // ---------------------------
-
-  // // selectフォームを変更した時に動作
-  //   $('.default_select #reservation_course').change(function() {
-  //     let aryReserve_text = [];
-  //     let reserveSelected = $('.default_select #reservation_course').children("option:selected");
-  //     let selectedText = reserveSelected.text();
-  //     let selectedCharge = reserveSelected.val();
-  //     $('.default_select #reservation_course').each(function(index, element){
-  //       aryReserve_text.push(selectedText);
-  //     });
-  //     $('#reserve-selected-text').html(aryReserve_text.join(''));
-  //   });
-
-  //   $('.add_nail2 #reservation_course').change(function() {
-  //     let aryReserve_text = [];
-  //     let reserveSelected = $('.add_nail2 #reservation_course').children("option:selected");
-  //     let selectedText = reserveSelected.text();
-  //     $('.add_nail2 #reservation_course').each(function(index, element){
-  //       aryReserve_text.push(selectedText);
-  //     });
-  //     $('#reserve-selected-text2').html(aryReserve_text.join(''));
-  //   });
-  // // ---------------------------
-
-  // // 追加オプションのチェックを変更した時に動作
-  //   $('[name="reservation[topping_menu][]"]').change(function() {
-  //     let aryAddReserve = [];
-  //     $('[name="reservation[topping_menu][]"]:checked').each(function(index, element){
-  //       let parent = $(element).parent();
-  //       let text = parent.text();
-  //       aryAddReserve.push(text);
-  //     });
-  //     $('#reserve-topping-text').html(aryAddReserve.join(' , '));
-  //   });
-  //   // 択一のチェックボックスにする
-  //   $('.topping_check_box input').on('click', function() {
-  //     if ($(this).prop('checked')){
-  //       // 一旦全てをクリアして再チェックする
-  //       $('.topping_check_box input').prop('checked', false);
-  //       $(this).prop('checked', true);
-  //     }
-  //   });
-  // // ---------------------------
-
-  // // submitボタンを押した時に、name要素を書き換える処理
-  //   $('[name="commit"]').on('click', function() {
-  //     // 巻き爪補正が選択されない場合は、.add_nail2 [name="reservation[course]"]をreservation[unpermitted_course]にする
-  //     $('.add_nail2 [name="reservation[course]"]').attr('name', 'reservation[unpermitted_course]');
-  //     if ($('#reservation_add_nail_count1').prop('checked')) {
-  //       $('[name="reservation[add_nail_count1]"]').attr('name', 'reservation[add_nail_count]');
-  //       $('[name="reservation[add_nail_count2]"]').attr('name', 'reservation[unpermitted_add_nail_count]');
-  //       // 同じname名だと後に記述したnameのvalueしか送信されない為、選択した方以外のname名をunpermit_courseとしてstrong_parameterで弾かれるようにする。
-  //       $('.add_nail2 [name="reservation[course]"]').attr('name', 'reservation[unpermitted_course]');
-  //     }
-  //     if ($('#reservation_add_nail_count2').prop('checked')) {
-  //       $('[name="reservation[add_nail_count2]"]').attr('name', 'reservation[add_nail_count]');
-  //       $('[name="reservation[add_nail_count1]"]').attr('name', 'reservation[unpermitted_add_nail_count]');
-  //       // 同じname名だと後に記述したnameのvalueしか送信されない為、選択した方以外のname名をunpermit_courseとしてstrong_parameterで弾かれるようにする。
-  //       $('.default_select [name="reservation[course]"]').attr('name', 'reservation[unpermitted_course]');
-  //       $('.add_nail2 [name="reservation[unpermitted_course]"]').attr('name', 'reservation[course]');
-  //     }
-  //   });
-  // ------------------------------------
-
-  // 時間選択は11時〜19時までに制限
-    var options = $('.reservation-form form select#reservation_start_time_4i option');
-
-    for (var i = 0; i < options.length; i++) {
-      if (options.eq(i).val() === "00") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "01") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "02") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "03") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "04") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "05") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "06") {
-        options.eq(i).wrap("<span>")
-      }
-      if (options.eq(i).val() === "07") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "08") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "09") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "10") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "20") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "21") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "22") {
-        options.eq(i).wrap("<span>");
-      }
-      if (options.eq(i).val() === "23") {
-        options.eq(i).wrap("<span>");
-      }
-      options.eq(i).prop("selected", false);
-    }
-    options.eq(0).prop("selected", true);
-  // ------------------------------------
-
 </script>

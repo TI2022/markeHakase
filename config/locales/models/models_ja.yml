@@ -59,11 +59,13 @@ ja:
         image: 画像
       menu:
         category: カテゴリー
+        category_number: カテゴリー番号
         category_order: カテゴリー順番
         category_title: カテゴリータイトル
-        title_order: カテゴリータイトル順番
+        category_title_number:  カテゴリータイトル番号
+        category_title_order:  カテゴリータイトル順番
         title: 施術メニュー
-        full_title: 予約メニュー
+        full_title: 予約表示メニュー
         description: 施術内容
         charge: 料金
         treatment_time: 施術時間
@@ -71,9 +73,9 @@ ja:
         image_number: 画像番号
         select_tab_number: 選択タブ番号
         select_tab_name: 選択タブ名
-        image_flag: 施術メニュー画像表示/非表示
-        menu_flag: 施術メニュー表示/非表示
-        reserve_flag: 予約メニュー表示/非表示
+        image_flag: 施術メニュー画像表示／非表示
+        menu_flag: 施術メニュー表示／非表示
+        reserve_flag: 予約メニュー表示／非表示
         topping_number: トッピング番号
         add_nail_number: 爪取り付け番号
         add_nail_count: 爪取り付け本数
@@ -89,10 +91,18 @@ ja:
         staff_id: スタッフ
         holiday_flag: 休み
         reservation_time: 予約時間
+        cancel_flag: キャンセル
         treatment_menu: 施術メニュー
         treatment_time_menu: 施術時間
+        full_treatment_time_menu: 総施術時間
         charge_menu: 料金
+        full_charge_menu: 総料金
+        add_nail_number_menu: ネイル取り付け番号
+        add_nail_count_menu: ネイル取り付け枚数
+        topping_number_menu: トッピング番号
+        topping_menu: トッピング
         guest_id: 予約ユーザー
+        staff_id: スタッフ
       store:
         name: 店舗名
         address: 住所

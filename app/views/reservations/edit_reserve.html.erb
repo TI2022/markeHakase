@@ -15,6 +15,10 @@
 
         <%= f.label :course, class: "col-form-label" %>
         <%= f.select :course, options_from_collection_for_select(@menus, :id, :title, selected = @reservation.course), :include_blank => true, class: "form-select-area" %>
+        <%= f.label :add_nail_number_menu, class: "col-form-label" %>
+        <%= f.select :add_nail_number_menu, options_from_collection_for_select(@menus, :id, :full_title, selected = @reservation.add_nail_number_menu), :include_blank => true %>
+        <%= f.label :topping_number_menu, class: "col-form-label" %>
+        <%= f.select :topping_number_menu, options_from_collection_for_select(@menus, :id, :full_title, selected = @reservation.topping_number_menu), :include_blank => true %>
 
         <%= f.label :staff_id, class: "col-form-label" %>
         <%= f.select :staff_id, options_from_collection_for_select(@staffs, :id, :name, selected = @reservation.staff_id), :include_blank => true, class: "form-select-area" %>

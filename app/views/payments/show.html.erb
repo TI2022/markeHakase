@@ -1,59 +1,54 @@
 <p>
   <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
   <%= link_to '商品一覧', items_path, class: "link-gray" %> ＞ 
-  <%= link_to '戻る', :back, class: "link-gray" %>
 </p>
 <p>
   <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
   <%= link_to 'イベント一覧', events_path, class: "link-gray" %> ＞ 
-  <%= link_to '戻る', :back, class: "link-gray" %>
+  <%= link_to '購入履歴', payments_path(current_user), class: "link-gray" %>
 </p>
 <p></p>
 
 <div class="container">
   <h1>注文内容 【 <%= current_user.name %> 様 】</h1>
+  <div>
+  </div>
+  <ul>
+    <li>注文日: <%= l @payment.created_at, format: :custom1 %></li>
+    <li>注文番号: <%= @payment.id %></li>
+    <% if @payment.all_shipped_at.present?  %>
+      <li>発送状況: 全て発送済み</li>
+    <% else %>
+      <li>発送状況: <span>発送準備中あり</span></li>
+    <% end %>
+  </ul>
+
   <table class="table">
-    <tr>
-      <td>注文日: <%= l @payment.created_at, format: :custom1 %></td>
-      <td>注文番号: <%= @payment.id %></td>
-      <% if @payment.all_shipped_at.present?  %>
-        <td>発送状況: 全て発送済み</td>
-      <% else %>
-        <td>発送状況: <span>発送準備中あり</span></td>
-      <% end %>
-    </tr>
-  </table>
-  <table class="table table-striped">
-    <tr>
-      <th>お届け先</th>
-      <th>支払い方法</th>
-      <th colspan="2">領収書/購入明細書</th>
-    </tr>
+    <tr><th>お届け先</th></tr>
     <tr>
       <td>
         <%= current_user.name %> 様<br>
         <%= current_user.postal_code %><br>
-        <%= current_user.prefecture_code %>
-        <%= current_user.city %>
+        <%= current_user.prefecture_code %><br>
+        <%= current_user.city %><br>
         <%= current_user.street %><br>
         <%= current_user.other_address %><br>
-        <%= current_user.phone %>
+        <%= current_user.phone %><br>
       </td>
-      <td>クレジットカード決済(PAY.JP)</td>
+    </tr>
+    <tr><th>支払い方法</th></tr>
+    <tr><td>クレジットカード決済(PAY.JP)</td></tr>
+    <tr><th>領収書/購入明細書</th></tr>
+    <tr>
       <td>
-        商品の小計:<br>
-        送料:<br>
-        消費税:<br>
-        ご請求額(合計):<br>
-      </td>
-      <td class="right">
-        <%= @payment.subtotal %> 円<br>
-        <%= @payment.shipping_fee %> 円<br>
-        <%= @payment.tax %> 円<br>
-        <%= @payment.total %> 円<br>
+        商品の小計: <%= @payment.subtotal %> 円<br>
+        送料: <%= @payment.shipping_fee %> 円<br>
+        消費税: <%= @payment.tax %> 円<br>
+        ご請求額(合計): <%= @payment.total %> 円<br>
       </td>
     </tr>
   </table>
+
   <table class="table">
     <% @orders.each do |order| %>
       <tr>

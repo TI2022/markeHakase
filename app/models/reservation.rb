@@ -8,8 +8,8 @@ class Reservation < ApplicationRecord
   validates :guest_id, presence: true
   validates :staff_id, presence: true
   validates :comment, length: { maximum: 200 }
-  validate :two_hours_later_on_the_day, on: :create # お客さんのみ新規登録は当日の２時間後以降しか登録できない
-  validate :reservations_can_be_made_up_to_10_days_in_advance, on: :create  #お客さんのみ新規予約登録は10日後までできる
+  validate :two_hours_later_on_the_day, on: :registration # お客さんのみ新規登録は当日の２時間後以降しか登録できない
+  validate :reservations_can_be_made_up_to_10_days_in_advance, on: :registration  #お客さんのみ新規予約登録は10日後までできる
   validate :in_working_time
   
   def two_hours_later_on_the_day

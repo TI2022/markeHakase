@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # indexとshowはスタッフのみのログインで可能
   skip_before_action :authenticate_user!, only: [:index, :search, :show, :admin_new, :admin_create, :admin_edit, :admin_update, :admin_destroy]
-  skip_before_action :authenticate_staff!, only: [:account] # 抜けていたので追記しました
+  skip_before_action :authenticate_staff!, only: [:account]
   before_action :set_q, only: [:index, :search]
 
   def index
@@ -85,4 +85,5 @@ class UsersController < ApplicationController
   def set_q
     @q = User.ransack(params[:q])
   end
+
 end

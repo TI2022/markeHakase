@@ -6,11 +6,10 @@
   <ul class="tab">
     <li><a href="#account-riserve">予約状況</a></li>
     <li><a href="#account-profile">お客様情報</a></li>
-    <li><a href="#account-payment">購入履歴</a></li>
   </ul>
   <div id="account-riserve" class="area">
       <h2>-- 現在の予約状況 --</h2>
-      <p><%= current_user.name %>様のご予約は <font color="red"><%= @reservations.count %></font> 件ございます。</p>
+      <p><%= current_user.name %> 様 のご予約は <font color="red"><%= @reservations.count %></font> 件ございます。</p>
       <table class="table table-bordered table-condesend">
         <thead class="table-success">
           <tr>

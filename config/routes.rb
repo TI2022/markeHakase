@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
   get 'static_pages/notification', to: 'static_pages#notification'
+  resources :tops, only: [:new, :create, :edit, :update, :show, :index]
   get 'static_pages/review_index', to: 'static_pages#review_index'
   resources :menus do
     collection do
       get :treatment_menu #ユーザーメニュー一覧画面
     end
   end
+
   resources :reservations do
     resources :reviews do
       resource :review_answers, except: %i[index show]
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
     member do
       get :edit_reserve
       post :update_reserve
+      post :cancel_reserve
     end
   end
   resources :stores
@@ -61,6 +64,7 @@ Rails.application.routes.draw do
     passwords:     'staffs/passwords',
     registrations: 'staffs/registrations'
   }
+
   # resources :reservations
   # resources :stores
   resources :items do

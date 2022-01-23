@@ -1,12 +1,37 @@
 ja:
   activerecord:
     models:
+      top: トップ
       item: 商品
       order: 注文
       event: イベント
       store: 店舗
       reservation: 予約
     attributes:
+      top:
+        reserve_title: 予約タイトル
+        reserve_text: 予約テキスト
+        reserve_text_caution: 予約テキスト注意書き
+        reserve_text2: 予約テキスト２
+        reserve_text2_caution: 予約テキスト注意書き２
+        reserve_comfirm_title: 予約確認タイトル
+        reserve_comfirm_text: 予約確認テキスト
+        calendar_title: カレンダータイトル
+        introduction_title: サロン紹介タイトル
+        introduction_text: サロン紹介テキスト
+        introduction_address: サロン紹介住所
+        introduction_time: サロン紹介営業時間
+        introduction_holiday: サロン紹介定休日
+        introduction_tel: サロン紹介電話番号
+        image_text: 画像テキスト
+        slide_number: スライド画像番号
+        image_order: 画像順番
+        introduction_image_count: サロン紹介画像表示枚数
+        slide_image_count: メインスライド表示枚数
+        main_slide_flag: メインスライド画像表示
+        reserve_image_flag: 予約説明画像表示
+        introduction_image_flag: 紹介画像表示
+        image: 画像
       item:
         id: ID
         name: 商品名
@@ -34,14 +59,27 @@ ja:
         image: 画像
       menu:
         category: カテゴリー
+        category_number: カテゴリー番号
         category_order: カテゴリー順番
         category_title: カテゴリータイトル
-        title_order: カテゴリータイトル順番
+        category_title_number:  カテゴリータイトル番号
+        category_title_order:  カテゴリータイトル順番
         title: 施術メニュー
+        full_title: 予約表示メニュー
         description: 施術内容
         charge: 料金
         treatment_time: 施術時間
         course_number: コース番号
+        image_number: 画像番号
+        select_tab_number: 選択タブ番号
+        select_tab_name: 選択タブ名
+        image_flag: 施術メニュー画像表示／非表示
+        menu_flag: 施術メニュー表示／非表示
+        reserve_flag: 予約メニュー表示／非表示
+        topping_number: トッピング番号
+        add_nail_number: 爪取り付け番号
+        add_nail_count: 爪取り付け本数
+        image: 画像
       reservation:
         start_time: 開始時間
         end_time: 終了時間
@@ -53,10 +91,18 @@ ja:
         staff_id: スタッフ
         holiday_flag: 休み
         reservation_time: 予約時間
+        cancel_flag: キャンセル
         treatment_menu: 施術メニュー
         treatment_time_menu: 施術時間
+        full_treatment_time_menu: 総施術時間
         charge_menu: 料金
+        full_charge_menu: 総料金
+        add_nail_number_menu: ネイル取り付け番号
+        add_nail_count_menu: ネイル取り付け枚数
+        topping_number_menu: トッピング番号
+        topping_menu: トッピング
         guest_id: 予約ユーザー
+        staff_id: スタッフ
       store:
         name: 店舗名
         address: 住所

@@ -383,7 +383,8 @@ body {
 }
 
 // Payment
-.payment-index-content-wrapper {
+.payment-index-content-wrapper,
+.payment-show-content-wrapper {
   display: grid; /* カードの横並び */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
   gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
@@ -392,6 +393,7 @@ body {
   border: 1px solid lightgray;
   padding: 10px;
 }
+
 
 .Editlink {
   text-decoration: none;

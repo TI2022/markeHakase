@@ -1,4 +1,4 @@
-<p>
+<p class="mt-2">
   <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
   マイページ
 </p>
@@ -54,6 +54,15 @@
               <td><%= l reserve.start_time, format: :timeonly %> - <%= l (reserve.start_time + (reserve.treatment_time_menu * 60)), format: :timeonly %></td>
               <td><%= reserve.charge_menu %>円</td>
             </tr>
+            <% if reserve.is_review_exists.even? %>
+              <tr>
+                <td colspan="4" class="text-right"><%= link_to "既にレビュー済みです", '#', class: "btn btn-secondary" %></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td colspan="4" class="text-right"><%= link_to "レビューを書く", new_reservation_review_path(reserve), class:"btn btn-primary"%></td>
+              </tr>
+            <% end %>
           </tbody>
         <% end %>
       </table>

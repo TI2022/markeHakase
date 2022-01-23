@@ -283,6 +283,16 @@ Menu.create!(
 )
 
 10.times do |n|
+  title  = "サンプルタイトルNo.#{n+1}"
+  body = Faker::Lorem.sentences(number: 100)
+  Notification.create!(
+    title: title,
+    body: body,
+    staff_id: 1
+  )
+end
+
+10.times do |n|
   name  = Faker::Name.name
   email = "sample-#{n+1}@email.com"
   password = "password"

@@ -548,3 +548,79 @@ Menu.create!(
   menu_flag: 1,
   store_id: 1
 )
+
+10.times do |n|
+  title  = "サンプルタイトルNo.#{n+1}"
+  body = Faker::Lorem.sentences(number: 100)
+  Notification.create!(
+    title: title,
+    body: body,
+    staff_id: 1
+  )
+end
+
+10.times do |n|
+  name  = Faker::Name.name
+  email = "sample-#{n+1}@email.com"
+  password = "password"
+  phone = "080-0000-0000"
+  store_id = 1
+  cart_id = n+1
+  postal_code = 2430000
+  prefecture_code = "神奈川県"
+  city = "厚木市"
+  street = "戸室"
+  other_address = "1-1-1"
+  User.create!(
+    name: name,
+    email: email,
+    password: password,
+    password_confirmation: password,
+    phone: phone,
+    store_id: store_id,
+    cart_id: cart_id,
+    postal_code: postal_code,
+    prefecture_code: prefecture_code,
+    city: city,
+    street: street,
+    other_address: other_address
+  )
+  Cart.create!(
+    user_id: n+1
+  )
+  time = Time.current
+  Order.create!(
+    cart_id: n+1,
+    item_id: n+1,
+    quantity: n+1,
+    paid_at: time,
+    payment_id: n+1,
+    shipped_at: time
+  )
+  EventOrder.create!(
+    cart_id: n+1,
+    event_id: n+1,
+    quantity: n+1,
+    paid_at: time,
+    payment_id: n+1,
+    shipped_at: time
+  )
+  item = Item.find(n+1)
+  event = Event.find(n+1)
+  subtotal = (item.price + event.price)*(n+1)
+  if subtotal >= 5000 || subtotal == 0
+    shipping_fee = 0
+  else
+    shipping_fee = 500
+  end
+  tax = ((subtotal+shipping_fee)*0.10).round
+  total = subtotal+shipping_fee+tax
+  Payment.create!(
+    cart_id: n+1,
+    subtotal: subtotal,
+    tax: tax,
+    shipping_fee: shipping_fee,
+    total: total,
+    all_shipped_at: time
+  )
+end

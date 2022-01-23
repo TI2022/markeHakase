@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_27_134723) do
+
+ActiveRecord::Schema.define(version: 2022_01_17_130705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +162,34 @@ ActiveRecord::Schema.define(version: 2021_12_27_134723) do
     t.string "topping_menu"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "is_review_exists", default: 1
+  end
+
+  create_table "review_answers", force: :cascade do |t|
+    t.bigint "staff_id", null: false
+    t.bigint "review_id", null: false
+    t.string "staff_name"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_review_answers_on_review_id"
+    t.index ["staff_id"], name: "index_review_answers_on_staff_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "reservation_id", null: false
+    t.string "title"
+    t.text "content"
+    t.integer "total_score"
+    t.integer "menu_score"
+    t.integer "customer_score"
+    t.integer "atmosphere_score"
+    t.boolean "review_exists", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -271,6 +300,10 @@ ActiveRecord::Schema.define(version: 2021_12_27_134723) do
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "items"
   add_foreign_key "payments", "carts"
+  add_foreign_key "review_answers", "reviews"
+  add_foreign_key "review_answers", "staffs"
+  add_foreign_key "reviews", "reservations"
+  add_foreign_key "reviews", "users"
   add_foreign_key "staffs", "stores"
   add_foreign_key "users", "stores"
 end

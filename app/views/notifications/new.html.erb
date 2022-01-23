@@ -1,6 +1,11 @@
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  お知らせ記事新規投稿
+</p>
 <div class="container">
   <div>
-    <h1>新規お知らせ投稿</h1>
+    <h1 class="text-center">新規お知らせ投稿</h1>
     <p class="text-right">ログイン中のスタッフ：<%= current_staff.name %> さん</p>
   </div>
   

@@ -1,7 +1,6 @@
 class CreateTops < ActiveRecord::Migration[6.1]
   def change
     create_table :tops do |t|
-      t.integer :store_id, default: 1
       t.string :reserve_title
       t.string :reserve_text
       t.string :reserve_text_caution
@@ -24,6 +23,7 @@ class CreateTops < ActiveRecord::Migration[6.1]
       t.integer :main_slide_flag, default: 0
       t.integer :introduction_image_flag, default: 0
       t.integer :reserve_image_flag, default: 0
+      t.integer :store_id, default: 1
       t.string :image # image 必ず一番下にしないと画像が読めない
 
       t.timestamps

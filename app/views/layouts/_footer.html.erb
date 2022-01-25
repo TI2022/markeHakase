@@ -23,6 +23,7 @@
           <%= link_to 'スタッフ一覧', staffs_index_path, class: 'dropdown-item link-black' %>
           <%= link_to '施術メニュー管理', menus_path, class: 'dropdown-item link-black' %>
           <%= link_to 'トップページ管理', tops_path, class: 'dropdown-item link-black' %>
+          <%= link_to 'スタッフシフト管理', shifts_path, class: 'dropdown-item link-black' %>
           <div class="dropdown-divider"></div>
           <%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'dropdown-item link-black' %>
         <% else %>

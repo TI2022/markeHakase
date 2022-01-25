@@ -65,6 +65,8 @@ class ReservationsController < ApplicationController
   end
 
   def index
+    @current_guest_reservations = Reservation.where(guest_id: current_user.id).where(cancel_flag: 0).where(status: "on_request") if user_signed_in?
+    @shifts = Shift.all
   end
 
   def confirm_reservation

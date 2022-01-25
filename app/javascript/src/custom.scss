@@ -212,17 +212,6 @@ body {
   border: 1px solid #ccc;
 }
 
-.item-show-name,
-.event-show-title {
-  font-size: 25px;
-}
-
-.item-show-price,
-.event-show-price {
-  font-size: 25px;
-  color: crimson;
-}
-
 .search-container {
   border: 1px solid #999;
   padding: 3px 10px;
@@ -261,28 +250,29 @@ body {
   background-color: white;
 }
 
-.cart-content-wrapper {
-  display: flex; // position stickyに必要
-  align-items: baseline; // position stickyに必要
+// Cart
+.cart-show-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
 }
 
-.cart-content-left {
-  width: 50%;
-  margin-right: 10%;
+.cart-content-payment {
+  max-width: 300px;
 }
 
-.cart-content-right {
-  width: 40%;
-  position: sticky; // position stickyに必要
-  align-self: baseline; // position stickyに必要
-  top: 6rem; // position stickyに必要 スクロールのときに上で止まる位置
+.cart-content-payment-total {
+  font-weight: bold;
 }
 
-// .cart-table-left {
-// }
+.cart-content-order-image {
+  max-width: 300px;
+}
 
-.cart-table-right {
-  border: 10px orange solid;
+.cart-payment-table-border {
+  border: 8px orange solid;
 }
 
 .table-striped {
@@ -299,31 +289,9 @@ body {
   margin-left: 0.3em;
 }
 
-// .event-content-wrapper {
-// }
 
-.split-content-left {
-  width: 50%;
-  margin-right: 10%;
-  float: left;
-}
-
-.split-content-right {
-  width: 40%;
-  float: left;
-}
-
-.covid_precaution {
-  float: left;
-  padding-bottom: 4rem;
-}
-
-.covid_precaution div {
-  padding: 50px;
-  background-color: lightgray;
-}
-
-.event-card-container {
+// Item
+.item-index-container {
   display: grid; /* カードの横並び */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
   gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
@@ -331,7 +299,7 @@ body {
   text-align: start; /* カード内の中央寄せ解除 */
 }
 
-.event-card-item {
+.item-index-body {
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
@@ -340,9 +308,76 @@ body {
   border-radius: 10px; /* 角丸指定 */
 }
 
-.event-card-title {
+.item-index-description {
   padding: 16px;
   line-height: 1.2;
+}
+
+.item-show-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.item-show-image {
+  width: 100%;
+  max-width: 500px;
+}
+
+// Item && Event
+.item-show-name,
+.event-show-title {
+  font-size: 1.5rem;
+}
+
+.item-show-price,
+.event-show-price {
+  font-size: 1.5rem;
+  color: crimson;
+}
+
+// Event
+.event-index-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.event-index-body {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  border: 1px solid #dadada;
+  border-radius: 10px; /* 角丸指定 */
+}
+
+.event-index-description {
+  padding: 16px;
+  line-height: 1.2;
+}
+
+.event-show-content-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.event-show-content-image {
+  width: 100%;
+  max-width: 500px;
+}
+
+.event-show-covid-precaution {
+    margin-bottom: 4rem;
+    padding: 50px;
+    background-color: lightgray;
 }
 
 .border-radius-top {
@@ -353,7 +388,8 @@ body {
   margin-bottom:  20px;
 }
 
-.store-card-container {
+// Store
+.store-index-container {
   display: grid; /* カードの横並び */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
   gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
@@ -361,7 +397,7 @@ body {
   text-align: start; /* カード内の中央寄せ解除 */
 }
 
-.store-card-item {
+.store-index-body {
   width: 100%;
   max-width: 350px;
   margin: 0 auto;
@@ -370,10 +406,36 @@ body {
   border-radius: 10px; /* 角丸指定 */
 }
 
-.store-card-title {
+.store-index-description {
   padding: 16px;
   line-height: 1.2;
 }
+
+.store-show-content-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.store-show-content-image {
+  width: 100%;
+  max-width: 500px;
+}
+
+// Payment
+.payment-index-content-wrapper,
+.payment-show-content-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto;
+  text-align: start; /* カード内の中央寄せ解除 */
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
 
 .Editlink {
   text-decoration: none;
@@ -442,22 +504,19 @@ body {
 }
 // -----------------------
 
+// staffs/account
 .staff-account-wrapper {
-  width: 100%;
-  display: flex; // position stickyに必要
-  align-items: baseline; // position stickyに必要
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
 }
 
-.staff-account-wrapper-left {
-  width: 65%;
-  margin-right: 5%;
+.staff-account-cards {
+  justify-content: space-around;
+  margin-right: 10px;
 }
 
-.staff-account-wrapper-right {
-  width: 30%;
-  align-self: baseline; // position stickyに必要
-  top: 6rem; // position stickyに必要 スクロールのときに上で止まる位置
-  position: sticky; // position stickyに必要
+.staff-info-table {
+  max-width: 500px;
 }
 
 .purchase-record-table {

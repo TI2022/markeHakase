@@ -14,16 +14,16 @@
     <%= link_to "新規イベント登録", new_event_path, class: "btn btn-sm btn-outline-dark"%>
   <% end %>
 </div>
-
-  <div class="event-card-container">
+  <p></p>
+  <div class="event-index-container">
     <% @results.each do |event| %>
-        <div class="event-card-item">
+        <div class="event-index-body">
           <% if event.image? %>
             <%= link_to image_tag(event.image.url, width: '100%', class: "image-border border-radius-top"), event_path(event) %>
           <% else %>
             <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), event_path(event) %>
           <% end %>
-          <p class="event-card-title">
+          <p class="event-index-description">
             <%= link_to event.title, event_path(event), class: "link-black" %><br>
             <br>
             <% if staff_signed_in? %>

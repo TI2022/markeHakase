@@ -65,6 +65,7 @@ class TopsController < ApplicationController
                                   :main_slide_flag,
                                   :reserve_image_flag,
                                   :introduction_image_flag,
+                                  :store_id,
                                   :image)
     end
 end

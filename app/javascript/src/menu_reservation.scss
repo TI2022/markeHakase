@@ -271,31 +271,38 @@
   // カレンダースマホ対応
     .fc-col-header-cell-cushion {
       @media (max-width: 600px) {
-        font-size: 0.5em;
+        font-size: 0.6em;
       }
     }
 
     .fc-timegrid-slot-label-cushion {
       @media (max-width: 600px) {
-        font-size: 0.5em;
+        font-size: 0.8em;
       }
     }
 
     .fc-timegrid-axis-cushion {
+      font-size: 0.8em;
       @media (max-width: 600px) {
-        font-size: 0.5em;
+        font-size: 0.6em;
       }
     }
 
     .fc-event-time {
       @media (max-width: 600px) {
-        font-size: 0.4em !important;
+        font-size: 0.8em !important;
       }
     }
 
     .fc-event-title {
       @media (max-width: 600px) {
-        font-size: 0.5em;
+        font-size: 0.8em;
+      }
+    }
+
+    .fc-dom-1 {
+      @media (max-width: 600px) {
+        font-size: 1em;
       }
     }
   // -----------------------

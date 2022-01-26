@@ -327,9 +327,7 @@
           <div class="font-bold font-deep-gray mb-2">選択されたメニュー</div>
           <div class="reserve-course-text reserve-white-bg py-1 px-2 mt-1"></div>
           <div class="reserve-add-nail-text reserve-white-bg py-1 px-2 mt-1"></div>
-          <% if @first_time_guests.present? %>
-            <div class="reserve-topping-text reserve-white-bg py-1 px-2 mt-1"></div>
-          <% end %>
+          <div class="reserve-topping-text reserve-white-bg py-1 px-2 mt-1"></div>
         </div>
 
         <div class="my-4 p-3 font-deep-gray reserve-text-bg">
@@ -426,7 +424,7 @@
           $('.reserve-course-text').text(menu_text);
           $('.reserve-course-text, .course-title').show();  
           $('.submit-coution').hide();
-          $('#hidden-course').val(course_id);                 // hidden_fieldのvalueに施術コースIDを代入
+          $('#hidden-course').val(course_id.replace(/[^0-9]/g, ''));                 // hidden_fieldのvalueに施術コースIDを代入
           $('#submit').prop('disabled',false);                // 送信ボタンを有効にする
           $('.course-charge-text').text(course_charge.replace(/[^0-9]/g, ''));
           let add_nail_charge_text = $('.add-nail-charge-text').text();
@@ -460,7 +458,7 @@
           $(this).addClass( open );
           $('.reserve-add-nail-text').text(menu_text);
           $('.reserve-add-nail-text, .add-nail-title').show();
-          $('#hidden-add-nail').val(course_id);
+          $('#hidden-add-nail').val(course_id.replace(/[^0-9]/g, ''));
           $('.add-nail-charge-text').text(add_nail_charge.replace(/[^0-9]/g, ''));
           let topping_charge_text = $('.topping-charge-text').text();
           let course_charge_text = $('.course-charge-text').text();
@@ -493,7 +491,7 @@
           $(this).addClass( open );
           $('.reserve-topping-text').text(menu_text);
           $('.reserve-topping-text, .topping-title').show();
-          $('#hidden-topping').val(course_id);
+          $('#hidden-topping').val(course_id.replace(/[^0-9]/g, ''));
           $('.topping-charge-text').text(topping_charge.replace(/[^0-9]/g, ''));
           let topping_charge_text = $('.topping-charge-text').text();
           let course_charge_text = $('.course-charge-text').text();

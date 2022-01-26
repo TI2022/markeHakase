@@ -1,7 +1,30 @@
-<p>
+<p class="mt-2">
   <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
   予約画面
 </p>
+
+<% if user_signed_in? %>
+  <% if @current_guest_reservations.count >= 1 %>
+    <% warning_text = "現在仮予約中です。承認されるまでお待ちください。" %>
+    <div class="mt-2">
+      現在
+      <font color="red">仮予約中</font>
+      の予約が
+      <%= @current_guest_reservations.count %>
+      件あります。承認されるまでお待ちください。
+    </div>
+    <% tel_text = "  キャンセルはお電話から承っております。" %>
+    <% tel_number = "0463-27-2008" %>
+    <div class="mt-2"><%= link_to sanitize('<i class="pr-2 fas fa-phone"></i>') + tel_number + tel_text, "tel:+81-463-27-2008", class: "btn btn-info" %></div>
+  <% end %>
+<% end %>
+
+<div class="mt-2 right">
+  営業時間：11:00〜20:00(18:00最終受付)
+</div>
+<div class="mt-2 right">
+  定休日：日曜日
+</div>
 
 <% unless user_signed_in? %>
   <font size="2rem" color="red">※WEB予約をご利用になる際はログインが必要になります。</font>

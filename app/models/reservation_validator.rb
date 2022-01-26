@@ -27,10 +27,11 @@ class ReservationValidator < ActiveModel::EachValidator
       working_staff = Reservation.where('cancel_flag IN (?) AND start_time < ? AND end_time > ?', record.cancel_flag, new_end_time, new_start_time)
     end
 
-    store = Store.find(record.store_id)
+    day = record.start_time
+    shift = Shift.find_by(working_day: day)
 
-    if working_staff.count >= store.working_staff
-      record.errors.add(attribute, "エラー、稼働スタッフは#{store.working_staff}人です。") if working_staff.count >= store.working_staff # 同時刻予約はスタッフ稼働人数まで
+    if working_staff.count >= shift.working_staff
+      record.errors.add(attribute, "エラー、稼働スタッフは#{shift.working_staff}人です。") if working_staff.count >= shift.working_staff # 同時刻予約はスタッフ稼働人数まで
     elsif not_own_periods.present?
       record.errors.add(attribute, 'エラー、予約時間に重複があります。') if not_own_periods.present?
     end

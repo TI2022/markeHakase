@@ -1,0 +1,59 @@
+<div class="page-info">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  シフト管理画面
+</div>
+
+<div class="container">
+  <h1 class="center">
+    シフト管理画面
+  </h1>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <%= link_to "←", shifts_path(date: @first_day.prev_month), class: "btn btn-primary" %>
+          <%= l(@first_day, format: :long) %>
+          <%= link_to "→", shifts_path(date: @first_day.next_month), class: "btn btn-primary" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <table class="table table-bordered table-condensed table-hover" id="table-attendances">
+      <thead>
+        <tr class="center">
+        <th>日付</th>
+        <th>稼働スタッフ人数</th>
+        <th>編集</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% @shifts.each do |shift| %>
+          <tr>
+            <td>
+              <%= l(shift.working_day, format: :short) %>
+              <% if shift.working_day.wday == 0 %>
+                <font color="RED">
+                  （<%= $days_of_the_week[shift.working_day.wday] %>）
+                </font>
+              <% elsif shift.working_day.wday == 6 %>
+                <font color="BLUE">
+                  （<%= $days_of_the_week[shift.working_day.wday] %>）
+                </font>
+              <% else %>
+                （<%= $days_of_the_week[shift.working_day.wday] %>）
+              <% end %>
+            </td>
+            <td><%= shift.working_staff %>人</td>
+            <td>
+              <%= link_to '編集', edit_shift_path(shift), class: 'btn btn-sm btn-primary' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

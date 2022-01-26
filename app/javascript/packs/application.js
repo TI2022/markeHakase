@@ -39,8 +39,11 @@ import timeGridPlugin from '@fullcalendar/timegrid';
         timeZone: 'Asia/Tokyo',
         headerToolbar: {
           start: '',
-          center: 'title',
+          left: 'title',
           end: 'today prev,next'
+        },
+        footerToolbar: {
+          right: "prev,next"
         },
         titleFormat: function(obj) {
           return obj.date.year+"年"+(obj.date.month+1)+"月";
@@ -59,10 +62,10 @@ import timeGridPlugin from '@fullcalendar/timegrid';
         expandRows: true,
         stickyHeaderDates: true,
         buttonText: {
-            today: '今日'
+          today: '今日'
         },
         nowIndicator: true,
-        allDayText: '終日',
+        allDayText: 'スタッフ',
         height: "auto",
         events: "/reservations.json",
         eventDidMount: function (info) {
@@ -77,6 +80,12 @@ import timeGridPlugin from '@fullcalendar/timegrid';
           }
           if (info.event._def.title=='施術完了') {
             info.el.style.background='blue' ;
+          }
+          if (info.event._def.title=='1') {
+            info.el.style.background='darkgray' ;
+          }
+          if (info.event._def.title=='2') {
+            info.el.style.background='gray' ;
           }
         }
       });

@@ -60,7 +60,11 @@
         </td>
         <td colspan="3"><%= link_to item.name, item_path(item), class: "link-black" %></td>
         <% if order.shipped_at.present? %>
-          <td>発送状況: 発送済み</td>
+          <td>
+            発送状況: 発送済み<br>
+            発送通知メール送信日時: <%= l(order.shipped_at, format: :custom1) %><br>
+            送付先: <%= @user.email %>
+          </td>
         <% else %>
           <td>発送状況: <span>未発送</span></td>
         <% end %>
@@ -70,11 +74,15 @@
         <td>数量: <%= order.quantity %></td>
         <td><%= item.price*order.quantity %> 円(税抜)</td>
         <td>
-          <%= form_with model: @order, url: ship_item_order_path(order), local: true do |f| %>
-            <%= f.submit "発送完了", class: "btn btn-sm btn-outline-dark" %>
-          <% end %>
-          <%= form_with model: @order, url: cancel_ship_item_order_path(order), local: true do |f| %>
-            <%= f.submit "未発送", class: "btn btn-sm btn-outline-danger" %>
+          <% if order.shipped_at.blank? %>
+            送付先: <%= @user.email %><br>
+            <%= form_with model: @order, url: ship_item_order_path(order), local: true do |f| %>
+              <%= f.submit "発送完了/メールを送信する", class: "btn btn-sm btn-outline-dark" %>
+            <% end %>
+          <% else %>
+            <%= form_with model: @order, url: cancel_ship_item_order_path(order), local: true do |f| %>
+              <%= f.submit "未発送に戻す", class: "btn btn-sm btn-outline-danger" %>
+            <% end %>
           <% end %>
         </td>
       </tr>
@@ -92,7 +100,11 @@
         </td>
         <td colspan="3"><%= link_to event.title, event_path(event), class: "link-black" %></td>
         <% if event_order.shipped_at.present? %>
-          <td>発送状況: 発送済み</td>
+          <td>
+            発送状況: 発送済み<br>
+            発送通知メール送信日時: <%= l(event_order.shipped_at, format: :custom1) %><br>
+            送付先: <%= @user.email %>
+          </td>
         <% else %>
           <td>発送状況: <span>未発送</span></td>
         <% end %>
@@ -102,11 +114,15 @@
         <td>数量: <%= event_order.quantity %></td>
         <td><%= event.price*event_order.quantity %> 円(税抜)</td>
         <td>
-          <%= form_with model: @event_order, url: ship_event_order_path(event_order), local: true do |f| %>
-            <%= f.submit "発送完了", class: "btn btn-sm btn-outline-dark" %>
-          <% end %>
-          <%= form_with model: @event_order, url: cancel_ship_event_order_path(event_order), local: true do |f| %>
-            <%= f.submit "未発送", class: "btn btn-sm btn-outline-danger" %>
+          <% if event_order.shipped_at.blank? %>
+            送付先: <%= @user.email %><br>
+            <%= form_with model: @event_order, url: ship_event_order_path(event_order), local: true do |f| %>
+              <%= f.submit "発送完了/メールを送信する", class: "btn btn-sm btn-outline-dark" %>
+            <% end %>
+          <% else %>
+            <%= form_with model: @event_order, url: cancel_ship_event_order_path(event_order), local: true do |f| %>
+              <%= f.submit "未発送に戻す", class: "btn btn-sm btn-outline-danger" %>
+            <% end %>
           <% end %>
         </td>
       </tr>

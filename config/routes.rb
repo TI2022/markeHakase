@@ -95,4 +95,5 @@ Rails.application.routes.draw do
   resources :purchase_records, only: %i[index show]
   post 'pay', to: 'payments#pay'
   resources :notifications
+  resources :shifts, only: [:edit, :update, :index]
 end

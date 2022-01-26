@@ -41,3 +41,11 @@ json.array! @reservations do |reservation|
     end
   end
 end
+
+if @shifts.present?
+  json.array! @shifts do |shift|
+    json.id shift.id
+    json.title shift.working_staff
+    json.start shift.working_day
+  end
+end

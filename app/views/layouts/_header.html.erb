@@ -45,6 +45,7 @@
   </div>
 
   <div class="header-menu row">
+    <div class="border-r col-2"><%= link_to 'ご予約', reservations_path, class: "link-lightgray" %></div>
     <div class="border-r col-2"><%= link_to '店舗のご案内', stores_path, class: "link-lightgray" %></div>
     <div class="border-r col-2"><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "link-lightgray" %></div>
     <div class="border-r col-2"><%= link_to '商品情報', items_path, class: "link-lightgray" %></div>
@@ -53,7 +54,7 @@
   </div>
 
   <div id="navArea">
-    <nav>
+    <div class="nav">
       <div class="inner">
         <div class="phone-guest-nav">
 
@@ -110,6 +111,7 @@
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-calendar-alt"></i></span><%= link_to '施術ご予約', reservations_path, 'data-turbolinks': false, class: "pl-3" %></li>
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-cart-arrow-down"></i></span><%= link_to '商品情報', items_path, class: "pl-3" %></li>
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-campground"></i></span><%= link_to 'イベント情報', events_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-comment-dots"></i></span><%= link_to '口コミ', static_pages_review_index_path, class: "pl-3" %></li>
         </ul>
 
         <div class="phone-staff-btn">
@@ -146,7 +148,7 @@
           <% end %>
         </div>
       </div>
-    </nav>
+    </div>
 
     <div class="toggle_btn">
       <span></span>

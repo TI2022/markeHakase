@@ -38,6 +38,7 @@
       background: #79a7d9;
       font-family: "游ゴシック体", "Yu Gothic", sans-serif;
       @media (max-width: 600px) {
+        display: none;
         font-size: 0.5em;
       }
     }
@@ -300,7 +301,7 @@
     transform: translateY(100px);
   }
 
-  /*　上に上がる動き　*/
+  /* 上に上がる動き */
 
   #page-top.UpMove{
     animation: UpAnime 0.5s forwards;
@@ -316,7 +317,7 @@
     }
   }
 
-  /*　下に下がる動き　*/
+  /* 下に下がる動き */
 
   #page-top.DownMove{
     animation: DownAnime 0.5s forwards;
@@ -344,7 +345,7 @@
   /*============
   nav
   =============*/
-  nav {
+  .nav {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -358,24 +359,24 @@
     z-index: 53;
     opacity: 0;
   }
-  .open nav {
+  .open .nav {
     left: 0;
     opacity: 1;
   }
-  nav .inner {
+  .nav .inner {
     padding: 25px;
   }
-  nav .inner ul {
+  .nav .inner ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  nav .inner ul li {
+  .nav .inner ul li {
     position: relative;
     margin: 0;
     border-bottom: 1px solid #333;
   }
-  nav .inner ul li a {
+  .nav .inner ul li a {
     display: block;
     color: #333;
     font-size: 14px;
@@ -383,11 +384,11 @@
     text-decoration: none;
     transition-duration: 0.2s;
   }
-  nav .inner ul li a:hover {
+  .nav .inner ul li a:hover {
     background: #e4e4e4;
   }
   @media screen and (max-width: 600px) {
-    nav {
+    .nav {
       left: -300px;
       width: 300px;
     }
@@ -404,7 +405,7 @@
     height: 30px;
     transition: all .5s;
     cursor: pointer;
-    z-index: 53;
+    z-index: 55;
   }
   .toggle_btn span {
     display: block;

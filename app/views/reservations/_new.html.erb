@@ -40,6 +40,7 @@
         </h5>
 
         <div class="card bg-light p-3">
+          <h5 class="py-2 font-deep-gray right">※表示価格はすべて税込みです。</h5>
           <% unless @first_time_guests.present? %>
             <div>
               <h5 class="py-2 category">
@@ -56,11 +57,12 @@
                       <%= menu.full_title %>
                     </div>
                     <div class="m-2">
-                      <div class="px-1 font-gray">
+                      <div class="px-1 description font-gray">
                         <%= menu.description %>
                       </div>
-                      <div class="right course-charge font-deep-gray pt-2 px-2">
-                        <%= menu.charge %>円
+                      <div class="right course-charge font-deep-gray pt-4 px-2">
+                        <span class="font-deep-gray font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                        <span class="font-gray font-small">税込</span>
                       </div>
                       <div class="display-none course-id">
                         <%= menu.id %>
@@ -91,11 +93,12 @@
                       <%= menu.full_title %>
                     </div>
                     <div class="m-2">
-                      <div class="px-1 font-gray">
+                      <div class="px-1 description font-gray">
                         <%= menu.description %>
                       </div>
-                      <div class="right course-charge font-deep-gray pt-2 px-2">
-                        <%= menu.charge %>円
+                      <div class="right course-charge font-deep-gray pt-4 px-2">
+                        <span class="font-deep-gray font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                        <span class="font-gray font-small">税込</span>
                       </div>
                       <div class="display-none course-id">
                         <%= menu.id %>
@@ -124,16 +127,18 @@
                       <%= menu.full_title %>
                     </div>
                     <div class="m-2">
-                      <div class="px-1 font-gray">
+                      <div class="px-1 description font-gray">
                         <%= menu.description %>
                       </div>
                       <div class="course-charge display-none">
-                        <%= menu.charge %>円
+                        <%= menu.charge %>
                       </div>
-                      <div class="right font-red pt-2 px-2">
-                        <span class="font-gray text-decoration-line-through"><%= menu.original_charge %>円</span>
-                        <span class="font-deep-gray px-2">→</span>
-                        <%= menu.charge %>円
+                      <div class="right pt-4 px-2">
+                        <span class="font-gray font-small pl-2">通常価格</span>
+                        <span class="font-gray text-decoration-line-through">￥<%= menu.original_charge.to_s(:delimited) %></span>
+                        <span class="font-deep-gray px-1">→</span>
+                        <span class="font-red font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                        <span class="font-gray font-small">税込</span>
                       </div>
                       <div class="display-none course-id">
                         <%= menu.id %>
@@ -159,11 +164,12 @@
                       <%= menu.full_title %>
                     </div>
                     <div class="m-2">
-                      <div class="px-1 font-gray">
+                      <div class="px-1 description font-gray">
                         <%= menu.description %>
                       </div>
-                      <div class="right course-charge font-deep-gray pt-2 px-2">
-                        <%= menu.charge %>円
+                      <div class="right course-charge font-deep-gray pt-4 px-2">
+                        <span class="font-deep-gray font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                        <span class="font-gray font-small">税込</span>
                       </div>
                       <div class="display-none course-id">
                         <%= menu.id %>
@@ -192,11 +198,12 @@
                     <%= menu.full_title %>
                   </div>
                   <div class="m-2">
-                    <div class="px-1 font-gray">
+                    <div class="px-1 description font-gray">
                       <%= menu.description %>
                     </div>
-                    <div class="right course-charge font-deep-gray pt-2 px-2">
-                      <%= menu.charge %>円
+                    <div class="right course-charge font-deep-gray pt-4 px-2">
+                      <span class="font-deep-gray font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                      <span class="font-gray font-small">税込</span>
                     </div>
                     <div class="display-none course-id">
                       <%= menu.id %>
@@ -225,17 +232,19 @@
                     <%= menu.full_title %>
                   </div>
                   <div class="m-2">
-                    <div class="px-1 font-gray">
+                    <div class="px-1 description font-gray">
                       <%= menu.description %>
                     </div>
                     <div class="course-charge display-none">
                       <%= menu.charge %>
                     </div>
-                    <div class="right font-red pt-2 px-2">
-                      <span class="font-gray text-decoration-line-through"><%= menu.original_charge %>円</span>
-                      <span class="font-deep-gray px-2">→</span>
-                      <%= menu.charge %>円
-                    </div>
+                    <div class="right pt-4 px-2">
+                        <span class="font-gray font-small pl-2">通常価格</span>
+                        <span class="font-gray text-decoration-line-through">￥<%= menu.original_charge.to_s(:delimited) %></span>
+                        <span class="font-deep-gray px-1">→</span>
+                        <span class="font-red font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                        <span class="font-gray font-small">税込</span>
+                      </div>
                     <div class="display-none course-id">
                       <%= menu.id %>
                     </div>
@@ -264,11 +273,12 @@
                     <%= menu.full_title %>
                   </div>
                   <div class="m-2">
-                    <div class="px-1 font-gray">
+                    <div class="px-1 description font-gray">
                       <%= menu.description %>
                     </div>
-                    <div class="right add-nail-charge font-deep-gray pt-2 px-2">
-                      <%= menu.charge %>円
+                    <div class="right add-nail-charge font-deep-gray pt-4 px-2">
+                      <span class="font-deep-gray font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                      <span class="font-gray font-small">税込</span>
                     </div>
                     <div class="display-none add-nail-id">
                       <%= menu.id %>
@@ -290,17 +300,18 @@
               <div class="toggle-btn cursor-pointer right my-2 px-3">
                 <i class="fas fa-chevron-down"></i>
               </div>
-              <div class="menu-toggle display-none mx-2">
+              <div class="menu-toggle mx-2">
                 <% @topping_menu.each do |menu| %>
                   <div class="topping-menu-btn display-block btn btn-info m-2">
                     <%= menu.full_title %>
                   </div>
                   <div class="m-2">
-                    <div class="px-1 font-gray">
+                    <div class="px-1 description font-gray">
                       <%= menu.description %>
                     </div>
-                      <div class="right topping-charge font-deep-gray pt-2 px-2">
-                      <%= menu.charge %>円
+                    <div class="right topping-charge font-deep-gray pt-4 px-2">
+                      <span class="font-deep-gray font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                      <span class="font-gray font-small">税込</span>
                     </div>
                     <div class="display-none topping-id">
                       <%= menu.id %>
@@ -346,6 +357,7 @@
           <div class="right font-bold font-deep-gray mb-2">
             合計 : <span class="full-charge font-bold font-deep-gray"></span>
           </div>
+          <h5 class="py-2 font-deep-gray right">※表示価格はすべて税込みです。</h5>
         </div>
 
         <div class="error-wrap">
@@ -417,7 +429,7 @@
           let topping_charge_text = $('.topping-charge-text').text();
           let course_charge_text = $('.course-charge-text').text();
           let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
-          $('.full-charge').text(full_charge + "円");
+          $('.full-charge').text(full_charge.toLocaleString() + "円");
         } else {
           $('.menu-btn').removeClass( open );
           $(this).addClass( open );
@@ -431,7 +443,7 @@
           let topping_charge_text = $('.topping-charge-text').text();
           let course_charge_text = $('.course-charge-text').text();
           let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
-          $('.full-charge').text(full_charge + "円");
+          $('.full-charge').text(full_charge.toLocaleString() + "円");
         }
         $('.reserve-text-bg').show();
         $('.fixed-reserve-text-bg').show();
@@ -452,7 +464,7 @@
           let topping_charge_text = $('.topping-charge-text').text();
           let course_charge_text = $('.course-charge-text').text();
           let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
-          $('.full-charge').text(full_charge + "円");
+          $('.full-charge').text(full_charge.toLocaleString() + "円");
         } else {
           $('.add-nail-menu-btn').removeClass( open );
           $(this).addClass( open );
@@ -464,7 +476,7 @@
           let course_charge_text = $('.course-charge-text').text();
           let add_nail_charge_text = $('.add-nail-charge-text').text();
           let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
-          $('.full-charge').text(full_charge + "円");
+          $('.full-charge').text(full_charge.toLocaleString() + "円");
         }
         $('.reserve-text-bg').show();
         $('.fixed-reserve-text-bg').show();
@@ -485,7 +497,7 @@
           let topping_charge_text = $('.topping-charge-text').text();
           let course_charge_text = $('.course-charge-text').text();
           let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
-          $('.full-charge').text(full_charge + "円");
+          $('.full-charge').text(full_charge.toLocaleString() + "円");
         } else {
           $('.topping-menu-btn').removeClass( open );
           $(this).addClass( open );
@@ -497,7 +509,7 @@
           let course_charge_text = $('.course-charge-text').text();
           let add_nail_charge_text = $('.add-nail-charge-text').text();
           let full_charge = ( (parseInt(topping_charge_text) || 0) + (parseInt(add_nail_charge_text) || 0)  + (parseInt(course_charge_text) || 0) );
-          $('.full-charge').text(full_charge + "円");
+          $('.full-charge').text(full_charge.toLocaleString() + "円");
         }
         $('.reserve-text-bg').show();
         $('.fixed-reserve-text-bg').show();
@@ -526,6 +538,24 @@
     // 固定テキストエリアの✖️ボタンを押すと固定テキストエリアを閉じる
       $('.fixed-text-close-btn').on('click', function() {
         $('.fixed-reserve-text-bg').hide();
+      });
+    // -----------------------------------------
+
+    // 各descriptionの割引の文字を目立たせる（spanタグで囲い、cssでデザインを変更する）
+      $(".description").children().addBack().contents().each(function(){
+        if (this.nodeType == 3) {
+          let str = $(this).replaceWith($(this).text().replace(/10％OFF/g, "<span>$&</span>"));
+        }
+      });
+      $(".description").children().addBack().contents().each(function(){
+        if (this.nodeType == 3) {
+          let str = $(this).replaceWith($(this).text().replace(/20％OFF/g, "<span>$&</span>"));
+        }
+      });
+      $(".description").children().addBack().contents().each(function(){
+        if (this.nodeType == 3) {
+          let str = $(this).replaceWith($(this).text().replace(/30％OFF/g, "<span>$&</span>"));
+        }
       });
     // -----------------------------------------
 

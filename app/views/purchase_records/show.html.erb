@@ -71,7 +71,7 @@
             <li>商品合計: <%= item.price*order.quantity %> 円(税抜)</li>
             <% if order.shipped_at.blank? %>
               <li>発送状況: <span>未発送あり</span></li>
-              <li>送付先: <%= @user.email %></li>
+              <li>通知先: <%= @user.email %></li>
               <div class="form-group">
                 <%= form_with model: @order, url: ship_item_order_path(order), local: true do |f| %>
                   <%= f.hidden_field :shipped_at, value: Time.current %>
@@ -85,7 +85,7 @@
             <% else %>
               <li>発送状況: 発送済み</li>
               <li>発送通知メール送信日時: <%= l(order.shipped_at, format: :custom1) %></li>
-              <li>送付先: <%= @user.email %></li>
+              <li>通知先: <%= @user.email %></li>
               <li>運送会社(任意): <%= order.shipping_company %></li>
               <li>送付状番号(任意): <%= order.tracking_number %></li>
               <div class="form-group">
@@ -114,7 +114,7 @@
             <li>チケット合計: <%= event.price*event_order.quantity %> 円(税抜)</li>
             <% if event_order.shipped_at.blank? %>
               <li>発送状況: <span>未発送あり</span></li>
-              <li>送付先: <%= @user.email %></li>
+              <li>通知先: <%= @user.email %></li>
               <div class="form-group">
                 <%= form_with model: @event_order, url: ship_event_order_path(event_order), local: true do |f| %>
                   <%= f.hidden_field :shipped_at, value: Time.current %>
@@ -128,7 +128,7 @@
             <% else %>
               <li>発送状況: 発送済み</li>
               <li>発送通知メール送信日時: <%= l(event_order.shipped_at, format: :custom1) %></li>
-              <li>送付先: <%= @user.email %></li>
+              <li>通知先: <%= @user.email %></li>
               <li>運送会社(任意): <%= event_order.shipping_company %></li>
               <li>送付状番号(任意): <%= event_order.tracking_number %></li>
               <div class="form-group">

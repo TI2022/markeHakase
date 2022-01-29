@@ -9,6 +9,8 @@ class CreateEventOrders < ActiveRecord::Migration[6.1]
       t.integer :adult_count
       t.integer :child_count
       t.datetime :shipped_at
+      t.integer :shipping_company
+      t.string :tracking_number
       t.timestamps
     end
   end

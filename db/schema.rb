@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2022_01_23_130419) do
     t.integer "adult_count"
     t.integer "child_count"
     t.datetime "shipped_at"
+    t.integer "shipping_company"
+    t.string "tracking_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_event_orders_on_cart_id"
@@ -118,6 +120,8 @@ ActiveRecord::Schema.define(version: 2022_01_23_130419) do
     t.integer "adult_count"
     t.integer "child_count"
     t.datetime "shipped_at"
+    t.integer "shipping_company"
+    t.string "tracking_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"

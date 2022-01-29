@@ -71,6 +71,12 @@
             <li><%= link_to item.name, item_path(item), class: "link-black" %></li>
             <% if order.shipped_at.present? %>
               <li>発送状況: 発送済み</li>
+              <% if order.shipping_company.present? %>
+                <li>運送会社: <%= order.shipping_company %></li>
+              <% end %>
+              <% if order.tracking_number.present? %>
+                <li>荷物問合せ番号: <%= order.tracking_number %></li>
+              <% end %>
             <% else %>
               <li>発送状況: <span>発送準備中</span></li>
             <% end %>
@@ -93,6 +99,12 @@
             <li><%= link_to event.title, event_path(event), class: "link-black" %></li>
             <% if event_order.shipped_at.present? %>
               <li>発送状況: 発送済み</li>
+              <% if event_order.shipping_company.present? %>
+                <li>運送会社: <%= event_order.shipping_company %></li>
+              <% end %>
+              <% if event_order.tracking_number.present? %>
+                <li>荷物問合せ番号: <%= event_order.tracking_number %></li>
+              <% end %>
             <% else %>
               <li>発送状況: <span>発送準備中</span></li>
             <% end %>

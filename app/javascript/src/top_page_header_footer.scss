@@ -38,6 +38,7 @@
       background: #79a7d9;
       font-family: "游ゴシック体", "Yu Gothic", sans-serif;
       @media (max-width: 600px) {
+        display: none;
         font-size: 0.5em;
       }
     }
@@ -300,7 +301,7 @@
     transform: translateY(100px);
   }
 
-  /*　上に上がる動き　*/
+  /* 上に上がる動き */
 
   #page-top.UpMove{
     animation: UpAnime 0.5s forwards;
@@ -316,7 +317,7 @@
     }
   }
 
-  /*　下に下がる動き　*/
+  /* 下に下がる動き */
 
   #page-top.DownMove{
     animation: DownAnime 0.5s forwards;
@@ -404,7 +405,7 @@
     height: 30px;
     transition: all .5s;
     cursor: pointer;
-    z-index: 53;
+    z-index: 55;
   }
   .toggle_btn span {
     display: block;

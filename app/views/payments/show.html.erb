@@ -74,9 +74,9 @@
             <% else %>
               <li>発送状況: <span>発送準備中</span></li>
             <% end %>
-            <li><%= item.price %> 円(税抜)</li>
+            <li>価格: <%= item.price %> 円(税抜)</li>
             <li>数量: <%= order.quantity %></li>
-            <li><%= item.price*order.quantity %> 円(税抜)</li>
+            <li>商品合計: <%= item.price*order.quantity %> 円(税抜)</li>
           </ul>
         <% end %>
       </div>
@@ -97,9 +97,9 @@
               <li>発送状況: <span>発送準備中</span></li>
             <% end %>
 
-            <li><%= event.price %> 円(税抜)</li>
+            <li>価格: <%= event.price %> 円(税抜)</li>
             <li>数量: <%= event_order.quantity %></li>
-            <li><%= event.price*event_order.quantity %> 円(税抜)</li>
+            <li>チケット合計: <%= event.price*event_order.quantity %> 円(税抜)</li>
           </ul>
         <% end %>
       </div>

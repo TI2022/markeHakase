@@ -525,7 +525,17 @@ body {
   max-width: 500px;
 }
 
-.purchase-record-table {
+.purchase-record-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto;
+  text-align: start; /* カード内の中央寄せ解除 */
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.purchase-record-span {
   span {
     color: red;
   }

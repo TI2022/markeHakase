@@ -38,9 +38,9 @@ class OrdersController < ApplicationController
     order = Order.find(params[:format])
     order.update(order_params)
     
-    # 発送完了時にメールを送信する機能/コメントアウトを外したら有効
-    user = User.find(order.cart.user.id)
-    OrderMailer.shipment_notification(user, order).deliver_now
+    # 発送完了時にメールを送信する機能/42, 43 コメントアウトを外したら有効
+    # user = User.find(order.cart.user.id)
+    # OrderMailer.shipment_notification(user, order).deliver_now
 
     redirect_to purchase_record_path(order.payment_id)
   end

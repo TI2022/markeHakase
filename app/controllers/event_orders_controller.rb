@@ -35,9 +35,9 @@ class EventOrdersController < ApplicationController
     event_order = EventOrder.find(params[:format])
     event_order.update(event_order_params)
 
-    # 発送完了時にメールを送信する機能/コメントアウトを外したら有効
-    user = User.find(event_order.cart.user.id)
-    EventOrderMailer.shipment_notification(user, event_order).deliver_now
+    # 発送完了時にメールを送信する機能/39, 40 コメントアウトを外したら有効
+    # user = User.find(event_order.cart.user.id)
+    # EventOrderMailer.shipment_notification(user, event_order).deliver_now
 
     redirect_to purchase_record_path(event_order.payment_id)
   end

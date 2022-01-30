@@ -44,6 +44,12 @@ ja:
         updated_at: 更新日
       order:
         quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 送付状番号
+      event_order:
+        quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 送付状番号
       event:
         title: イベント名
         category: カテゴリー

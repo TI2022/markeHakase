@@ -17,7 +17,7 @@
     <%= paginate @payments %>
     <h1>購入履歴 【 <%= current_user.name %> 様 】</h1>
     <% @payments.each do |payment| %>
-      <div class="payment-index-content-wrapper">
+      <div class="payment-index-wrapper">
         <div>
           <ul>
             <li>注文日時:<br><%= l payment.created_at, format: :custom1 %></li>
@@ -27,7 +27,7 @@
           </ul>
         </div>
 
-        <div>
+        <div class="payment-index-inner-wrapper">
           <div>
             <% orders = Order.where(payment_id: payment.id) %>
             <% orders.each do |order| %>

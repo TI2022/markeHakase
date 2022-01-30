@@ -8,7 +8,9 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :payment_id
       t.integer :adult_count
       t.integer :child_count
-      t.time :shipped_at
+      t.datetime :shipped_at
+      t.integer :shipping_company
+      t.string :tracking_number
       t.timestamps
     end
   end

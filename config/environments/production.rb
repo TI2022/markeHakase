@@ -4,6 +4,7 @@ Rails.application.configure do
 
   # 本番環境へのデプロイのために追加
   config.hosts << "genkinomoto.herokuapp.com"
+  # config.hosts << "genkinomototo.herokuapp.com"
   config.hosts << "localhost"
 
   # Settings specified here will take precedence over those in config/application.rb.

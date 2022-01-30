@@ -129,12 +129,10 @@ Devise.setup do |config|
   # config.pepper = 'd58e68617a4f6936f0252e0b785d0ed5f3412551063ffaaea5611f6e64851a1b4e098076372a85c67ab2ba079410b0c7b233e7925ab4c719796f5c858d5556c5'
 
   # Send a notification to the original email when the user's email is changed.
-  # ユーザーのemailが変更された時に元のメールへ通知メールを送るかどうか。
-  config.send_email_changed_notification = true
+  # config.send_email_changed_notification = false
 
   # Send a notification email when the user's password is changed.
-  # ユーザーのパスワードが変更された時にメールへ告知のメールを送るかどうか。
-  config.send_password_change_notification = true
+  # config.send_password_change_notification = false
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -166,8 +164,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # ログイン情報を保存する期間の設定。
-  config.remember_for = 2.weeks
+  # config.remember_for = 2.weeks
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
@@ -232,8 +229,7 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # reset. Defaults to true, so a user is signed in automatically after a reset.
-  # パスワードリセット完了後に自動でログイン状態にさせるか。
-  config.sign_in_after_reset_password = true
+  # config.sign_in_after_reset_password = true
 
   # ==> Configuration for :encryptable
   # Allow you to use another hashing or encryption algorithm besides bcrypt (default).

@@ -43,11 +43,13 @@ class ReviewsController < ApplicationController
     @reservation = Reservation.where(is_review_exists: 2, guest_id: current_user.id) #投稿したユーザーの分だけを表示させる
     @reservation_id = Reservation.find(params[:reservation_id])
     @reviews = Review.includes(:reservation).where(user_id: current_user.id).page(params[:page]).per(10).order(created_at: "ASC")
-    @review_total_score = @reviews.average(:total_score).round(1)
-    @review_menu_score = @reviews.average(:menu_score).round(1)
-    @review_customer_score = @reviews.average(:customer_score).round(1)
-    @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
-    # @review_answers = ReviewAnswer.new
+    if @reviews.present?
+      @review_total_score = @reviews.average(:total_score).round(1)
+      @review_menu_score = @reviews.average(:menu_score).round(1)
+      @review_customer_score = @reviews.average(:customer_score).round(1)
+      @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
+      # @review_answers = ReviewAnswer.new
+    end
     # @staff = Staff.all
   end
 

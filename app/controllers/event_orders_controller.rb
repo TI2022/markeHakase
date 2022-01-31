@@ -33,15 +33,21 @@ class EventOrdersController < ApplicationController
 
   def ship_event_order
     event_order = EventOrder.find(params[:format])
-    event_order.shipped_at = Time.current
-    event_order.save
+    event_order.update(event_order_params)
+
+    # 発送完了時にメールを送信する機能/39, 40 コメントアウトを外したら有効
+    # user = User.find(event_order.cart.user.id)
+    # EventOrderMailer.shipment_notification(user, event_order).deliver_now
+
     redirect_to purchase_record_path(event_order.payment_id)
   end
 
   def cancel_ship_event_order
     event_order = EventOrder.find(params[:format])
     event_order.shipped_at = nil
-    event_order.save
+    event_order.shipping_company = nil
+    event_order.tracking_number = nil
+    event_order.update(event_order_params)
     redirect_to purchase_record_path(event_order.payment_id)
   end
 
@@ -62,6 +68,6 @@ class EventOrdersController < ApplicationController
 
   private
     def event_order_params
-      params.permit(:event_id, :quantity, :paid_at, :payment_id, :adult_count, :child_count)
+      params.permit(:event_id, :quantity, :paid_at, :payment_id, :adult_count, :child_count, :shipped_at, :shipping_company, :tracking_number)
     end
 end

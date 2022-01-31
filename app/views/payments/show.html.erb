@@ -11,7 +11,7 @@
 
 <div class="container">
   <h1>注文明細/発送状況 【 <%= current_user.name %> 様 】</h1>
-  <div class="payment-show-content-wrapper">
+  <div class="payment-show-wrapper">
   
     <div>
       <p class="center">◎注文情報◎</p>
@@ -58,7 +58,7 @@
       </table>
     </div>
 
-    <div>
+    <div class="payment-show-inner-wrapper">
       <div>
         <% @orders.each do |order| %>
           <ul>
@@ -69,14 +69,20 @@
               <li><%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), item_path(item) %></li>
             <% end %>
             <li><%= link_to item.name, item_path(item), class: "link-black" %></li>
+            <li>価格: <%= item.price %> 円(税抜)</li>
+            <li>数量: <%= order.quantity %></li>
+            <li>商品合計: <%= item.price*order.quantity %> 円(税抜)</li>
             <% if order.shipped_at.present? %>
               <li>発送状況: 発送済み</li>
+              <% if order.shipping_company.present? %>
+                <li>運送会社: <%= order.shipping_company %></li>
+              <% end %>
+              <% if order.tracking_number.present? %>
+                <li>荷物問合せ番号: <%= order.tracking_number %></li>
+              <% end %>
             <% else %>
               <li>発送状況: <span>発送準備中</span></li>
             <% end %>
-            <li><%= item.price %> 円(税抜)</li>
-            <li>数量: <%= order.quantity %></li>
-            <li><%= item.price*order.quantity %> 円(税抜)</li>
           </ul>
         <% end %>
       </div>
@@ -91,15 +97,21 @@
               <li><%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), event_path(event) %></li>
             <% end %>
             <li><%= link_to event.title, event_path(event), class: "link-black" %></li>
+            <li>価格: <%= event.price %> 円(税抜)</li>
+            <li>数量: <%= event_order.quantity %></li>
+            <li>チケット合計: <%= event.price*event_order.quantity %> 円(税抜)</li>
             <% if event_order.shipped_at.present? %>
               <li>発送状況: 発送済み</li>
+              <% if event_order.shipping_company.present? %>
+                <li>運送会社: <%= event_order.shipping_company %></li>
+              <% end %>
+              <% if event_order.tracking_number.present? %>
+                <li>荷物問合せ番号: <%= event_order.tracking_number %></li>
+              <% end %>
             <% else %>
               <li>発送状況: <span>発送準備中</span></li>
             <% end %>
 
-            <li><%= event.price %> 円(税抜)</li>
-            <li>数量: <%= event_order.quantity %></li>
-            <li><%= event.price*event_order.quantity %> 円(税抜)</li>
           </ul>
         <% end %>
       </div>

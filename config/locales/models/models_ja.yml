@@ -44,6 +44,12 @@ ja:
         updated_at: 更新日
       order:
         quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 送付状番号
+      event_order:
+        quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 送付状番号
       event:
         title: イベント名
         category: カテゴリー
@@ -119,6 +125,10 @@ ja:
       review:
         title: タイトル
         content: 本文
+        total_score: 総合評価
+        menu_score: メニュー・料金
+        customer_score: 接客・技術
+        atmosphere_score: 雰囲気
       shift:
         working_staff: 稼働スタッフ人数
         working_day: 日にち

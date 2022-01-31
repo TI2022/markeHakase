@@ -7,110 +7,139 @@
 <p></p>
 
 <div class="container">
-  <table class="table purchase-record-table">
-    <tr>
-      <td>注文日: <%= l @payment.created_at, format: :custom1 %></td>
-      <td>注文番号: <%= @payment.id %></td>
-      <% if @payment.all_shipped_at.present?  %>
-        <td>発送状況: 全て発送済み</td>
-      <% else %>
-        <td>発送状況: <span>未発送あり</span></td>
-      <% end %>
-    </tr>
-  </table>
-  <table class="table table-striped">
-    <tr>
-      <th>お届け先</th>
-      <th>支払い方法</th>
-      <th colspan="2">領収書/購入明細書</th>
-    </tr>
-    <tr>
-      <td>
-        <%= link_to @user.name, users_show_path(@user), class: "link-black" %> 様<br>
-        <%= @user.prefecture_code %>
-        <%= @user.city %>
-        <%= @user.street %>
-        <%= @user.other_address %>
-      </td>
-      <td>クレジットカード決済(PAY.JP)</td>
-      <td>
-        商品の小計:<br>
-        送料:<br>
-        消費税:<br>
-        ご請求額(合計):<br>
-      </td>
-      <td class="right">
-        <%= @payment.subtotal %> 円<br>
-        <%= @payment.shipping_fee %> 円<br>
-        <%= @payment.tax %> 円<br>
-        <%= @payment.total %> 円<br>
-      </td>
-    </tr>
-  </table>
-  <table class="table purchase-record-table">
-    <% @orders.each do |order| %>
-      <tr>
-        <td rowspan="2">
-          <% item = Item.find(order.item_id) %>
-          <% if item.image? %>
-            <%= link_to image_tag(item.image.url, width: 100, class: "image-border"), item_path(item) %>
-          <% else %>
-            <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), item_path(item) %>
-          <% end %>
-        </td>
-        <td colspan="3"><%= link_to item.name, item_path(item), class: "link-black" %></td>
-        <% if order.shipped_at.present? %>
-          <td>発送状況: 発送済み</td>
-        <% else %>
-          <td>発送状況: <span>未発送</span></td>
-        <% end %>
-      </tr>
-      <tr>
-        <td><%= item.price %> 円(税抜)</td>
-        <td>数量: <%= order.quantity %></td>
-        <td><%= item.price*order.quantity %> 円(税抜)</td>
-        <td>
-          <%= form_with model: @order, url: ship_item_order_path(order), local: true do |f| %>
-            <%= f.submit "発送完了", class: "btn btn-sm btn-outline-dark" %>
-          <% end %>
-          <%= form_with model: @order, url: cancel_ship_item_order_path(order), local: true do |f| %>
-            <%= f.submit "未発送", class: "btn btn-sm btn-outline-danger" %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
+  <h1>注文明細/発送状況 【 <%= @user.name %> 様 】</h1>
+  <div class="purchase-record-wrapper">
+  
+    <div>
+      <p class="center">◎注文情報◎</p>
+      <table class="table purchase-record-span">
+        <tbody>
+          <tr><td>注文日</td><td><%= l @payment.created_at, format: :custom1 %></td></tr>
+          <tr><td>注文番号</td><td><%= @payment.id %></td></tr>
+          <% if @payment.all_shipped_at.present?  %>
+            <tr><td>発送状況</td><td>全て発送済み</td></tr>
+         <% else %>
+            <tr><td>発送状況</td><td><span>未発送あり</span></td></tr>
+         <% end %>
+        </tbody>
+      </table>
+      <p class="center">◎お届け先◎</p>
+      <table class="table">
+        <tbody>
+          <tr><td><%= @user.name %> 様</td></tr>
+          <tr><td><%= @user.postal_code %></td></tr>
+          <tr><td><%= @user.prefecture_code %></td></tr>
+          <tr><td><%= @user.city %></td></tr>
+          <tr><td><%= @user.street %></td></tr>
+          <tr><td><%= @user.other_address %></td></tr>
+          <tr><td><%= @user.phone %></td></tr>
+        </tbody>
+      </table>
+    </div>
 
-    <% @event_orders.each do |event_order| %>
-      <tr>
-        <td rowspan="2">
-          <% event = Event.find(event_order.event_id) %>
-          <% if event.image? %>
-            <%= link_to image_tag(event.image.url, width: 100, class: "image-border"), event_path(event) %>
-          <% else %>
-            <%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), event_path(event) %>
-          <% end %>
-        </td>
-        <td colspan="3"><%= link_to event.title, event_path(event), class: "link-black" %></td>
-        <% if event_order.shipped_at.present? %>
-          <td>発送状況: 発送済み</td>
-        <% else %>
-          <td>発送状況: <span>未発送</span></td>
+    <div>
+      <p class="center">◎支払い方法◎</p>
+      <table class="table">
+        <tbody>
+          <tr><td>クレジットカード決済(PAY.JP)</td></tr>
+        </tbody>
+      </table>
+      <p class="center">◎領収書/購入明細◎</p>
+      <table class="table">
+        <tbody>
+          <tr><td>商品の小計</td><td><%= @payment.subtotal %> 円</td></tr>
+          <tr><td>送料</td><td><%= @payment.shipping_fee %> 円</td></tr>
+          <tr><td>消費税</td><td><%= @payment.tax %> 円</td></tr>
+          <tr><td>ご請求額(合計)</td><td><%= @payment.total %> 円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="purchase-record-inner-wrapper">
+      <div>
+        <% @orders.each do |order| %>
+          <ul class="purchase-record-span">
+            <% item = Item.find(order.item_id) %>
+            <% if item.image? %>
+              <li><%= link_to image_tag(item.image.url, width: 100, class: "image-border"), item_path(item) %></li>
+            <% else %>
+              <li><%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), item_path(item) %></li>
+            <% end %>
+            <li><%= link_to item.name, item_path(item), class: "link-black" %></li>
+            
+            <li>価格: <%= item.price %> 円(税抜)</li>
+            <li>数量: <%= order.quantity %></li>
+            <li>商品合計: <%= item.price*order.quantity %> 円(税抜)</li>
+            <% if order.shipped_at.blank? %>
+              <li>発送状況: <span>未発送あり</span></li>
+              <li>通知先: <%= @user.email %></li>
+              <div class="form-group">
+                <%= form_with model: @order, url: ship_item_order_path(order), local: true do |f| %>
+                  <%= f.hidden_field :shipped_at, value: Time.current %>
+                  <%= f.label :shipping_company, "運送会社(任意):" %>
+                  <%= f.select :shipping_company, ['未設定', 'ヤマト運輸', '佐川急便', '日本郵便', 'その他'], {}, { class: "form-control col-sm-5" } %>
+                  <%= f.label :tracking_number, "荷物問合せ番号(任意):" %>
+                  <%= f.number_field :tracking_number, { class: "form-control col-sm-5" } %>
+                  <%= f.submit "発送完了のメールを送信する", class: "btn btn-sm btn-outline-dark" %>
+                <% end %>
+              </div>
+            <% else %>
+              <li>発送状況: 発送済み</li>
+              <li>発送通知メール送信日時: <%= l(order.shipped_at, format: :custom1) %></li>
+              <li>通知先: <%= @user.email %></li>
+              <li>運送会社(任意): <%= order.shipping_company %></li>
+              <li>荷物問合せ番号(任意): <%= order.tracking_number %></li>
+              <div class="form-group">
+                <%= form_with model: @order, url: cancel_ship_item_order_path(order), local: true do |f| %>
+                  <%= f.submit "未発送に戻す", class: "btn btn-sm btn-outline-danger" %>
+                <% end %>
+              </div>
+            <% end %>
+          </ul>
         <% end %>
-      </tr>
-      <tr>
-        <td><%= event.price %> 円(税抜)</td>
-        <td>数量: <%= event_order.quantity %></td>
-        <td><%= event.price*event_order.quantity %> 円(税抜)</td>
-        <td>
-          <%= form_with model: @event_order, url: ship_event_order_path(event_order), local: true do |f| %>
-            <%= f.submit "発送完了", class: "btn btn-sm btn-outline-dark" %>
-          <% end %>
-          <%= form_with model: @event_order, url: cancel_ship_event_order_path(event_order), local: true do |f| %>
-            <%= f.submit "未発送", class: "btn btn-sm btn-outline-danger" %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
+      </div>
 
-  </table>
+      <div>
+        <% @event_orders.each do |event_order| %>
+          <ul class="purchase-record-span">
+            <% event = Event.find(event_order.event_id) %>
+            <% if event.image? %>
+              <li><%= link_to image_tag(event.image.url, width: 100, class: "image-border"), event_path(event) %></li>
+            <% else %>
+              <li><%= link_to image_tag("/no_image2.png", width: 100, class: "image-border"), event_path(event) %></li>
+            <% end %>
+            <li><%= link_to event.title, event_path(event), class: "link-black" %></li>
+
+            <li>価格: <%= event.price %> 円(税抜)</li>
+            <li>数量: <%= event_order.quantity %></li>
+            <li>チケット合計: <%= event.price*event_order.quantity %> 円(税抜)</li>
+            <% if event_order.shipped_at.blank? %>
+              <li>発送状況: <span>未発送あり</span></li>
+              <li>通知先: <%= @user.email %></li>
+              <div class="form-group">
+                <%= form_with model: @event_order, url: ship_event_order_path(event_order), local: true do |f| %>
+                  <%= f.hidden_field :shipped_at, value: Time.current %>
+                  <%= f.label :shipping_company, "運送会社(任意):" %>
+                  <%= f.select :shipping_company, ['未設定', 'ヤマト運輸', '佐川急便', '日本郵便', 'その他'], {}, { class: "form-control col-sm-5" } %>
+                  <%= f.label :tracking_number, "荷物問合せ番号(任意):" %>
+                  <%= f.number_field :tracking_number, { class: "form-control col-sm-5" } %>
+                  <%= f.submit "発送完了のメールを送信する", class: "btn btn-sm btn-outline-dark" %>
+                <% end %>
+              </div>
+            <% else %>
+              <li>発送状況: 発送済み</li>
+              <li>発送通知メール送信日時: <%= l(event_order.shipped_at, format: :custom1) %></li>
+              <li>通知先: <%= @user.email %></li>
+              <li>運送会社(任意): <%= event_order.shipping_company %></li>
+              <li>荷物問合せ番号(任意): <%= event_order.tracking_number %></li>
+              <div class="form-group">
+                <%= form_with model: @event_order, url: cancel_ship_event_order_path(event_order), local: true do |f| %>
+                  <%= f.submit "未発送に戻す", class: "btn btn-sm btn-outline-danger" %>
+                <% end %>
+              </div>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

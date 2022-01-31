@@ -38,7 +38,7 @@
         <ul>
           <li><%= f.label :image %></li>
           <li><%= f.file_field :image, id: :store_img %></li>
-
+          <p></p>
           <% if @store.image.present? %>
             <li><%= image_tag @store.image.url, width: "100%", class: "image-border store_form_image", id: :store_img_prev %></li>
           <% else %>

@@ -50,8 +50,23 @@ document.addEventListener("turbolinks:load", function() {
     height: "auto",
     events: "/reservations.json",
     eventDidMount: function (info) {
+      if (info.event._def.title=='予約確定') {
+        info.el.style.background='green' ;
+      }
+      if (info.event._def.title=='仮予約') {
+        info.el.style.background='gray' ;
+      }
       if (info.event._def.title=='×') {
         info.el.style.background='darkgray' ;
+      }
+      if (info.event._def.title=='施術完了') {
+        info.el.style.background='blue' ;
+      }
+      if (info.event._def.title=='1') {
+        info.el.style.background='darkgray' ;
+      }
+      if (info.event._def.title=='2') {
+        info.el.style.background='gray' ;
       }
     }
   });

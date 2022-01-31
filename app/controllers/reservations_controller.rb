@@ -9,6 +9,7 @@ class ReservationsController < ApplicationController
   before_action :set_q, only: [:reservation_management, :search]
   before_action :set_new, only: [:management_new, :new, :guest_reservation]
   before_action :set_staffs, only: [:management_new, :edit_reserve, :update_reserve]
+  before_action :set_month, only: :index
 
   def reservation_management
     @search_reservations = @q.result

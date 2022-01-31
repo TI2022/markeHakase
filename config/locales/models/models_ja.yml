@@ -125,6 +125,10 @@ ja:
       review:
         title: タイトル
         content: 本文
+        total_score: 総合評価
+        menu_score: メニュー・料金
+        customer_score: 接客・技術
+        atmosphere_score: 雰囲気
       shift:
         working_staff: 稼働スタッフ人数
         working_day: 日にち

@@ -30,7 +30,7 @@ ja:
         phone: "電話番号"
         store_id: "所属店舗"
         password: "パスワード"
-        password_confirmation: "確認用パスワード"
+        password_confirmation: "確認用パスワード(確認用)"
         remember_me: "ログインを記憶"
     models:
       user: "ユーザ"

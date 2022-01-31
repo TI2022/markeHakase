@@ -4,6 +4,8 @@ module ReviewsHelper
   end
 
   def star_width(average)
-    average * 20
+    if @reviews.present?
+      average * 20
+    end
   end
 end

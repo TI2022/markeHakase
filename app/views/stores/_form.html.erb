@@ -1,65 +1,48 @@
 <div class="container">
   <%= form_with(model: @store, local: true) do |f| %>
-  <div class="container-wrapper">
+    <div class="store-form-wrapper">
 
-    <div class="split-content-left">
-      <table class="table">
-        <tr>
-          <td><%= f.label :name %></td>
-          <td><%= f.text_field :name %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :phone %></td>
-          <td><%= f.text_field :phone %></td>
-        </tr>
-        <tr>
-        <td><%= f.label :email %></td>
-        <td><%= f.text_field :email %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :line_id %></td>
-          <td><%= f.text_field :line_id %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :address %></td>
-          <td><%= f.text_field :address %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :opening_time %></td>
-          <td><%= f.time_select :opening_time, {minute_step: 10} %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :closing_time %></td>
-          <td><%= f.time_select :closing_time, {minute_step: 10} %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :last_order_time %></td>
-          <td><%= f.time_select :last_order_time, {minute_step: 10} %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :working_staff %></td>
-          <td><%= f.number_field :working_staff %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :non_business_day %></td>
-          <td><%= f.text_field :non_business_day %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :description %></td>
-          <td><%= f.text_area :description %></td>
-        </tr>
-      </table>
-    </div>
+      <div>
+        <ul>
+          <li><%= f.label :name %></li>
+          <li><%= f.text_field :name, class: "form-control" %></li>
+          <li><%= f.label :phone %></li>
+          <li><%= f.text_field :phone, class: "form-control" %></li>
+          <li><%= f.label :email %></li>
+          <li><%= f.text_field :email, class: "form-control" %></li>
+          <li><%= f.label :line_id %></li>
+          <li><%= f.text_field :line_id, class: "form-control" %></li>
+          <li><%= f.label :address %></li>
+          <li><%= f.text_field :address, class: "form-control" %></li>
+        </ul>
+      </div>
+      
+      <div>
+        <ul>
+          <li><%= f.label :opening_time %></li>
+          <li><%= f.time_select :opening_time, {minute_step: 10} %></li>
+          <li><%= f.label :closing_time %></li>
+          <li><%= f.time_select :closing_time, {minute_step: 10} %></li>
+          <li><%= f.label :last_order_time %></li>
+          <li><%= f.time_select :last_order_time, {minute_step: 10} %></li>
+          <li><%= f.label :working_staff %></li>
+          <li><%= f.number_field :working_staff %></li>
+          <li><%= f.label :non_business_day %></li>
+          <li><%= f.text_field :non_business_day, class: "form-control" %></li>
+          <li><%= f.label :description %></li>
+          <li><%= f.text_area :description, class: "form-control" %></li>
+        </ul>
+      </div>
 
-    <div class="split-content-right">
-      <table class="table">
-        <td>
-          <%= f.label :image %><br>
-          <%= f.file_field :image, id: :store_img %>
+      <div>
+        <ul>
+          <li><%= f.label :image %></li>
+          <li><%= f.file_field :image, id: :store_img %></li>
+
           <% if @store.image.present? %>
-            <%= image_tag @store.image.url, width: "100%", class: "image-border", id: :store_img_prev %>
+            <li><%= image_tag @store.image.url, width: "100%", class: "image-border store_form_image", id: :store_img_prev %></li>
           <% else %>
-            <%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :store_img_prev %>
+            <li><%= image_tag "/no_image2.png", width: "100%", class: "image-border store_form_image", id: :store_img_prev %></li>
           <% end %>
           <script type="text/javascript">
             $(function() {
@@ -77,12 +60,17 @@
               });
             });
           </script>
-        </td>
-      </table>
+        </ul>
+      </div>
     </div>
-  </div>
-    <%= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>
-    <%= link_to 'キャンセル', stores_path, class: "link-gray" %>
+    
+    <div>
+      <ul class="center">
+        <li><%= f.submit "登録", class: "btn btn-outline-dark store-form-button" %></li>
+        <p></p>
+        <li><%= link_to 'キャンセル', stores_path, class: "btn btn-outline-danger store-form-button" %></li>
+      </ul>
+    </div>
+
   <% end %>
 </div>
-

@@ -395,7 +395,9 @@ body {
 }
 
 // Store
-.store-index-container {
+.store-index-container,
+.store-show-content-wrapper,
+.store-form-wrapper {
   display: grid; /* カードの横並び */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
   gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
@@ -405,7 +407,7 @@ body {
 
 .store-index-body {
   width: 100%;
-  max-width: 350px;
+  max-width: 300px;
   margin: 0 auto;
   background-color: #f1f1f1;
   border: 1px solid #dadada;
@@ -417,17 +419,15 @@ body {
   line-height: 1.2;
 }
 
-.store-show-content-wrapper {
-  display: grid; /* カードの横並び */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
-  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
-  margin: 20px auto 0;
-  text-align: start; /* カード内の中央寄せ解除 */
-}
-
-.store-show-content-image {
+.store-show-content-image,
+.store_form_image {
   width: 100%;
   max-width: 500px;
+}
+
+.store-form-button {
+  width: 100%;
+  max-width: 200px;
 }
 
 // Payment

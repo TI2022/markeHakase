@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :authenticate_staff!
+  before_action :set_month, only: :top
 
   def top
     if current_user && !current_user.cart.present?
@@ -11,7 +12,6 @@ class StaticPagesController < ApplicationController
     @reservations = Reservation.includes(:guest)
     @tops = Top.where(main_slide_flag: 1).order(image_order: :asc)
     @top1 = Top.find(1)
-    
     @reserve_top = Top.find_by(reserve_image_flag: 1)
     @introduce_top = Top.find_by(introduction_image_flag: 1)
   end

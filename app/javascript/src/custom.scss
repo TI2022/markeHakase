@@ -394,9 +394,9 @@ body {
   margin-bottom:  20px;
 }
 
-// Store
+.item-form-wrapper,
 .store-index-container,
-.store-show-content-wrapper,
+.store-show-wrapper,
 .store-form-wrapper {
   display: grid; /* カードの横並び */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
@@ -419,12 +419,13 @@ body {
   line-height: 1.2;
 }
 
-.store-show-content-image,
+.store-show-image,
 .store_form_image {
   width: 100%;
   max-width: 500px;
 }
 
+.item-form-button,
 .store-form-button {
   width: 100%;
   max-width: 200px;

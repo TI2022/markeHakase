@@ -35,7 +35,7 @@ ja:
       item:
         id: ID
         name: 商品名
-        price: 価格
+        price: 価格(税抜)
         quantity: 数量
         stock: 在庫数
         description: 詳細
@@ -53,7 +53,7 @@ ja:
       event:
         title: イベント名
         category: カテゴリー
-        price: 価格
+        price: 価格(税抜)
         stock: チケット残数
         description: 詳細
         remaining_ticket_numbers: チケット残数

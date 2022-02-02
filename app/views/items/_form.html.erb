@@ -1,70 +1,54 @@
 <%= form_with(model: @item, local: true) do |f| %>
  <%#= render partial: 'shared/error_messages', locals: { object: @item } %>
-  <table class="table">
-      <tr>
-        <td rowspan="3" class="center">
-          <div class="form-group">
-            <%= f.label :image %><br>
-            <%= f.file_field :image, id: :item_img %>
-
-            <% if @item.image.present? %>
-              <%= image_tag @item.image.url, size: "300", class: "image-border", id: :img_prev %>
-            <% else %>
-              <%= image_tag "/no_image2.png", size: "300", class: "image-border", id: :img_prev %>
-            <% end %>
-
-            <script type="text/javascript">
-              $(function() {
-                function readURL(input) {
-                    if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                $('#img_prev').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                    }
+  <div class="item-form-wrapper">
+    <div>
+      <ul>
+        <li><%= f.label :image %></li>
+        <% if @item.image.present? %>
+          <li><%= image_tag @item.image.url, size: "300", class: "image-border", id: :img_prev %></li>
+        <% else %>
+          <li><%= image_tag "/no_image2.png", size: "300", class: "image-border", id: :img_prev %></li>
+        <% end %>
+        <p></p>
+        <li><%= f.file_field :image, id: :item_img %></li>
+        <script type="text/javascript">
+          $(function() {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+            $('#img_prev').attr('src', e.target.result);
                 }
-                $("#item_img").change(function(){
-                    readURL(this);
-                });
-              });
-            </script>
+                reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#item_img").change(function(){
+                readURL(this);
+            });
+          });
+        </script>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><%= f.label :name %></li>
+        <li><%= f.text_field :name, class: "form-control" %></li>
+        <li><%= f.label :price %></li>
+        <li><%= f.number_field :price, min: 0, class: "form-control" %></li>
+        <li><%= f.label :stock %></li>
+        <li><%= f.number_field :stock, min: 0, max: 100, class: "form-control" %></li>
+        <li><%= f.label :description %></li>
+        <li><%= f.text_area :description, class: "form-control" %></li>
+      </ul>
+    </div>
+  </div>
 
-          </div>
-        </td>
-        <td colspan="2">
-          <div class="form-group">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: "form-control" %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="form-group">
-            <%= f.label :price %>
-            <%= f.number_field :price, min: 0, class: "form-control" %>
-          </div>
-        </td>
-        <td>
-          <div class="form-group">
-            <%= f.label :stock %>
-            <%= f.number_field :stock, min: 0, max: 100, class: "form-control" %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div class="form-group">
-            <%= f.label :description %>
-            <%= f.text_area :description, class: "form-control" %>
-          </div>
-        </td>
-      </tr>
-  </table>
-  <div class="form-group">
-    <%= f.submit "商品登録", class: "btn btn-sm btn-outline-dark" %>
-    <%= link_to 'キャンセル', items_path, class: "link-gray" %>
+  <div>
+    <ul class="center">
+      <li><%= f.submit "商品登録", class: "btn btn-outline-dark item-form-button" %></li>
+      <p></p>
+      <li><%= link_to 'キャンセル', items_path, class: "btn btn-outline-danger item-form-button" %></li>
+    </ul>
   </div>
 
 <% end %>

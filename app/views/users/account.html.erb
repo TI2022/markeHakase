@@ -4,14 +4,14 @@
 </p>
 <div class="user-account-wrapper">
   <ul class="tab">
-    <li><a href="#account-riserve">予約状況</a></li>
+    <li><a href="#account-reserve">予約状況</a></li>
     <li><a href="#account-profile">お客様情報</a></li>
   </ul>
-  <div id="account-riserve" class="area">
+  <div id="account-reserve" class="area">
       <h2>-- 現在の予約状況 --</h2>
       <p><%= current_user.name %> 様 のご予約は <font color="red"><%= @reservations.count %></font> 件ございます。</p>
-      <table class="table table-bordered table-condesend">
-        <thead class="table-success">
+      <table class="table table-bordered table-condensed">
+        <thead class="table-secondary">
           <tr>
             <th>施術日</th>
             <th>施術内容</th>
@@ -35,8 +35,8 @@
       </table>
 
       <h2>-- ご利用履歴 --</h2>
-      <table class="table table-bordered table-condesend">
-        <thead class="table-success">
+      <table class="table table-bordered table-condensed">
+        <thead class="table-secondary">
           <tr>
             <th>施術日</th>
             <th>施術内容</th>

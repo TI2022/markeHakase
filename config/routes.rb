@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       get :treatment_menu #ユーザーメニュー一覧画面
     end
   end
+  
+  get 'review_management', to: 'reviews#management'
+  delete 'review_management/destroy', to: 'reviews#management_destroy'
 
   resources :reservations do
     resources :reviews do

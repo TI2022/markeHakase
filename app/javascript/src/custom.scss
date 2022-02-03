@@ -154,7 +154,7 @@ body {
 // devise設定
   .container-login {
     @extend .container-fluid;
-    max-width: 576px;
+    max-width: 600px;
     .form-control {
       margin-bottom: 20px;
     }
@@ -162,7 +162,7 @@ body {
 
   .mw-md {
     margin-top: 20px;
-    max-width: 576px;
+    max-width: 600px;
   }
 
   .mw-xl {
@@ -461,11 +461,17 @@ body {
   background-size: cover;  
   background-position: center center;
   border-radius: 20px;
+  @media (max-width: 600px) {
+    height: 200px;
+  }
   span {
     color: whitesmoke;
     font-size: 2.8rem;
     text-align: center;
     text-shadow: 1px 2px 3px #808080;
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
   }
 }
 
@@ -476,11 +482,17 @@ body {
   background-size: cover;  
   background-position: center center;
   border-radius: 20px;
+  @media (max-width: 600px) {
+    height: 200px;
+  }
   span {
     color: whitesmoke;
     font-size: 2.8rem;
     text-align: center;
     text-shadow: 1px 2px 3px #808080;
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
   }
 }
 
@@ -497,9 +509,15 @@ body {
   padding: 20px 20px 50px 20px;
   margin-bottom: 20px;
   color: #444;
+  @media (max-width: 600px) {
+    margin-top: 10px;
+  }
   h4 {
     color: #444;
     padding-top: 50px;
+    @media(max-width: 600px) {
+      padding-top: 10px;
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  skip_before_action :authenticate_staff!
+  skip_before_action :authenticate_user!
   
   def new
     @reservation = Reservation.find(params[:reservation_id])
@@ -58,7 +58,7 @@ class ReviewsController < ApplicationController
     # @reservation = Reservation.where(is_review_exists: 2)
     @review = Review.find(params[:id])    
   end
-
+  
   def destroy
     @review = Review.find(params[:id])
     if @review.destroy
@@ -66,6 +66,20 @@ class ReviewsController < ApplicationController
       flash[:success] = "レビューを削除しました。"
     end
   end
+  
+  # スタッフ側で口コミを削除 --
+  def management
+    @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
+  end
+  
+  def management_destroy
+    @review = Review.find(params[:format])
+    if @review.destroy
+      redirect_to staffs_account_url
+      flash[:success] = "レビューを削除しました。"
+    end
+  end
+  # --
 
   private
     def review_params

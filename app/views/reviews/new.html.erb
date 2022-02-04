@@ -21,10 +21,15 @@
     <%#= f.hidden_field :reservation_id, value: @reservation.id %>
     <%= f.hidden_field :review_exists, value: true %>
     <%= f.hidden_field :total_score, id: "rating-value" %>
-
+    
     <tr>
       <td>今回受けた施術</td>
       <td><%= @reservation.treatment_menu %></td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :nickname %>(任意)</td>
+      <td><%= f.text_field :nickname, class: "form-control" %></td>
     </tr>
 
     <tr>
@@ -72,6 +77,7 @@
       <td><%= f.text_area :content, class: "form-control", rows: 6, placeholder: "10~1000文字内で入力してください。", required: true %></td>
     </tr>
 
+    
     <tr>
       <td colspan="2" class="text-center">
         <%= f.submit "投稿する", class: "btn btn-primary", 'data-turbolinks': false %>&nbsp;

@@ -55,11 +55,11 @@
             </tr>
             <% if reserve.is_review_exists.even? %>
               <tr>
-                <td colspan="4" class="text-right"><%= link_to "既にレビュー済みです", '#', class: "btn btn-secondary" %></td>
+                <td colspan="4" class="text-right"><%= link_to "口コミは投稿済みです", '#', class: "btn btn-secondary" %></td>
               </tr>
             <% else %>
               <tr>
-                <td colspan="4" class="text-right"><%= link_to "レビューを書く", new_reservation_review_path(reserve), class:"btn btn-primary"%></td>
+                <td colspan="4" class="text-right"><%= link_to "口コミを書く", new_reservation_review_path(reserve), class:"btn btn-primary"%></td>
               </tr>
             <% end %>
           </tbody>
@@ -87,76 +87,6 @@
     <%= link_to "編集はこちら",edit_user_registration_path, class: "btn btn-sm btn-outline-dark" %>
   </div>
 
-  <div id="account-payment" class="area">
-<%
-=begin
-%>
-    <% if current_user.cart.payments.present? %>
-      <%= paginate @payments %>
-      <h2>>購入履歴 【 <%= current_user.name %> 様 】</h2>
-      <table class="table">
-        <% @payments.each do |payment| %>
-        <thead>
-          <tr>
-            <th style="width: 20%">注文日時:<br><%= l payment.created_at, format: :custom1 %></th>
-            <th style="width: 40%">合計:<br><%= payment.total %> 円(税込)</th>
-            <th style="width: 15%">注文番号: <%= payment.id %></th>
-            <th colspan="2"  class="center"  style="width: 25%"><%= link_to "注文内容", payment_path(payment), class: "btn btn-sm btn-outline-dark" %></th>
-          </tr>
-        </thead>
-
-          <% orders = Order.where(payment_id: payment.id) %>
-          <% orders.each do |order| %>
-          <tr>
-            <td class="center">
-              <% item = Item.find(order.item_id) %>
-              <% if item.image? %>
-                <%= link_to image_tag(item.image.url, width: 70, class: "image-border"), item_path(item) %>
-              <% else %>
-                <%= link_to image_tag("/no_image2.png", width: 70, class: "image-border"), item_path(item) %>
-              <% end %>
-            </td>
-            <td><%= link_to item.name, item_path(item), class: "link-black" %></td>
-            <td><%= item.price %> 円(税抜)</td>
-            <td>数量: <%= order.quantity %></td>
-            <td><%= item.price*order.quantity %> 円(税抜)</td>
-          </tr>
-          <% end %>
-          <tr>
-            <td colspan="5"></td>
-          </tr>
-        
-          <% event_orders = EventOrder.where(payment_id: payment.id) %>
-          <% event_orders.each do |event_order| %>
-          <tr>
-            <td class="center">
-              <% event = Event.find(event_order.event_id) %>
-              <% if event.image? %>
-                <%= link_to image_tag(event.image.url, width: 70, class: "image-border"), event_path(event) %>
-              <% else %>
-                <%= link_to image_tag("/no_image2.png", width: 70, class: "image-border"), event_path(event) %>
-              <% end %>
-            </td>
-            <td><%= link_to event.title, event_path(event), class: "link-black" %></td>
-            <td><%= event.price %> 円(税抜)</td>
-            <td>数量: <%= event_order.quantity %></td>
-            <td><%= event.price*event_order.quantity %> 円(税抜)</td>
-          </tr>
-          <% end %>
-          <tr>
-            <td colspan="5"></td>
-          </tr>
-        <% end %>
-      </table>
-      <%= paginate @payments %>
-    <% else %>
-      <h2>購入履歴 【 <%= current_user.name %> 様 】</h2>
-      <p>お客様の注文履歴はありません。</p>
-    <% end %>
-<%
-=end
-%>
-  </div>
 </div>
 
 <%= javascript_pack_tag 'users/account', 'data-turbolinks-track': 'reload' %>

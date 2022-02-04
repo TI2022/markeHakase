@@ -124,6 +124,7 @@ ja:
         image: 画像
       review:
         title: タイトル
+        nickname: ニックネーム
         content: 本文
         total_score: 総合評価
         menu_score: メニュー・料金

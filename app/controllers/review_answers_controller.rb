@@ -2,8 +2,7 @@ class ReviewAnswersController < ApplicationController
   skip_before_action :authenticate_user!
 
   def new
-    @review = Review.find(params[:review_id])
-    @reservation = Reservation.where(status: :completed, guest_id: current_user.id).order(id: :desc).first
+    @review = Review.find(params[:format])
     @review_answer = ReviewAnswer.new
   end
 

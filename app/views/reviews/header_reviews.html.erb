@@ -63,9 +63,12 @@
           </tr>
           <% if current_staff %>
             <tr>
-              <td colspan="3" class="text-right">
-                  スタッフ専用 <%= link_to "削除", header_reviews_destroy_path(review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %>
+              <td colspan="3">
+                  スタッフ専用 <%= link_to "お客様の口コミを削除", header_reviews_destroy_path(review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %>
               </td>
+            </tr>
+            <tr>
+            <td><%= link_to 'お客様の口コミに返信', new_review_answers_path(review), class: "btn btn-sm btn-outline-dark" %></td>
             </tr>
           <% end %>
         <% end %>

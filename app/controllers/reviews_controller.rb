@@ -12,8 +12,8 @@ class ReviewsController < ApplicationController
     @reservation = Reservation.find(params[:reservation_id])
     @review = @reservation.reviews.build(review_params)
     @review.user_id = current_user.id
-    if @reservation.is_review_exists == 1
-      @reservation.is_review_exists = 2
+    if @reservation.is_reviewed == false
+      @reservation.is_reviewed = true
       @reservation.save
     end
     if @review.save
@@ -41,7 +41,7 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    @reservation = Reservation.where(is_review_exists: 2, guest_id: current_user.id) #投稿したユーザーの分だけを表示させる
+    @reservation = Reservation.where(is_reviewed: true, guest_id: current_user.id) #投稿したユーザーの分だけを表示させる
     @reservation_id = Reservation.find(params[:reservation_id])
     @reviews = Review.includes(:reservation).where(user_id: current_user.id).page(params[:page]).per(10).order(created_at: "ASC")
     if @reviews.present?
@@ -56,7 +56,7 @@ class ReviewsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:reservation_id])
-    # @reservation = Reservation.where(is_review_exists: 2)
+    # @reservation = Reservation.where(is_reviewed: true)
     @review = Review.find(params[:id])    
   end
   

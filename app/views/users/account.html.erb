@@ -53,7 +53,7 @@
               <td><%= l reserve.start_time, format: :timeonly %> - <%= l (reserve.start_time + (reserve.treatment_time_menu * 60)), format: :timeonly %></td>
               <td><%= reserve.charge_menu %>円</td>
             </tr>
-            <% if reserve.is_review_exists.even? %>
+            <% if reserve.is_reviewed == true %>
               <tr>
                 <td colspan="4" class="text-right"><%= link_to "口コミ投稿済み 編集/削除", reservation_reviews_path(reserve), class: "btn btn-secondary" %></td>
               </tr>

@@ -60,6 +60,13 @@
           <tr class="reviews-content-body">
             <td colspan="3" row="5"><%== review.content %></td>
           </tr>
+          <% if current_staff %>
+            <tr>
+              <td colspan="3" class="text-right">
+                <%= link_to "削除する", review_management_destroy_path(review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </table>
       <%= paginate(@reviews) %>

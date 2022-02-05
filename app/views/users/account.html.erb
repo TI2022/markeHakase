@@ -55,7 +55,7 @@
             </tr>
             <% if reserve.is_review_exists.even? %>
               <tr>
-                <td colspan="4" class="text-right"><%= link_to "口コミは投稿済みです", '#', class: "btn btn-secondary" %></td>
+                <td colspan="4" class="text-right"><%= link_to "口コミ投稿済み 編集/削除", reservation_reviews_path(reserve), class: "btn btn-secondary" %></td>
               </tr>
             <% else %>
               <tr>

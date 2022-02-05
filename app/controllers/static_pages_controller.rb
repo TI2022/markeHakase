@@ -20,7 +20,7 @@ class StaticPagesController < ApplicationController
     @notifications = Notification.page(params[:page]).per(10).where(display_flag: true).order(created_at: "ASC")
   end
 
-  def review_index
+  def header_reviews
     @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
     if @reviews.present?
       @review_total_score = @reviews.average(:total_score).round(1)
@@ -28,5 +28,12 @@ class StaticPagesController < ApplicationController
       @review_customer_score = @reviews.average(:customer_score).round(1)
       @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
     end
+  end
+
+  def header_reviews_destroy
+    @review = Review.find(params[:format])
+    @review.destroy
+    flash[:success] = "レビューを削除しました。"
+    redirect_to header_reviews_url
   end
 end

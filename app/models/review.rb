@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :reservation
-  has_many :review_answer, dependent: :destroy
+  has_many :review_answers, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, presence: true, length: { maximum: 1000 }

@@ -165,8 +165,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_040052) do
     t.string "topping_menu"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "is_review_exists", default: 1
     t.boolean "is_reviewed", default: false
+    t.integer "review_id"
   end
 
   create_table "review_answers", force: :cascade do |t|

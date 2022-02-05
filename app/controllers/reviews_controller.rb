@@ -4,22 +4,22 @@ class ReviewsController < ApplicationController
 
   def new
     @reservation = Reservation.find(params[:reservation_id])
-    # @reservation = Reservation.where(status: :completed, guest_id: current_user.id).order(id: :desc).first
     @review = Review.new
   end
   
   def create
-    @reservation = Reservation.find(params[:reservation_id])
-    @review = @reservation.reviews.build(review_params)
-    @review.user_id = current_user.id
-    if @reservation.is_reviewed == false
-      @reservation.is_reviewed = true
-      @reservation.save
-    end
-    if @review.save
-      redirect_to reservation_reviews_url
+    reservation = Reservation.find(params[:reservation_id])
+    reservation.is_reviewed = true
+    review = Review.new(review_params)
+    review.user_id = current_user.id # 親子関係で必須項目
+    review.reservation_id = params[:reservation_id] # 親子関係で必須項目
+    if review.save
+      reservation.review_id = review.id
+      reservation.save
       flash[:success] = "投稿に成功しました。"
+      redirect_to reservation_reviews_url
     else
+      flash[:danger] = "投稿に失敗しました。"
       render :new
     end
   end
@@ -32,11 +32,11 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      redirect_to reservation_reviews_url
       flash[:success] = "編集に成功しました。"
+      redirect_to reservation_reviews_url
     else
-      render :edit
       flash[:danger] = "更新に失敗しました。"
+      render :edit
     end
   end
 
@@ -56,16 +56,17 @@ class ReviewsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:reservation_id])
-    # @reservation = Reservation.where(is_reviewed: true)
-    @review = Review.find(params[:id])    
+    @review = Review.find(params[:id])
   end
   
   def destroy
-    @review = Review.find(params[:id])
-    if @review.destroy
-      redirect_to users_account_url
-      flash[:success] = "レビューを削除しました。"
-    end
+    review = Review.find(params[:id])
+    reservation = review.reservation
+    reservation.is_reviewed = false
+    reservation.save
+    review.destroy
+    flash[:success] = "レビューを削除しました。"
+    redirect_to users_account_url
   end
   
   def header_reviews
@@ -79,15 +80,18 @@ class ReviewsController < ApplicationController
   end
 
   def header_reviews_destroy
-    @review = Review.find(params[:format])
-    @review.destroy
+    review = Review.find(params[:format])
+    reservation = review.reservation
+    reservation.is_reviewed = false
+    reservation.save
+    review.destroy
     flash[:success] = "レビューを削除しました。"
     redirect_to header_reviews_url
   end
 
   private
     def review_params
-      params.require(:review).permit(:reservation_id, :title, :content, :total_score, :menu_score, :customer_score, :atmosphere_score, :review_exists, :nickname)
+      params.require(:review).permit(:reservation_id, :user_id, :title, :content, :total_score, :menu_score, :customer_score, :atmosphere_score, :review_exists, :nickname)
     end
 
 end

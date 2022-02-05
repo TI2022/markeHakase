@@ -8,11 +8,8 @@ Rails.application.routes.draw do
     end
   end
   
-  get 'header_reviews', to: 'static_pages#header_reviews'
-  delete 'header_reviews/destroy', to: 'static_pages#header_reviews_destroy'
-
-  get 'review_management', to: 'reviews#management'
-  delete 'review_management/destroy', to: 'reviews#management_destroy'
+  get 'header_reviews', to: 'reviews#header_reviews'
+  delete 'header_reviews/destroy', to: 'reviews#header_reviews_destroy'
 
   resources :reservations do
     resources :reviews do

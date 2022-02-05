@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   skip_before_action :authenticate_user!
-  
+  skip_before_action :authenticate_staff!, only: [:header_reviews]
+
   def new
     @reservation = Reservation.find(params[:reservation_id])
     # @reservation = Reservation.where(status: :completed, guest_id: current_user.id).order(id: :desc).first
@@ -79,7 +80,23 @@ class ReviewsController < ApplicationController
       flash[:success] = "レビューを削除しました。"
     end
   end
-  # --
+  
+  def header_reviews
+    @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
+    if @reviews.present?
+      @review_total_score = @reviews.average(:total_score).round(1)
+      @review_menu_score = @reviews.average(:menu_score).round(1)
+      @review_customer_score = @reviews.average(:customer_score).round(1)
+      @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
+    end
+  end
+
+  def header_reviews_destroy
+    @review = Review.find(params[:format])
+    @review.destroy
+    flash[:success] = "レビューを削除しました。"
+    redirect_to header_reviews_url
+  end
 
   private
     def review_params

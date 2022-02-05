@@ -13,8 +13,7 @@ Rails.application.routes.draw do
   resource :review_answers, except: %i[index show]
 
   resources :reservations do
-    resources :reviews do
-    end
+    resources :reviews
     collection do
       get :management_new
       get :search

@@ -68,19 +68,6 @@ class ReviewsController < ApplicationController
     end
   end
   
-  # スタッフ側で口コミを削除 --
-  def management
-    @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
-  end
-  
-  def management_destroy
-    @review = Review.find(params[:format])
-    if @review.destroy
-      redirect_to staffs_account_url
-      flash[:success] = "レビューを削除しました。"
-    end
-  end
-  
   def header_reviews
     @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
     if @reviews.present?

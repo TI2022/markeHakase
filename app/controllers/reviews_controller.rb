@@ -100,7 +100,7 @@ class ReviewsController < ApplicationController
 
   private
     def review_params
-      params.require(:review).permit(:reservation_id, :title, :content, :total_score, :menu_score, :customer_score, :atmosphere_score, :review_exists)
+      params.require(:review).permit(:reservation_id, :title, :content, :total_score, :menu_score, :customer_score, :atmosphere_score, :review_exists, :nickname)
     end
 
 end

@@ -9,16 +9,16 @@ class ReviewAnswersController < ApplicationController
   end
 
   def create
-    @reservation = Reservation.find(params[:reservation_id])
-    @review = Review.find(@reservation.review_id)
-    @review_answer = ReviewAnswer.new(review_answer_params)
-    if @review_answer.save
-      @reservation.review_answer_id = @review_answer.id
-      @reservation.is_review_answered = true
-      @reservation.save
-      @review.review_answer_id = @review_answer.id
-      @review.is_review_answered = true
-      @review.save
+    reservation = Reservation.find(params[:reservation_id])
+    review = Review.find(reservation.review_id)
+    review_answer = ReviewAnswer.new(review_answer_params)
+    if review_answer.save
+      reservation.review_answer_id = review_answer.id
+      reservation.is_review_answered = true
+      reservation.save
+      review.review_answer_id = review_answer.id
+      review.is_review_answered = true
+      review.save
       flash[:success] = "口コミ返信の投稿に成功しました"
       redirect_to header_reviews_path
     else
@@ -34,25 +34,25 @@ class ReviewAnswersController < ApplicationController
   end
 
   def update
-    @reservation = Reservation.find(params[:reservation_id])
-    @review_answer = ReviewAnswer.find(@reservation.review_answer_id)
-    if @review_answer.update(review_answer_params)
+    reservation = Reservation.find(params[:reservation_id])
+    review_answer = ReviewAnswer.find(reservation.review_answer_id)
+    if review_answer.update(review_answer_params)
       flash[:success] = "口コミ返信の更新に成功しました"
       redirect_to header_reviews_path 
     end
   end
 
   def destroy
-    @reservation = Reservation.find(params[:reservation_id])
-    @review = Review.find(@reservation.review_id)
-    @review_answer = ReviewAnswer.find(@reservation.review_answer_id)
-    if @review_answer.destroy
-      @reservation.review_answer_id = nil
-      @reservation.is_review_answered = false
-      @reservation.save
-      @review.review_answer_id = nil
-      @review.is_review_answered = false
-      @review.save
+    reservation = Reservation.find(params[:reservation_id])
+    review = Review.find(reservation.review_id)
+    review_answer = ReviewAnswer.find(reservation.review_answer_id)
+    if review_answer.destroy
+      reservation.review_answer_id = nil
+      reservation.is_review_answered = false
+      reservation.save
+      review.review_answer_id = nil
+      review.is_review_answered = false
+      review.save
       redirect_to header_reviews_path
       flash[:success] = "口コミ返信を削除しました。"
     end

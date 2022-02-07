@@ -3,10 +3,15 @@ ja:
     models:
       top: トップ
       item: 商品
-      order: 注文
       event: イベント
-      store: 店舗
+      order: 注文
+      event_order: 注文
+      menu: メニュー
       reservation: 予約
+      store: 店舗
+      review: 口コミ
+      review_answer: 口コミ返信
+      shift: シフト
     attributes:
       top:
         reserve_title: 予約タイトル
@@ -42,14 +47,6 @@ ja:
         image: 画像
         created_at: 作成日
         updated_at: 更新日
-      order:
-        quantity: 数量
-        shipping_company: 運送会社
-        tracking_number: 送付状番号
-      event_order:
-        quantity: 数量
-        shipping_company: 運送会社
-        tracking_number: 送付状番号
       event:
         title: イベント名
         category: カテゴリー
@@ -63,6 +60,14 @@ ja:
         end_time: 終了時間
         location: 開催場所
         image: 画像
+      order:
+        quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 荷物問合せ番号
+      event_order:
+        quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 荷物問合せ番号
       menu:
         category: カテゴリー
         category_number: カテゴリー番号
@@ -130,6 +135,8 @@ ja:
         menu_score: メニュー・料金
         customer_score: 接客・技術
         atmosphere_score: 雰囲気
+      review_answer:
+        content: 返信コメント
       shift:
         working_staff: 稼働スタッフ人数
         working_day: 日にち

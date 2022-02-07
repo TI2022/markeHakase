@@ -54,22 +54,31 @@
             <td colspan="2"><%= review.title %></td>
           </div>
           <div class="col-4">
-            <td class="text-right"><%= review.created_at.strftime("%Y年%m月%d日") %>投稿</td>
+            <td class="text-right"><%= l(review.created_at, format: :custom1) %> 投稿</td>
           </div>
           </tr>
 
           <tr class="reviews-content-body">
-            <td colspan="3" row="5"><%== review.content %></td>
+            <td colspan="3" row="5"><%= review.content %></td>
           </tr>
           <% if current_staff %>
             <tr>
               <td colspan="3">
-                  スタッフ専用 <%= link_to "お客様の口コミを削除", header_reviews_destroy_path(review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %>
+                  スタッフ専用 <%= link_to "お客様の口コミを削除", header_reviews_destroy_path(review), method: :delete, data:{ confirm: "お客様の口コミを削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %>
               </td>
             </tr>
             <tr>
-            <td><%= link_to 'お客様の口コミに返信', new_review_answers_path(review), class: "btn btn-sm btn-outline-dark" %></td>
+            <% if review.is_answered == false %>
+              <% reservation = review.reservation %>
+              <td><%= link_to '口コミ返信を新規作成', new_reservation_review_answer_path(reservation, review), class: "btn btn-sm btn-outline-dark" %></td>
+            <% else %>
+              <%  %>
+              <td><%#= review_answer.content %></td>
+              <td><%= link_to '口コミ返信を編集', '#', class: "btn btn-sm btn-outline-dark" %></td>
+              <td><%= link_to '口コミ返信を削除', '#', method: :delete, data:{ confirm: "口コミ返信を削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %></td>
+            <% end %>
             </tr>
+
           <% end %>
         <% end %>
       </table>

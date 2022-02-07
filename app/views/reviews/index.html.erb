@@ -46,7 +46,7 @@
             </div>
           <% end %>
           <div class="col-4">
-            <td class="text-right"><%= review.created_at.strftime("%Y年%m月%d日") %>投稿</td>
+            <td class="text-right"><%= l(review.created_at, format: :custom1) %> 投稿</td>
           </div>
           </tr>
 
@@ -56,10 +56,9 @@
 
           <% if current_user.id == review.user_id %>
             <tr>
-              <td colspan="3" class="text-right">
-                <%= link_to "編集する", edit_reservation_review_path(@reservation_id, review), class:"btn btn-success" %>
-                <%#= link_to "編集する", edit_review_reservation_review_path(@reservation, review), remote: true, class:"btn btn-success" %>
-                <%= link_to "削除する", reservation_review_path(@reservation_id, review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
+              <td colspan="3" class="center">
+                <%= link_to "編集", edit_reservation_review_path(@reservation_id, review), class:"btn btn-sm btn-outline-dark" %>
+                <%= link_to "削除", reservation_review_path(@reservation_id, review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %>
               </td>
             </tr>
           <% end %>

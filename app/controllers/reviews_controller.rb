@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   skip_before_action :authenticate_user!
-  skip_before_action :authenticate_staff!, only: [:header_reviews]
+  skip_before_action :authenticate_staff!
 
   def new
     @reservation = Reservation.find(params[:reservation_id])
@@ -49,7 +49,7 @@ class ReviewsController < ApplicationController
       @review_menu_score = @reviews.average(:menu_score).round(1)
       @review_customer_score = @reviews.average(:customer_score).round(1)
       @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
-      # @review_answers = ReviewAnswer.new
+      # @ = ReviewAnswer.new
     end
     # @staff = Staff.all
   end
@@ -63,6 +63,7 @@ class ReviewsController < ApplicationController
     review = Review.find(params[:id])
     reservation = review.reservation
     reservation.is_reviewed = false
+    reservation.review_id = nil
     reservation.save
     review.destroy
     flash[:success] = "レビューを削除しました。"
@@ -83,6 +84,7 @@ class ReviewsController < ApplicationController
     review = Review.find(params[:format])
     reservation = review.reservation
     reservation.is_reviewed = false
+    reservation.review_id = nil
     reservation.save
     review.destroy
     flash[:success] = "レビューを削除しました。"
@@ -91,7 +93,7 @@ class ReviewsController < ApplicationController
 
   private
     def review_params
-      params.require(:review).permit(:reservation_id, :user_id, :title, :content, :total_score, :menu_score, :customer_score, :atmosphere_score, :review_exists, :nickname)
+      params.require(:review).permit(:reservation_id, :user_id, :title, :content, :total_score, :menu_score, :customer_score, :atmosphere_score, :review_exists, :nickname, :is_answered, :review_answer_id)
     end
 
 end

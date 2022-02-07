@@ -22,7 +22,7 @@ class ReviewAnswersController < ApplicationController
       flash[:success] = "口コミ返信の投稿に成功しました"
       redirect_to header_reviews_path
     else
-      flash[:danger] = "口コミ返信の投稿に失敗しました、入力項目を確認してください。"
+      flash[:danger] = "口コミ返信の投稿に失敗しました。入力項目を確認してください。"
       render :new
     end
   end
@@ -38,7 +38,10 @@ class ReviewAnswersController < ApplicationController
     review_answer = ReviewAnswer.find(reservation.review_answer_id)
     if review_answer.update(review_answer_params)
       flash[:success] = "口コミ返信の更新に成功しました"
-      redirect_to header_reviews_path 
+      redirect_to header_reviews_path
+    else
+      flash[:danger] = "口コミ返信の更新に失敗しました。入力項目を確認してください。"
+      render :edit
     end
   end
 

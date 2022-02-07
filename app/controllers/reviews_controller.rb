@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
       flash[:success] = "口コミの投稿に成功しました。"
       redirect_to reservation_reviews_url
     else
-      flash[:danger] = "口コミの投稿に失敗しました。"
+      flash[:danger] = "口コミの投稿に失敗しました。入力項目を確認してください。"
       render :new
     end
   end
@@ -35,7 +35,7 @@ class ReviewsController < ApplicationController
       flash[:success] = "口コミの編集に成功しました。"
       redirect_to reservation_reviews_url
     else
-      flash[:danger] = "口コミの更新に失敗しました。"
+      flash[:danger] = "口コミの更新に失敗しました。入力項目を確認してください。"
       render :edit
     end
   end

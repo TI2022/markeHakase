@@ -19,7 +19,7 @@
 
 <div>
 
-  <%= form_with(model: [@reservation, ReviewAnswer.new], local: true) do |f| %>
+  <%= form_with(model: [@reservation, @review_answer], local: true) do |f| %>
     <%= f.label :content %>
     <%= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
     <%= f.hidden_field :staff_id, value: current_staff.id %>

@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2022_02_05_040052) do
     t.bigint "reservation_id", null: false
     t.integer "review_id"
     t.integer "staff_id"
-    t.text "content"
+    t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reservation_id"], name: "index_review_answers_on_reservation_id"

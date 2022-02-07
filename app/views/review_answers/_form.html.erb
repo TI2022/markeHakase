@@ -18,12 +18,14 @@
 </div>
 
 <div>
-  <%#= form_with(model: @review_answer, local: true) do |f| %>
-    <%#= f.hidden_field :review_id, value: @review.id %>
-    <%#= f.hidden_field :staff_id, value: current_staff.id %>
-    <%#= f.label :content %>
-    <%#= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
-    <%#= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>
-    <%#= link_to "キャンセル", header_reviews_path, class: "btn btn-sm btn-outline-danger" %>
-  <%# end %>
+
+  <%= form_with(model: [@reservation, ReviewAnswer.new], local: true) do |f| %>
+    <%= f.label :content %>
+    <%= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
+    <%= f.hidden_field :staff_id, value: current_staff.id %>
+    <%= f.hidden_field :reservation_id, value: @reservation.id %>
+    <%= f.hidden_field :review_id, value: @review.id %>
+    <%= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>
+    <%= link_to "キャンセル", header_reviews_path, class: "btn btn-sm btn-outline-danger" %>
+  <% end %>
 </div>

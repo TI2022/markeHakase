@@ -68,14 +68,14 @@
               </td>
             </tr>
             <tr>
-            <% if review.is_answered == false %>
-              <% reservation = review.reservation %>
+            <% reservation = review.reservation %>
+            <% if reservation.is_review_answered == false %>
               <td><%= link_to '口コミ返信を新規作成', new_reservation_review_answer_path(reservation, review), class: "btn btn-sm btn-outline-dark" %></td>
             <% else %>
-              <%  %>
-              <td><%#= review_answer.content %></td>
-              <td><%= link_to '口コミ返信を編集', '#', class: "btn btn-sm btn-outline-dark" %></td>
-              <td><%= link_to '口コミ返信を削除', '#', method: :delete, data:{ confirm: "口コミ返信を削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %></td>
+              <% review_answer = reservation.review_answers.last %>
+              <td><%= review_answer.content %></td>
+              <td><%= link_to '口コミ返信を編集', edit_reservation_review_answer_path(reservation, review), class: "btn btn-sm btn-outline-dark" %></td>
+              <td><%= link_to '口コミ返信を削除', reservation_review_answer_path(reservation, review), method: :delete, data:{ confirm: "口コミ返信を削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %></td>
             <% end %>
             </tr>
 

@@ -1,3 +1,3 @@
 class ReviewAnswer < ApplicationRecord
-  belongs_to :reservation, dependent: :destroy
+  belongs_to :reservation
 end

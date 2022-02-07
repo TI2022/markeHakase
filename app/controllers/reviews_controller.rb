@@ -64,6 +64,8 @@ class ReviewsController < ApplicationController
     reservation = review.reservation
     reservation.is_reviewed = false
     reservation.review_id = nil
+    reservation.is_review_answered = false
+    reservation.review_answer_id = nil
     reservation.save
     review.destroy
     flash[:success] = "レビューを削除しました。"

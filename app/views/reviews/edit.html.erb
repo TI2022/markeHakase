@@ -1,6 +1,6 @@
 <p class="mt-2">
   <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
-  <%= link_to 'マイページ', users_account_path, class: "link-gray" %> ＞ 
+  <%= link_to 'マイページ', users_account_path, class: "link-gray", 'data-turbolinks': false %> ＞ 
   <%= link_to '口コミ一覧', reservation_reviews_path(@reservation), class: "link-gray" %> ＞ 
   口コミ編集画面
 </p>

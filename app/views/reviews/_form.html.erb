@@ -9,7 +9,7 @@
   </div>
 <% end %>
 
-<%= form_with(model:[@reservation,@review], local: true) do |f| %>
+<%= form_with(model:[@reservation, @review], local: true) do |f| %>
 <table class="table table-borderless reviews-table">
   <%= f.hidden_field :reservation_id, value: @reservation.id %>
   <%= f.hidden_field :total_score, id: "rating-value" %>

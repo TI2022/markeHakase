@@ -9,17 +9,17 @@ class ReviewsController < ApplicationController
   
   def create
     reservation = Reservation.find(params[:reservation_id])
-    reservation.is_reviewed = true
     review = Review.new(review_params)
     review.user_id = current_user.id # 親子関係で必須項目
     review.reservation_id = params[:reservation_id] # 親子関係で必須項目
     if review.save
       reservation.review_id = review.id
+      reservation.is_reviewed = true
       reservation.save
-      flash[:success] = "投稿に成功しました。"
+      flash[:success] = "口コミの投稿に成功しました。"
       redirect_to reservation_reviews_url
     else
-      flash[:danger] = "投稿に失敗しました。"
+      flash[:danger] = "口コミの投稿に失敗しました。"
       render :new
     end
   end
@@ -32,10 +32,10 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      flash[:success] = "編集に成功しました。"
+      flash[:success] = "口コミの編集に成功しました。"
       redirect_to reservation_reviews_url
     else
-      flash[:danger] = "更新に失敗しました。"
+      flash[:danger] = "口コミの更新に失敗しました。"
       render :edit
     end
   end
@@ -49,9 +49,7 @@ class ReviewsController < ApplicationController
       @review_menu_score = @reviews.average(:menu_score).round(1)
       @review_customer_score = @reviews.average(:customer_score).round(1)
       @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
-      # @ = ReviewAnswer.new
     end
-    # @staff = Staff.all
   end
 
   def show
@@ -68,7 +66,7 @@ class ReviewsController < ApplicationController
     reservation.review_answer_id = nil
     reservation.save
     review.destroy
-    flash[:success] = "レビューを削除しました。"
+    flash[:success] = "口コミを削除しました。"
     redirect_to users_account_url
   end
   
@@ -91,7 +89,7 @@ class ReviewsController < ApplicationController
     reservation.review_answer_id = nil
     reservation.save
     review.destroy
-    flash[:success] = "レビューを削除しました。"
+    flash[:success] = "口コミを削除しました。"
     redirect_to header_reviews_url
   end
 

@@ -6,7 +6,7 @@
   <div>
     <div class="d-flex flex-row bd-highlight mb-2 total_score-top mt-3">
       <div class="p-2 bd-highlight" id ="total-score-review">
-        総合平均点 <span class="review-avg-score"><%= @review_total_score %> 点</span>
+        総合 平均 <span class="review-avg-score"><%= @review_total_score %> </span>
       </div>
       <div class="average-score">
         <div class="star-rating">
@@ -14,9 +14,9 @@
           <div class="pt-3 star-rating-back bd-highlight">★★★★★</div>
         </div>
       </div>
-      <div class="p-3 pl-5 bd-highlight">| メニュー・料金<%= @review_menu_score %>点</div>
-      <div class="p-3 bd-highlight">| 接客・技術<%= @review_customer_score %>点</div>
-      <div class="p-3 bd-highlight">| 清潔さ・雰囲気<%= @review_atmosphere_score %>点</div>
+      <div class="p-3 pl-5 bd-highlight">メニュー・料金: ★<%= @review_menu_score %></div>
+      <div class="p-3 bd-highlight">接客・技術: ★<%= @review_customer_score %></div>
+      <div class="p-3 bd-highlight">清潔さ・雰囲気: ★<%= @review_atmosphere_score %></div>
     </div>
     <p class="center">☆口コミの投稿は、施術終了後にお客様のマイページから☆</p>
     <p class="center">☆ご意見、ご要望、何でもOKです!!!☆</p>

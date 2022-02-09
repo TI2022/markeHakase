@@ -30,7 +30,9 @@ class ReviewsController < ApplicationController
       reservation.is_reviewed = true
       reservation.save
 
-      
+      # 口コミ投稿完了時にメールを送信する機能/34行目 コメントアウトを外したら有効
+      # ReviewMailer.review_notification(current_user, reservation, review).deliver_now
+
       flash[:success] = "口コミの投稿に成功しました。"
       redirect_to reservation_reviews_url
     else

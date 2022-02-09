@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @reservation = reservation
     # mail(to: ENV["GMAIL_USERNAME"],
-    mail(to: "motorsports46animals@gmail.com",#テスト用アドレスなので、本番では変更要(envファイルにて再設定してください）。
+    mail(to: ENV["GMAIL_USERNAME"], #テスト用アドレスなので、本番では変更要(envファイルにて再設定してください）。
          subject: "予約申込みメール")
   end
 

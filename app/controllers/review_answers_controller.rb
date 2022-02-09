@@ -20,6 +20,10 @@ class ReviewAnswersController < ApplicationController
       review.review_answer_id = review_answer.id
       review.is_review_answered = true
       review.save
+
+      # 口コミ返信完了時にメールを送信する機能/25行目 コメントアウトを外したら有効
+      # ReviewAnswerMailer.review_answer_notification(current_staff, reservation, review).deliver_now
+
       flash[:success] = "口コミ返信の投稿に成功しました"
       redirect_to header_reviews_path
     else

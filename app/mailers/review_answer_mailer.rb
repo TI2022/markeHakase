@@ -5,9 +5,12 @@ class ReviewAnswerMailer < ApplicationMailer
   #
   #   en.review_answer_mailer.review_answer_notification.subject
   #
-  def review_answer_notification
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def review_answer_notification(current_staff, reservation, review)
+    @staff = current_staff
+    @reservation = reservation
+    @review = review
+    @guest = User.find(@reservation.guest_id)
+    mail to: @guest.email,
+    subject: "【ゲンキノモト】お客様の口コミに返信がされました"
   end
 end

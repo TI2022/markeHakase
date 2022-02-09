@@ -33,6 +33,7 @@
     <%= f.label :content %>
     <%= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
     <%= f.hidden_field :staff_id, value: current_staff.id %>
+    <%= f.hidden_field :user_id, value: @reservation.guest_id %>
     <%= f.hidden_field :reservation_id, value: @reservation.id %>
     <%= f.hidden_field :review_id, value: @review.id %>
     <%= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>

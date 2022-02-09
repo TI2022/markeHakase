@@ -66,6 +66,6 @@ class ReviewAnswersController < ApplicationController
 
   private
     def review_answer_params
-      params.require(:review_answer).permit(:reservation_id, :review_id, :staff_id, :content)
+      params.require(:review_answer).permit(:reservation_id, :review_id, :staff_id, :user_id, :content)
     end
 end

@@ -1,3 +1,5 @@
+<p class="center">☆口コミのご記入ありがとうございます☆</p>
+<p class="center">☆お客様からの声がわたしたちスタッフの励みになります☆</p>
 <% if @review.errors.any? %>
   <div class="alert alert-warning">
     <ul>
@@ -10,14 +12,12 @@
 <% end %>
 
 <%= form_with(model:[@reservation, @review], local: true) do |f| %>
-<table class="table table-borderless reviews-table">
+
   <%= f.hidden_field :reservation_id, value: @reservation.id %>
   <%= f.hidden_field :total_score, id: "rating-value" %>
 
-  <tr>
     <td>今回受けた施術</td>
-    <td><%= @reservation.treatment_menu %></td>
-  </tr>
+    <td><%= @reservation.treatment_menu %> [<%= l @reservation.start_time, format: :day %>]</td>
 
   <tr>
     <td><%= f.label :nickname %>(任意)</td>
@@ -74,7 +74,7 @@
       <%= link_to "キャンセル", reservation_reviews_path(@reservation, @review), class: "btn btn-sm btn-outline-danger" %>
     </td>
   </tr>
-</table>
+
 <% end %>
 
 <%= javascript_pack_tag 'review/reviews' %>

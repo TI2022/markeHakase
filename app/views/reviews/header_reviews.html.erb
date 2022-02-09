@@ -35,8 +35,8 @@
         <table class="table">
           <tbody>
             <tr class="header-review-headline">
-              <td class="headline-item"><%= l(review.created_at, format: :custom1) %></td>
-              <td colspan="3" class="headline-item"><%= review.nickname %> さん</td>
+              <td class="headline-item"><%= l(review.created_at, format: :custom1) %> 投稿</td>
+              <td colspan="2" class="headline-item"><%= review.nickname %> さん</td>
             </tr>
             <tr class="header-review-headline">
               <td class="headline-item">
@@ -48,15 +48,18 @@
                   <div class="pl-3">総合: ★<%= review.total_score %></div>
                 </div>
               </td>
+              <td colspan="2" class="headline-item"><%= review.reservation.treatment_menu %> [<%= l review.reservation.start_time, format: :day %>]</td>
+            </tr>
+            <tr class="header-review-headline">
               <td class="headline-item">メニュー/料金: ★<%= review.menu_score %></td>
               <td class="headline-item">接客/技術: ★<%= review.customer_score %></td>
               <td class="headline-item">雰囲気/清潔さ: ★<%= review.atmosphere_score %></td>
             </tr>
-            <tr><td colspan="4" class="header-review-title"><%= review.title %></td></tr>
-            <tr><td colspan="4"><%= review.content %></td></tr>
+            <tr><td colspan="3" class="header-review-title"><%= review.title %></td></tr>
+            <tr><td colspan="3"><%= review.content %></td></tr>
             <% if current_staff %>
               <tr class="center">
-                <td colspan="4"><%= link_to "お客様の口コミを削除", header_reviews_destroy_path(review),
+                <td colspan="3"><%= link_to "お客様の口コミを削除", header_reviews_destroy_path(review),
                         method: :delete, data:{ confirm: "お客様の口コミを削除してよろしいですか？" },
                         class: "p-1 btn btn-sm btn-outline-danger" %>
                 </td>

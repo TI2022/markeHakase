@@ -40,12 +40,12 @@
     <li><span class="required"></span><span> 接客/技術</span><%= f.select :customer_score, {'とても良かった': 5, 'まあまあ良かった': 4, '普通': 3, 'あまり良くなかった': 2, '良くなかった': 1 }, { include_blank: '選択してください' }, { class: 'form-control' } %></li>
     <li><span class="required"></span><span> 雰囲気/清潔さ</span><%= f.select :atmosphere_score, {'とても良かった': 5, 'まあまあ良かった': 4, '普通': 3, 'あまり良くなかった': 2, '良くなかった': 1 }, { include_blank: '選択してください' }, { class: 'form-control' } %></li>
 
-    <%= f.label :nickname %>
-    <%= f.text_field :nickname, class: "form-control" %>
-    <span class="required"></span> <%= f.label :title %>
-    <%= f.text_field :title, class: "form-control", placeholder: "50文字以内で入力してください。", required: true %>
-    <span class="required"></span> <%= f.label :content %>
-    <%= f.text_area :content, class: "form-control", rows: 6, placeholder: "10~1000文字内で入力してください。" %>
+    <li><%= f.label :nickname %></li>
+    <li><%= f.text_field :nickname, class: "form-control" %></li>
+    <li><span class="required"></span> <%= f.label :title %></li>
+    <li><%= f.text_field :title, class: "form-control", placeholder: "50文字以内で入力してください。", required: true %></li>
+    <li><span class="required"></span> <%= f.label :content %></li>
+    <li><%= f.text_area :content, class: "form-control", rows: 6, placeholder: "10~1000文字内で入力してください。" %></li>
     <li class="center">
       <%= f.submit "登録", class: "btn btn-sm btn-outline-dark", 'data-turbolinks': false %>
       <%= link_to "キャンセル", reservation_reviews_path(@reservation, @review), class: "btn btn-sm btn-outline-danger" %>

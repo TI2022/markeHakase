@@ -11,6 +11,6 @@ class ReviewMailer < ApplicationMailer
     @review = review
     @staff = Staff.find(@reservation.staff_id)
     mail to: @staff.email,
-    subject: "【ゲンキノモト】新規口コミが投稿されました"
+    subject: "【ゲンキノモト】お客様から新規口コミが投稿されました"
   end
 end

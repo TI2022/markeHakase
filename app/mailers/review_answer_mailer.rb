@@ -9,8 +9,8 @@ class ReviewAnswerMailer < ApplicationMailer
     @staff = current_staff
     @reservation = reservation
     @review = review
-    @guest = User.find(@reservation.guest_id)
-    mail to: @guest.email,
-    subject: "【ゲンキノモト】お客様の口コミに返信がされました"
+    @user = User.find(@reservation.guest_id)
+    mail to: @user.email,
+    subject: "【ゲンキノモト】お客様の口コミにスタッフから返信がされました"
   end
 end

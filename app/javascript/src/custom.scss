@@ -603,19 +603,6 @@ body {
 }
 // ---
 
-// review-index ---
-
-// .star-rating-front {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   overflow: hidden;
-//   color: #ffcc33;
-// }
-// .star-rating-back {
-//   color: #ccc;
-// }
-
 // 星塗りつぶし --
 .average-score {
   display: flex; // ★と点数を横並びにする
@@ -640,39 +627,6 @@ body {
   color: gray;
 }
 // --
-
-.reviews-container {
-  display: flex;
-  justify-content: center;
-}
-
-.reviewMainWrapper {
-  // padding-inline: 20px;
-  // width: 700px;
-  margin-top: 30px;
-  .reviews-table {
-    color: #64554a;
-    // display: flex;
-    // justify-content: center;
-  }
-  .reviews-content-header {
-    background-image: linear-gradient(
-      45deg,
-      #ff9a9e 0%,
-      #fad0c4 99%,
-      #fad0c4 100%
-    );
-    border-top-left-radius: 10px;
-  }
-  // .reviews-content-top {
-  // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  // background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-  // }
-  .reviews-content-body {
-    // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    min-height: 200px;
-  }
-}
 
 .header-review-total-score-top {
   border: solid 10px #AED6F1;

@@ -5,8 +5,8 @@ class ReviewAnswersController < ApplicationController
     @reservation = Reservation.find(params[:reservation_id])
     @review = Review.find(@reservation.review_id)
     @review_answer = ReviewAnswer.new
-    @user = User.find(@reservation.guest_id)
-    @staff = Staff.find(@reservation.staff_id)
+    @guest = @reservation.guest
+    @staff = @reservation.staff
   end
 
   def create
@@ -32,7 +32,7 @@ class ReviewAnswersController < ApplicationController
     @reservation = Reservation.find(params[:reservation_id])
     @review = Review.find(@reservation.review_id)
     @review_answer = ReviewAnswer.find(@reservation.review_answer_id)
-    @user = User.find(@reservation.guest_id)
+    @guest = User.find(@reservation.guest_id)
     @staff = Staff.find(@reservation.staff_id)
   end
 

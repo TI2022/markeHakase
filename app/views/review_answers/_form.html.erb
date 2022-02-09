@@ -2,13 +2,12 @@
 
 <div>
   <ul>
-    <li>お客様: <%= @user.name %> 様</li>
+    <li>お客様: <%= @guest.name %> 様</li>
     <li>ご予約日時: <%= l(@reservation.start_time, format: :custom1) %></li>
     <li>ご予約内容: <%= @reservation.treatment_menu %></li>
     <li>担当スタッフ: <%= @staff.name %></li>
   </ul>
 </div>
-
 
 <div>
   <ul>

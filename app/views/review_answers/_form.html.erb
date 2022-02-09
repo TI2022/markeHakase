@@ -2,6 +2,16 @@
 
 <div>
   <ul>
+    <li>お客様: <%= @user.name %> 様</li>
+    <li>ご予約日時: <%= l(@reservation.start_time, format: :custom1) %></li>
+    <li>ご予約内容: <%= @reservation.treatment_menu %></li>
+    <li>担当スタッフ: <%= @staff.name %></li>
+  </ul>
+</div>
+
+
+<div>
+  <ul>
     <li>総合評価: ★<%= @review.total_score %></li>
     <li>メニュー・料金に対する評価: ★<%= @review.menu_score %></li>
     <li>接客・技術に関する評価: ★<%= @review.customer_score %></li>
@@ -12,6 +22,7 @@
 <div>
   <ul>
     <li>口コミ番号: <%= @review.id %></li>
+    <li>口コミニックネーム: <%= @review.nickname %></li>
     <li>口コミタイトル: <%= @review.title %></li>
     <li>口コミ内容: <%= @review.content %></li>
   </ul>

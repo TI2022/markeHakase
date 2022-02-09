@@ -29,6 +29,8 @@ class ReviewsController < ApplicationController
       reservation.review_id = review.id
       reservation.is_reviewed = true
       reservation.save
+
+      
       flash[:success] = "口コミの投稿に成功しました。"
       redirect_to reservation_reviews_url
     else

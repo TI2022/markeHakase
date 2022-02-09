@@ -10,7 +10,9 @@ class ReviewsController < ApplicationController
       @review_customer_score = @reviews.average(:customer_score).round(1)
       @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
     end
-    @reservation_id = Reservation.find(params[:reservation_id]) # reservation_idがないとindexに遷移できないのでとりあえず入れる
+    # reservations/:reservation_id/reviews/:id
+    # reservation_idがないとindexに遷移できないので、とりあえず入れる
+    @reservation_id = Reservation.find(params[:reservation_id])
   end
 
   def new

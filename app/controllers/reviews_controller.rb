@@ -2,6 +2,17 @@ class ReviewsController < ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :authenticate_staff!
 
+  def index
+    @reviews = Review.includes(:reservation).where(user_id: current_user.id).page(params[:page]).per(10).order(updated_at: "DESC")
+    if @reviews.present?
+      @review_total_score = @reviews.average(:total_score).round(1)
+      @review_menu_score = @reviews.average(:menu_score).round(1)
+      @review_customer_score = @reviews.average(:customer_score).round(1)
+      @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
+    end
+    @reservation_id = Reservation.find(params[:reservation_id]) # reservation_idがないとindexに遷移できないのでとりあえず入れる
+  end
+
   def new
     @reservation = Reservation.find(params[:reservation_id])
     @review = Review.new
@@ -40,23 +51,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def index
-    @reservation = Reservation.where(is_reviewed: true, guest_id: current_user.id) #投稿したユーザーの分だけを表示させる
-    @reservation_id = Reservation.find(params[:reservation_id])
-    @reviews = Review.includes(:reservation).where(user_id: current_user.id).page(params[:page]).per(10).order(updated_at: "DESC")
-    if @reviews.present?
-      @review_total_score = @reviews.average(:total_score).round(1)
-      @review_menu_score = @reviews.average(:menu_score).round(1)
-      @review_customer_score = @reviews.average(:customer_score).round(1)
-      @review_atmosphere_score = @reviews.average(:atmosphere_score).round(1)
-    end
-  end
-
-  def show
-    @reservation = Reservation.find(params[:reservation_id])
-    @review = Review.find(params[:id])
-  end
-  
   def destroy
     review = Review.find(params[:id])
     reservation = review.reservation

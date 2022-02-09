@@ -72,7 +72,7 @@
           <tbody>
             <% reservation = review.reservation %>
             <% if reservation.is_review_answered == true %>
-              <% review_answer = reservation.review_answers.last %>
+              <% review_answer = ReviewAnswer.find_by(reservation_id: reservation.id) %>
               <tr><th class="table-danger">スタッフからの返信</th></tr>
               <tr><td><%= review_answer.content %></tr></td>
             <% end %>

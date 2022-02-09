@@ -44,8 +44,9 @@
             <% if current_user.id == review.user_id %>
             <tr>
               <td colspan="3" class="center">
-                <%= link_to "編集", edit_reservation_review_path(@reservation_id, review), class:"btn btn-sm btn-outline-dark" %>
-                <%= link_to "削除", reservation_review_path(@reservation_id, review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %>
+                <% reservation = review.reservation %>
+                <%= link_to "編集", edit_reservation_review_path(reservation, review), class:"btn btn-sm btn-outline-dark" %>
+                <%= link_to "削除", reservation_review_path(reservation, review), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" %>
               </td>
             </tr>
             <% end %>

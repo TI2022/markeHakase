@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
   def index
     @reservation = Reservation.where(is_reviewed: true, guest_id: current_user.id) #投稿したユーザーの分だけを表示させる
     @reservation_id = Reservation.find(params[:reservation_id])
-    @reviews = Review.includes(:reservation).where(user_id: current_user.id).page(params[:page]).per(10).order(created_at: "ASC")
+    @reviews = Review.includes(:reservation).where(user_id: current_user.id).page(params[:page]).per(10).order(updated_at: "DESC")
     if @reviews.present?
       @review_total_score = @reviews.average(:total_score).round(1)
       @review_menu_score = @reviews.average(:menu_score).round(1)
@@ -71,7 +71,7 @@ class ReviewsController < ApplicationController
   end
   
   def header_reviews
-    @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(created_at: "ASC")
+    @reviews = Review.includes(:reservation).page(params[:page]).per(10).order(updated_at: "DESC")
     if @reviews.present?
       @review_total_score = @reviews.average(:total_score).round(1)
       @review_menu_score = @reviews.average(:menu_score).round(1)

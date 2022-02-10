@@ -32,6 +32,10 @@
       <ul>
         <li><%= f.label :name %></li>
         <li><%= f.text_field :name, class: "form-control" %></li>
+        <li><%= f.label :flagship_location %></li>
+        <li><%= f.select :flagship_location, [["いいえ", "false"], ["はい", "true"]], {}, { class: "form-control" } %></li>
+        <li>注: 旗艦店は一つだけにしてください。</li>
+        <li>注: 旗艦店がトップページの地図としても表示されます。</li>
         <li><%= f.label :phone %></li>
         <li><%= f.text_field :phone, class: "form-control" %></li>
         <li><%= f.label :email %></li>

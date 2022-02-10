@@ -1,3 +1,16 @@
+<% if current_staff %>
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  お知らせ詳細
+</p>
+<% else %>
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  お知らせ詳細
+</p>
+<% end %>
+
 <div class="container">
   <div class="notification-show-image bg-info d-flex align-items-center justify-content-center">
     <span>お知らせ</span>

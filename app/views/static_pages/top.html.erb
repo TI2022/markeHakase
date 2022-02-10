@@ -1,8 +1,12 @@
 <div class="slider-wrap">
   <div class="slider-main">
-    <div><%= link_to image_tag("/slide_01pc.jpeg"), reservations_path, 'data-turbolinks': false %></div>
-    <div><%= link_to image_tag("/slide_02pc.jpeg"), reservations_path, 'data-turbolinks': false %></div>
-    <div><%= link_to image_tag("/slide_03pc.jpeg"), reservations_path, 'data-turbolinks': false %></div>
+    <% if @tops.present? %>
+      <% @tops.each do |t| %>
+        <% if t.image.present? %>
+          <div><%= link_to image_tag(t.image.url), reservations_path, 'data-turbolinks': false %></div>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -11,58 +15,88 @@
   <div class="top-notification-body">
     <div class="row">
       <div class="col-12 col-sm-8 col-md-12">
-        <% @notifications.first(3).each do |n| %>
-          <ul>
-            <li><%= n.created_at.strftime("%Y.%m.%d") %><span><%= link_to truncate(n.title, length: 30), notification_path(n), class: "Editlink" %></span></li>
-          </ul>
-        <% end %>
+        <dl>
+          <% @notifications.first(3).each do |n| %>
+          <div>
+            <dt><%= n.created_at.strftime("%Y/%m/%d") %></dt>
+            <dd><%= link_to truncate(n.title, length: 30), notification_path(n), class: "n-show-link" %></dd>
+          </div>
+          <% end %>
+        </dl>
       </div>
     </div>
   </div>
   <div class="text-right">
-    <%= link_to ">> and more...", static_pages_notification_path, class: "Editlink" %>
+    <%= link_to ">> and more...", static_pages_notification_path, class: "and-more" %>
   </div>
 </div>
 
+<div class="top-reservation">
+  <div class="row">
+    <div class="col-11 col-md-4 top-reservation-left">
+      <h5><%= @top1.reserve_title %></h5>
+      <p>
+        <%= @top1.reserve_text %><br />
+        <font size="2rem" color="red"><%= @top1.reserve_text_caution %></font>
+      </p>
+      <% if @reserve_top.present? %>
+        <div class="top-reservation-image"><%= link_to image_tag(@reserve_top.image.url, width: '100%'), reservations_path, 'data-turbolinks': false %></div>
+      <% end %>
+      <p>
+        <%= @top1.reserve_text2 %><br />
+        <font size="2rem" color="red"><%= @top1.reserve_text2_caution %></font>
+      </p>
+      <div class="comfirm-title"><%= @top1.reserve_comfirm_title %></div>
+      <p>
+        <%= safe_join(@top1.reserve_comfirm_text.split("\n"),tag(:br)) %>
+      </p>
+    </div>
+    <div class="col-12 col-md-1"></div>
+    <div class="col-12 col-md-7">
+      <h5><%= @top1.calendar_title %></h5>
+      <div id="calendar"></div>
+    </div>
+  </div>
+</div>
 
 <div class="top-salon-introduction">
-  <h1>サロン紹介</h1>
+  <h1><%= @top1.introduction_title %></h1>
   <div class="row">
     <div class="col-12 col-md-7">
       <div class="row mb-5">
         <div class="col-12 col-sm-8 col-md-12">
-          <div><%= link_to image_tag("/salon.jpg", width: '100%'), reservations_path, 'data-turbolinks': false %></div>
+          <% if @introduce_top.present? %>
+          <div><%= link_to image_tag(@introduce_top.image.url, width: '100%'), reservations_path, 'data-turbolinks': false %></div>
+          <% end %>
         </div>
         <div class="col-12 mt-4">
           <p>
-            巻き爪、タコ、ウオノメのケアを中心としたボディケアサロンです。<br>
-              巻き爪ケアは痛みが少なく短い爪でも補正ができ、ご好評をいただいています！<br>
-              皆様のご来店をお待ちしています。
+            <%= safe_join(@top1.introduction_text.split("\n"),tag(:br)) %>
           </p>
           <div>
             <dl>
               <div>
                 <dt>住所</dt>
                 <dd>
-                  〒254-0034 神奈川県平塚市宝町9-14 平塚スポーツケアセンター2階
+                  <%= @top1.introduction_address %>
                 </dd>
               </div>
               <div>
                 <dt>営業時間</dt>
                 <dd>
-                  11:00〜20:00(18:00最終受付)
+                  <%= @top1.introduction_time %>
                 </dd>
               </div>
               <div>
                 <dt>定休日</dt>
                 <dd>
-                  日曜日
+                  <%= @top1.introduction_holiday %>
                 </dd>
               </div>
               <div>
                 <dt>TEL</dt>
                 <dd>
-                  0463-27-2008
+                  <%= @top1.introduction_tel %>
                 </dd>
               </div>
             </dl>
@@ -71,12 +105,24 @@
       </div>
     </div>
     <div class="col-12 col-md-5">
-      <div><%= link_to image_tag("/map-sample.png", width: '100%'), reservations_path, 'data-turbolinks': false %></div>
-      仮で画像を差し込んでいます<br>
-      本番ではここにGoogleMapを埋め込んでください。
+      <% if @store %>
+        <div class="top-google-map">
+          <iframe src="<%= @store.google_map %>" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
 
 <%= link_to "ご予約はこちら", reservations_path, 'data-turbolinks': false, class: "reserve-btn" %>
 <%= link_to "ご予約はこちら", reservations_path, 'data-turbolinks': false, class: "phone-reserve-btn", id: "phone-reservation-btn" %>
+
+<script>
+  var setGmapSize = function (default_height) {
+    $(".top-google-map").height(
+      ($(window).height() < (default_height + 100)) ? $(window).height() - 100 : default_height
+    );
+  };
+</script>
+
+<%= javascript_pack_tag 'calendar/top' %>

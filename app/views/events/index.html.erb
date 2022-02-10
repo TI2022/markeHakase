@@ -6,7 +6,7 @@
   <div class="right">
     <% if staff_signed_in? %>
       <p>スタッフ専用</p>
-      <%= link_to "新規イベントの登録", new_event_path, class: "btn btn-sm btn-outline-dark"%>
+      <%= link_to "新規イベント登録", new_event_path, class: "btn btn-sm btn-outline-dark"%>
     <% end %>
   </div>
   <div class="center">
@@ -17,15 +17,15 @@
   </div>
   <p></p>
   <%= paginate @events %>
-  <div class="event-card-container">
+  <div class="event-index-container">
     <% @events.each do |event| %>
-      <div class="event-card-item">
+      <div class="event-index-body">
         <% if event.image? %>
           <%= link_to image_tag(event.image.url, width: '100%', class: "image-border border-radius-top"), event_path(event) %>
         <% else %>
           <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), event_path(event) %>
         <% end %>
-        <p class="event-card-title">
+        <p class="event-index-description">
           <ul>
             <li><%= link_to event.title, event_path(event), class: "link-black" %></li>
             <% if staff_signed_in? %>

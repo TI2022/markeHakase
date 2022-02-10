@@ -1,19 +1,48 @@
-<div class="calendar-wrap">
-  <p>
-    <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
-    予約画面
-  </p>
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+  予約画面
+</p>
 
-  <% unless user_signed_in? %>
-    <font size="2rem" color="red">※WEB予約をご利用になる際はログインが必要になります。</font>
-    <%= link_to 'アカウントを登録する', new_user_registration_path, class: "btn btn-sm btn-outline-info" %>
+<% if user_signed_in? %>
+  <% if @current_guest_reservations.count >= 1 %>
+    <% warning_text = "現在仮予約中です。承認されるまでお待ちください。" %>
+    <div class="mt-2">
+      現在
+      <font color="red">仮予約中</font>
+      の予約が
+      <%= @current_guest_reservations.count %>
+      件あります。承認されるまでお待ちください。
+    </div>
+    <% tel_text = "  キャンセルはお電話から承っております。" %>
+    <% tel_number = "0463-27-2008" %>
+    <div class="mt-2"><%= link_to sanitize('<i class="pr-2 fas fa-phone"></i>') + tel_number + tel_text, "tel:+81-463-27-2008", class: "btn btn-info" %></div>
   <% end %>
+<% end %>
 
+<div class="mt-2 font-deep-gray right">
+  営業時間：11:00〜20:00
+</div>
+<div class="mt-2 font-deep-gray right">
+  定休日：日曜日
+</div>
+
+<% unless user_signed_in? %>
+  <font size="2rem" color="red">※WEB予約をご利用になる際はログインが必要になります。</font>
+  <%= link_to 'ログインする', new_user_session_path, class: "btn btn-sm btn-outline-info" %>
+  <%= link_to 'アカウントを登録する', new_user_registration_path, class: "btn btn-sm btn-outline-primary" %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "ご予約はこちら", new_reservation_path, remote: true, class: "btn btn-outline-info" %>
+<% end %>
+
+<div class="calendar-wrap">
   <div id="calendar"></div>
 </div>
 
-<%= link_to "ご予約画面表示", new_reservation_path, remote: true, class: "reserve-show-btn" %>
-<%= link_to "ご予約画面表示", new_reservation_path, remote: true, class: "phone-reserve-show-btn", id: "phone-reservation-show-btn" %>
+<% if user_signed_in? %>
+  <%= link_to "ご予約はこちら", new_reservation_path, remote: true, class: "reserve-show-btn" %>
+  <%= link_to "ご予約はこちら", new_reservation_path, remote: true, class: "phone-reserve-show-btn", id: "phone-reservation-show-btn" %>
+<% end %>
 
 <div id="new_reservation" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-<%= javascript_pack_tag 'calendar/reservation' %>

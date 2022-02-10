@@ -1,28 +1,56 @@
 ja:
   activerecord:
     models:
+      top: トップ
       item: 商品
-      order: 注文
       event: イベント
-      store: 店舗
+      order: 注文
+      event_order: 注文
+      menu: メニュー
       reservation: 予約
+      store: 店舗
+      review: 口コミ
+      review_answer: 口コミ返信
+      shift: シフト
     attributes:
+      top:
+        reserve_title: 予約タイトル
+        reserve_text: 予約テキスト
+        reserve_text_caution: 予約テキスト注意書き
+        reserve_text2: 予約テキスト２
+        reserve_text2_caution: 予約テキスト注意書き２
+        reserve_comfirm_title: 予約確認タイトル
+        reserve_comfirm_text: 予約確認テキスト
+        calendar_title: カレンダータイトル
+        introduction_title: サロン紹介タイトル
+        introduction_text: サロン紹介テキスト
+        introduction_address: サロン紹介住所
+        introduction_time: サロン紹介営業時間
+        introduction_holiday: サロン紹介定休日
+        introduction_tel: サロン紹介電話番号
+        image_text: 画像テキスト
+        slide_number: 画像番号
+        image_order: 画像順番
+        introduction_image_count: サロン紹介画像表示枚数
+        slide_image_count: メインスライド表示枚数
+        main_slide_flag: メインスライド画像表示
+        reserve_image_flag: 予約説明画像表示
+        introduction_image_flag: 紹介画像表示
+        image: 画像
       item:
         id: ID
         name: 商品名
-        price: 価格
+        price: 価格(税抜)
         quantity: 数量
         stock: 在庫数
         description: 詳細
         image: 画像
         created_at: 作成日
         updated_at: 更新日
-      order:
-        quantity: 数量
       event:
         title: イベント名
         category: カテゴリー
-        price: 価格
+        price: 価格(税抜)
         stock: チケット残数
         description: 詳細
         remaining_ticket_numbers: チケット残数
@@ -32,16 +60,37 @@ ja:
         end_time: 終了時間
         location: 開催場所
         image: 画像
+      order:
+        quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 荷物問合せ番号
+      event_order:
+        quantity: 数量
+        shipping_company: 運送会社
+        tracking_number: 荷物問合せ番号
       menu:
         category: カテゴリー
+        category_number: カテゴリー番号
         category_order: カテゴリー順番
         category_title: カテゴリータイトル
-        title_order: カテゴリータイトル順番
+        category_title_number:  カテゴリータイトル番号
+        category_title_order:  カテゴリータイトル順番
         title: 施術メニュー
+        full_title: 予約表示メニュー
         description: 施術内容
         charge: 料金
         treatment_time: 施術時間
         course_number: コース番号
+        image_number: 画像番号
+        select_tab_number: 選択タブ番号
+        select_tab_name: 選択タブ名
+        image_flag: 施術メニュー画像表示／非表示
+        menu_flag: 施術メニュー表示／非表示
+        reserve_flag: 予約メニュー表示／非表示
+        topping_number: トッピング番号
+        add_nail_number: 爪取り付け番号
+        add_nail_count: 爪取り付け本数
+        image: 画像
       reservation:
         start_time: 開始時間
         end_time: 終了時間
@@ -53,10 +102,18 @@ ja:
         staff_id: スタッフ
         holiday_flag: 休み
         reservation_time: 予約時間
+        cancel_flag: キャンセル
         treatment_menu: 施術メニュー
         treatment_time_menu: 施術時間
+        full_treatment_time_menu: 総施術時間
         charge_menu: 料金
+        full_charge_menu: 総料金
+        add_nail_number_menu: ネイル取り付け番号
+        add_nail_count_menu: ネイル取り付け枚数
+        topping_number_menu: トッピング番号
+        topping_menu: トッピング
         guest_id: 予約ユーザー
+        staff_id: スタッフ
       store:
         name: 店舗名
         address: 住所
@@ -70,3 +127,18 @@ ja:
         non_business_day: 定休日
         working_staff: 稼働スタッフ人数
         image: 画像
+        google_map: Google Maps URL
+        flagship_location: 旗艦店
+      review:
+        title: タイトル
+        nickname: ニックネーム
+        content: 本文
+        total_score: 総合評価
+        menu_score: メニュー・料金
+        customer_score: 接客・技術
+        atmosphere_score: 雰囲気
+      review_answer:
+        content: 返信コメント
+      shift:
+        working_staff: 稼働スタッフ人数
+        working_day: 日にち

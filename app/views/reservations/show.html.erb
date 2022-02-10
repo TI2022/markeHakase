@@ -31,7 +31,11 @@
   </thead>
   <tbody>
     <tr>
+    <% if @reservation.topping_menu.present? %>
+      <td><%= l @reservation.start_time, format: :timeonly %> - <%= l (@reservation.start_time + ((@reservation.treatment_time_menu + 30) * 60)), format: :timeonly if @reservation.end_time.present? %></td>
+    <% else %>
       <td><%= l @reservation.start_time, format: :timeonly %> - <%= l (@reservation.start_time + (@reservation.treatment_time_menu * 60)), format: :timeonly if @reservation.end_time.present? %></td>
+    <% end %>
     </tr>
   </tbody>
   <thead class="table-secondary">
@@ -46,12 +50,32 @@
   </tbody>
   <thead class="table-secondary">
     <tr>
+      <th scope="col">巻き爪補正</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @reservation.add_nail_count_menu ? @reservation.add_nail_count_menu : "0" %>本</td>
+    </tr>
+  </tbody>
+  <thead class="table-secondary">
+    <tr>
+      <th scope="col">トッピング</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @reservation.topping_menu ? @reservation.topping_menu : "無し" %></td>
+    </tr>
+  </tbody>
+  <thead class="table-secondary">
+    <tr>
       <th scope="col">料金</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><%= @reservation.charge_menu %>円</td>
+      <td><%= @reservation.full_charge_menu %>円</td>
     </tr>
   </tbody>
   <thead class="table-secondary">

@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ゲンキノモト。【公式】|ボディケア|お客様ご予約|グッズ販売|イベント販売|</title>
+    <title>ゲンキノモト。【公式】|ボディケア|フットケア|ご予約|グッズ販売|チケット販売|</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
+    <script src="https://kit.fontawesome.com/484e6509e8.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <%= favicon_link_tag 'favicon.ico' %>
   </head>
 
-  <body>
+  <body data-turbolinks="false">
     <%= render 'layouts/header' %>
     <div class="container-fluid <%= devise_controller? ? 'mw-md' : 'mw-xl' %>" id="c-body">
+      <%= alert %>
       <% flash.each do |message_type, msg| %>
-        <div class="alert alert-<%= message_type %>"><%= msg.html_safe %></div>
+        <div class="mt-2 alert alert-<%= message_type %>"><%= msg.html_safe %></div>
       <% end %>
       <%= yield %>
     </div>

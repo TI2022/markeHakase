@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # indexとshowはスタッフのみのログインで可能
   skip_before_action :authenticate_user!, only: [:index, :search, :show, :admin_new, :admin_create, :admin_edit, :admin_update, :admin_destroy]
-  skip_before_action :authenticate_staff!, only: [:account] # 抜けていたので追記しました
+  skip_before_action :authenticate_staff!, only: [:account]
   before_action :set_q, only: [:index, :search]
 
   def index
@@ -63,9 +63,8 @@ class UsersController < ApplicationController
       cart.save
     end
     @users = User.where(id: current_user.id)
-    @reservations = Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where.not(status: 3)
-    @completed_reservations= Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where(status: 3)
-    @payments = @q.result.page(params[:page]).per(5).order(id: "DESC") if current_user.cart.payments.present?
+    @reservations = Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where.not(status: 3).order(start_time: "DESC")
+    @completed_reservations= Reservation.where(guest_id: current_user.id).where(cancel_flag: false).where(status: 3).order(start_time: "DESC")
   end
 
   def out
@@ -85,4 +84,5 @@ class UsersController < ApplicationController
   def set_q
     @q = User.ransack(params[:q])
   end
+
 end

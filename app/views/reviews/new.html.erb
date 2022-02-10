@@ -1,0 +1,8 @@
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+  <%= link_to 'マイページ', users_account_path, class: "link-gray", 'data-turbolinks': false %> ＞ 
+  口コミ新規投稿画面
+</p>
+<div class="container">
+  <%= render 'form' %>
+</div>

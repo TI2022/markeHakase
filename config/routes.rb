@@ -1,22 +1,32 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
   get 'static_pages/notification', to: 'static_pages#notification'
+  resources :tops, only: [:new, :create, :edit, :update, :show, :index]
   resources :menus do
     collection do
       get :treatment_menu #ユーザーメニュー一覧画面
     end
   end
+  
+  get 'header_reviews', to: 'reviews#header_reviews'
+  delete 'header_reviews/destroy', to: 'reviews#header_reviews_destroy'
+  
   resources :reservations do
+    resources :reviews
+    resources :review_answers
     collection do
-      get :management_new
-      get :search
-      get :confirm_reservation
-      get :reservation_management
-      post :reservation_management_create
+      get :confirm_reservation      # 予約申請確認画面
+      get :reservation_management   # スタッフ予約管理画面
+      get :search                   # スタッフ予約管理画面(検索後) 
+      get :management_new           # スタッフ新規予約作成画面
+      post :management_create       # スタッフ新規予約作成処理
+      get :validate_new             # スタッフ予約制限作成画面
+      post :validate_create         # スタッフ予約制限作成処理
     end
     member do
       get :edit_reserve
       post :update_reserve
+      post :cancel_reserve
     end
   end
   resources :stores
@@ -57,8 +67,7 @@ Rails.application.routes.draw do
     passwords:     'staffs/passwords',
     registrations: 'staffs/registrations'
   }
-  resources :reservations
-  resources :stores
+
   resources :items do
     collection do
       get 'search'
@@ -87,4 +96,5 @@ Rails.application.routes.draw do
   resources :purchase_records, only: %i[index show]
   post 'pay', to: 'payments#pay'
   resources :notifications
+  resources :shifts, only: [:edit, :update, :index]
 end

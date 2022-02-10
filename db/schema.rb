@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_123508) do
+ActiveRecord::Schema.define(version: 2022_02_10_034310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.integer "payment_id"
     t.integer "adult_count"
     t.integer "child_count"
-    t.time "shipped_at"
+    t.datetime "shipped_at"
+    t.integer "shipping_company"
+    t.string "tracking_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_event_orders_on_cart_id"
@@ -75,16 +77,24 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
 
   create_table "menus", force: :cascade do |t|
     t.string "category"
-    t.integer "category_order"
+    t.integer "category_number", default: 0
+    t.integer "category_order", default: 0
     t.string "category_title"
-    t.integer "title_order"
+    t.integer "category_title_number", default: 0
+    t.integer "category_title_order", default: 0
     t.string "title"
     t.string "full_title"
-    t.integer "charge"
+    t.integer "charge", default: 0
+    t.integer "original_charge", default: 0
     t.string "description"
-    t.integer "treatment_time"
+    t.integer "treatment_time", default: 0
     t.integer "course_number", default: 0
+    t.integer "image_flag", default: 0
+    t.integer "menu_flag", default: 0
+    t.integer "reserve_flag", default: 0
+    t.integer "add_nail_count", default: 0
     t.integer "store_id", default: 1
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -109,7 +119,9 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.integer "payment_id"
     t.integer "adult_count"
     t.integer "child_count"
-    t.time "shipped_at"
+    t.datetime "shipped_at"
+    t.integer "shipping_company"
+    t.string "tracking_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_orders_on_cart_id"
@@ -141,11 +153,59 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.integer "staff_id"
     t.integer "guest_id"
     t.datetime "reservation_time"
-    t.integer "holiday_flag", default: 0
     t.integer "cancel_flag", default: 0
+    t.integer "validate_flag", default: 0
     t.string "treatment_menu"
-    t.integer "treatment_time_menu"
-    t.integer "charge_menu"
+    t.integer "treatment_time_menu", default: 0
+    t.integer "full_treatment_time_menu", default: 0
+    t.integer "charge_menu", default: 0
+    t.integer "full_charge_menu", default: 0
+    t.integer "add_nail_number_menu", default: 0
+    t.integer "add_nail_count_menu", default: 0
+    t.integer "topping_number_menu", default: 0
+    t.string "topping_menu"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_reviewed", default: false
+    t.integer "review_id"
+    t.boolean "is_review_answered", default: false
+    t.integer "review_answer_id"
+  end
+
+  create_table "review_answers", force: :cascade do |t|
+    t.bigint "reservation_id", null: false
+    t.integer "review_id"
+    t.integer "staff_id"
+    t.integer "user_id"
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reservation_id"], name: "index_review_answers_on_reservation_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "reservation_id", null: false
+    t.string "title"
+    t.text "content"
+    t.integer "total_score"
+    t.integer "menu_score"
+    t.integer "customer_score"
+    t.integer "atmosphere_score"
+    t.boolean "review_exists", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "nickname"
+    t.boolean "is_review_answered", default: false
+    t.integer "review_answer_id"
+    t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.integer "working_staff", default: 1
+    t.date "working_day"
+    t.integer "store_id", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -189,6 +249,37 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "google_map"
+    t.boolean "flagship_location", default: false
+  end
+
+  create_table "tops", force: :cascade do |t|
+    t.string "reserve_title"
+    t.string "reserve_text"
+    t.string "reserve_text_caution"
+    t.string "reserve_text2"
+    t.string "reserve_text2_caution"
+    t.string "reserve_comfirm_title"
+    t.string "reserve_comfirm_text"
+    t.string "calendar_title"
+    t.string "introduction_title"
+    t.string "introduction_text"
+    t.string "introduction_address"
+    t.string "introduction_time"
+    t.string "introduction_holiday"
+    t.string "introduction_tel"
+    t.string "image_text"
+    t.integer "image_order"
+    t.integer "slide_number"
+    t.integer "slide_image_count"
+    t.integer "introduction_image_count"
+    t.integer "main_slide_flag", default: 0
+    t.integer "introduction_image_flag", default: 0
+    t.integer "reserve_image_flag", default: 0
+    t.integer "store_id", default: 1
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -229,6 +320,9 @@ ActiveRecord::Schema.define(version: 2021_11_20_123508) do
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "items"
   add_foreign_key "payments", "carts"
+  add_foreign_key "review_answers", "reservations"
+  add_foreign_key "reviews", "reservations"
+  add_foreign_key "reviews", "users"
   add_foreign_key "staffs", "stores"
   add_foreign_key "users", "stores"
 end

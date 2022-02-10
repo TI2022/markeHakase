@@ -8,23 +8,43 @@
         </button>
     </div>
     <div class="modal-body">
-      <div class="col-md-12">
-        <h6>予約者</h6>
-        <p class="ms-1"><%= @reservation.guest.name %>様</p>
-        <h6>予約日</h6>
-        <p><%= l @reservation.start_time, format: :dayonly %></p>
-        <h6>予約時間</h6>
-        <p><%= l @reservation.start_time, format: :timeonly %> - <%= l @reservation.end_time, format: :timeonly if @reservation.end_time.present? %></p>
-        <h6>予約コース</h6>
-        <p><%= @reservation.treatment_menu %></p>
-        <h6>コメント</h6>
-        <p><%= @reservation.comment.presence || "未記入"  %></p>
-      </div>
-      <div class="center mt-3">
-        <%= link_to "予約確定", reservation_path(@reservation), method: :patch, class: "btn btn-primary" %>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          キャンセル
-        </button>
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-bordered">
+            <tr>
+              <td class="font-bold">お客様名</td>
+              <td><%= @reservation.guest.name %>様</td>
+            </tr>
+            <tr>
+              <td class="font-bold">予約日</td>
+              <td><%= l @reservation.start_time, format: :dayonly %></td>
+            </tr>
+            <tr>
+              <td class="font-bold">予約時間</td>
+              <td><%= l @reservation.start_time, format: :timeonly %> - <%= l @reservation.end_time, format: :timeonly if @reservation.end_time.present? %></td>
+            </tr>
+            <tr>
+              <td class="font-bold">予約コース</td>
+              <td><%= @reservation.treatment_menu %></td>
+            </tr>
+            <tr>
+              <td class="font-bold" colspan="2">コメント</td>
+            </tr>
+            <tr>
+              <td colspan="2"><%= @reservation.comment.presence || "未記入"  %></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="center">
+                  <%= link_to "予約確定", reservation_path(@reservation), method: :patch, class: "btn btn-primary" %>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    キャンセル
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,32 @@
+<p><%= @user.name %> 様</p>
+
+<p>いつもゲンキノモト。をご利用いただき誠にありがとうございます。</p>
+
+<p>ご注文の商品を発送しましたので、お知らせいたします。</p>
+
+<p>注文番号: <%= @payment.id %></p>
+<p>商品名: <%= @item.name %></p>
+<p>数量: <%= @order.quantity %></p>
+
+<% if @order.shipping_company.present? && @order.tracking_number.present? %>
+  <p>運送会社: <%= @order.shipping_company %></p>
+  <p>送り状番号: <%= @order.tracking_number %></p>
+  <p></p>
+  <% if @order.shipping_company == 'ヤマト運輸' %>
+    <%= link_to 'ヤマト運輸のお荷物お問い合わせはこちら', 'http://toi.kuronekoyamato.co.jp/cgi-bin/tneko' %>
+  <% elsif @order.shipping_company == '佐川急便' %>
+    <%= link_to '佐川急便のお荷物お問い合わせはこちら', 'https://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp' %>
+  <% elsif @order.shipping_company == '日本郵便' %>
+    <%= link_to '日本郵便のお荷物お問い合わせはこちら', 'https://trackings.post.japanpost.jp/services/srv/search/input' %>
+  <% end %>
+<% end %>
+
+<p>
+  詳細は弊社ウェブサイトにログインの上、<br>
+  購入履歴よりご確認ください。
+</p>
+<p></p>
+<p>------------------------------------</p>
+<p>ゲンキノモト。公式ウェブサイト</p>
+<p>https://genkinomoto.herokuapp.com/</p>
+<p>------------------------------------</p>

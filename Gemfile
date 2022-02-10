@@ -35,11 +35,13 @@ gem "omniauth-rails_csrf_protection"
 
 # 画像のアップロード機能
 gem 'carrierwave'
+gem 'cloudinary'
+
 # 検索機能
 gem 'ransack'
 gem 'payjp'
-gem 'quilljs-rails', :git => 'git://github.com/abhinavmathur/quilljs-rails.git'
-
+gem 'quilljs-rails', :git => 'https://github.com/abhinavmathur/quilljs-rails.git' # エラーが出たのでhttpsに変更しました
+gem 'spring'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -51,13 +53,16 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
-  gem 'spring'
   gem 'spring-commands-rspec'
 end
 
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
+end
+
+group :production do
+  gem 'rails_12factor' # herokuで詳細なログを出す
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

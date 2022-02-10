@@ -8,7 +8,8 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   imagemagick \
   build-essential \
   libpq-dev \
-  postgresql-client
+  postgresql-client \
+  vim
 
 # 変更予定
 RUN apt-get update && apt-get install -y unzip && \
@@ -23,15 +24,25 @@ RUN apt-get update && apt-get install -y unzip && \
   sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
   apt-get update && apt-get install -y google-chrome-stable
 
-# 変更前
-# WORKDIR /app
-# COPY Gemfile Gemfile.lock /app/
-# RUN bundle install
-
-# 変更予定
-RUN mkdir /app
 WORKDIR /app
+
+# gem
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
+
 RUN bundle install
+
 COPY . /app
+
+# アセットのプリコンパイル
+RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile \
+ && yarn cache clean \
+ && rm -rf node_modules tmp/cache
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+# Configure the main process to run when running the image
+CMD ["rails", "server", "-b", "0.0.0.0"]

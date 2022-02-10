@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!
   # skip_before_action :authenticate_user!
   skip_before_action :authenticate_staff!, only: [:show]
   before_action :set_notification, only: [:show, :edit, :update, :destroy]

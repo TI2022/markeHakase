@@ -36,15 +36,21 @@ class OrdersController < ApplicationController
 
   def ship_item_order
     order = Order.find(params[:format])
-    order.shipped_at = Time.current
-    order.save
+    order.update(order_params)
+    
+    # 発送完了時にメールを送信する機能/42, 43 コメントアウトを外したら有効
+    user = User.find(order.cart.user.id)
+    OrderMailer.shipment_notification(user, order).deliver_now
+
     redirect_to purchase_record_path(order.payment_id)
   end
 
   def cancel_ship_item_order
     order = Order.find(params[:format])
     order.shipped_at = nil
-    order.save
+    order.shipping_company = nil
+    order.tracking_number = nil
+    order.update(order_params)
     redirect_to purchase_record_path(order.payment_id)
   end
 
@@ -65,7 +71,7 @@ class OrdersController < ApplicationController
 
   private
     def order_params
-      params.permit(:item_id, :quantity, :paid_at, :payment_id, :adult_count, :child_count)
+      params.permit(:item_id, :quantity, :paid_at, :payment_id, :adult_count, :child_count, :shipped_at, :shipping_company, :tracking_number)
     end
 
 end

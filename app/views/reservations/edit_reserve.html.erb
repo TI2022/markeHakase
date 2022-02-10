@@ -1,5 +1,5 @@
-<%= link_to '申請予約承認画面へ　→', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'btn btn-info mb-4' %><br>
-<%= link_to '予約管理画面へ　→', reservation_management_reservations_path, class: 'btn btn-info mb-4' %>
+<%= link_to '申請予約承認画面へ  →', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'btn btn-info mb-4' %><br>
+<%= link_to '予約管理画面へ  →', reservation_management_reservations_path, class: 'btn btn-info mb-4' %>
 <% now = Time.zone.now %>
 <h1>予約内容編集画面</h1>
 <div class="jumbotron">
@@ -15,6 +15,10 @@
 
         <%= f.label :course, class: "col-form-label" %>
         <%= f.select :course, options_from_collection_for_select(@menus, :id, :title, selected = @reservation.course), :include_blank => true, class: "form-select-area" %>
+        <%= f.label :add_nail_number_menu, class: "col-form-label" %>
+        <%= f.select :add_nail_number_menu, options_from_collection_for_select(@add_nail_menus, :id, :full_title, selected = @reservation.add_nail_number_menu), :include_blank => true %>
+        <%= f.label :topping_number_menu, class: "col-form-label" %>
+        <%= f.select :topping_number_menu, options_from_collection_for_select(@topping_menus, :id, :full_title, selected = @reservation.topping_number_menu), :include_blank => true %>
 
         <%= f.label :staff_id, class: "col-form-label" %>
         <%= f.select :staff_id, options_from_collection_for_select(@staffs, :id, :name, selected = @reservation.staff_id), :include_blank => true, class: "form-select-area" %>
@@ -25,13 +29,13 @@
         <%= f.label :status, class: "col-form-label" %>
         <%= f.select :status, Reservation.statuses.keys.map {|k| [I18n.t("enums.reservation.status.#{k}"), k]}, class: "form-select-area" %>
 
-        <div class="text-center my-4">キャンセル切替　：　チェックを入れるとキャンセルになります</div>
+        <div class="text-center my-4">キャンセル切替  ：  チェックを入れるとキャンセルになります</div>
         <div class="text-center"><%= f.check_box :cancel_flag, { style: 'transform: scale(2);' } %></div>
 
         <%= f.hidden_field :guest_id, :value => @reservation.guest.id %>
 
         <div class="center mt-4">
-          <%= f.submit "変更", class: "btn btn-primary" %>
+          <%= f.submit "変更", class: "btn block btn-primary" %>
         </div>
       <% end %>
     </div>

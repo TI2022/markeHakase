@@ -1,0 +1,155 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %>
+  ＞ トップページ情報一覧
+</p>
+
+<div class="right">
+  <% if staff_signed_in? %>
+    <%= link_to "トップページ情報（画像）登録", new_top_path, class: "btn btn-sm btn-outline-dark" %>
+  <% end %>
+</div>
+
+<div class="top-page-edit mt-3">
+  <div class="row">
+    <div class="col-12 col-md-7">
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">タイトル</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= link_to @top1.image_text, top_path(@top1), class: "link-black" %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">予約タイトル</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.reserve_title %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">予約テキスト１</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.reserve_text %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">予約テキスト注意１</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.reserve_text_caution %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">予約テキスト２</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.reserve_text2 %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">予約テキスト注意２</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.reserve_text2_caution %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">予約確認タイトル</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.reserve_comfirm_title %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">予約確認テキスト</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= safe_join(@top1.reserve_comfirm_text.split("\n"),tag(:br)) %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">カレンダータイトル</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.calendar_title %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">サロン紹介タイトル</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.introduction_title %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">サロン紹介テキスト</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= safe_join(@top1.introduction_text.split("\n"),tag(:br)) %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">サロン紹介住所</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.introduction_address %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">サロン紹介営業時間</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.introduction_time %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">サロン紹介定休日</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.introduction_holiday %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">サロン紹介電話番号</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.introduction_tel %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">スライド番号</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.slide_number %></div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">メインスライド画像枚数</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.slide_image_count %>枚</div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">サロン紹介スライド画像枚数</div>
+        <div class="col-12 col-md-7 border border-2 py-2"><%= @top1.introduction_image_count %>枚</div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">表示メインスライド画像</div>
+        <% if @top1.main_slide_flag == 0 %>
+          <div class="col-12 col-md-7 border border-2 py-2">非表示</div>
+        <% else %>
+          <div class="col-12 col-md-7 border border-2 py-2"><span class="font-red">表示</span></div>
+          <% end %>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">表示予約説明画像</div>
+        <% if @top1.reserve_image_flag == 0 %>
+          <div class="col-12 col-md-7 border border-2 py-2">非表示</div>
+        <% else %>
+          <div class="col-12 col-md-7 border border-2 py-2"><span class="font-red">表示</span></div>
+          <% end %>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">表示サロン紹介スライド画像</div>
+        <% if @top1.introduction_image_flag == 0 %>
+          <div class="col-12 col-md-7 border border-2 py-2">非表示</div>
+        <% else %>
+          <div class="col-12 col-md-7 border border-2 py-2"><span class="font-red">表示</span></div>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-5 bg-light border border-2 py-2">編集</div>
+        <div class="center col-12 col-md-7 border border-2 py-2"><%= link_to '編集', edit_top_path(@top1), class: "btn btn-sm btn-outline-dark" %></div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-5">
+      <div class="store-card-container">
+        <% @tops.order(slide_number: :asc).each do |top| %>
+          <div class="store-card-item">
+            <% if top.image? %>
+              <%= link_to image_tag(top.image.url, width: '100%', class: "image-border border-radius-top"), top_path(top) %>
+            <% else %>
+              <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), top_path(top) %>
+            <% end %>
+            <div class="my-3 px-3">
+              <%= link_to top.slide_number, top_path(top), class: "btn btn-info mr-3" %>
+              <%= link_to top.image_text, top_path(top), class: "link-black mr-3" %>
+              <% if top.image_order.present? %>
+                <%= link_to top.image_order, top_path(top), class: "link-black" %>番目
+              <% end %>
+            </div>
+          
+            <% if top.main_slide_flag == 0 %>
+              <div class="right my-3 pr-3">メインスライド画像：非表示</div>
+            <% else %>
+              <div class="right my-3 pr-3">メインスライド画像：<span class="font-red">表示</span></div>
+            <% end %>
+            <% if top.reserve_image_flag == 0 %>
+              <div class="right my-3 pr-3">予約説明画像：非表示</div>
+            <% else %>
+              <div class="right my-3 pr-3">予約説明画像：<span class="font-red">表示</span></div>
+            <% end %>
+            <% if top.introduction_image_flag == 0 %>
+              <div class="right my-3 pr-3">サロン紹介画像：非表示</div>
+            <% else %>
+              <div class="right my-3 pr-3">サロン紹介画像：<span class="font-red">表示</span></div>
+            <% end %>
+            <div class="right my-3 pr-3"><%= link_to '編集', edit_top_path(top), class: "btn btn-sm btn-outline-dark" %></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

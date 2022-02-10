@@ -21,6 +21,14 @@
         <li>店舗名:</li>
         <li><%= @store.name %></li>
         <p></p>
+        <% if current_staff %>
+          <% if @store.flagship_location == true %>
+            <li>旗艦店: はい</li>
+          <% else %>
+            <li>旗艦店: いいえ</li>
+          <% end %>
+          <p></p>
+        <% end %>
         <li>住所:</li>
         <li><%= @store.address %></li>
         <p></p>

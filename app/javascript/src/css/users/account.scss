@@ -1,0 +1,90 @@
+// タブ切替（account.html.erbで使用）
+  /*tabの形状*/
+  .tab {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tab li {
+    margin-bottom: 5px;
+  }
+
+  .tab li a {
+    display: block;
+    background:rgb(216, 216, 216);
+    border-radius: 5px;
+    border: 1px solid gray;
+    color: black;
+    text-decoration: none;
+    margin:0 2px;
+    padding:10px 20px;
+    @media (max-width: 600px) {
+      font-size: 0.7rem;
+    }
+  }
+
+  /*liにactiveクラスがついた時の形状*/
+  .tab li.active a{
+    background:rgb(152, 233, 255);
+  }
+
+
+  /*エリアの表示非表示と形状*/
+  .area {
+    text-align: center;
+    margin: 0 auto;
+    display: none;/*はじめは非表示*/
+    opacity: 0;/*透過0*/
+    padding:20px 0;
+  }
+
+  /*areaにis-activeというクラスがついた時の形状*/
+  .area.is-active {
+      display: block;/*表示*/
+      animation-name: displayAnime;/*ふわっと表示させるためのアニメーション*/
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+  }
+
+  @keyframes displayAnime{
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /*========= レイアウトのためのCSS ===============*/
+    .user-account-wrapper {
+      width: 100%;
+      padding: 2.5rem;
+      @media (max-width: 600px) {
+        padding: 0;
+        margin: 2.5rem 0;
+      }
+    }
+    .area h2{
+      text-align: center;
+      margin: 2rem 0;
+      @media (max-width: 600px) {
+        font-size: 1em;
+      }
+    }
+    .area p{
+      text-align: center;
+      @media (max-width: 600px) {
+        font-size: 0.8em;
+      }
+    }
+    .area th, .area td {
+      text-align: center;
+      padding: 10px;
+      @media (max-width: 600px) {
+        font-size: 0.6em;
+      }
+    }
+// --------------

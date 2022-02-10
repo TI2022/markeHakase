@@ -1,0 +1,24 @@
+<%= form_with model: @notification, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, autofocus: true, class: "form-control", placeholder: "タイトルを入力してください。" %>
+  </div>
+
+  <div class="form-group notification-body-form">
+    <%= f.label :body %><br />
+    <%= f.text_field :body, class:"quill_container", placeholder: "入力してください。" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :"記事の表示" %><br />
+    <%= f.radio_button :display_flag, true %>
+    <%= f.label :display_flag, "表示", value: true %>&emsp;
+    <%= f.radio_button :display_flag, false %>
+    <%= f.label :display_flag, "非表示", value: false %>
+  </div>
+
+  <div class="form-group text-center">
+    <%= f.submit "投稿", class: "btn btn-primary btn-lg" %>&nbsp;
+    <%= link_to "戻る", staffs_account_path, class: "btn btn-secondary btn-lg" %>
+  </div>
+<% end %>

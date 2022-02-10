@@ -1,0 +1,93 @@
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  マイページ
+</p>
+<div class="user-account-wrapper">
+  <ul class="tab">
+    <li><a href="#account-reserve">予約状況</a></li>
+    <li><a href="#account-profile">お客様情報</a></li>
+  </ul>
+  <div id="account-reserve" class="area">
+      <h2>-- 現在の予約状況 --</h2>
+      <p><%= current_user.name %> 様 のご予約は <font color="red"><%= @reservations.count %></font> 件ございます。</p>
+      <table class="table table-bordered table-condensed">
+        <thead class="table-secondary">
+          <tr>
+            <th>施術日</th>
+            <th>施術内容</th>
+            <th>施術時間</th>
+            <th>料金</th>
+            <th>予約状況</th>
+          </tr>
+        </thead>
+        <% @reservations.order(status: :desc).each do |reserve| %>
+          <tbody>
+            <tr>
+              <td><%= l reserve.start_time, format: :day %></td>
+              <td><%= reserve.treatment_menu %></td>
+              <!-- ログインしたユーザーが自分の予約を確認する時はインターバルを抜いた時間で終了時間を表示。 -->
+              <td><%= l reserve.start_time, format: :timeonly %> - <%= l (reserve.start_time + (reserve.treatment_time_menu * 60)), format: :timeonly %></td>
+              <td><%= reserve.charge_menu %>円</td>
+              <td><%= reserve.status_i18n %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+
+      <h2>-- ご利用履歴 --</h2>
+      <table class="table table-bordered table-condensed">
+        <thead class="table-secondary">
+          <tr>
+            <th>施術日</th>
+            <th>施術内容</th>
+            <th>施術時間</th>
+            <th>料金</th>
+          </tr>
+        </thead>
+        <% @completed_reservations.order(status: :desc).each do |reserve| %>
+          <tbody>
+            <tr>
+              <td><%= l reserve.start_time, format: :day %></td>
+              <td><%= reserve.treatment_menu %></td>
+              <!-- ログインしたユーザーが自分の予約を確認する時はインターバルを抜いた時間で終了時間を表示。 -->
+              <td><%= l reserve.start_time, format: :timeonly %> - <%= l (reserve.start_time + (reserve.treatment_time_menu * 60)), format: :timeonly %></td>
+              <td><%= reserve.charge_menu %>円</td>
+            </tr>
+            <% if reserve.is_reviewed == true %>
+              <tr>
+                <td colspan="4" class="text-right"><%= link_to "口コミ投稿済み 編集/削除ページへ", reservation_reviews_path(reserve), class: "link-gray" %></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td colspan="4" class="text-right">☆口コミはこちらから☆→→→<%= link_to "口コミを書く", new_reservation_review_path(reserve), class:"btn btn-sm btn-outline-dark"%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+  </div>
+
+  <div id="account-profile" class="area">
+    <table class="table">
+      <thead class="table table-secondary center">
+        <tr><th colspan="2" class="table-secondary">お客様情報</th></tr>
+      </thead>
+      <tbody class="table table-striped">
+        <tr><td>お名前</td><td><%= current_user.name %></td></tr>
+        <tr><td>ふりがな</td><td><%= current_user.kana %></td></tr>
+        <tr><td>メール</td><td><%= current_user.email %></td></tr>
+        <tr><td>電話番号</td><td><%= current_user.phone %></td></tr>
+        <tr><td>郵便番号</td><td><%= current_user.postal_code %></td></tr>
+        <tr><td>都道府県</td><td><%= current_user.prefecture_code %></td></tr>
+        <tr><td>市区町村</td><td><%= current_user.city %></td></tr>
+        <tr><td>丁目/番地</td><td><%= current_user.street %></td></tr>
+        <tr><td>建物名</td><td><%= current_user.other_address %></td></tr>
+      </tbody>
+    </table>
+    <%= link_to "編集はこちら",edit_user_registration_path, class: "btn btn-sm btn-outline-dark" %>
+  </div>
+
+</div>
+
+<%= javascript_pack_tag 'users/account', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_pack_tag 'users/account', media: 'all', 'data-turbolinks-track': 'reload' %>

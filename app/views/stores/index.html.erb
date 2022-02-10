@@ -1,2 +1,45 @@
-<h1>Stores#index</h1>
-<p>Find me in app/views/stores/index.html.erb</p>
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %>
+  ＞ 店舗のご案内
+</p>
+
+<div class="container">
+  <div class="right">
+    <% if staff_signed_in? %>
+      <p>スタッフ専用</p>
+      <%= link_to "新規店舗の登録", new_store_path, class: "btn btn-sm btn-outline-dark" %>
+    <% end %>
+  </div>
+
+  <div class="center">
+    <div class="store-index-container">
+      <% @stores.each do |store| %>
+        <div class="store-index-body">
+          <% if store.image? %>
+            <%= link_to image_tag(store.image.url, width: '100%', class: "image-border border-radius-top"), store_path(store) %>
+          <% else %>
+            <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), store_path(store) %>
+          <% end %>
+          <p class="store-index-description">
+            <ul>
+              <li><%= link_to store.name, store_path(store), class: "link-black" %></li>
+              <li><%= store.address %></li>
+              <li><%= store.phone %></li>
+              <li><%= store.email %></li>
+              <% if staff_signed_in? %>
+              <li>
+                <p></p>
+                スタッフ専用
+                <%= link_to '編集', edit_store_path(store), class: "btn btn-sm btn-outline-dark" %>
+                <%= link_to '削除', store_path(store), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+              </li>
+        <% end %>
+            </ul>
+          </p>
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <p></p>
+</div>

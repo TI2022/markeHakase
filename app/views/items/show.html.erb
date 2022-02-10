@@ -1,50 +1,50 @@
 <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
 <%= link_to '商品一覧', items_path, class: "link-gray" %> ＞ 
-<%= link_to '戻る', :back, class: "link-gray" %>
-
-<div class="right">
-  <%= link_to image_tag('/payment_history.png', width: 30), payments_path(current_user) %>
-  <%= link_to '注文履歴', payments_path(current_user), class: "btn btn-md btn-secondary" %>
-  <% unpaid_orders = current_user.cart.orders.where(paid_at: nil) %>
-  <% if unpaid_orders.present? %>
-    <%= link_to image_tag('/cart_items.png', width: 30), carts_path(current_user) %>
-  <% else %>
-    <%= link_to image_tag('/cart_empty.png', width: 30), carts_path(current_user) %>
-  <% end %>
-  <%= link_to 'カート', carts_path(current_user), class: "btn btn-md btn-warning" %>
-</div>
+<%= @item.name %>
 <p></p>
 <div class="container">
-  <table class="table">
-    <tr>
-      <td rowspan="4" class="center">
-        <% if @item.image? %>
-          <%= image_tag(@item.image.url, width: 500, class: "item-image-border") %>
-        <% else %>
-          <%= image_tag("/no_image2.png", width: 500, class: "item-image-border") %>
-        <% end %>
-      </td>
-      <td colspan="2" class="center">
-        <%= form_with model: @order, url: orders_path(@order), method: :post do |f| %>
-          <%= f.label "数量:" %>
-          <% range = (1..10) %>
-          <%= f.select :quantity, range %><br>
-          <%= f.fields_for @item do |i| %>
-            <%= i.hidden_field :item_id, value: @item.id %>
+  <div class="item-show-container">
+    <div class="item-show-image">
+      <% if @item.image? %>
+        <%= image_tag(@item.image.url, width: '100%', class: "image-border") %>
+      <% else %>
+        <%= image_tag("/no_image2.png", width: '100%', class: "image-border") %>
+      <% end %>
+    </div>
+    <div class="item-show-content">
+      <ul>
+        <li colspan="2" class="item-show-name"><%= @item.name %></li>
+        <li class="center item-show-price"><%= @item.price %> 円 (税抜)</li> 
+        <li class="center">
+          <% if @item.stock == 0 %>
+            <%= link_to "在庫がありません", '#', class: "btn btn-sm btn-outline-dark" %>
+          <% elsif (@item.stock <= 5) && !user_signed_in? %>
+            <span class="font-red">在庫残りわずか</span><br>
+            <%= link_to "ログインしてカートに入れる", new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
+          <% elsif (@item.stock > 0) && !user_signed_in? %>
+            <%= link_to "ログインしてカートに入れる", new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
+          <% elsif (@item.stock > 0) && user_signed_in? %>
+            <% if @item.stock <= 5 %>
+              <span class="font-red">在庫残りわずか</span><br>
+            <% end %>
+            <%= form_with model: @order, url: create_item_order_path(@order), method: :post do |f| %>
+              <%= f.label "数量:", class: "item-show-name" %>
+              <% max = 10 %>
+              <% max = @item.stock if (@item.stock < 10) %>
+              <% range = (1..max) %>
+              <%= f.select :quantity, range, {}, { class: "item-show-name" } %><br>
+              <%= f.fields_for @item do |i| %>
+                <%= i.hidden_field :item_id, value: @item.id %>
+              <% end %>
+              <%= f.submit "カートに入れる", class: "btn btn-md btn-warning" %>
+            <% end %>
           <% end %>
-          <%= f.submit "カートにいれる", class: "btn btn-sm btn-warning" %>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" class="item-name-show"><%= @item.name %></td>
-    </tr>
-    <tr>
-      <td class="center item-price-show"><%= @item.price %> 円 (税別)</td>
-      <td class="center">在庫数: <%= @item.stock %></td>
-    </tr>
-    <tr>
-      <td colspan="2"><%= @item.description %></td>
-    </tr>
-  </table>
+        </li>
+        <p></p>
+        <li class="center">在庫数: <%= @item.stock %></li>
+        <p></p>
+        <li colspan="2"><%= @item.description %></li>
+      </ul>
+    </div>
+  </div>
 </div>

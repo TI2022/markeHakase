@@ -1,0 +1,25 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  <%= link_to 'お客様一覧', users_index_path, class: "link-gray" %> ＞
+  お客様詳細情報
+</p>
+<div class="container">
+  <div class="center">
+    <%= link_to '編集', users_admin_edit_path(@user), class: "btn btn-sm btn-outline-dark" %>
+    <%= link_to '削除', users_admin_destroy_path(@user), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+  </div>
+  <p></p>
+  <table class="table center">
+    <tr><td>所属店舗</td><td><%= @store.name %></td></tr>
+    <tr><td>お名前</td><td><%= @user.name %></td></tr>
+    <tr><td>ふりがな</td><td><%= @user.kana %></td></tr>
+    <tr><td>メール</td><td><%= @user.email %></td></tr>
+    <tr><td>電話番号</td><td><%= @user.phone %></td></tr>
+    <tr><td>郵便番号</td><td><%= @user.postal_code %></td></tr>
+    <tr><td>都道府県</td><td><%= @user.prefecture_code %></td></tr>
+    <tr><td>市区町村</td><td><%= @user.city %></td></tr>
+    <tr><td>丁目/番地</td><td><%= @user.street %></td></tr>
+    <tr><td>建物名</td><td><%= @user.other_address %></td></tr>
+  </table>
+</div>

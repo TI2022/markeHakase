@@ -1,0 +1,40 @@
+<% if current_staff %>
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  お知らせ詳細
+</p>
+<% else %>
+<p class="mt-2">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  お知らせ詳細
+</p>
+<% end %>
+
+<div class="container">
+  <div class="notification-show-image bg-info d-flex align-items-center justify-content-center">
+    <span>お知らせ</span>
+  </div>
+
+  <div class="notification-wrapper">  
+    <div>
+      <h4 class="text-center"><%= @notification.title %></h4><hr id="design-hr">
+    </div><br />
+    <div>
+      <p><%== @notification.body %></p>
+    </div>
+  </div>
+
+  <% if current_staff %>
+    <div class="text-center">
+      <%= link_to "編集", edit_notification_path(@notification), class: "btn btn-success" %>&nbsp;
+      <%= link_to "削除", notification_path(@notification), method: :delete, data:{ confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>&nbsp;
+      <%= link_to "スタッフトップへ", staffs_account_path, class:"btn btn-secondary" %>
+    </div>
+  <% else %>
+    <div class="text-center">
+      <%= link_to "お知らせ一覧へ", static_pages_notification_path, class: "btn btn-lg btn-outline-secondary mt-1" %>
+    </div>
+  <% end %>
+
+</div>

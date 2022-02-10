@@ -1,0 +1,78 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  <%= link_to 'お客様一覧', users_index_path, class: "link-gray" %>
+  ＞ お客様情報の編集
+</p>
+
+<div class="container-login">
+  <div>
+    <%= form_with(model: @user, url: users_admin_update_path(@user), local: true) do |f| %>
+      <div class="field">
+        <span class="required"><%= f.label :store_id %></span><br />
+        <%# class optionは第3引数に設定する %>
+        <%#= f.select :store_id, Store.all.collect { |p| [ p.name, p.id ] } , {}, { class: "form-control" } %>
+        <%= f.collection_select :store_id, Store.all, :id, :name, {}, { class: "form-control" } %>
+      </div>
+      <div class="field">
+        <span class="required"><%= f.label :name %></span><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "山田太郎" %>
+      </div>
+      <div class="field">
+        <%= f.label :kana %><br />
+        <%= f.text_field :kana, autocomplete: "kana", class: "form-control", placeholder: "やまだたろう" %>
+      </div>
+
+      <div class="field">
+        <span class="required"><%= f.label :email %></span><br />
+        <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "email@eamil.com" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone %><br />
+        <%= f.text_field :phone, autocomplete: "phone", class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :birthday %><br />
+        <%= f.date_select :birthday, autocomplete: "birthday", start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1), class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :sex %><br />
+        <%= f.label :male  %>
+        <%= f.radio_button :sex, :male %>&emsp;
+        <%= f.label :female  %>
+        <%= f.radio_button :sex, :female %>&emsp;
+        <%= f.label :no_select  %>
+        <%= f.radio_button :sex, :no_select %>
+      </div><br />
+      <div class="field">
+        <%= f.label :postal_code %><br>
+        <%= f.text_field :postal_code, class: "form-control", placeholder: "ハイフンなし" %>
+      </div>
+      <div class="field">
+        <%= f.label :prefecture_code %><br>
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :city %><br>
+        <%= f.text_field :city, class: "form-control", placeholder: "必須" %>
+      </div>
+      <div class="field">
+        <%= f.label :street %><br>
+        <%= f.text_field :street, class: "form-control", placeholder: "必要な場合入力してください" %>
+      </div>
+      <div class="field">
+        <%= f.label :other_address %><br>
+        <%= f.text_field :other_address, class: "form-control", placeholder: "必要な場合入力してください" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "更新", class: "btn btn-sm btn-outline-dark" %>
+      </div>
+    <% end %>
+  </div>
+  <p></p>
+  <div class="password-handling-notification">
+    <p>※パスワードの変更は、お客様ご本人がログインしてご自身により変更が可能です。</p>
+    <p>※パスワードはお客様ページの「お客様情報」の編集ボタンからお客様ご自身で変更してください。</p>
+  </div>
+</div>

@@ -1,0 +1,172 @@
+<%= form_with(model: @menu, local: true) do |f| %>
+<%#= render partial: 'shared/error_messages', locals: { object: @menu } %>
+  <table class="table">
+    <tr>
+      <%= f.label :image %><br>
+      <%= f.file_field :image, id: :menu_img%>
+      <% if @menu.image.present? %>
+        <%= image_tag @menu.image.url, width: "100%", class: "image-border", id: :menu_img_prev %>
+      <% else %>
+        <%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :menu_img_prev %>
+      <% end %>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :image_number %>
+          <%= f.number_field :image_number, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :category %>
+          <%= f.text_field :category, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :category_number %>
+          <%= f.number_field :category_number, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :category_order %>
+          <%= f.number_field :category_order, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :category_title %>
+          <%= f.text_field :category_title, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :category_title_number %>
+          <%= f.number_field :category_title_number, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :category_title_order %>
+          <%= f.number_field :category_title_order, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :full_title %>
+          <%= f.text_field :full_title, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :charge %>
+          <%= f.number_field :charge, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :treatment_time %>
+          <%= f.number_field :treatment_time, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :course_number %>
+          <%= f.number_field :course_number, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :image_flag %>
+          <%= f.number_field :image_flag, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :menu_flag %>
+          <%= f.number_field :menu_flag, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :reserve_flag %>
+          <%= f.number_field :reserve_flag, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="form-group">
+          <%= f.label :add_nail_count %>
+          <%= f.number_field :add_nail_count, class: "form-control" %>
+        </div>
+      </td>
+    </tr>
+
+  </table>
+  <div class="form-group">
+    <%= f.submit yield(:button_text), class: "btn btn-md btn-primary" %>
+    <%= link_to 'キャンセル', menus_path, class: "link-gray" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+    $(function() {
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+      $('#menu_img_prev').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+          }
+      }
+      $("#menu_img").change(function(){
+          readURL(this);
+      });
+    });
+  </script>

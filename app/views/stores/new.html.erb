@@ -1,2 +1,11 @@
-<h1>Stores#new</h1>
-<p>Find me in app/views/stores/new.html.erb</p>
+<%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+<%= link_to '店舗のご案内', stores_path, class: "link-gray" %> ＞
+新規店舗の登録
+<p></p>
+
+<div class="container">
+  <div class="center">
+  <h1>新規店舗の登録</h1>
+    <%= render 'form' %>
+  </div>
+</div>

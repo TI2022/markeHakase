@@ -1,0 +1,59 @@
+<div id="wapper">
+  <div id="page_contents" class="menu">
+    <div class="block01 clearfix">
+      <h3>メニュー・料金</h3>
+    </div>
+    
+    <% @menus.select(:category, :category_order).distinct.order(category_order: :asc).each do |menu| %>
+      <div class="block01 clearfix">
+        <h4 id="menu_01"><%= menu.category %></h4>
+        <ul class="menu_box clearfix">
+          <% @menus.where(category: menu.category).select(:category_title, :category_title_order).distinct.order(category_title_order: :asc).each do |title_menu| %>
+            <li>
+              <div class="title"><%= title_menu.category_title %></div>
+              <div>
+                <% @menus.where(category: menu.category).where(category_title: title_menu.category_title)
+                          .order(course_number: :asc).each_with_index do |title, index|
+                %>
+                  <% unless index == 0 %>
+                    <hr width=90% size=3>
+                  <% end %>
+                  <% if title.image.present? %>
+                    <% t = @menus.find(title.id) %>
+                    <% unless index == 0 %>
+                      <div class="center"><%= link_to image_tag(t.image.url, width: '90%', class: "rounded"), reservations_path, 'data-turbolinks': false %></div>
+                    <% else %>
+                      <div class="center mt-3"><%= link_to image_tag(t.image.url, width: '90%', class: "rounded"), reservations_path, 'data-turbolinks': false %></div>
+                    <% end %>
+                  <% end %>
+                  <p>
+                    <%= title.title %>  <span class="float-right"><%= title.charge.to_s(:delimited) %>円
+                    <% if title_menu.category_title == "巻き爪補正" %>
+                      ／１本
+                    <% end %>
+                    </span>
+                  </p>
+                  <div class="course_box"><%=safe_join(title.description.split("\n"),tag(:br))%></div>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="block01 clearfix">
+      <p>※表示価格はすべて税込みです。</p>
+      <p>※クレジットカードがご利用いただけます。</p>
+      <p>※妊娠、もしくはその可能性がある方は、ご予約時に必ずお申し出ください。</p>
+      <p>
+        ※表示の時間はいずれのコースも施術時間を表示しております。
+        <br>
+        お着替え等の時間は含まれておりませんので、コース所要時間に10分ほどプラスしてお考え下さいませ。
+      </p>
+    </div>
+  </div>
+  
+  <%= link_to "ご予約はこちら", reservations_path, 'data-turbolinks': false, class: "reserve-btn" %>
+  <%= link_to "ご予約はこちら", reservations_path, 'data-turbolinks': false, class: "phone-reserve-btn", id: "phone-reservation-btn" %>
+</div>

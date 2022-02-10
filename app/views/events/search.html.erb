@@ -1,0 +1,37 @@
+<%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+<%= link_to 'イベント一覧', events_path, class: "link-gray" %>
+
+<div class="center">
+  <%= search_form_for @q, url: search_events_path do |f| %>
+    <%= f.search_field :title_cont, class: "search-container" %>
+    <%= f.submit 'イベント名検索' %>
+  <% end %>
+</div>
+
+<div class="right">
+  <% if staff_signed_in? %>
+    <p>スタッフ専用</p>
+    <%= link_to "新規イベント登録", new_event_path, class: "btn btn-sm btn-outline-dark"%>
+  <% end %>
+</div>
+  <p></p>
+  <div class="event-index-container">
+    <% @results.each do |event| %>
+        <div class="event-index-body">
+          <% if event.image? %>
+            <%= link_to image_tag(event.image.url, width: '100%', class: "image-border border-radius-top"), event_path(event) %>
+          <% else %>
+            <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), event_path(event) %>
+          <% end %>
+          <p class="event-index-description">
+            <%= link_to event.title, event_path(event), class: "link-black" %><br>
+            <br>
+            <% if staff_signed_in? %>
+              スタッフ専用
+              <%= link_to '編集', edit_event_path(event), class: "btn btn-sm btn-outline-dark" %>
+              <%= link_to '削除', event_path(event), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+            <% end %>
+          </p>
+        </div>
+    <% end %>
+  </div>

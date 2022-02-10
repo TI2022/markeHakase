@@ -1,19 +1,6 @@
 # ためしに作成してみる
 ja:
   activerecord:
-    models:
-      reservation: 予約
-    attributes:
-      reservation:
-        start_time: 開始時間
-        end_time: 終了時間
-        title_for_guest: ゲスト表示
-        title_for_staff: スタッフ表示
-        course: コース
-        status: 状況
-        comment: コメント
-        holiday_flag: 休日フラグ
-        reservation_time: 予約時間
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -219,6 +206,7 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
       dayonly: "%m月%d日(%a)"
+      day: "%m/%d(%a)"
       timeonly: "%H:%M"
       custom1: "%Y/%m/%d(%a) %H:%M"
     pm: 午後
@@ -231,17 +219,9 @@ ja:
         truncate: "..."
   enums:
     reservation:
-      course:
-        course_default: 未設定
-        course_foot_40: フットケア40分
-        course_foot_60: フットケア60分
-        course_massage_30: マッサージ30分
-        course_massage_60: マッサージ60分
-        course_massage_80: マッサージ80分
-        course_acupoint_30: 足つぼ30分
-        course_acupoint_45: 足つぼ45分
       status:
         status_default: 未設定
         on_request: 申込中
         on_reserve: 予約確定
+        completed: 施術完了
 

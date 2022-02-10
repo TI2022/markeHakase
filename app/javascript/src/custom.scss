@@ -1,36 +1,51 @@
+/* universal */
 
 html {
   min-height: 100%; //背景色の高さを画面サイズに合わせる
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 0.7em;
 }
 
 h1 {
   font-size: 1.2rem;
+  margin-bottom: 20px;
 }
 
 p {
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 
-ul, li {
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul,
+li {
   list-style: none;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
 }
 
 body {
-  // font-family: "Hiragino-Maru";
   color: #000;
-  background: #fff;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-
-  // background-image: image-url('orange_bg1.png');
-  // background-color:rgba(255,255,255,0.4); //背景画像の色を薄くする場合① ①②の両方が必要
-  // background-blend-mode:lighten; //背景画像の色を薄くする場合② ①②の両方が必要
+  background: #ffffff;
 }
 
+#c-body {
+  min-height: 100vh;
+  margin-bottom: 80px;
+}
 .center {
   text-align: center;
 }
@@ -39,153 +54,167 @@ body {
   text-align: right;
 }
 
+.float-left {
+  float: left;
+}
+
 .link-black {
   text-decoration: none;
-  color: #000;
+  color: black;
 }
 
 .link-gray {
   text-decoration: none;
-  color: #696969;
+  color: gray;
 }
 
-.header{
-  position: fixed;
-  background-color: #010047a8;
-  opacity: 0.85;
-  height: 4em;
-  top: 0em;
-  width: 100%;
-  z-index: 99; //一番上にくる
-  border: none;
-}
-
-#logo {
-  // font-family: '';
-  // font-size: 1.5em;
-  // color: #fff;
-  // background-color: #010047a8;
-  // text-transform: uppercase;
-  float: left;
-  margin-left: 15px;
-  letter-spacing: 0px;
-  vertical-align: middle;
-  font-weight: bold;
-  width: auto;
-  height: auto;
-}
-
-#logo:hover {
-  color: #fff;
+.link-lightgray {
   text-decoration: none;
+  color: rgb(237, 237, 237);
+}
+.link-lightgray:hover {
+  text-decoration: none;
+  color: white;
 }
 
-.nav {
-  margin-right: 20px;
-  color: #fff;
+.link-red {
+  text-decoration: none;
+  color: red;
 }
 
-.header-list {
-  float: left;
-  margin-left: 150px;
+.link-white {
+  text-decoration: none;
+  color: white;
 }
 
-.header-list-items {
-  float: left;
-  vertical-align: middle;
-  font-size: 1.3em;
-  background-color: #010047a8;
+.link-blue {
+  text-decoration: none;
+  color: blue;
 }
 
-.footer{
-  position: fixed;
-  bottom: 0em; /*下に固定*/
-  width: 100%;
-  font-size: 1.3em;
-  color: #fff;
-  background-color: #000;
-  opacity: 0.85;
-  line-height: 1.5em;
-  z-index: 99; //一番上にくる
+.page-info {
+  font-size: 1em;
+  color: rgb(24, 24, 24);
+  margin-bottom: 20px;
 }
 
-h1 {
-  margin-bottom: 30px;
+.card {
+  margin-bottom: 20px;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.text-decoration-line-through {
+  text-decoration: line-through;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-gray {
+  color: gray;
+}
+
+.font-deep-gray {
+  color: rgb(60, 60, 60);
+}
+
+.font-small {
+  font-size: 0.8rem;
+}
+
+.font-large {
+  font-size: 1.2rem;
 }
 
 // devise設定
-
 .container-login {
   @extend .container-fluid;
-  max-width: 576px;
+  max-width: 600px;
   .form-control {
     margin-bottom: 20px;
   }
 }
 
 .mw-md {
-  max-width: 576px;
+  margin-top: 20px;
+  max-width: 600px;
 }
 
 .mw-xl {
   max-width: 1200px;
 }
+// ---------
 
 .round-square-top {
-  width: 260px;            /* 幅指定 */
-  height: 280px;              /* 高さ指定 */
-  border-radius: 40px;        /* 角丸指定 */
-  display:  inline-block;     /* インラインブロックする */
-  box-sizing:  border-box;    /* 崩れ防止 */
+  width: 250px; /* 幅指定 */
+  height: 80px; /* 高さ指定 */
+  border-radius: 15px; /* 角丸指定 */
+  display: inline-block; /* インラインブロックする */
+  box-sizing: border-box; /* 崩れ防止 */
   margin-bottom: 5px;
-  margin-right: 30px;         /* 要素の空き具合指定 */
+  margin-right: 10px; /* 要素の空き具合指定 */
   padding: 2rem;
   // font-family: "ヒラギノ丸ゴ Pro W4","Hiragino Maru Gothic Pro";    /* フォントの種類を指定 */
-  text-align:  center;
+  text-align: center;
   line-height: 1.5em;
-  color:  rgb(0, 0, 0);
-  background-color:#c0c0c0;
-  font-size: 17px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(251, 255, 198);
+  border-color: #000;
+  font-size: 15px;
 }
 
 /*ページネーション自体のデザイン*/
-.pagination {      /*ページネーションを中央に*/
+.pagination {
+  /*ページネーションを中央に*/
   justify-content: center;
   display: flex;
 }
 .pagination > li > a {
-   border: none;     /*枠線をなくす*/
-   color: #696969;   /*文字の色を変える*/
- }
-.pagination > li > a:hover {    /*ホバー時のデザイン*/
-   border-radius: 20px;    /*角を丸くする*/
+  border: none; /*枠線をなくす*/
+  color: #696969; /*文字の色を変える*/
+}
+.pagination > li > a:hover {
+  /*ホバー時のデザイン*/
+  border-radius: 3px; /*角を丸くする*/
 }
 /* 表示しているページ番号のデザイン */
 .pagination > .active > a {
-  background: #4077b1 !important;     /*背景の色を変える*/
-  border-radius: 20px !important;     /*角を丸くする*/
+  background: gray !important; /*背景の色を変える*/
+  border-radius: 3px !important; /*角を丸くする*/
   line-height: 1.25 !important;
   padding: 0.5rem 0.75rem !important;
 }
 .pagination > .active > a:hover {
-  background: #93c9ff !important;     /*背景の色を変える*/
-  border-radius: 20px !important;     /*角を丸くする*/
+  background: lightgray !important; /*背景の色を変える*/
+  border-radius: 3px !important; /*角を丸くする*/
 }
 
-.item-image-border {
+.image-border {
   border: 1px solid #ccc;
-}
-
-.item-price-show {
-  font-size: 30px;
-  font-weight: bold;
-  color: crimson;
-}
-
-.item-name-show {
-  font-size: 30px;
-  font-weight: bold;
-  color: #000;
 }
 
 .search-container {
@@ -195,7 +224,6 @@ h1 {
   width: 260px;
 }
 
-
 .sort_link {
   color: #696969;
 }
@@ -204,7 +232,6 @@ h1 {
   color: #999;
   text-decoration: none;
 }
-
 //テーブル表示
 .table-white {
   background-color: white;
@@ -228,36 +255,29 @@ h1 {
   background-color: white;
 }
 
-#reservation_course {
-  width: 100%;
-  height: calc(1.5em + 0.75rem + 2px);
-  border: 1px solid #ced4da;
-  background-color: #fff;
+// Cart
+.cart-show-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
 }
 
-
-.cart-wrapper {
-  display: flex;
-  align-items: baseline; // position stickyに必要
+.cart-content-payment {
+  max-width: 300px;
 }
 
-.cart-content-left {
-  width: 60%;
-  margin-right: 10%;
+.cart-content-payment-total {
+  font-weight: bold;
 }
 
-.cart-content-right {
-  width: 30%;
-  align-self: baseline; // position stickyに必要
-  position: sticky;
-  top: 100px; // position stickyに必要 スクロールのときに上で止まる位置
+.cart-content-order-image {
+  max-width: 300px;
 }
 
-.cart-table-left {
-}
-
-.cart-table-right {
-  border: 10px orange solid;
+.cart-payment-table-border {
+  border: 8px orange solid;
 }
 
 .table-striped {
@@ -271,6 +291,380 @@ h1 {
   font-size: 0.8em;
   padding: 0.3em;
   border-radius: 0.5em;
-  margin-left:0.3em;
-  }
+  margin-left: 0.3em;
+}
 
+// Item
+.item-index-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.item-index-body {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  border: 1px solid #dadada;
+  border-radius: 10px; /* 角丸指定 */
+}
+
+.item-index-description {
+  padding: 16px;
+  line-height: 1.2;
+}
+
+.item-show-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.item-show-image {
+  width: 100%;
+  max-width: 500px;
+}
+
+// Item && Event
+.item-show-name,
+.event-show-title {
+  font-size: 1.5rem;
+}
+
+.item-show-price,
+.event-show-price {
+  font-size: 1.5rem;
+  color: crimson;
+}
+
+// Event
+.event-index-container {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.event-index-body {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  border: 1px solid #dadada;
+  border-radius: 10px; /* 角丸指定 */
+}
+
+.event-index-description {
+  padding: 16px;
+  line-height: 1.2;
+}
+
+.event-show-content-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.event-show-content-image {
+  width: 100%;
+  max-width: 500px;
+}
+
+.event-show-covid-precaution {
+  margin-bottom: 4rem;
+  padding: 50px;
+  background-color: lightgray;
+}
+
+.border-radius-top {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.menu-new-page-btn {
+  margin-bottom: 20px;
+}
+
+.item-form-wrapper,
+.event-form-wrapper,
+.store-index-container,
+.store-show-wrapper,
+.store-form-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 40px auto 0;
+  text-align: start; /* カード内の中央寄せ解除 */
+}
+
+.store-index-body {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #f1f1f1;
+  border: 1px solid #dadada;
+  border-radius: 10px; /* 角丸指定 */
+}
+
+.store-index-description {
+  padding: 16px;
+  line-height: 1.2;
+}
+
+.store-show-image,
+.store_form_image {
+  width: 100%;
+  max-width: 500px;
+}
+
+.item-form-button,
+.event-form-button,
+.store-form-button {
+  width: 100%;
+  max-width: 200px;
+}
+
+// Payment
+.payment-index-wrapper,
+.payment-index-inner-wrapper,
+.payment-show-wrapper,
+.payment-show-inner-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto;
+  text-align: start; /* カード内の中央寄せ解除 */
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.Editlink {
+  text-decoration: none;
+  color: #444;
+}
+
+// お知らせ notification
+.notification-image {
+  background-image: url("../images/notification-top.jpg");
+  max-width: 100%;
+  height: 450px;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 20px;
+  @media (max-width: 600px) {
+    height: 200px;
+  }
+  span {
+    color: whitesmoke;
+    font-size: 2.8rem;
+    text-align: center;
+    text-shadow: 1px 2px 3px #808080;
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
+  }
+}
+
+.notification-show-image {
+  background-image: url("../images/notification-show.jpg");
+  max-width: 100%;
+  height: 450px;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 20px;
+  @media (max-width: 600px) {
+    height: 200px;
+  }
+  span {
+    color: whitesmoke;
+    font-size: 2.8rem;
+    text-align: center;
+    text-shadow: 1px 2px 3px #808080;
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
+  }
+}
+
+.notification-body {
+  margin-top: 30px;
+  li {
+    padding-bottom: 20px;
+  }
+}
+
+.notification-wrapper {
+  background-color: #fffffa;
+  margin-top: 30px;
+  padding: 20px 20px 50px 20px;
+  margin-bottom: 20px;
+  color: #444;
+  @media (max-width: 600px) {
+    margin-top: 10px;
+  }
+  h4 {
+    color: #444;
+    padding-top: 50px;
+    @media (max-width: 600px) {
+      padding-top: 10px;
+    }
+  }
+}
+
+.notification-body-form {
+  height: 250px;
+}
+
+#design-hr {
+  height: 1px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(transparent),
+    color-stop(#ccc),
+    to(transparent)
+  );
+  background-image: linear-gradient(to right, transparent, #ccc, transparent);
+  margin: 30px auto;
+}
+// -----------------------
+
+// staffs/account
+.staff-account-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+}
+
+.staff-account-cards {
+  justify-content: space-around;
+  margin-right: 10px;
+}
+
+.staff-info-table {
+  max-width: 500px;
+}
+
+.purchase-record-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto;
+  text-align: start; /* カード内の中央寄せ解除 */
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.purchase-record-inner-wrapper {
+  display: grid; /* カードの横並び */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
+  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
+  margin: 20px auto;
+  text-align: start; /* カード内の中央寄せ解除 */
+  border: 1px solid lightgray;
+  padding: 10px;
+}
+
+.purchase-record-span {
+  span {
+    color: red;
+  }
+}
+
+.font-red {
+  color: red;
+}
+
+// 星機能 ----
+.rating-box .ratings .fa {
+  font-size: 30px;
+  color: orange;
+  cursor: pointer;
+}
+
+.main-rating {
+  display: flex;
+}
+
+.rating-value-display {
+  font-size: 20px;
+  color: #999;
+}
+
+#reviews-item {
+  padding-top: 30px;
+}
+// ---
+
+// 星塗りつぶし --
+.average-score {
+  display: flex; // ★と点数を横並びにする
+  justify-content: flex-start;
+}
+
+.star-rating {
+  position: relative;
+  width: 5em;
+  font-size: 22px;
+}
+.star-rating-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden; // 指定幅からはみ出した部分を隠す。
+  white-space: nowrap; // widthが足りない時に、折り返さないようにする。
+  color: orange;
+  // height: 25px;
+}
+.star-rating-back {
+  color: gray;
+}
+// --
+
+.header-review-total-score-top {
+  border: solid 10px #AED6F1;
+  background: #EAECEE;
+  margin: 20px;
+  grid-template-columns: repeat(auto-fit);
+  padding: 20px;
+  @media (max-width: 800px) {
+    .total-score-top {
+      display: grid;
+      text-align: center;
+      max-height: fit-content;
+    }
+  }
+}
+
+.header-review-container {
+  grid-template-columns: repeat(auto-fit); /* gridの設定 */
+}
+
+.header-review-body {
+  width: 100%;
+  margin: 20px;
+  background-color: #fff;
+  border: 1px solid gray;
+  .header-review-title {
+    font-weight: bold;
+  }
+  .header-review-headline {
+    background: #D6EAF8;
+    color: #000;
+    @media (max-width: 800px) {
+      .headline-item {
+        border: 0px;
+        padding: 12px;
+        display: grid;
+        max-height: 2.2rem;
+      }
+    }
+  }
+}

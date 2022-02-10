@@ -1,0 +1,49 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  <%= link_to 'スタッフ一覧', staffs_index_path, class: "link-gray" %>
+  ＞ スタッフ情報の新規作成
+</p>
+
+<div class="container-login">
+  <%= form_with(model: @staff, url: staffs_admin_create_path(@staff), local: true) do |f| %>
+
+    <div class="field">
+      <span class="required"><%= f.label :store_id %></span><br />
+      <%# class optionは第3引数に設定する %>
+      <%= f.select :store_id, Store.all.collect { |p| [ p.name, p.id ] } , {}, { class: "form-control" } %>
+    </div>
+
+    <div class="field">
+      <span class="required"><%= f.label :name %></span><br />
+      <%= f.text_field :name, autocomplete: "name", class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <span class="required"><%= f.label :email %></span><br />
+      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :phone %><br />
+      <%= f.text_field :phone, autocomplete: "phone", class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <span class="required"><%= f.label :password %></span>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %>文字以上)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <span class="required"><%= f.label :password_confirmation %></span><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "新規登録", class: "btn btn-sm btn-outline-dark" %>
+    </div>
+  <% end %>
+</div>

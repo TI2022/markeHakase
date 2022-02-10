@@ -1,0 +1,41 @@
+<p><%= @staff.name %> さん</p>
+<p></p>
+<p>お客様(<%= @user.name %> さん)が口コミ投稿しました。</p>
+<p>ご確認をお願いいたします。</p>
+<p></p>
+<p>------------------------------------</p>
+<p>投稿された口コミ詳細</p>
+
+<div>
+  <ul>
+    <li>お客様: <%= @user.name %> 様</li>
+    <li>ご予約日時: <%= l(@reservation.start_time, format: :custom1) %></li>
+    <li>ご予約内容: <%= @reservation.treatment_menu %></li>
+    <li>担当スタッフ: <%= @staff.name %></li>
+  </ul>
+</div>
+
+<div>
+  <ul>
+    <li>総合評価: ★<%= @review.total_score %></li>
+    <li>メニュー・料金に対する評価: ★<%= @review.menu_score %></li>
+    <li>接客・技術に関する評価: ★<%= @review.customer_score %></li>
+    <li>雰囲気に対する評価: ★<%= @review.atmosphere_score %></li>
+  </ul>
+</div>
+
+<div>
+  <ul>
+    <li>口コミ番号: <%= @review.id %></li>
+    <li>投稿日時: <%= l(@review.created_at, format: :custom1) %></li>
+    <li>口コミニックネーム: <%= @review.nickname %></li>
+    <li>口コミタイトル: <%= @review.title %></li>
+    <li>口コミ内容: <%= @review.content %></li>
+  </ul>
+</div>
+<p>------------------------------------</p>
+<p></p>
+<p>------------------------------------</p>
+<p>ゲンキノモト。公式ウェブサイト</p>
+<p>https://genkinomoto.herokuapp.com/</p>
+<p>------------------------------------</p>

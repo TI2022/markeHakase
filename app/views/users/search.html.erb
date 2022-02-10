@@ -1,0 +1,40 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  <%= link_to 'お客様一覧', users_index_path, class: "link-gray" %> ＞
+  検索結果
+</p>
+
+<div class="container">
+  <h1 class="center">お客様一覧 検索結果</h1>
+    <div class="center">
+      <%= search_form_for @q, url: users_search_path do |f| %>
+        <%= f.search_field :name_cont, class: "search-container" %>
+        <%= f.submit 'お客様検索', class: "btn btn-sm btn-outline-dark" %>
+      <% end %>
+    </div>
+    <p></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>氏名</th>
+          <th>メール</th>
+          <th></th>
+        </tr>
+      </thead>
+    <% @results.each do |user| %>
+      <tbody>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to '編集', users_admin_edit_path(user), class: "btn btn-sm btn-outline-dark" %>
+            <%= link_to '削除', users_admin_destroy_path(user), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+    </table>
+</div>

@@ -10,11 +10,13 @@
     <div class="modal-body">
       <div class="col-md-12">
         <h6>予約者</h6>
-        <p class="ms-1"><%= @reservation.guest.email %></p>
+        <p class="ms-1"><%= @reservation.guest.name %>様</p>
         <h6>予約日</h6>
         <p><%= l @reservation.start_time, format: :dayonly %></p>
         <h6>予約時間</h6>
         <p><%= l @reservation.start_time, format: :timeonly %> - <%= l @reservation.end_time, format: :timeonly if @reservation.end_time.present? %></p>
+        <h6>予約コース</h6>
+        <p><%= @reservation.treatment_menu %></p>
         <h6>コメント</h6>
         <p><%= @reservation.comment.presence || "未記入"  %></p>
       </div>

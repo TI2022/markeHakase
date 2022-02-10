@@ -1,56 +1,49 @@
-<%= link_to 'ホーム', root_url, class: "link-gray" %>
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %>
+  ＞ 商品一覧
+</p>
 
 <div class="container">
+  <div class="right">
+    <% if staff_signed_in? %>
+      <p>スタッフ専用</p>
+      <%= link_to "新規商品登録", new_item_path, class: "btn btn-sm btn-outline-dark"%>
+    <% end %>
+  </div>
   <div class="center">
     <%= search_form_for @q, url: search_items_path do |f| %>
       <%= f.search_field :name_cont, class: "search-container" %>
-      <%= f.submit '商品検索' %>
+      <%= f.submit '商品検索', class: "btn btn-sm btn-outline-dark" %>
     <% end %>
-  </div>
-  <div class="right">
-    <%= link_to "新規商品登録", new_item_path, class: "btn btn-md btn-info"%>
   </div>
   <p></p>
-  <div class="right">
-    <%= link_to image_tag('/payment_history.png', width: 30), payments_path(current_user) %>
-    <%= link_to '注文履歴', payments_path(current_user), class: "btn btn-md btn-secondary" %>
-    <% unpaid_orders = current_user.cart.orders.where(paid_at: nil) %>
-    <% if unpaid_orders.present? %>
-      <%= link_to image_tag('/cart_items.png', width: 30), carts_path(current_user) %>
-    <% else %>
-      <%= link_to image_tag('/cart_empty.png', width: 30), carts_path(current_user) %>
-    <% end %>
-    <%= link_to 'カート', carts_path(current_user), class: "btn btn-md btn-warning" %>
-  </div>
   <%= paginate @items %>
-  <table class="table">
-    <thead>
-      <tr class="center">
-        <th></th>
-        <th><%= sort_link(@q, :name, "↑↓") %></th>
-        <th><%= sort_link(@q, :price, "↑↓") %></th>
-        <th><%= sort_link(@q, :stock, "↑↓") %></th>
-        <th colspan="2">従業員欄</th>
-      </tr>
-    </thead>
+  <div class="item-index-container">
     <% @items.each do |item| %>
-    <tbody>
-      <tr>
-        <td>
+      <div class="item-index-body">
         <% if item.image? %>
-          <%= link_to image_tag(item.image.url, width: 200, class: "item-image-border"), item_path(item) %>
+          <%= link_to image_tag(item.image.url, width: '100%', class: "image-border border-radius-top"), item_path(item) %>
         <% else %>
-          <%= link_to image_tag("/no_image2.png", width: 200, class: "item-image-border"), item_path(item) %>
+          <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border border-radius-top"), item_path(item) %>
         <% end %>
-        </td>
-        <td><%= link_to item.name, item_path(item), class: "link-black" %></td>
-        <td><%= item.price %> 円 (税抜)</td>
-        <td>在庫数: <%= item.stock %></td>
-        <td><%= link_to '編集', edit_item_path(item), class: 'btn btn-sm btn-primary' %></td>
-        <td><%= link_to '削除', item_path(item), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-danger" %></td>
-      </tr>
-    </tbody>
+        <p class="item-index-description">
+          <ul>
+            <li><%= link_to item.name, item_path(item), class: "link-black" %></li>
+            <li><%= item.price %> 円 (税抜)</li>
+            <li>在庫数: <%= item.stock %></li>
+            <% if staff_signed_in? %>
+              <li>
+                <p></p>
+                スタッフ専用
+                <%= link_to '編集', edit_item_path(item), class: "btn btn-sm btn-outline-dark" %>
+                <%= link_to '削除', item_path(item), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+              </li>
+            <% end %>
+          </ul>
+        </p>
+      </div>
     <% end %>
-  </table>
+  </div>
+  <p></p>
   <%= paginate @items %>
 </div>

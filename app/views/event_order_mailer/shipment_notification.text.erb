@@ -1,0 +1,29 @@
+<%= @user.name %> 様
+
+いつもゲンキノモト。をご利用いただき誠にありがとうございます。
+
+ご注文の商品を発送しましたので、お知らせいたします。
+
+注文番号: <%= @payment.id %>
+商品名: <%= @event.title %>
+数量: <%= @event_order.quantity %>
+
+<% if @event_order.shipping_company.present? && @event_order.tracking_number.present? %>
+運送会社: <%= @event_order.shipping_company %>
+送り状番号: <%= @event_order.tracking_number %>
+  <% if @event_order.shipping_company == 'ヤマト運輸' %>
+    <%= link_to 'ヤマト運輸のお荷物お問い合わせはこちら', 'http://toi.kuronekoyamato.co.jp/cgi-bin/tneko' %>
+  <% elsif @event_order.shipping_company == '佐川急便' %>
+    <%= link_to '佐川急便のお荷物お問い合わせはこちら', 'https://k2k.sagawa-exp.co.jp/p/sagawa/web/okurijoinput.jsp' %>
+  <% elsif @event_order.shipping_company == '日本郵便' %>
+    <%= link_to '日本郵便のお荷物お問い合わせはこちら', 'https://trackings.post.japanpost.jp/services/srv/search/input' %>
+  <% end %>
+<% end %>
+
+詳細は弊社ウェブサイトにログインの上、
+購入履歴よりご確認ください。
+
+------------------------------------
+ゲンキノモト。公式ウェブサイト
+https://genkinomoto.herokuapp.com/
+------------------------------------

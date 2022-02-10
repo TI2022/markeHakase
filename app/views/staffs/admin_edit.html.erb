@@ -1,0 +1,38 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  <%= link_to 'スタッフ一覧', staffs_index_path, class: "link-gray" %>
+  ＞ スタッフ情報の編集
+</p>
+
+<div class="container-login">
+  <div>
+    <%= form_with(model: @staff, url: staffs_admin_update_path(@staff), local: true) do |f| %>
+      <div class="field">
+        <%= f.label :store_id %><br />
+        <%# class optionは第3引数に設定する %>
+        <%= f.select :store_id, Store.all.collect { |p| [ p.name, p.id ] } , {}, { class: "form-control" } %>
+      </div>
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autocomplete: "name", class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :phone %><br />
+        <%= f.text_field :phone, autocomplete: "phone", class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "更新", class: "btn btn-sm btn-outline-dark" %>
+      </div>
+    <% end %>
+  </div>
+  <p></p>
+  <div class="password-handling-notification">
+    <p>※パスワードの変更は、スタッフご本人がログインしてご自身により変更が可能です。</p>
+    <p>※パスワードはスタッフページの「スタッフ情報」の編集ボタンからスタッフさんご自身で変更してください。</p>
+  </div>
+</div>

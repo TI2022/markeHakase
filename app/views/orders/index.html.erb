@@ -1,0 +1,37 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %>
+  ＞ カート内未決済商品一覧
+</p>
+
+<div class="container">
+  <div>
+    <h1><%= l(Date.today, format: :long) %></h1>
+  </div>
+  <table class="table">
+    <tr class="center">
+      <th>商品注文別ID</th>
+      <th>お客様氏名</th>
+      <th>商品名</th>
+      <th>商品在庫数</th>
+      <th>カート内数量</th>
+      <th>カート保存日</th>
+      <th>削除</th>
+
+    </tr>
+    <% @orders.each do |order| %>
+      <tr class="center">
+        <td><%= order.id %></td>
+        <td><%= Cart.find(order.cart_id).user.name %></td>
+        <td>
+          <% item = Item.find(order.item_id) %>
+          <%= item.name %>
+        </td>
+        <td><%= item.stock %></td>
+        <td><%= order.quantity %></td>
+        <td><%= l(order.created_at, format: :custom1) %></td>
+        <td><%= link_to "削除", order_path(order), method: :delete, data: { confirm: "削除してもよろしいでしょうか?" }, class: "btn btn-sm btn-outline-danger" %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

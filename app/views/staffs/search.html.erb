@@ -1,0 +1,46 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  <%= link_to 'スタッフ一覧', staffs_index_path, class: "link-gray" %> ＞
+  検索結果
+</p>
+
+<div class="container">
+  <h1 class="center">スタッフ一覧 検索結果</h1>
+  <div class="center">
+    <%= search_form_for @q, url: staffs_search_path do |f| %>
+      <%= f.search_field :name_cont, class: "search-container" %>
+      <%= f.submit 'スタッフ検索', class: "btn btn-sm btn-outline-dark" %>
+    <% end %>
+  </div>
+  <p></p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>氏名</th>
+        <th>メール</th>
+        <th></th>
+      </tr>
+    <% @results.each do |staff| %>
+    <tbody>
+      <tr>
+        <td><%= staff.id %></td>
+        <td><%= staff.name %></td>
+        <td><%= staff.email %></td>
+        <td>
+          <%= link_to '編集', staffs_admin_edit_path(staff), class: "btn btn-sm btn-outline-dark" %>
+          <% unless staff == current_staff %>
+            <%= link_to '削除', staffs_admin_destroy_path(staff), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</div>
+<hr>
+<div>
+  <%= link_to "お知らせ新規作成", new_notification_path, class: "btn btn-primary" %>&nbsp;
+  <%= link_to "お知らせ一覧へ", notifications_path, class: "btn btn-primary" %>
+</div>

@@ -1,22 +1,162 @@
-<header class='header navbar nabvar-fixed-top'>
-  <div>
-    <%= link_to image_tag("logo1.jpg"), root_path, id: 'logo' %>
-    <div class='header-list'>
-      <ul class="nav header-list-items">
-        <li><%= link_to 'ホーム', root_path, class: 'nav' %></li>
-        <% if staff_signed_in? %>
-          <li><%= link_to 'スタッフページ', staffs_path, class: 'nav' %></li>
-          <li><%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'nav' %></li>
-        <% elsif user_signed_in? %>
-          <li><%= link_to 'マイページ', users_index_path, class: 'nav' %></li>
-          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav' %></li>
-        <% else %>
-          <li><%= link_to 'ユーザーログイン', new_user_session_path, class: 'nav' %></li>
-          <li><%= link_to 'スタッフログイン', new_staff_session_path, class: 'nav' %></li>
-        <% end %>
-        <li><%= link_to '商品ページ', items_path, class: 'nav' %></li>
-      </ul>
+<header class='header DownMove'>
+  <div class="header-logo">
+    <%= link_to image_tag("/logo1.jpg", height: '100%'), root_path, 'data-turbolinks': false %>
+  </div>
+  <div class="pc-guest-nav">
+    <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <% if user_signed_in? %>
+        ● <%= current_user.name %> さん
+      <% else %>
+        ○ お客様ログイン
+      <% end %>
+    </button>
+    <div class="dropdown-menu">
+      <% if user_signed_in? %>
+        <%= link_to 'マイページ', users_account_path(current_user.id), class: 'dropdown-item', 'data-turbolinks': false %>
+        <%= link_to 'ご予約ページ', reservations_path, class: 'dropdown-item', 'data-turbolinks': false %>
+        <div class="dropdown-divider"></div>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+      <% else %>
+        <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
+        <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
+      <% end %>
     </div>
+    <% if !user_signed_in? %>
+      <%= link_to image_tag('/payment_history.png', width: 30), new_user_session_path %>
+      <%= link_to '購入履歴', new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
+    <% else %>
+      <%= link_to image_tag('/payment_history.png', width: 30), payments_path(current_user) %>
+      <%= link_to '購入履歴', payments_path(current_user), class: "btn btn-sm btn-outline-dark" %>
+    <% end %>
+    <% if !user_signed_in? %>
+      <%= link_to image_tag('/cart_empty.png', width: 30), new_user_session_path %>
+      <%= link_to 'カート', new_user_session_path, class: "btn btn-sm btn-warning" %>
+    <% else %>
+      <% unpaid_orders = current_user.cart.orders.where(paid_at: nil) %>
+      <% unpaid_event_orders = current_user.cart.event_orders.where(paid_at: nil) %>
+      <% if unpaid_orders.present? || unpaid_event_orders.present? %>
+        <%= link_to image_tag('/cart_items.png', width: 30), carts_path(current_user) %>
+      <% else %>
+        <%= link_to image_tag('/cart_empty.png', width: 30), carts_path(current_user) %>
+      <% end %>
+      <%= link_to 'カート', carts_path(current_user), class: "btn btn-sm btn-warning" %>
+    <% end %>
+  </div>
+
+  <div class="header-menu row">
+    <div class="border-r col-2"><%= link_to 'ご予約', reservations_path, class: "link-lightgray" %></div>
+    <div class="border-r col-2"><%= link_to '店舗のご案内', stores_path, class: "link-lightgray" %></div>
+    <div class="border-r col-2"><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "link-lightgray" %></div>
+    <div class="border-r col-2"><%= link_to '商品情報', items_path, class: "link-lightgray" %></div>
+    <div class="border-r col-2"><%= link_to 'イベント情報', events_path, class: "link-lightgray" %></div>
+    <div class="col-2"><%= link_to '口コミ', header_reviews_path, class: "link-lightgray", 'data-turbolinks': false %></div>
+  </div>
+
+  <div id="navArea">
+    <div class="nav">
+      <div class="inner">
+        <div class="phone-guest-nav">
+
+          <div class="user-payment-info">
+            <% if !user_signed_in? %>
+              <%= link_to image_tag('/payment_history.png', width: 30), new_user_session_path %>
+              <%= link_to '購入履歴', new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
+            <% else %>
+              <%= link_to image_tag('/payment_history.png', width: 30), payments_path(current_user) %>
+              <%= link_to '購入履歴', payments_path(current_user), class: "btn btn-sm btn-outline-dark" %>
+            <% end %>
+            <% if !user_signed_in? %>
+              <%= link_to image_tag('/cart_empty.png', width: 30), new_user_session_path %>
+              <%= link_to 'カート', new_user_session_path, class: "btn btn-sm btn-warning" %>
+            <% else %>
+              <% unpaid_orders = current_user.cart.orders.where(paid_at: nil) %>
+              <% unpaid_event_orders = current_user.cart.event_orders.where(paid_at: nil) %>
+              <% if unpaid_orders.present? || unpaid_event_orders.present? %>
+                <%= link_to image_tag('/cart_items.png', width: 30), carts_path(current_user) %>
+              <% else %>
+                <%= link_to image_tag('/cart_empty.png', width: 30), carts_path(current_user) %>
+              <% end %>
+              <%= link_to 'カート', carts_path(current_user), class: "btn btn-sm btn-warning" %>
+            <% end %>
+          </div>
+
+          <div class="mt-3">
+            <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if user_signed_in? %>
+                ● <%= current_user.name %> さん
+              <% else %>
+                ○ お客様ログイン
+              <% end %>
+            </button>
+            <div class="dropdown-menu">
+              <% if user_signed_in? %>
+                <%= link_to 'マイページ', users_account_path(current_user.id), class: 'dropdown-item', 'data-turbolinks': false %>
+                <%= link_to 'ご予約ページ', reservations_path, class: 'dropdown-item', 'data-turbolinks': false %>
+                <div class="dropdown-divider"></div>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              <% else %>
+                <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
+                <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+
+        <ul class="phone-list-link">
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-store-alt"></span></i><%= link_to '店舗のご案内', stores_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-bars"></i></span><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-calendar-alt"></i></span><%= link_to '施術ご予約', reservations_path, 'data-turbolinks': false, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-cart-arrow-down"></i></span><%= link_to '商品情報', items_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-campground"></i></span><%= link_to 'イベント情報', events_path, class: "pl-3" %></li>
+          <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-comment-dots"></i></span><%= link_to '口コミ', header_reviews_path, class: "pl-3" %></li>
+        </ul>
+
+        <div class="phone-staff-btn">
+          <div class="btn-group staff-button mt-5">
+            <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if staff_signed_in? %>
+                ● <%= current_staff.name %> さん
+              <% else %>
+                ○ スタッフ専用
+              <% end %>
+            </button>
+            <div class="dropdown-menu">
+              <% if staff_signed_in? %>
+                <%= link_to '申請予約承認', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+                <%= link_to '予約管理', reservation_management_reservations_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+                <%= link_to 'お知らせ記事一覧', notifications_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+                <%= link_to '未決済商品一覧', orders_path, class: 'dropdown-item link-black' %>
+                <%= link_to '未決済イベント一覧', event_orders_path, class: 'dropdown-item link-black' %>
+                <%= link_to 'お客様一覧', users_index_path, class: 'dropdown-item link-black' %>
+                <%= link_to 'スタッフ一覧', staffs_index_path, class: 'dropdown-item link-black' %>
+                <%= link_to '施術メニュー管理', menus_path, class: 'dropdown-item link-black' %>
+                <%= link_to 'トップページ管理', tops_path, class: 'dropdown-item link-black' %>
+                <%= link_to 'スタッフシフト管理', shifts_path, class: 'dropdown-item link-black' %>
+                <div class="dropdown-divider"></div>
+                <%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'dropdown-item link-black' %>
+              <% else %>
+                <%= link_to 'ログイン', new_staff_session_path, class: 'dropdown-item link-black' %>
+              <% end %>
+            </div>
+          </div>
+          <% if staff_signed_in? %>
+            <div class="mt-1"><%= link_to 'スタッフ専用ページ', staffs_account_path, class: "btn btn-sm btn-outline-dark" %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="toggle_btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div id="mask"></div>
+
   </div>
 </header>
-

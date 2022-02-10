@@ -1,67 +1,25 @@
-<%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
-<%= link_to '商品一覧', items_path, class: "link-gray" %> ＞ 
-<%= link_to '戻る', :back, class: "link-gray" %>
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+  <%= link_to '商品一覧', items_path, class: "link-gray" %> ＞ 
+  <%= link_to '戻る', :back, class: "link-gray" %>
+</p>
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+  <%= link_to 'イベント一覧', events_path, class: "link-gray" %> ＞ 
+  <%= link_to '戻る', :back, class: "link-gray" %>
+</p>
 
 <div class="container">
-  <div class="cart-wrapper">
-    <div class="cart-content-left">
-      <h1>ショッピングカート 【 <%= current_user.name %> 様 】</h1>
-      <% if !@orders.present? %>
-        <table class="table cart-table-left">
-          <tr>
-            <td>
-              <p>カートは空です。</p>
-            </td>
-          </tr>
-        </table>
-      <% else %>
-        <table class="table cart-table-left">
-          <% @orders.each do |order| %>
-          <tr>
-            <td rowspan="3">
-              <% item = Item.find(order.item_id) %>
-              <% if item.image? %>
-                <%= link_to image_tag(item.image.url, width: 200, class: "item-image-border"), item_path(item) %>
-              <% else %>
-                <%= link_to image_tag("/no_image2.png", width: 200, class: "item-image-border"), item_path(item) %>
-              <% end %>
-            </td>
-            <td colspan="3"><%= link_to item.name, item_path(item), class: "link-black" %></td>
-          </tr>
-          <tr>
-            <td colspan="3"><%= item.price %> 円 (税別)</td>
-          </tr>
-          <tr>
-            <td>数量: <%= order.quantity %></td>
-            <td><%= order.quantity*item.price %> 円(税別)</td>
-            <td>
-              <%= link_to "削除", orders_path(order), method: :delete, class: "btn btn-sm btn-secondary" %>
-            </td>
-          </tr>
-          <% end %>
-        </table>
-      <% end %>
-    </div>
-    <div class="cart-content-right">
-<div class="right">
-  <%= link_to image_tag('/payment_history.png', width: 30), payments_path(current_user) %>
-  <%= link_to '注文履歴', payments_path(current_user), class: "btn btn-md btn-secondary" %>
-  <% unpaid_orders = current_user.cart.orders.where(paid_at: nil) %>
-  <% if unpaid_orders.present? %>
-    <%= link_to image_tag('/cart_items.png', width: 30), carts_path(current_user) %>
-  <% else %>
-    <%= link_to image_tag('/cart_empty.png', width: 30), carts_path(current_user) %>
-  <% end %>
-  <%= link_to 'カート', carts_path(current_user), class: "btn btn-md btn-warning" %>
-</div>
-  <p></p>
-      <table class="table cart-table-right">
-        <tr><td>小計</td><td class="right"> <%= @subtotal %> 円</td></tr>
-        <tr><td>消費税 (10%)</td><td class="right"> <%= @tax %> 円</td></tr>
-        <tr><td>送料</td><td class="right"><%= @shipping_fee %> 円</td></tr>
-        <tr><td>合計</td><td class="right"> <%= @total %> 円 (税込)</td></tr>
+  <p>ショッピングカート【<%= current_user.name %> 様】</p>
+  <div class="cart-show-container">
+    <div class="cart-content-payment">
+      <table class="table cart-payment-table-border">
+        <tr><td>小計: <%= @subtotal %> 円</td></tr>
+        <tr><td>送料: <%= @shipping_fee %> 円</td></tr>
+        <tr><td>消費税(10%): <%= @tax %> 円</td></tr>
+        <tr><td class="cart-content-payment-total">合計: <%= @total %> 円 (税込)</td></tr>
         <tr>
-          <td colspan="2" class="center">
+          <td class="center">
             <% if @total == 0 %>
               <button class="btn btn-sm btn-secondary">カートは空です</button>
             <% else %>
@@ -72,14 +30,65 @@
                   class="payjp-button"
                   data-key="<%= ENV["PAYJP_TEST_PUBLIC_KEY"] %>"
                   data-name-placeholder="SHOHEI OHTANI"
+                  data-submit-text="カードで支払う"
                   >
                 </script>
               <% end %>
-          <% end %>
+            <% end %>
           </td>
         </tr>
       </table>
       <p class="center">お買い上げ 5000円 以上で送料無料</p>
+      <p class="center"><%= image_tag('/credit_logos.png', width: 200) %></p>
+      <p class="center">Powered by <%= link_to image_tag('/PAY.JP_logo1.png', width: 100), "https://pay.jp/", target: :_blank, rel: "noopener noreferrer" %></p>
+    </div>
+    
+    <div>
+      <% if !@orders.present? && !@event_orders.present? %>
+        <p>現在、カートは空です。</p>
+        <p>いつもご利用いただきありがとうございます。</p>
+      <% else %>
+        <table class="table">
+          <% @orders.each do |order| %>
+          <tr>
+            <td>
+              <% item = Item.find(order.item_id) %>
+              <% if item.image? %>
+                <%= link_to image_tag(item.image.url, width: '100%', class: "image-border cart-content-order-image"), item_path(item) %>
+              <% else %>
+                <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border cart-content-order-image"), item_path(item) %>
+              <% end %>
+            </td>
+          </tr>
+          <tr><td><%= link_to item.name, item_path(item), class: "link-black" %></td></tr>
+          <tr><td>価格: <%= item.price %> 円 (税別)</td></tr>
+          <tr><td>数量: <%= order.quantity %></td></tr>
+          <tr><td>商品計: <%= order.quantity*item.price %> 円(税別)</td></tr>
+          <tr><td><%= link_to "削除", destroy_item_order_path(order), method: :delete, class: "btn btn-sm btn-outline-danger" %></td></tr>
+          <% end %>
+        </table>
+
+        <table class="table">
+          <% @event_orders.each do |event_order| %>
+          <tr>
+            <td>
+              <% event = Event.find(event_order.event_id) %>
+              <% if event.image? %>
+                <%= link_to image_tag(event.image.url, width: '100%', class: "image-border cart-content-order-image"), event_path(event) %>
+              <% else %>
+                <%= link_to image_tag("/no_image2.png", width: '100%', class: "image-border cart-content-order-image"), event_path(event) %>
+              <% end %>
+            </td>
+          </tr>
+          <tr><td><%= link_to event.title, event_path(event), class: "link-black" %></td></tr>
+          <tr><td>価格: <%= event.price %> 円 (税別)</td></tr>
+          <tr><td>数量: <%= event_order.quantity %></td></tr>
+          <tr><td>チケット計: <%= event_order.quantity*event.price %> 円(税別)</td></tr>
+          <tr><td><%= link_to "削除", destroy_event_order_path(event_order), method: :delete, class: "btn btn-sm btn-outline-danger" %></td></tr>
+          <% end %>
+        </table>
+
+      <% end %>
     </div>
   </div>
 </div>

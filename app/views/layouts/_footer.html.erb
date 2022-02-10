@@ -1,6 +1,40 @@
-<footer class="footer center">
-  <div>
-    <small>2021 ゲンキノモト。 Genkinomoto Body Care Laboratory, All Rights Reserved</small><br>
-    <small>Created by Oshima, Nakagawa, and Takubo</small>
+<footer id="footer">
+  <div id="page-top"><a href="#">Page Top</a></div>
+  <div class="copy-rights">Genkinomoto Body Care Lab., All Rights Reserved</div>
+
+  <div class="staff-btn">
+    <div class="btn-group staff-button">
+      <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <% if staff_signed_in? %>
+          ● <%= current_staff.name %> さん
+        <% else %>
+          ○ スタッフ専用
+        <% end %>
+      </button>
+      <div class="dropdown-menu">
+        <% if staff_signed_in? %>
+          <%= link_to '申請予約承認', confirm_reservation_reservations_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+          <%= link_to '予約管理', reservation_management_reservations_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+          <%= link_to 'お知らせ記事一覧', notifications_path, 'data-turbolinks': false, class: 'dropdown-item link-black' %>
+          <%= link_to '未決済商品一覧', orders_path, class: 'dropdown-item link-black' %>
+          <%= link_to '未決済イベント一覧', event_orders_path, class: 'dropdown-item link-black' %>
+          <%= link_to 'お客様一覧', users_index_path, class: 'dropdown-item link-black' %>
+          <%= link_to 'スタッフ一覧', staffs_index_path, class: 'dropdown-item link-black' %>
+          <%= link_to 'ご注文発送一覧', purchase_records_path, class: "dropdown-item link-red" %>
+          <%= link_to '施術メニュー管理', menus_path, class: 'dropdown-item link-black' %>
+          <%= link_to 'トップページ管理', tops_path, class: 'dropdown-item link-black' %>
+          <%= link_to 'スタッフシフト管理', shifts_path, class: 'dropdown-item link-black' %>
+          <div class="dropdown-divider"></div>
+          <%= link_to 'ログアウト', destroy_staff_session_path, method: :delete, class: 'dropdown-item link-black' %>
+        <% else %>
+          <%= link_to 'ログイン', new_staff_session_path, class: 'dropdown-item link-black' %>
+        <% end %>
+      </div>
+      </div>
+    <% if staff_signed_in? %>
+      <div class="mt-1"><%= link_to 'スタッフ専用ページ', staffs_account_path, class: "btn btn-sm btn-outline-dark" %></div>
+    <% end %>
   </div>
+
 </footer>

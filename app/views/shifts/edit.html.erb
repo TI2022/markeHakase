@@ -1,0 +1,35 @@
+<% provide(:button_text, '更新') %>
+<div class="page-info">
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to '管理画面', shifts_path, class: "link-gray" %> ＞ スタッフ稼働人数の変更
+</div>
+
+<div class="container">
+  <div class="center col-md-8 offset-md-2">
+  <h1>スタッフ稼働人数の変更</h1>
+    <%= form_with(model: @shift, local: true) do |f| %>
+      <table class="table">
+      <tr>
+          <td>
+            <div class="form-group">
+              <%= f.label :working_day %>
+              <%= f.date_field :working_day, class: "form-control" %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group">
+              <%= f.label :working_staff %>
+              <%= f.number_field :working_staff, class: "form-control" %>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="form-group">
+        <%= f.submit yield(:button_text), class: "btn btn-md btn-primary" %>
+        <%= link_to 'キャンセル', shifts_path, class: "link-gray" %>
+      </div>
+    <% end %>
+  </div>
+</div>

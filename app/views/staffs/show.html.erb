@@ -1,0 +1,26 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %> ＞
+  <%= link_to 'スタッフ一覧', staffs_index_path, class: "link-gray" %> ＞
+  スタッフ詳細情報
+</p>
+
+<div class="container">
+  <div class="center">
+    <%= link_to '編集', staffs_admin_edit_path(@staff), class: "btn btn-sm btn-outline-dark" %>
+    <% if @staff == current_staff %>
+      <%= link_to '削除', "#", class: "btn btn-sm btn-outline-secondary" %>
+    <% else %>
+      <%= link_to '削除', staffs_admin_destroy_path(@staff), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+    <% end %>
+  </div>
+  <p></p>
+  <table class="table center">
+    <tr><td>所属店舗</td><td><%= @store.name %></td></tr>
+    <tr><td>お名前</td><td><%= @staff.name %></td></tr>
+    <tr><td>ふりがな</td><td><%= @staff.kana %></td></tr>
+    <tr><td>メール</td><td><%= @staff.email %></td></tr>
+    <tr><td>電話番号</td><td><%= @staff.phone %></td></tr>
+    <tr><td>住所</td><td><%= @staff.address %></td></tr>
+  </table>
+</div>

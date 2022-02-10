@@ -1,0 +1,34 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %>
+  ＞ ご注文一覧/発送状況
+</p>
+
+<div class="container">
+  <div>
+    <h1><%= l(Date.today, format: :long) %></h1>
+  </div>
+  <table class="table">
+    <tr class="center">
+      <th>ご注文ID</th>
+      <th>お客様氏名</th>
+      <th>ご購入日時</th>
+      <th>合計金額</th>
+      <th>発送状況</th>
+    </tr>
+    
+    <% @payments.each do |payment| %>
+      <tr class="center">
+        <td><%= link_to payment.id, purchase_record_path(payment), class: "link-black" %></td>
+        <td><%= link_to Cart.find(payment.cart_id).user.name, purchase_record_path(payment), class: "link-black" %></td>
+        <td><%= link_to l(payment.created_at, format: :custom1), purchase_record_path(payment), class: "link-black" %></td>
+        <td><%= link_to payment.total, purchase_record_path(payment), class: "link-black" %> 円</td>
+        <% if payment.all_shipped_at.present?  %>
+          <td><%= link_to '全て発送済み', purchase_record_path(payment), class: "link-black" %></td>
+        <% else %>
+          <td><%= link_to '未発送あり', purchase_record_path(payment), class: "link-red" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

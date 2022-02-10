@@ -1,17 +1,17 @@
 class ItemsController < ApplicationController
-  #skip_before_action :authenticate_user!
-  skip_before_action :authenticate_staff!
+  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_staff!, only: [:index, :show, :search]
   before_action :set_q, only: [:index, :search]
 
   def index
-    #  初めて商品ページを訪問したログインユーザーにはカートが作られます
-    if !current_user.cart.present?
+    #  初めてページを訪問したログインユーザーにはカートが作られます
+    if current_user && !current_user.cart.present?
       cart = current_user.build_cart
       cart.save
     end
-
-    # @items = Item.page(params[:page]).per(5).order(id: "ASC")
-    @items = @q.result.page(params[:page]).per(5).order(id: "DESC")
+    # @items = Item.page(params[:page]).per(6).order(updated_at: "DESC")
+    # @q.resultはソート機能です
+    @items = @q.result.page(params[:page]).per(6).order(updated_at: "DESC")
   end
 
   def search
@@ -20,7 +20,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    
   end
 
   def new
@@ -29,19 +28,18 @@ class ItemsController < ApplicationController
   end
 
   def create
-    
-    if @item = Item.create(item_params)
-      flash[:success] = "#{@item} の登録に成功しました"
-    redirect_to items_path(current_user)
+    @item = Item.new(item_params)
+    if @item.save
+      flash[:success] = "#{@item.name} の登録に成功しました"
+      redirect_to items_path(current_user)
     else
-      flash[:danger] = "#{@item} の作成に問題がありました"
+      flash[:danger] = "新規商品の登録に問題がありました"
       render :new
     end
   end
 
   def edit
     @item = Item.find(params[:id])
-    
   end
 
   def update
@@ -50,6 +48,7 @@ class ItemsController < ApplicationController
       flash[:success] = "#{@item.name} の情報を更新しました。"
       redirect_to items_path(current_user)
     else
+      flash[:danger] = "商品情報の編集に問題がありました"
       render :edit
     end
   end

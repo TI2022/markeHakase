@@ -1,81 +1,55 @@
-<h1 class='mb-4'>スタッフページ</h1>
-<div class='row justify-content-between'>
-  <div class='card col-sm-2'>
-    <div class='card-body'>
-      <h5 class='card-title'>今月の予約数</h5>
-      <p class='card-text'>50件</p>
-    </div>
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %>
+  ＞ スタッフ一覧
+</p>
+<div class="container">
+  <div>
+    <h1><%= l(Date.today, format: :long) %></h1>
   </div>
-  <div class='card col-sm-2'>
-    <div class='card-body'>
-      <h5 class='card-title'>今月の顧客</h5>
-      <p class='card-text'>40人</p>
-    </div>
+  <div class="right">
+    <%= link_to "スタッフ新規作成", staffs_admin_new_path, class: "link-black btn btn-sm btn-outline-dark" %>
   </div>
-  <div class='card col-sm-2'>
-    <div class='card-body'>
-      <h5 class='card-title'>今月の問合せ</h5>
-      <p class='card-text'>5件</p>
-    </div>
+  <div class="center">
+    <%= search_form_for @q, url: staffs_search_path do |f| %>
+      <%= f.search_field :name_cont, class: "search-container" %>
+      <%= f.submit 'スタッフ検索', class: "btn btn-sm btn-outline-dark" %>
+    <% end %>
   </div>
-  <div class='card col-sm-2'>
-    <div class='card-body'>
-      <h5 class='card-title'>今月の売上</h5>
-      <p class='card-text'>500,000円</p>
-    </div>
-  </div>
-  <div class='card col-sm-2'>
-    <div class='card-body'>
-      <h5 class='card-title'>商品の売上</h5>
-      <p class='card-text'>100,000件</p>
-    </div>
-  </div>
+  <p></p>
+  <%= paginate @staffs %>
+  <table class="table">
+    <thead>
+      <tr class="center">
+        <th>従業員ID</th>
+        <th>氏名</th>
+        <th>電話番号</th>
+        <th>所属店舗</th>
+        <th></th>
+      </tr>
+    <% @staffs.each do |staff| %>
+    <tbody>
+      <tr class="center">
+        <td><%= link_to staff.id, staffs_show_path(staff), class: "link-black" %></td>
+        <td><%= link_to staff.name, staffs_show_path(staff), class: "link-black" %></td>
+        <td><%= link_to staff.phone, staffs_show_path(staff), class: "link-black" %></td>
+        <td><%= link_to Store.find(staff.store_id).name, staffs_show_path(staff), class: "link-black" %></td>
+        <td>
+          <%= link_to '編集', staffs_admin_edit_path(staff), class: "btn btn-sm btn-outline-dark" %>
+          <% if staff == current_staff %>
+            <%= link_to '削除', "#", class: "btn btn-sm btn-outline-secondary" %>
+          <% else %>
+            <%= link_to '削除', staffs_admin_destroy_path(staff), method: :delete, data: { confirm: '削除してもよろしいでしょうか?' }, class: "btn btn-sm btn-outline-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+  <%= paginate @staffs %>
 </div>
-<div class='row pt-4 justify-content-between'>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', confirm_reservation_reservations_path %>
-    </div>
-  </div>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', '#'%>
-    </div>
-  </div>
-</div>
-<div class='row pt-3 justify-content-between'>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', '#'%>
-    </div>
-  </div>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', '#'%>
-    </div>
-  </div>
-</div>
-<div class='row pt-3 justify-content-between'>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', '#'%>
-    </div>
-  </div>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', '#'%>
-    </div>
-  </div>
-</div>
-<div class='row pt-3 justify-content-between'>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', '#'%>
-    </div>
-  </div>
-  <div class='card col-sm-5'>
-    <div class='card-body'>
-      <%= link_to '予約内容確認', '#'%>
-    </div>
-  </div>
+<hr>
+<div>
+  <%= link_to "お知らせ新規作成", new_notification_path, class: "btn btn-primary" %>&nbsp;
+  <%= link_to "お知らせ一覧へ", notifications_path, class: "btn btn-primary" %>
 </div>

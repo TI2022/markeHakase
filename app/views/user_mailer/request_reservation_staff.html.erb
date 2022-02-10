@@ -13,8 +13,8 @@
     <p><%= @user.name %> 様から下記内容で予約申込みがありました。</p>
     <p>-----------------------------------------------------</p>
     <p>【予約日】：<%= l @reservation.start_time, format: :dayonly %></p>
-    <p>【時間】：<%= l @reservation.start_time, format: :timeonly %> - <%= l @reservation.end_time, format: :timeonly if @reservation.end_time.present? %></p>
-    <p>【コース】：<%= @reservation.course_i18n %></p>
+    <p>【時間】：<%= l @reservation.start_time, format: :timeonly %> - <%= l (@reservation.start_time + (@reservation.treatment_time_menu * 60)), format: :timeonly if @reservation.end_time.present? %></p>
+    <p>【コース】：<%= @reservation.treatment_menu %></p>
     <p>【コメント】：<%= @reservation.comment.presence || "未記入"  %></p>
     <p>-----------------------------------------------------</p>
     <p><%= link_to "予約確認ページへ", confirm_reservation_reservations_url %></p>

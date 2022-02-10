@@ -1,0 +1,69 @@
+<%= link_to 'ホーム', root_url, class: "link-gray" %> ＞ 
+<%= link_to 'イベント一覧', events_path, class: "link-gray" %> ＞ 
+<%= @event.title %>
+<p></p>
+
+<div class="container">
+  <div class="event-show-content-wrapper">
+
+    <div class="event-show-content-image">
+      <% if @event.image? %>
+        <%= image_tag(@event.image.url, width: "100%", class: "image-border") %>
+      <% else %>
+        <%= image_tag("/no_image2.png", width: "100%", class: "image-border") %>
+      <% end %>
+    </div>
+
+    <div>
+      <ul>
+        <li class="event-show-title"><%= @event.title %></li>
+        <li class="event-show-price"><%= @event.price %> 円(税抜)</li>
+        <li class="center">
+          <% if (@event.stock == 0) %>
+            <%= link_to "チケット完売", '#', class: "btn btn-sm btn-outline-dark" %>
+          <% elsif (@event.stock <= 5) && !user_signed_in? %>
+            <span class="font-red">チケット残りわずか</span><br>
+            <%= link_to "ログインしてカートに入れる", new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
+          <% elsif (@event.stock > 5) && !user_signed_in? %>
+            チケット購入はこちら<br>
+            <%= link_to "ログインしてカートに入れる", new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
+          <% elsif (@event.stock > 0) && user_signed_in? %>
+            <% if @event.stock <= 5 %>
+              <span class="font-red">チケット残りわずか</span><br>
+            <% end %>
+            <%= form_with model: @event_order, url: create_event_order_path(@event_order), method: :post do |f| %>
+              <%= f.label "枚数:", class: "event-show-title" %>
+              <% max = 10 %>
+              <% max = @event.stock if (@event.stock < 10) %>
+              <% range = (1..max) %>
+              <%= f.select :quantity, range, class: "event-show-title" %><br>
+              <%= f.fields_for @event do |e| %>
+                <%= e.hidden_field :event_id, value: @event.id %>
+              <% end %>
+              <%= f.submit "カートに入れる", class: "btn btn-md btn-warning" %>
+            <% end %>
+          <% end %>
+        </li>
+        <p></p>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <p></p>
+    <ul>
+      <li>期間: <%= l(@event.first_date, format: :long) %> - <%= l(@event.last_date, format: :long) %></li>
+      <li>場所: <%= @event.location %></li>
+      <li>
+        <% if @event.start_time.present? && @event.end_time.present? %>
+          開場: <%= @event.start_time.strftime("%H:%M") %> - 終了: <%= @event.end_time.strftime("%H:%M") %>
+        <% end %>
+      </li>
+      <li><%= @event.description %></li>
+    </ul>
+  </div>
+  
+  <div class="event-show-covid-precaution">
+    <%= render 'covid_precaution' %>
+  </div>
+</div>

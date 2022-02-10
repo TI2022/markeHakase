@@ -1,0 +1,37 @@
+<p>
+  <%= link_to 'ホーム', root_url, class: "link-gray" %> ＞
+  <%= link_to 'スタッフページ', staffs_account_path, class: "link-gray" %>
+  ＞ カート内未決済イベントチケット一覧
+</p>
+
+<div class="container">
+  <div>
+    <h1><%= l(Date.today, format: :long) %></h1>
+  </div>
+  <table class="table">
+    <tr class="center">
+      <th>イベント注文別ID</th>
+      <th>お客様氏名</th>
+      <th>イベント名</th>
+      <th>チケット在庫数</th>
+      <th>カート内数量</th>
+      <th>カート保存日</th>
+      <th>削除</th>
+
+    </tr>
+    <% @event_orders.each do |event_order| %>
+      <tr class="center">
+        <td><%= event_order.id %></td>
+        <td><%= Cart.find(event_order.cart_id).user.name %></td>
+        <td>
+          <% event = Event.find(event_order.event_id) %>
+          <%= event.title %>
+        </td>
+        <td><%= event.stock %></td>
+        <td><%= event_order.quantity %></td>
+        <td><%= l(event_order.created_at, format: :custom1) %></td>
+        <td><%= link_to "削除", event_order_path(event_order), method: :delete, data: { confirm: "削除してもよろしいでしょうか?" }, class: "btn btn-sm btn-outline-danger" %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

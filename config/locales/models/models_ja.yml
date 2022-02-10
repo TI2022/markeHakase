@@ -127,6 +127,7 @@ ja:
         non_business_day: 定休日
         working_staff: 稼働スタッフ人数
         image: 画像
+        google_map: Google Maps URL
       review:
         title: タイトル
         nickname: ニックネーム

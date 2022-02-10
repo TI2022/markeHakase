@@ -56,6 +56,9 @@
         <li><%= f.text_field :non_business_day, class: "form-control" %></li>
         <li><%= f.label :description %></li>
         <li><%= f.text_area :description, class: "form-control" %></li>
+        <li><%= f.label :google_map %></li>
+        <li><%= f.url_field :google_map, class: "form-control" %></li>
+        <li>注: 地図情報はiframeは省いて https://www.google.com/maps/embed...... の部分のみを貼り付けてください</li>
       </ul>
     </div>
   </div>

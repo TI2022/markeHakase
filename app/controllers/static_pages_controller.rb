@@ -14,6 +14,7 @@ class StaticPagesController < ApplicationController
     @top1 = Top.find(1)
     @reserve_top = Top.find_by(reserve_image_flag: 1)
     @introduce_top = Top.find_by(introduction_image_flag: 1)
+    @store = Store.find_by(flagship_location: true)
   end
   
   def notification

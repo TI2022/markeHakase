@@ -2,20 +2,18 @@ Rails.application.routes.draw do
   root 'static_pages#top'
   get 'static_pages/notification', to: 'static_pages#notification'
   resources :tops, only: [:new, :create, :edit, :update, :show, :index]
-  get 'static_pages/review_index', to: 'static_pages#review_index'
   resources :menus do
     collection do
       get :treatment_menu #ユーザーメニュー一覧画面
     end
   end
   
-  get 'review_management', to: 'reviews#management'
-  delete 'review_management/destroy', to: 'reviews#management_destroy'
-
+  get 'header_reviews', to: 'reviews#header_reviews'
+  delete 'header_reviews/destroy', to: 'reviews#header_reviews_destroy'
+  
   resources :reservations do
-    resources :reviews do
-      resource :review_answers, except: %i[index show]
-    end
+    resources :reviews, except: :show
+    resources :review_answers, except: [:index, :show]
     collection do
       get :management_new
       get :search
@@ -68,8 +66,6 @@ Rails.application.routes.draw do
     registrations: 'staffs/registrations'
   }
 
-  # resources :reservations
-  # resources :stores
   resources :items do
     collection do
       get 'search'

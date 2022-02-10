@@ -105,7 +105,9 @@
       </div>
     </div>
     <div class="col-12 col-md-5">
-      <div><%= link_to image_tag("/map-sample.png", width: '100%'), reservations_path, 'data-turbolinks': false %></div>
+      <div>
+        <iframe src="<%= @store.google_map %>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
     </div>
   </div>
 </div>

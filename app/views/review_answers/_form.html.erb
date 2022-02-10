@@ -1,0 +1,42 @@
+<p>投稿された口コミ詳細</p>
+
+<div>
+  <ul>
+    <li>お客様: <%= @guest.name %> 様</li>
+    <li>ご予約日時: <%= l(@reservation.start_time, format: :custom1) %></li>
+    <li>ご予約内容: <%= @reservation.treatment_menu %></li>
+    <li>担当スタッフ: <%= @staff.name %></li>
+  </ul>
+</div>
+
+<div>
+  <ul>
+    <li>総合評価: ★<%= @review.total_score %></li>
+    <li>メニュー・料金に対する評価: ★<%= @review.menu_score %></li>
+    <li>接客・技術に関する評価: ★<%= @review.customer_score %></li>
+    <li>雰囲気に対する評価: ★<%= @review.atmosphere_score %></li>
+  </ul>
+</div>
+
+<div>
+  <ul>
+    <li>口コミ番号: <%= @review.id %></li>
+    <li>口コミニックネーム: <%= @review.nickname %></li>
+    <li>口コミタイトル: <%= @review.title %></li>
+    <li>口コミ内容: <%= @review.content %></li>
+  </ul>
+</div>
+
+<div>
+
+  <%= form_with(model: [@reservation, @review_answer], local: true) do |f| %>
+    <%= f.label :content %>
+    <%= f.text_area :content, class: "form-control", placeholder: "入力してください。" %>
+    <%= f.hidden_field :staff_id, value: current_staff.id %>
+    <%= f.hidden_field :user_id, value: @reservation.guest_id %>
+    <%= f.hidden_field :reservation_id, value: @reservation.id %>
+    <%= f.hidden_field :review_id, value: @review.id %>
+    <%= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>
+    <%= link_to "キャンセル", header_reviews_path, class: "btn btn-sm btn-outline-danger" %>
+  <% end %>
+</div>

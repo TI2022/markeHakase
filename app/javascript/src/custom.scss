@@ -123,9 +123,8 @@ body {
 }
 
 .align-items-center {
-  align-items: center
+  align-items: center;
 }
-
 
 .cursor-pointer {
   cursor: pointer;
@@ -144,30 +143,30 @@ body {
 }
 
 .font-small {
-  font-size: 0.8rem
+  font-size: 0.8rem;
 }
 
 .font-large {
-  font-size: 1.2rem
+  font-size: 1.2rem;
 }
 
 // devise設定
-  .container-login {
-    @extend .container-fluid;
-    max-width: 600px;
-    .form-control {
-      margin-bottom: 20px;
-    }
+.container-login {
+  @extend .container-fluid;
+  max-width: 600px;
+  .form-control {
+    margin-bottom: 20px;
   }
+}
 
-  .mw-md {
-    margin-top: 20px;
-    max-width: 600px;
-  }
+.mw-md {
+  margin-top: 20px;
+  max-width: 600px;
+}
 
-  .mw-xl {
-    max-width: 1200px;
-  }
+.mw-xl {
+  max-width: 1200px;
+}
 // ---------
 
 .round-square-top {
@@ -295,7 +294,6 @@ body {
   margin-left: 0.3em;
 }
 
-
 // Item
 .item-index-container {
   display: grid; /* カードの横並び */
@@ -381,9 +379,9 @@ body {
 }
 
 .event-show-covid-precaution {
-    margin-bottom: 4rem;
-    padding: 50px;
-    background-color: lightgray;
+  margin-bottom: 4rem;
+  padding: 50px;
+  background-color: lightgray;
 }
 
 .border-radius-top {
@@ -391,11 +389,14 @@ body {
 }
 
 .menu-new-page-btn {
-  margin-bottom:  20px;
+  margin-bottom: 20px;
 }
 
-// Store
-.store-index-container {
+.item-form-wrapper,
+.event-form-wrapper,
+.store-index-container,
+.store-show-wrapper,
+.store-form-wrapper {
   display: grid; /* カードの横並び */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
   gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
@@ -405,7 +406,7 @@ body {
 
 .store-index-body {
   width: 100%;
-  max-width: 350px;
+  max-width: 300px;
   margin: 0 auto;
   background-color: #f1f1f1;
   border: 1px solid #dadada;
@@ -417,17 +418,17 @@ body {
   line-height: 1.2;
 }
 
-.store-show-content-wrapper {
-  display: grid; /* カードの横並び */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* gridの設定 */
-  gap: 40px 10px; /* カード同士の隙間 縦方向 横方向 */
-  margin: 20px auto 0;
-  text-align: start; /* カード内の中央寄せ解除 */
-}
-
-.store-show-content-image {
+.store-show-image,
+.store_form_image {
   width: 100%;
   max-width: 500px;
+}
+
+.item-form-button,
+.event-form-button,
+.store-form-button {
+  width: 100%;
+  max-width: 200px;
 }
 
 // Payment
@@ -444,10 +445,9 @@ body {
   padding: 10px;
 }
 
-
 .Editlink {
   text-decoration: none;
-  color: #444 ;
+  color: #444;
 }
 
 // お知らせ notification
@@ -455,7 +455,7 @@ body {
   background-image: url("../images/notification-top.jpg");
   max-width: 100%;
   height: 450px;
-  background-size: cover;  
+  background-size: cover;
   background-position: center center;
   border-radius: 20px;
   @media (max-width: 600px) {
@@ -476,7 +476,7 @@ body {
   background-image: url("../images/notification-show.jpg");
   max-width: 100%;
   height: 450px;
-  background-size: cover;  
+  background-size: cover;
   background-position: center center;
   border-radius: 20px;
   @media (max-width: 600px) {
@@ -501,7 +501,7 @@ body {
 }
 
 .notification-wrapper {
-  background-color: #FFFFFA;
+  background-color: #fffffa;
   margin-top: 30px;
   padding: 20px 20px 50px 20px;
   margin-bottom: 20px;
@@ -512,7 +512,7 @@ body {
   h4 {
     color: #444;
     padding-top: 50px;
-    @media(max-width: 600px) {
+    @media (max-width: 600px) {
       padding-top: 10px;
     }
   }
@@ -524,7 +524,14 @@ body {
 
 #design-hr {
   height: 1px;
-  background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#ccc), to(transparent));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(transparent),
+    color-stop(#ccc),
+    to(transparent)
+  );
   background-image: linear-gradient(to right, transparent, #ccc, transparent);
   margin: 30px auto;
 }
@@ -570,7 +577,7 @@ body {
     color: red;
   }
 }
-    
+
 .font-red {
   color: red;
 }
@@ -578,7 +585,7 @@ body {
 // 星機能 ----
 .rating-box .ratings .fa {
   font-size: 30px;
-  color: #fc0;
+  color: orange;
   cursor: pointer;
 }
 
@@ -591,91 +598,73 @@ body {
   color: #999;
 }
 
-
 #reviews-item {
   padding-top: 30px;
 }
 // ---
 
-// review-index ---
-
-// .star-rating-front {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   overflow: hidden;
-//   color: #ffcc33;
-// }
-// .star-rating-back {
-//   color: #ccc;
-// }
-
 // 星塗りつぶし --
 .average-score {
-  display: flex;// ★と点数を横並びにする
+  display: flex; // ★と点数を横並びにする
   justify-content: flex-start;
 }
 
 .star-rating {
   position: relative;
   width: 5em;
-  height: 1em;
-  font-size: 17px;
-
+  font-size: 22px;
 }
 .star-rating-front {
   position: absolute;
   top: 0;
   left: 0;
   overflow: hidden; // 指定幅からはみ出した部分を隠す。
-  white-space: nowrap;// widthが足りない時に、折り返さないようにする。
-  color: #ffcc33;
+  white-space: nowrap; // widthが足りない時に、折り返さないようにする。
+  color: orange;
   // height: 25px;
 }
 .star-rating-back {
-  color: #ccc;
+  color: gray;
 }
 // --
 
-.reviews-container {
-  display: flex;
-  justify-content: center;
-}
-
-.reviewMainWrapper {
-  // padding-inline: 20px;
-  // width: 700px;
-  margin-top: 30px;
-  .reviews-table {
-    color: #64554A;
-    // display: flex;
-    // justify-content: center;
-  }
-  .reviews-content-header {
-    background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-    border-top-left-radius: 10px;
-  }
-  // .reviews-content-top {
-    // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    // background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-  // }
-  .reviews-content-body {
-    // background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-    min-height: 200px;
+.header-review-total-score-top {
+  border: solid 10px #AED6F1;
+  background: #EAECEE;
+  margin: 20px;
+  grid-template-columns: repeat(auto-fit);
+  padding: 20px;
+  @media (max-width: 800px) {
+    .total-score-top {
+      display: grid;
+      text-align: center;
+      max-height: fit-content;
+    }
   }
 }
 
-.total_score-top {
-  border: solid 1px #444;
-  height: 100px;
-  width: -webkit-fill-available;
-  .c-1 {
-    text-align-last: justify;
+.header-review-container {
+  grid-template-columns: repeat(auto-fit); /* gridの設定 */
+}
+
+.header-review-body {
+  width: 100%;
+  margin: 20px;
+  background-color: #fff;
+  border: 1px solid gray;
+  .header-review-title {
+    font-weight: bold;
+  }
+  .header-review-headline {
+    background: #D6EAF8;
+    color: #000;
+    @media (max-width: 800px) {
+      .headline-item {
+        border: 0px;
+        padding: 12px;
+        display: grid;
+        max-height: 2.2rem;
+      }
+    }
   }
 }
-
-#total-score-review {
-  font-size: 1.4rem;
-}
-
-// ---

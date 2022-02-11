@@ -106,7 +106,9 @@
     </div>
     <div class="col-12 col-md-5">
       <div>
-        <iframe src="<%= @store.google_map %>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <% if @store %>
+          <iframe src="<%= @store.google_map %>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <% end %>
       </div>
     </div>
   </div>

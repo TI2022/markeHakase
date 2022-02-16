@@ -6,9 +6,9 @@
 <p></p>
 
 <div class="container">
-  <div class="store-show-content-wrapper">
+  <div class="store-show-wrapper">
     
-    <div class="store-show-content-image">
+    <div class="store-show-image">
       <% if @store.image? %>
         <%= image_tag(@store.image.url, width: "100%", class: "image-border") %>
       <% else %>
@@ -21,6 +21,14 @@
         <li>店舗名:</li>
         <li><%= @store.name %></li>
         <p></p>
+        <% if current_staff %>
+          <% if @store.flagship_location == true %>
+            <li>旗艦店: はい</li>
+          <% else %>
+            <li>旗艦店: いいえ</li>
+          <% end %>
+          <p></p>
+        <% end %>
         <li>住所:</li>
         <li><%= @store.address %></li>
         <p></p>
@@ -40,6 +48,11 @@
           <li><%= @store.last_order_time.strftime("%H:%M") %> まで受付</li>
         <% end %>
         <p></p>
+      </ul>
+    </div>
+    
+    <div>
+      <ul>
         <li>定休日:</li>
         <li><%= @store.non_business_day %></li>
         <p></p>
@@ -51,6 +64,8 @@
         <p></p>
       </ul>
     </div>
+
+    <div><iframe src="<%= @store.google_map %>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
 
   </div>
 </div>

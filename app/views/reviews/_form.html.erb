@@ -1,0 +1,56 @@
+<p class="center">☆口コミのご記入ありがとうございます☆</p>
+<p class="center">☆お客様からの声がわたしたちスタッフの励みになります☆</p>
+
+<% if @review.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <h5>入力に足りない箇所があります。再度ご入力をお願いいたします。</h5>
+      <% @review.errors.full_messages.each do |message| %>
+        <li class="ml-2">・<%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model:[@reservation, @review], local: true) do |f| %>
+  <%= f.hidden_field :reservation_id, value: @reservation.id %>
+  <%= f.hidden_field :total_score, id: "rating-value" %>
+  <ul>
+    <li>今回受けた施術: <%= @reservation.treatment_menu %> [<%= l @reservation.start_time, format: :day %>]</li>
+    <li id ="reviews-item"><span class="required"></span> お店全体の評価</li>
+    <li>
+      <div class="rating-box mt-3">        
+        <div class="main-rating">
+          <div class="ratings mb-3">
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+          </div>
+          <div class="rating-value-display">&nbsp;
+            <span id="rating-value-display">0</span>/5<span> 星をクリックしてご評価ください。</span>
+          </div>
+        </div>
+      </div>
+    </li>
+
+
+    <li><span class="required"></span><span> メニュー/料金</span><%= f.select :menu_score, {'とても良かった': 5, 'まあまあ良かった': 4, '普通': 3, 'あまり良くなかった': 2, '良くなかった': 1 }, { include_blank: '選択してください' }, { class: 'form-control' } %></li>
+    <li><span class="required"></span><span> 接客/技術</span><%= f.select :customer_score, {'とても良かった': 5, 'まあまあ良かった': 4, '普通': 3, 'あまり良くなかった': 2, '良くなかった': 1 }, { include_blank: '選択してください' }, { class: 'form-control' } %></li>
+    <li><span class="required"></span><span> 雰囲気/清潔さ</span><%= f.select :atmosphere_score, {'とても良かった': 5, 'まあまあ良かった': 4, '普通': 3, 'あまり良くなかった': 2, '良くなかった': 1 }, { include_blank: '選択してください' }, { class: 'form-control' } %></li>
+
+    <li><%= f.label :nickname %></li>
+    <li><%= f.text_field :nickname, class: "form-control" %></li>
+    <li><span class="required"></span> <%= f.label :title %></li>
+    <li><%= f.text_field :title, class: "form-control", placeholder: "50文字以内で入力してください。", required: true %></li>
+    <li><span class="required"></span> <%= f.label :content %></li>
+    <li><%= f.text_area :content, class: "form-control", rows: 6, placeholder: "10~1000文字内で入力してください。" %></li>
+    <li class="center">
+      <%= f.submit "登録", class: "btn btn-sm btn-outline-dark", 'data-turbolinks': false %>
+      <%= link_to "キャンセル", reservation_reviews_path(@reservation, @review), class: "btn btn-sm btn-outline-danger" %>
+    </li>
+  </ul>
+<% end %>
+
+<%= javascript_pack_tag 'review/reviews' %>

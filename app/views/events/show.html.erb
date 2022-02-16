@@ -17,7 +17,7 @@
     <div>
       <ul>
         <li class="event-show-title"><%= @event.title %></li>
-        <li class="event-show-price"><%= @event.price %> 円(税別)</li>
+        <li class="event-show-price"><%= @event.price %> 円(税抜)</li>
         <li class="center">
           <% if (@event.stock == 0) %>
             <%= link_to "チケット完売", '#', class: "btn btn-sm btn-outline-dark" %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_130419) do
+ActiveRecord::Schema.define(version: 2022_02_10_034310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,18 +165,21 @@ ActiveRecord::Schema.define(version: 2022_01_23_130419) do
     t.string "topping_menu"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "is_review_exists", default: 1
+    t.boolean "is_reviewed", default: false
+    t.integer "review_id"
+    t.boolean "is_review_answered", default: false
+    t.integer "review_answer_id"
   end
 
   create_table "review_answers", force: :cascade do |t|
-    t.bigint "staff_id", null: false
-    t.bigint "review_id", null: false
-    t.string "staff_name"
-    t.text "content"
+    t.bigint "reservation_id", null: false
+    t.integer "review_id"
+    t.integer "staff_id"
+    t.integer "user_id"
+    t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["review_id"], name: "index_review_answers_on_review_id"
-    t.index ["staff_id"], name: "index_review_answers_on_staff_id"
+    t.index ["reservation_id"], name: "index_review_answers_on_reservation_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -191,6 +194,9 @@ ActiveRecord::Schema.define(version: 2022_01_23_130419) do
     t.boolean "review_exists", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "nickname"
+    t.boolean "is_review_answered", default: false
+    t.integer "review_answer_id"
     t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -242,6 +248,8 @@ ActiveRecord::Schema.define(version: 2022_01_23_130419) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "google_map"
+    t.boolean "flagship_location", default: false
   end
 
   create_table "tops", force: :cascade do |t|
@@ -311,8 +319,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_130419) do
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "items"
   add_foreign_key "payments", "carts"
-  add_foreign_key "review_answers", "reviews"
-  add_foreign_key "review_answers", "staffs"
+  add_foreign_key "review_answers", "reservations"
   add_foreign_key "reviews", "reservations"
   add_foreign_key "reviews", "users"
   add_foreign_key "staffs", "stores"

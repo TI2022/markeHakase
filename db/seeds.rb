@@ -7,66 +7,55 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Store.create!(
-  name: "ゲンキノモト。厚木店",
-  phone: "046-000-0001",
-  email: "genkinomoto-atsugi@email.com",
-  line_id: "genkinomoto_line_dummy",
-  address: "神奈川県 厚木市 中央",
-  description: Faker::Lorem.sentences(number: 10),
-  opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
-  closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
-  last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
-  non_business_day: "水曜日",
-  working_staff: "1",
-  image: File.open("app/assets/images/store1.jpg")
-)
-
-Store.create!(
   name: "ゲンキノモト。平塚店",
-  address: "神奈川県 平塚市 某所",
-  phone: "046-000-0002",
+  address: "〒254-0034 神奈川県平塚市宝町9-14",
+  phone: "0463-27-2008",
   email: "genkinomoto-hiratsuka@email.com",
   line_id: "genkinomoto_line_dummy",
   description: Faker::Lorem.sentences(number: 10),
   opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
-  non_business_day: "水曜日",
+  non_business_day: "日曜日",
   working_staff: "1",
+  google_map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3255.0627195805328!2d139.35094595109592!3d35.329263980181075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019ad25a8c32701%3A0x36c45fcb575b1d71!2z5bmz5aGa44K544Od44O844OE44Kx44Ki44K744Oz44K_44O8!5e0!3m2!1sja!2sjp!4v1644463885246!5m2!1sja!2sjp",
+  flagship_location: true,
+  image: File.open("app/assets/images/store1.jpg")
+)
+
+Store.create!(
+  name: "ゲンキノモト。厚木店",
+  phone: "0463-27-2008",
+  email: "genkinomoto-atsugi@email.com",
+  line_id: "genkinomoto_line_dummy",
+  address: "〒234-0014 神奈川県厚木市旭町2丁目11-5 アポロパレス 101",
+  description: Faker::Lorem.sentences(number: 10),
+  opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
+  closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
+  last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
+  non_business_day: "日曜日",
+  working_staff: "1",
+  google_map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3250.729532010515!2d139.36566915109853!3d35.43672948015504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185554fee05891%3A0x4aad0ea8f4ab2da9!2z44Ky44Oz44Kt44OO44Oi44OI44CCQm9keSBDYXJlIFNhbG9uIOWOmuacqOW6lw!5e0!3m2!1sja!2sjp!4v1644465208813!5m2!1sja!2sjp",
+  flagship_location: false,
   image: File.open("app/assets/images/store1.jpg")
 )
 
 Store.create!(
   name: "ゲンキノモト。小田原店",
   address: "神奈川県 小田原市 某所",
-  phone: "046-000-0003",
+  phone: "0465-48-1009",
   email: "genkinomoto-odawara@email.com",
   line_id: "genkinomoto_line_dummy",
   description: Faker::Lorem.sentences(number: 10),
   opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
-  non_business_day: "水曜日",
+  non_business_day: "日曜日",
   working_staff: "1",
+  google_map: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d26056.285485017193!2d139.190598!3d35.280239!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019a5905e29d9ad%3A0x9d4ecfce9744b4a2!2z44CSMjU2LTA4MTMg56We5aWI5bed55yM5bCP55Sw5Y6f5biC5YmN5bed77yR77yV77yV4oiS77yR!5e0!3m2!1sja!2sjp!4v1644464272615!5m2!1sja!2sjp",
+  flagship_location: false,
   image: File.open("app/assets/images/store1.jpg")
 )
-
-Store.create!(
-  name: "ゲンキノモト。イベント開場A",
-  address: "神奈川県 海老名市 某所",
-  phone: "046-000-0004",
-  email: "genkinomoto-event@email.com",
-  line_id: "genkinomoto_line_dummy",
-  description: Faker::Lorem.sentences(number: 10),
-  opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
-  closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
-  last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
-  non_business_day: "水曜日",
-  working_staff: "1",
-  image: File.open("app/assets/images/event_site1.jpg")
-)
-
-
 
 10.times do |n|
   name  = Faker::Name.name

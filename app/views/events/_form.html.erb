@@ -1,84 +1,70 @@
-<div class="container">
   <%= form_with(model: @event, local: true) do |f| %>
-  <div class="container-wrapper">
-
-    <div class="split-content-left">
-      <table class="table">
-        <tr>
-          <td><%= f.label :title %></td>
-          <td><%= f.text_field :title %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :category %></td>
-          <td><%= f.text_field :category %></td>
-        </tr>
-        <tr>
-        <td><%= f.label :price %></td>
-        <td><%= f.number_field :price, min: 0 %> 円</td>
-        </tr>
-        <tr>
-        <td><%= f.label :stock %></td>
-        <td><%= f.number_field :stock, min: 0 %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :description %></td>
-          <td><%= f.text_area :description %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :location %></td>
-          <td><%= f.text_field :location %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :first_date %></td>
-          <td><%= f.date_select :first_date %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :last_date %></td>
-          <td><%= f.date_select :last_date %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :start_time %></td>
-          <td><%= f.time_select :start_time %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :end_time %></td>
-          <td><%= f.time_select :end_time %></td>
-        </tr>
-      </table>
+  <div class="event-form-wrapper">
+    <div>
+     <ul>
+      <li><%= f.label :image %></li>
+      <% if @event.image.present? %>
+        <li><%= image_tag @event.image.url, width: "100%", class: "image-border", id: :event_img_prev %></li>
+      <% else %>
+        <li><%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :event_img_prev %></li>
+      <% end %>
+      <p></p>
+      <li><%= f.file_field :image, id: :event_img %></li>
+      <script type="text/javascript">
+        $(function() {
+          function readURL(input) {
+              if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+          $('#event_img_prev').attr('src', e.target.result);
+              }
+              reader.readAsDataURL(input.files[0]);
+              }
+          }
+          $("#event_img").change(function(){
+              readURL(this);
+          });
+        });
+      </script>
+     </ul>
     </div>
 
-    <div class="split-content-right">
-     <table class="table">
-      <td>
-        <%= f.label :image %><br>
-        <%= f.file_field :image, id: :event_img %>
-        <% if @event.image.present? %>
-          <%= image_tag @event.image.url, width: "100%", class: "image-border", id: :event_img_prev %>
-        <% else %>
-          <%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :event_img_prev %>
-        <% end %>
-        <script type="text/javascript">
-          $(function() {
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-            $('#event_img_prev').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-                }
-            }
-            $("#event_img").change(function(){
-                readURL(this);
-            });
-          });
-        </script>
-      </td>
-     </table>
+    <div>
+      <ul>
+        <li><%= f.label :title %></li>
+        <li><%= f.text_field :title, class: "form-control" %></li>
+        <li><%= f.label :category %></li>
+        <li><%= f.text_field :category, class: "form-control" %></li>
+        <li><%= f.label :price %></li>
+        <li><%= f.number_field :price, min: 0 %> 円</li>
+        <li><%= f.label :stock %></li>
+        <li><%= f.number_field :stock, min: 0 %> 枚</li>
+        <li><%= f.label :description %></li>
+        <li><%= f.text_area :description, class: "form-control" %></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><%= f.label :location %></li>
+        <li><%= f.text_field :location, class: "form-control" %></li>
+        <li><%= f.label :first_date %></li>
+        <li><%= f.date_select :first_date %></li>
+        <li><%= f.label :last_date %></li>
+        <li><%= f.date_select :last_date %></li>
+        <li><%= f.label :start_time %></li>
+        <li><%= f.time_select :start_time %></li>
+        <li><%= f.label :end_time %></li>
+        <li><%= f.time_select :end_time %></li>
+      </ul>
     </div>
   </div>
-    <%= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>
-    <%= link_to 'キャンセル', events_path, class: "link-gray" %>
-  <% end %>
-</div>
+  
+  <div>
+    <ul>
+      <li><%= f.submit "登録", class: "btn btn-outline-dark event-form-button" %></li>
+      <p></p>
+      <li><%= link_to 'キャンセル', events_path, class: "btn btn-outline-danger event-form-button" %></li>
+    </ul>
+  </div>
 
+  <% end %>

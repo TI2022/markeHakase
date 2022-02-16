@@ -14,7 +14,7 @@
     <div class="item-show-content">
       <ul>
         <li colspan="2" class="item-show-name"><%= @item.name %></li>
-        <li class="center item-show-price"><%= @item.price %> 円 (税別)</li> 
+        <li class="center item-show-price"><%= @item.price %> 円 (税抜)</li> 
         <li class="center">
           <% if @item.stock == 0 %>
             <%= link_to "在庫がありません", '#', class: "btn btn-sm btn-outline-dark" %>

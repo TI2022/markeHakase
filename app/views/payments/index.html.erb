@@ -11,11 +11,11 @@
 <p></p>
 <div class="container">
   <% if !current_user.cart.payments.present? %>
-    <h1>購入履歴 【 <%= current_user.name %> 様 】</h1>
+    <p>購入履歴 【 <%= current_user.name %> 様 】</p>
     <p>お客様の注文履歴はありません。</p>
   <% else %>
     <%= paginate @payments %>
-    <h1>購入履歴 【 <%= current_user.name %> 様 】</h1>
+    <p>購入履歴 【 <%= current_user.name %> 様 】</p>
     <% @payments.each do |payment| %>
       <div class="payment-index-wrapper">
         <div>

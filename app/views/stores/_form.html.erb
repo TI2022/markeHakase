@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <td><%= f.label :working_staff %></td>
-          <td><%= f.number_field :working_staff %></td>
+          <td><%= f.number_field :working_staff, min: 0 %></td>
         </tr>
         <tr>
           <td><%= f.label :non_business_day %></td>

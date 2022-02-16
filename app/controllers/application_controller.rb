@@ -21,6 +21,26 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # ログイン済みのユーザーか確認します。
+  def logged_in_user
+    unless user_signed_in?
+      flash[:danger] = "ログインしてください。"
+      redirect_to(root_url)
+    end
+  end
+  
+  # アクセスしたユーザーが現在ログインしているユーザーか確認します。
+  def correct_user
+    unless current_user.id === @reservation.guest_id
+      flash[:danger] = "アクセス権限がありません。"
+      redirect_to(root_url)
+    end
+  end
+
   def set_month
     $days_of_the_week = %w{日 月 火 水 木 金 土}
     now = Date.current

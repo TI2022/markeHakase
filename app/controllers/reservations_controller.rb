@@ -10,6 +10,8 @@ class ReservationsController < ApplicationController
   before_action :set_new, only: [:management_new, :new, :guest_reservation]
   before_action :set_staffs, only: [:management_new, :edit_reserve, :update_reserve]
   before_action :set_month, only: :index
+  before_action :logged_in_user, only: :show
+  before_action :correct_user, only: :show
 
   def reservation_management
     @search_reservations = @q.result
@@ -88,13 +90,13 @@ class ReservationsController < ApplicationController
     to    = (from - 2.month).at_end_of_day
     @guests_within_two_weeks = Reservation.where(guest_id: current_user.id).where(cancel_flag: 0).where(start_time: to...from)
     menu = Menu.where(reserve_flag: 0) # 予約画面に表示するメニューはreserve_flag: 0のものだけ。
-    @first_menu = menu.where(category_number: "1").where(category_title: "初回") # 初回メニュー
+    @first_menu = menu.where(category_title_number: "1") # 初回メニュー
     @foot_menu = menu.where(category_title_number: "2") # フットケアメニュー
     @body_menu = menu.where(category_number: "2") # ボディケアメニュー
     @topping_menu = menu.where(category_number: "3") # トッピングメニュー
     @change_nail_menu = menu.where(category_number: "1").where(category_title_number: "4") # ２ヶ月以内来店巻き爪補正単品メニュー
-    @special_menu = menu.where(category_number: "1").where(category_title_number: "3") # ２ヶ月以内来店スペシャル割引メニュー
-    @DM_menu = menu.where(category_number: "1").where(category_title_number: "7") # DMメニュー
+    @special_menu = menu.where(category_title_number: "3") # ２ヶ月以内来店スペシャル割引メニュー
+    @DM_menu = menu.where(category_title_number: "7") # DMメニュー
     @add_nail_menu = menu.where(category_number: "4").where(category_title_number: "4") # 巻き爪補正メニュー
   end
 
@@ -176,7 +178,7 @@ class ReservationsController < ApplicationController
         @reservation.add_nail_count_menu = add_nail_number_menu.add_nail_count if add_nail_number_menu.present?
         
         if topping_number_menu.present? && add_nail_number_menu.present?                           #トッピングあり && 巻き爪補正あり
-          @reservation.full_charge_menu = menu.charge + topping_number_menu.charge + add_nail_number_menu.charge 
+          @reservation.full_charge_menu = menu.charge + topping_number_menu.charge + add_nail_number_menu.charge
         elsif add_nail_number_menu.present? && !topping_number_menu.present?                      #トッピングなし && 巻き爪補正あり
           @reservation.full_charge_menu = menu.charge + add_nail_number_menu.charge
         elsif topping_number_menu.present? && !add_nail_number_menu.present?                      #トッピングあり、巻き爪補正なし

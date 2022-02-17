@@ -19,7 +19,7 @@ json.array! @reservations do |reservation|
     end
     json.start reservation.start_time
     if user_signed_in?
-      if current_user.id == reservation.guest_id
+      if current_user.id === reservation.guest_id
         # ログインしたユーザーが自分の予約を確認する時だけカレンダーの表示をインターバルを抜いた時間で終了時間を表示
         if reservation.topping_menu.present?
           json.end (reservation.start_time + ((reservation.treatment_time_menu + 30) * 60))

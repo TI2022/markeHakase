@@ -55,7 +55,7 @@
         <li><%= f.label :last_order_time %></li>
         <li><%= f.time_select :last_order_time, {minute_step: 10} %></li>
         <li><%= f.label :working_staff %></li>
-        <li><%= f.number_field :working_staff %></li>
+        <li><%= f.number_field :working_staff, min: 0, class: "form-control" %></li>
         <li><%= f.label :non_business_day %></li>
         <li><%= f.text_field :non_business_day, class: "form-control" %></li>
         <li><%= f.label :description %></li>

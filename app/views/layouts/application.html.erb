@@ -19,6 +19,7 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container-fluid <%= devise_controller? ? 'mw-md' : 'mw-xl' %>" id="c-body">
+      <%= alert %>
       <% flash.each do |message_type, msg| %>
         <div class="mt-2 alert alert-<%= message_type %>"><%= msg.html_safe %></div>
       <% end %>

@@ -507,13 +507,13 @@ Menu.create!(
   category_number: 1,
   category_order: 1,
   category_title: "巻き爪補正",
-  category_title_number: 4,
+  category_title_number: 8,
   category_title_order: 3,
   title: "ネイル貼り替え１本",
   full_title: "フットケア ネイル貼り替え１本",
   charge: 5000,
   description: "フットケア ネイル貼り替え１本",
-  treatment_time: 0,
+  treatment_time: 40,
   course_number: 18,
   menu_flag: 1,
   store_id: 1
@@ -525,15 +525,31 @@ Menu.create!(
   category_number: 1,
   category_order: 1,
   category_title: "巻き爪補正",
-  category_title_number: 4,
+  category_title_number: 8,
   category_title_order: 3,
   title: "ネイル貼り替え２本",
   full_title: "フットケア ネイル貼り替え２本",
   charge: 8000,
   description: "フットケア ネイル貼り替え２本",
-  treatment_time: 0,
+  treatment_time: 40,
   course_number: 19,
   menu_flag: 1,
+  store_id: 1
+)
+
+Menu.create!(
+  category: "Hand Care  ~ハンドケア~",
+  category_number: 4,
+  category_order: 1,
+  category_title: "ハンドケア",
+  category_title_number: 9,
+  category_title_order: 1,
+  title: "ハンドケア",
+  full_title: "ハンドケア 40分",
+  charge: 4000,
+  description: "ハンドケア 40分",
+  treatment_time: 40,
+  course_number: 20,
   store_id: 1
 )
 

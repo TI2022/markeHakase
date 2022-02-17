@@ -54,6 +54,10 @@ body {
   text-align: right;
 }
 
+.left {
+  text-align: left;
+}
+
 .float-left {
   float: left;
 }
@@ -148,6 +152,10 @@ body {
 
 .font-large {
   font-size: 1.2rem;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 // devise設定

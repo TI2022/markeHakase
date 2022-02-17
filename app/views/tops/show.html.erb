@@ -5,117 +5,116 @@
 </p>
 <p></p>
 
-  <div class="row">
-    <div class="col-12">
-      <table class="table table-bordered">
-        <tr>
-          <% if @top.image? %>
-            <%= image_tag(@top.image.url, width: "100%", class: "image-border") %>
-          <% else %>
-            <%= image_tag("/no_image2.png", width: "100%", class: "image-border") %>
-          <% end %>
-        </tr>
-        <tr>
-          <td>予約タイトル</td>
-          <td><%= @top.reserve_title %></td>
-        </tr>
-        <tr>
-          <td>予約テキスト</td>
-          <td><%= @top.reserve_text %></td>
-        </tr>
-        <tr>
-          <td>予約テキスト注意書き</td>
-          <td><%= @top.reserve_text_caution %></td>
-        </tr>
-        <tr>
-          <td>予約テキスト２</td>
-          <td><%= @top.reserve_text2 %></td>
-        </tr>
-        <tr>
-          <td>予約テキスト注意書き２</td>
-          <td><%= @top.reserve_text2_caution %></td>
-        </tr>
-        <tr>
-          <td>予約確認タイトル</td>
-          <td><%= @top.reserve_comfirm_title %></td>
-        </tr>
-        <tr>
-          <td>予約確認テキスト</td>
-          <td><%= safe_join(@top.reserve_comfirm_text.split("\n"),tag(:br)) %></td>
-        </tr>
-        <tr>
-          <td>カレンダータイトル</td>
-          <td><%= @top.calendar_title %></td>
-        </tr>
-        <tr>
-          <td>サロン紹介タイトル</td>
-          <td><%= @top.introduction_title %></td>
-        </tr>
-        <tr>
-          <td>サロン紹介テキスト</td>
-          <td><%= safe_join(@top.introduction_text.split("\n"),tag(:br)) %></td>
-        </tr>
-        <tr>
-          <td>サロン紹介住所</td>
-          <td><%= @top.introduction_address %></td>
-        </tr>
-        <tr>
-          <td>サロン紹介営業時間</td>
-          <td><%= @top.introduction_time %></td>
-        </tr>
-        <tr>
-          <td>サロン紹介定休日</td>
-          <td><%= @top.introduction_holiday %></td>
-        </tr>
-        <tr>
-          <td>サロン紹介電話番号</td>
-          <td><%= @top.introduction_tel %></td>
-        </tr>
-        <tr>
-          <td>スライド番号</td>
-          <td><%= @top.slide_number %></td>
-        </tr>
-        <tr>
-          <td>画像テキスト</td>
-          <td><%= @top.image_text %></td>
-        </tr>
-        <tr>
-          <td>スライド画像表示枚数</td>
-          <td><%= @top.slide_image_count %></td>
-        </tr>
-        <tr>
-          <td>サロン紹介スライド画像表示枚数</td>
-          <td><%= @top.introduction_image_count %></td>
-        </tr>
-        <tr>
-          <td>表示メインスライド画像</td>
-          <% if @top.main_slide_flag == 0 %>
-            <td>非表示</td>
-          <% else %>
-            <td>表示</td>
-          <% end %>
-        </tr>
-        <tr>
-          <td>表示予約説明画像</td>
-          <% if @top.reserve_image_flag == 0 %>
-            <td>非表示</td>
-          <% else %>
-            <td>表示</td>
-          <% end %>
-        </tr>
-        <tr>
-          <td>表示サロン紹介スライド画像</td>
-          <% if @top.introduction_image_flag == 0 %>
-            <td>非表示</td>
-          <% else %>
-            <td>表示</td>
-          <% end %>
-        </tr>
-        <tr>
-          <td>編集</td>
-          <td class="center"><%= link_to '編集', edit_top_path(@top), class: "btn btn-sm btn-outline-dark" %></td>
-        </tr>
-      </table>
-    </div>
+<div class="row">
+  <div class="col-12">
+    <table class="table table-bordered">
+      <tr>
+        <% if @top.image? %>
+          <%= image_tag(@top.image.url, width: "100%", class: "image-border") %>
+        <% else %>
+          <%= image_tag("/no_image2.png", width: "100%", class: "image-border") %>
+        <% end %>
+      </tr>
+      <tr>
+        <td>予約タイトル</td>
+        <td><%= @top.reserve_title %></td>
+      </tr>
+      <tr>
+        <td>予約テキスト</td>
+        <td><%= @top.reserve_text %></td>
+      </tr>
+      <tr>
+        <td>予約テキスト注意書き</td>
+        <td><%= @top.reserve_text_caution %></td>
+      </tr>
+      <tr>
+        <td>予約テキスト２</td>
+        <td><%= @top.reserve_text2 %></td>
+      </tr>
+      <tr>
+        <td>予約テキスト注意書き２</td>
+        <td><%= @top.reserve_text2_caution %></td>
+      </tr>
+      <tr>
+        <td>予約確認タイトル</td>
+        <td><%= @top.reserve_comfirm_title %></td>
+      </tr>
+      <tr>
+        <td>予約確認テキスト</td>
+        <td><%= safe_join(@top.reserve_comfirm_text.split("\n"),tag(:br)) %></td>
+      </tr>
+      <tr>
+        <td>カレンダータイトル</td>
+        <td><%= @top.calendar_title %></td>
+      </tr>
+      <tr>
+        <td>サロン紹介タイトル</td>
+        <td><%= @top.introduction_title %></td>
+      </tr>
+      <tr>
+        <td>サロン紹介テキスト</td>
+        <td><%= safe_join(@top.introduction_text.split("\n"),tag(:br)) %></td>
+      </tr>
+      <tr>
+        <td>サロン紹介住所</td>
+        <td><%= @top.introduction_address %></td>
+      </tr>
+      <tr>
+        <td>サロン紹介営業時間</td>
+        <td><%= @top.introduction_time %></td>
+      </tr>
+      <tr>
+        <td>サロン紹介定休日</td>
+        <td><%= @top.introduction_holiday %></td>
+      </tr>
+      <tr>
+        <td>サロン紹介電話番号</td>
+        <td><%= @top.introduction_tel %></td>
+      </tr>
+      <tr>
+        <td>スライド番号</td>
+        <td><%= @top.slide_number %></td>
+      </tr>
+      <tr>
+        <td>画像テキスト</td>
+        <td><%= @top.image_text %></td>
+      </tr>
+      <tr>
+        <td>スライド画像表示枚数</td>
+        <td><%= @top.slide_image_count %></td>
+      </tr>
+      <tr>
+        <td>サロン紹介スライド画像表示枚数</td>
+        <td><%= @top.introduction_image_count %></td>
+      </tr>
+      <tr>
+        <td>表示メインスライド画像</td>
+        <% if @top.main_slide_flag == 0 %>
+          <td>非表示</td>
+        <% else %>
+          <td>表示</td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>表示予約説明画像</td>
+        <% if @top.reserve_image_flag == 0 %>
+          <td>非表示</td>
+        <% else %>
+          <td>表示</td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>表示サロン紹介スライド画像</td>
+        <% if @top.introduction_image_flag == 0 %>
+          <td>非表示</td>
+        <% else %>
+          <td>表示</td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>編集</td>
+        <td class="center"><%= link_to '編集', edit_top_path(@top), class: "btn btn-sm btn-outline-dark" %></td>
+      </tr>
+    </table>
   </div>
 </div>

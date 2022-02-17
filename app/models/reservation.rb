@@ -4,7 +4,7 @@ class Reservation < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :review_answers, dependent: :destroy
   validates :start_time, presence: true, reservation: true # reservation: trueを記述する事でreservation_validator.rbのバリデーションを有効にする
-  validates :end_time, reservation: true # reservation: trueを記述する事でreservation_validator.rbのバリデーションを有効にする
+  validates :end_time, presence: true, reservation: true # reservation: trueを記述する事でreservation_validator.rbのバリデーションを有効にする
   validates :course, presence: true
   validates :comment, length: { maximum: 200 }
   validate :two_hours_later_on_the_day, on: :registration # お客さんのみ新規登録は当日の２時間後以降しか登録できない

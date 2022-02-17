@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   delete 'header_reviews/destroy', to: 'reviews#header_reviews_destroy'
   
   resources :reservations do
-    resources :reviews, except: :show
-    resources :review_answers, except: [:index, :show]
+    resources :reviews
+    resources :review_answers
     collection do
       get :management_new
       get :search

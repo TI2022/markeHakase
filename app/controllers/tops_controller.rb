@@ -3,7 +3,7 @@ class TopsController < ApplicationController
   skip_before_action :authenticate_staff!, only: [:index, :show]
 
   def index
-    @tops = Top.all.order(slide_number: :asc)
+    @tops = Top.all
     @top1 = Top.find(1)
   end
 
@@ -21,7 +21,7 @@ class TopsController < ApplicationController
       flash[:success] = "#{@top.image_text} の登録に成功しました"
       redirect_to tops_path(current_staff)
     else
-      flash[:danger] = "新規店舗の登録に問題がありました"
+      flash[:danger] = "新規登録に問題がありました"
       render :new
     end
   end
@@ -36,7 +36,7 @@ class TopsController < ApplicationController
       flash[:success] = "#{@top.image_text} の情報を更新しました。"
       redirect_to tops_path(current_staff)
     else
-      flash[:danger] = "商品情報の編集に問題がありました"
+      flash[:danger] = "編集に問題がありました"
       render :edit
     end
   end

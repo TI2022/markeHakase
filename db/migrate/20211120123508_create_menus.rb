@@ -5,7 +5,7 @@ class CreateMenus < ActiveRecord::Migration[6.1]
       t.integer :category_number, default: 0 # カテゴリー番号 フットケア：１ ボディケア：２ トッピング：３
       t.integer :category_order, default: 0 # カテゴリー順番 施術メニュー画面でカテゴリーの順番を並び替えたい時に使用
       t.string :category_title # カテゴリー内の小カテゴリー
-      t.integer :category_title_number, default: 0 # カテゴリー内の小カテゴリー番号（ 初回：１、 通常：２、 スペシャル：３、 巻き爪補正：４、全身：５、 足ツボ：６、 DM：７）
+      t.integer :category_title_number, default: 0 # カテゴリー内の小カテゴリー番号（ 初回：１、 通常：２、 スペシャル：３、 巻き爪補正：４、全身：５、 足ツボ：６、 DM：７、 巻き爪補正（貼り替え）：8）
       t.integer :category_title_order, default: 0 # category_titleの並び順の変更するために使用
       t.string :title
       t.string :full_title

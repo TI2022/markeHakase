@@ -14,7 +14,7 @@
     <div class="col-12 col-md-5 mt-3">
       <div class="form-group">
         <%= f.label :image_number %>
-        <%= f.number_field :image_number, min: 0, class: "form-control" %>
+        <%= f.number_field :image_number, min: 0, placeholder: "※ 任意で画像の番号を選択できます", class: "form-control" %>
       </div>
       <div class="my-5">
         <div><%= f.label :image_flag %></div>
@@ -22,76 +22,88 @@
       </div>
     </div>
   </div>
-  <table class="table table-striped">
+  <table class="table">
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :category %>
-          <%= f.text_field :category, class: "form-control" %>
+          <div class="required"><%= f.label :category %></div>
+          <%= f.text_field :category, placeholder: "※ 記述例：Foot Care ~フットケア~", class: "form-control" %>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :category_number %>
+          <div class="required"><%= f.label :category_number %></div>
           <%= f.number_field :category_number, min: 0, class: "form-control" %>
+          <div class="left font-gray m-1">※ 下記大カテゴリー名に合う番号を選択してください。</div>
+          <div class="left font-gray m-1">※ 1：Foot Care ~フットケア~</div>
+          <div class="left font-gray m-1">※ 2：Body Care  ~ボディケア~</div>
+          <div class="left font-gray m-1">※ 3：Topping  ~トッピング~</div>
+          <div class="left font-gray m-1">※ 4：Hand Care  ~ハンドケア~</div>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :category_order %>
-          <%= f.number_field :category_order, min: 0, class: "form-control" %>
+          <div class="required"><%= f.label :category_order %></div>
+          <%= f.number_field :category_order, min: 0, placeholder: "※ お客様用施術メニューページの大カテゴリーの並び替えができます", class: "form-control" %>
+          <div class="left font-gray m-1">※ お客様用施術メニューページの大カテゴリーの並び替えができます。</div>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :category_title %>
-          <%= f.text_field :category_title, class: "form-control" %>
+          <div class="required"><%= f.label :category_title %></div>
+          <%= f.text_field :category_title, placeholder: "※ 記述例：初回", class: "form-control" %>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :category_title_number %>
+          <div class="required"><%= f.label :category_title_number %></div>
           <%= f.number_field :category_title_number, min: 0, class: "form-control" %>
+          <div class="left font-gray m-1">※ 下記小カテゴリー名に合う番号を選択してください。</div>
+          <div class="left font-gray m-1">※ 初回：１、 通常：２、 スペシャル：３、 巻き爪補正：４、全身：５、 足ツボ：６、 DM：７、 巻き爪補正（貼り替え）：8</div>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :category_title_order %>
-          <%= f.number_field :category_title_order, min: 0, class: "form-control" %>
+          <div class="required"><%= f.label :category_title_order %></div>
+          <%= f.number_field :category_title_order, min: 0, placeholder: "※ お客様用施術メニューページの小カテゴリーの並び替えができます", class: "form-control" %>
+          <div class="left font-gray m-1">※ お客様用施術メニューページの小カテゴリーの並び替えができます。</div>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :title %>
-          <%= f.text_field :title, class: "form-control" %>
+          <div class="required"><%= f.label :title %></div>
+          <%= f.text_field :title, placeholder: "※ お客様用施術メニューページに表示する施術メニュー名です", class: "form-control" %>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :full_title %>
-          <%= f.text_field :full_title, class: "form-control" %>
+          <div class="required"><%= f.label :full_title %></div>
+          <%= f.text_field :full_title, placeholder: "※ 予約ページで表示する施術メニュー名です", class: "form-control" %>
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :charge %>
-          <%= f.number_field :charge, min: 0, class: "form-control" %>
+          <div class="required"><%= f.label :charge %></div>
+          
+          <div class="display-flex align-items-center">
+            <%= f.number_field :charge, min: 0, class: "form-control" %><span>円</span>
+          </div>
         </div>
       </td>
     </tr>
@@ -106,7 +118,7 @@
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :treatment_time %>
+          <div class="required"><%= f.label :treatment_time %></div>
           <%= f.number_field :treatment_time, min: 0, class: "form-control" %>
         </div>
       </td>
@@ -114,8 +126,8 @@
     <tr>
       <td>
         <div class="form-group">
-          <%= f.label :course_number %>
-          <%= f.number_field :course_number, min: 0, class: "form-control" %>
+          <div class="required"><%= f.label :course_number %></div>
+          <%= f.number_field :course_number, min: 0, placeholder: "※ 他のコース番号と被らない番号を選択してください", class: "form-control" %>
         </div>
       </td>
     </tr>
@@ -139,7 +151,8 @@
       <td>
         <div class="form-group">
           <%= f.label :add_nail_count %>
-          <%= f.number_field :add_nail_count, min: 0, class: "form-control" %>
+          <%= f.number_field :add_nail_count, min: 0, placeholder: "※ 巻き爪取り付け本数の変更ができます", class: "form-control" %>
+          <div class="left font-gray m-1">※ 巻き爪取り付け本数の変更ができます。</div>
         </div>
       </td>
     </tr>

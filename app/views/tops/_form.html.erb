@@ -1,13 +1,17 @@
 <%= form_with(model: @top, local: true) do |f| %>
   <table class="table">
     <tr>
-      <%= f.label :image %><br>
-      <%= f.file_field :image, id: :top_img%>
-      <% if @top.image.present? %>
-        <%= image_tag @top.image.url, width: "100%", class: "image-border", id: :top_img_prev %>
-      <% else %>
-        <%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :top_img_prev %>
-      <% end %>
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6 my-3">
+          <%= f.label :image %><br>
+          <%= f.file_field :image, id: :top_img%>
+          <% if @top.image.present? %>
+            <%= image_tag @top.image.url, width: "100%", class: "image-border", id: :top_img_prev %>
+          <% else %>
+            <%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :top_img_prev %>
+          <% end %>
+        </div>
+      </div>
     </tr>
     <tr>
       <td><%= f.label :reserve_title %></td>
@@ -77,25 +81,25 @@
       <td><%= f.label :introduction_image_count %></td>
       <td><%= f.number_field :introduction_image_count, min: 0, class: "form-control" %></td>
     </tr>
-    <tr>
+    <tr class="slide-number">
       <td class="required"><%= f.label :slide_number %></td>
-      <td><%= f.number_field :slide_number, min: 0, class: "form-control" %></td>
+      <td><%= f.number_field :slide_number, min: 0, placeholder: "※ 他の画像番号と被らない番号を選択してください", class: "form-control" %></td>
     </tr>
-    <tr>
+    <tr class="image-text">
       <td class="required"><%= f.label :image_text %></td>
-      <td><%= f.text_field :image_text, class: "form-control" %></td>
+      <td><%= f.text_field :image_text, placeholder: "※ 画像の説明文", class: "form-control" %></td>
     </tr>
     <tr>
       <td><%= f.label :main_slide_flag %></td>
-      <td>表示する場合はチェックを入れる<%= f.check_box :main_slide_flag %></td>
+      <td><%= f.select :main_slide_flag, [['表示', 0], ['非表示', 1]], {}, class: "form-control" %></td>
     </tr>
     <tr>
       <td><%= f.label :reserve_image_flag %></td>
-      <td>表示する場合はチェックを入れる<%= f.check_box :reserve_image_flag %></td>
+      <td><%= f.select :reserve_image_flag, [['表示', 0], ['非表示', 1]], {}, class: "form-control" %></td>
     </tr>
     <tr>
       <td><%= f.label :introduction_image_flag %></td>
-      <td>表示する場合はチェックを入れる<%= f.check_box :introduction_image_flag %></td>
+      <td><%= f.select :introduction_image_flag, [['表示', 0], ['非表示', 1]], {}, class: "form-control" %></td>
     </tr>
   </table>
   <%= f.submit "登録", class: "btn btn-sm btn-outline-dark" %>

@@ -3,7 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
 
   # 本番環境へのデプロイのために追加
-  config.hosts << "genkinomototest.herokuapp.com"
+  config.hosts << "genkinomoto.herokuapp.com"
   config.hosts << "localhost"
 
   # Settings specified here will take precedence over those in config/application.rb.

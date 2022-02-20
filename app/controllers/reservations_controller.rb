@@ -23,7 +23,7 @@ class ReservationsController < ApplicationController
 
   def management_new
     @courses = @menus.where.not(category_number: "4").where.not(category_number: "3")
-    @add_nail_menus = @menus.where(reserve_flag: "0").where(category_title_number: "4") # 巻き爪補正メニュー
+    @add_nail_menus = @menus.where(reserve_flag: "0").where(category_title_number: "4") # 予約メニューに表示する、巻き爪補正メニュー
     @topping_menus = @menus.where(category_number: "3") # トッピングメニュー
   end
 

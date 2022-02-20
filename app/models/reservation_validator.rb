@@ -1,7 +1,7 @@
 class ReservationValidator < ActiveModel::EachValidator
   # start_timeとend_timeのデータを元に同時刻に予約が重複しないようにバリデーションをかける
-  # record：検証対象のモデルオブジェクト
-  # attribute：検証対象のフィールド名
+  # record：検証対象のモデルオブジェクト（Reservationモデル）
+  # attribute：検証対象のフィールド名（カラム名）
   # value：検証対象の値
   def validate_each(record, attribute, value)
     # 新規登録する期間

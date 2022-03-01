@@ -57,7 +57,7 @@ Store.create!(
   image: File.open("app/assets/images/store1.jpg")
 )
 
-10.times do |n|
+5.times do |n|
   name  = Faker::Name.name
   email = "staff-#{n+1}@email.com"
   password = "password"
@@ -73,7 +73,7 @@ Store.create!(
   )
 end
 
-20.times do |n|
+5.times do |n|
   name = "商品#{n+1} サンプル ボディケア専用オイル 250ml"
   price = (n+1)*100
   description = Faker::Lorem.sentences(number: 10)
@@ -87,7 +87,7 @@ end
     )
 end
 
-20.times do |n|
+5.times do |n|
   title = "イベント-#{n+1} サンプルイベント"
   category = "屋外イベント"
   price = (n+1)*1000
@@ -144,7 +144,7 @@ Top.create!(
   store_id: 1
 )
 
-10.times do |n|
+5.times do |n|
   name  = Faker::Name.name
   email = "sample-#{n+1}@email.com"
   password = "password"
@@ -553,8 +553,8 @@ Menu.create!(
   store_id: 1
 )
 
-10.times do |n|
-  title  = "サンプルタイトルNo.#{n+1}"
+5.times do |n|
+  title  = "サンプルお知らせNo.#{n+1}"
   body = Faker::Lorem.sentences(number: 100)
   Notification.create!(
     title: title,

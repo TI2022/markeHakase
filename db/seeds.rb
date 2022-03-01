@@ -10,9 +10,9 @@ Store.create!(
   name: "ゲンキノモト。平塚店",
   address: "〒254-0034 神奈川県平塚市宝町9-14",
   phone: "0463-27-2008",
-  email: "genkinomoto-hiratsuka@email.com",
-  line_id: "genkinomoto_line_dummy",
-  description: Faker::Lorem.sentences(number: 10),
+  email: "genkinomoto.foot@gmail.com",
+  line_id: "変更をお願いします",
+  description: "変更をお願いします",
   opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
@@ -26,10 +26,10 @@ Store.create!(
 Store.create!(
   name: "ゲンキノモト。厚木店",
   phone: "0463-27-2008",
-  email: "genkinomoto-atsugi@email.com",
-  line_id: "genkinomoto_line_dummy",
+  email: "genkinomoto.foot@gmail.com",
+  line_id: "変更をお願いします",
   address: "〒234-0014 神奈川県厚木市旭町2丁目11-5 アポロパレス 101",
-  description: Faker::Lorem.sentences(number: 10),
+  description: "変更をお願いします",
   opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
@@ -42,11 +42,11 @@ Store.create!(
 
 Store.create!(
   name: "ゲンキノモト。小田原店",
-  address: "神奈川県 小田原市 某所",
+  address: "〒256-0813 神奈川県小田原市前川155-1",
   phone: "0465-48-1009",
-  email: "genkinomoto-odawara@email.com",
-  line_id: "genkinomoto_line_dummy",
-  description: Faker::Lorem.sentences(number: 10),
+  email: "genkinomoto.foot@gmail.com",
+  line_id: "変更をお願いします",
+  description: "変更をお願いします",
   opening_time: Time.current.beginning_of_day + 36000, # 10:00:00
   closing_time: Time.current.beginning_of_day + 72000, # 20:00:00
   last_order_time: Time.current.beginning_of_day + 68400, # 20:00:00
@@ -57,8 +57,8 @@ Store.create!(
   image: File.open("app/assets/images/store1.jpg")
 )
 
-5.times do |n|
-  name  = Faker::Name.name
+3.times do |n|
+  name  = "サンプルスタッフNo.#{n+1}"
   email = "staff-#{n+1}@email.com"
   password = "password"
   phone = "080-0000-0000"
@@ -73,8 +73,8 @@ Store.create!(
   )
 end
 
-5.times do |n|
-  name = "商品#{n+1} サンプル ボディケア専用オイル 250ml"
+3.times do |n|
+  name = "サンプル商品No.#{n+1}"
   price = (n+1)*100
   description = Faker::Lorem.sentences(number: 10)
   stock = (n+1)
@@ -87,8 +87,8 @@ end
     )
 end
 
-5.times do |n|
-  title = "イベント-#{n+1} サンプルイベント"
+3.times do |n|
+  title = "サンプルイベントNo.#{n+1}"
   category = "屋外イベント"
   price = (n+1)*1000
   stock = (n+1)
@@ -144,8 +144,8 @@ Top.create!(
   store_id: 1
 )
 
-5.times do |n|
-  name  = Faker::Name.name
+3.times do |n|
+  name  = "サンプルお客様No.#{n+1}"
   email = "sample-#{n+1}@email.com"
   password = "password"
   phone = "080-0000-0000"
@@ -553,7 +553,7 @@ Menu.create!(
   store_id: 1
 )
 
-5.times do |n|
+3.times do |n|
   title  = "サンプルお知らせNo.#{n+1}"
   body = Faker::Lorem.sentences(number: 100)
   Notification.create!(

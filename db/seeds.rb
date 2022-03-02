@@ -484,6 +484,22 @@ Menu.create!(
 )
 
 Menu.create!(
+  category: "Topping  ~トッピング~",
+  category_number: 3,
+  category_order: 3,
+  category_title: "ハンドケア",
+  category_title_number: 9,
+  category_title_order: 1,
+  title: "ハンドケア 20分",
+  full_title: "ハンドケア 20分",
+  charge: 2000,
+  description: "※ハンドマッサージ。",
+  treatment_time: 20,
+  course_number: 17,
+  store_id: 1
+)
+
+Menu.create!(
   category: "Foot Care  ~フットケア~",
   category_number: 1,
   category_order: 1,
@@ -496,7 +512,7 @@ Menu.create!(
   original_charge: 9000,
   description: "DM持参で通常スペシャル 60分コースを30％OFFいたします。",
   treatment_time: 60,
-  course_number: 17,
+  course_number: 18,
   menu_flag: 1,
   store_id: 1
 )
@@ -514,7 +530,7 @@ Menu.create!(
   charge: 5000,
   description: "フットケア ネイル貼り替え１本",
   treatment_time: 40,
-  course_number: 18,
+  course_number: 19,
   menu_flag: 1,
   store_id: 1
 )
@@ -532,7 +548,7 @@ Menu.create!(
   charge: 8000,
   description: "フットケア ネイル貼り替え２本",
   treatment_time: 40,
-  course_number: 19,
+  course_number: 20,
   menu_flag: 1,
   store_id: 1
 )
@@ -540,7 +556,7 @@ Menu.create!(
 Menu.create!(
   category: "Hand Care  ~ハンドケア~",
   category_number: 4,
-  category_order: 1,
+  category_order: 4,
   category_title: "ハンドケア",
   category_title_number: 9,
   category_title_order: 1,
@@ -549,7 +565,9 @@ Menu.create!(
   charge: 4000,
   description: "ハンドケア 40分",
   treatment_time: 40,
-  course_number: 20,
+  course_number: 21,
+  menu_flag: 1,
+  reserve_flag: 1,
   store_id: 1
 )
 

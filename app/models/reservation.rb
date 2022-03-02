@@ -3,8 +3,8 @@ class Reservation < ApplicationRecord
   belongs_to :staff, class_name: 'Staff'
   has_many :reviews, dependent: :destroy
   has_many :review_answers, dependent: :destroy
-  validates :start_time, presence: true, reservation: true # reservation: trueを記述する事でreservation_validator.rbのバリデーションを有効にする
-  validates :end_time, presence: true, reservation: true # reservation: trueを記述する事でreservation_validator.rbのバリデーションを有効にする
+  validates :start_time, presence: true, reservation: true # reservation: trueを記述する事でreservation_validator.rbのエラー表示にカラム名を表示する。
+  validates :end_time, presence: true
   validates :course, presence: true
   validates :comment, length: { maximum: 200 }
   validate :two_hours_later_on_the_day, on: :registration # お客さんのみ新規登録は当日の２時間後以降しか登録できない
@@ -52,7 +52,7 @@ class Reservation < ApplicationRecord
     )
   end
 
-  #reservations_controller.rbのreservation_management_createアクションで使用
+  #reservations_controller.rbのmanagement_createアクションで使用
   def apply_management!(menu_time)
     end_time = start_time + menu_time
     title_for_staff_comment = "予約確定 #{self.guest.name}様  #{self.treatment_menu}  #{self.staff.name}"

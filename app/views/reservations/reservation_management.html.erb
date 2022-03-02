@@ -7,6 +7,7 @@
 </div>
 <div class="my-3 right">
   <%= link_to "新規予約作成", management_new_reservations_path, remote: true, class: "btn btn-primary" %>
+  <%= link_to "予約制限作成", validate_new_reservations_path, remote: true, class: "btn btn-warning" %>
 </div>
 <div class="center my-3">
   <%= search_form_for @q, url: search_reservations_path do |f| %>
@@ -102,6 +103,7 @@
 </div>
 
 <div id="management_new_reservation" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div id="validate_new_reservation" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 
 <script>
   if($('.show_delete_btn').hasClass('danger_btn_close')){

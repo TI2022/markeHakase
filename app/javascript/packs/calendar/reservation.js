@@ -26,8 +26,26 @@ document.addEventListener("turbolinks:load", function() {
       center: 'title',
       end: 'today prev,next'
     },
-    titleFormat: function() {
-      return "予約状況";
+    views: {
+      timeGridWeek: {
+        titleFormat: function (date) {
+          const startMonth = date.start.month + 1;
+          const endMonth = date.end.month + 1;
+    
+          // 1週間のうちに月をまたぐかどうかの分岐処理
+          if (startMonth === endMonth) {
+            return startMonth + '月';
+          } else {
+            return startMonth + '月～' + endMonth + '月'; 
+          }
+        },
+        dayHeaderFormat: function (date) {
+          const day = date.date.day;
+          const weekNum = date.date.marker.getDay();
+          const week = ['(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)'][weekNum];
+          return day + ' ' + week;
+        }
+      }
     },
     selectable: true,
     slotMinTime: '10:00:00',
@@ -61,6 +79,15 @@ document.addEventListener("turbolinks:load", function() {
       }
       if (info.event._def.title=='施術完了') {
         info.el.style.background='blue' ;
+      }
+      if (info.event._def.title=='1人') {
+        info.el.style.background='darkgray' ;
+      }
+      if (info.event._def.title=='2人') {
+        info.el.style.background='darkgray' ;
+      }
+      if (info.event._def.title=='3人') {
+        info.el.style.background='darkgray' ;
       }
     }
   });

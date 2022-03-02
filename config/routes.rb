@@ -15,11 +15,13 @@ Rails.application.routes.draw do
     resources :reviews
     resources :review_answers
     collection do
-      get :management_new
-      get :search
-      get :confirm_reservation
-      get :reservation_management
-      post :reservation_management_create
+      get :confirm_reservation      # 予約申請確認画面
+      get :reservation_management   # スタッフ予約管理画面
+      get :search                   # スタッフ予約管理画面(検索後) 
+      get :management_new           # スタッフ新規予約作成画面
+      post :management_create       # スタッフ新規予約作成処理
+      get :validate_new             # スタッフ予約制限作成画面
+      post :validate_create         # スタッフ予約制限作成処理
     end
     member do
       get :edit_reserve

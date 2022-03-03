@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_034310) do
     t.integer "guest_id"
     t.datetime "reservation_time"
     t.integer "cancel_flag", default: 0
+    t.integer "validate_flag", default: 0
     t.string "treatment_menu"
     t.integer "treatment_time_menu", default: 0
     t.integer "full_treatment_time_menu", default: 0

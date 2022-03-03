@@ -1,32 +1,16 @@
   <%= form_with(model: @event, local: true) do |f| %>
   <div class="event-form-wrapper">
     <div>
-     <ul>
-      <li><%= f.label :image %></li>
-      <% if @event.image.present? %>
-        <li><%= image_tag @event.image.url, width: "100%", class: "image-border", id: :event_img_prev %></li>
-      <% else %>
-        <li><%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :event_img_prev %></li>
-      <% end %>
-      <p></p>
-      <li><%= f.file_field :image, id: :event_img %></li>
-      <script type="text/javascript">
-        $(function() {
-          function readURL(input) {
-              if (input.files && input.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-          $('#event_img_prev').attr('src', e.target.result);
-              }
-              reader.readAsDataURL(input.files[0]);
-              }
-          }
-          $("#event_img").change(function(){
-              readURL(this);
-          });
-        });
-      </script>
-     </ul>
+      <ul>
+        <li><%= f.label :image %></li>
+        <% if @event.image.present? %>
+          <li><%= image_tag @event.image.url, width: "100%", class: "image-border", id: :event_img_prev %></li>
+        <% else %>
+          <li><%= image_tag "/no_image2.png", width: "100%", class: "image-border", id: :event_img_prev %></li>
+        <% end %>
+        <p></p>
+        <li><%= f.file_field :image, id: :event_img %></li>
+      </ul>
     </div>
 
     <div>
@@ -67,4 +51,21 @@
     </ul>
   </div>
 
-  <% end %>
+<% end %>
+
+<script type="text/javascript">
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#event_img_prev').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#event_img").change(function(){
+        readURL(this);
+    });
+  });
+</script>

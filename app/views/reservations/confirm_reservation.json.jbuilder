@@ -12,3 +12,11 @@ json.array! @reservations do |reservation|
     json.url edit_reserve_reservation_url(reservation.id)
   end
 end
+
+if @shifts.present?
+  json.array! @shifts do |shift|
+    json.id shift.id
+    json.title "#{shift.working_staff}人"
+    json.start shift.working_day
+  end
+end

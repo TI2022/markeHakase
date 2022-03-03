@@ -111,13 +111,17 @@ class ReservationsController < ApplicationController
     @guests_within_two_weeks = Reservation.where(guest_id: current_user.id).where(cancel_flag: 0).where(start_time: to...from)
     menu = Menu.where(reserve_flag: 0) # 予約画面に表示するメニューはreserve_flag: 0のものだけ。
     @first_menu = menu.where(category_title_number: "1") # 初回メニュー
+    @change_nail_menu = menu.where(category_title_number: "8") # ２ヶ月以内来店巻き爪補正単品メニュー
+    @special_menu = menu.where(category_title_number: "3") # ２ヶ月以内来店スペシャル割引メニュー
+
     @foot_menu = menu.where(category_title_number: "2") # フットケアメニュー
     @body_menu = menu.where(category_number: "2") # ボディケアメニュー
-    @topping_menu = menu.where(category_number: "3") # トッピングメニュー
-    @change_nail_menu = menu.where(category_number: "1").where(category_title_number: "4") # ２ヶ月以内来店巻き爪補正単品メニュー
-    @special_menu = menu.where(category_title_number: "3") # ２ヶ月以内来店スペシャル割引メニュー
+    @add_menu = menu.where.not(category_title_number: 1..9) # 追加したメニュー
     @DM_menu = menu.where(category_title_number: "7") # DMメニュー
+
+    @topping_menu = menu.where(category_number: "3") # トッピングメニュー
     @add_nail_menu = menu.where(category_number: "4").where(category_title_number: "4") # 巻き爪補正メニュー
+    
   end
 
   def create

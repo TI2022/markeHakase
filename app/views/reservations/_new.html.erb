@@ -215,6 +215,42 @@
             </div>
           </div>
 
+
+          <% if @add_menu.present? %>
+            <% @add_menu.each do |menu| %>
+              <hr>
+
+              <div>
+                <h5 class="py-2 category">
+                  <span class="px-1"><%= menu.category%></span>
+                </h5>
+                <div class="py-2 reserve-white-bg">
+                  <div class="toggle-btn cursor-pointer right my-2 px-3">
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="menu-toggle mx-2 display-none">
+                      <div class="menu-btn display-block btn btn-info m-2">
+                        <%= menu.full_title %>
+                      </div>
+                      <div class="m-2">
+                        <div class="px-1 description font-gray">
+                          <%= menu.description %>
+                        </div>
+                        <div class="right course-charge font-deep-gray pt-4 px-2">
+                          <span class="font-deep-gray font-large">￥<%= menu.charge.to_s(:delimited) %></span>
+                          <span class="font-gray font-small">税込</span>
+                        </div>
+                        <div class="display-none course-id">
+                          <%= menu.id %>
+                        </div>
+                      </div>
+                      <br />
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+
           <hr>
 
           <div>

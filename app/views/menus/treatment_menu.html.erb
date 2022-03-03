@@ -18,13 +18,9 @@
                   <% unless index == 0 %>
                     <hr width=90% size=3>
                   <% end %>
-                  <% if title.image.present? %>
+                  <% if title.image.present? && title.image_flag == 0 %>
                     <% t = @menus.find(title.id) %>
-                    <% unless index == 0 %>
-                      <div class="center"><%= link_to image_tag(t.image.url, width: '90%', class: "rounded"), reservations_path, 'data-turbolinks': false %></div>
-                    <% else %>
-                      <div class="center mt-3"><%= link_to image_tag(t.image.url, width: '90%', class: "rounded"), reservations_path, 'data-turbolinks': false %></div>
-                    <% end %>
+                    <div class="center mt-3"><%= link_to image_tag(t.image.url, width: '90%', class: "rounded"), reservations_path, 'data-turbolinks': false %></div>
                   <% end %>
                   <p>
                     <%= title.title %>  <span class="float-right"><%= title.charge.to_s(:delimited) %>円

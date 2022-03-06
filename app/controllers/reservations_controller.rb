@@ -79,6 +79,8 @@ class ReservationsController < ApplicationController
   def validate_create
     @reservation = Reservation.new(reservation_params)
     @reservation[:validate_flag] = "1"
+    title_for_staff_comment = "予約制限"
+    @reservation[:title_for_staff] = title_for_staff_comment
     if @reservation.save
       flash[:success] = "予約制限作成を完了しました。"
       redirect_to reservation_management_reservations_url

@@ -1,13 +1,19 @@
-===============================
 <%= @user.name %>様
-===============================
 
 この度はゲンキノモトをご利用頂きありがとうございます！
-下記内容で予約申込みさせて頂きました。
+以下の内容でお客様の仮予約を承りました。
+予約完了まで少々お待ちください。
 -----------------------------------------------------
 【予約日】：<%= l @reservation.start_time, format: :dayonly %>
 【時間】：<%= l @reservation.start_time, format: :timeonly %> - <%= l (@reservation.start_time + (@reservation.treatment_time_menu * 60)), format: :timeonly if @reservation.end_time.present? %>
+【店舗】：<%= @user.store.name %>
 【コース】：<%= @reservation.treatment_menu %>
-【コメント】：<%= @reservation.comment.presence || "未記入"  %>
+【コメント】：<%= @reservation.comment.presence || ""  %>
 -----------------------------------------------------
 ※予約は確定ではありません。スタッフが確認次第、ご連絡させて頂きます。
+
+
+------------------------------------
+ゲンキノモト。公式ウェブサイト
+https://genkinomoto.herokuapp.com/
+------------------------------------

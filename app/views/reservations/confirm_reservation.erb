@@ -11,7 +11,6 @@
       <th scope="col">名前</th>
       <th scope="col">予約時間</th>
       <th scope="col">コース名</th>
-      <th scope="col">スタッフ名</th>
       <th scope="col">操作</th>
     </tr>
   </thead>
@@ -22,8 +21,7 @@
           <td><%= l reservation.start_time, format: :dayonly %></td>
           <td><%= reservation.guest.name %>様</td>
           <td><%= l reservation.start_time, format: :timeonly %> - <%= l reservation.end_time, format: :timeonly if reservation.end_time.present? %></td>
-          <td><%= link_to reservation.treatment_menu, reservation_path(reservation.id), class: 'btn btn-info' %></td>
-          <td><%= reservation.staff_id %></td>
+          <td><%= reservation.treatment_menu %></td>
           <td><%= link_to "内容確認", edit_reservation_path(reservation.id), remote: true, class: "btn btn-primary" %></td>
         </tr>
       <% end %>

@@ -35,6 +35,8 @@ gem "omniauth-rails_csrf_protection"
 
 # 画像のアップロード機能
 gem 'carrierwave'
+gem 'cloudinary'
+
 # 検索機能
 gem 'ransack'
 gem 'payjp'

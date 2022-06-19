@@ -11,17 +11,14 @@
       <table class="table">
       <tr>
           <td>
-            <div class="form-group">
-              <%= f.label :working_day %>
-              <%= f.date_field :working_day, class: "form-control" %>
-            </div>
+            <%= l(@shift.working_day, format: :middle) %>
           </td>
         </tr>
         <tr>
           <td>
             <div class="form-group">
               <%= f.label :working_staff %>
-              <%= f.number_field :working_staff, class: "form-control" %>
+              <%= f.number_field :working_staff, min: 1, class: "form-control" %>
             </div>
           </td>
         </tr>

@@ -85,6 +85,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    aws_cf_signer (0.1.3)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.9.3)
@@ -109,6 +110,9 @@ GEM
       mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
     childprocess (4.1.0)
+    cloudinary (1.23.0)
+      aws_cf_signer
+      rest-client (>= 2.0.0)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     devise (4.8.1)
@@ -369,6 +373,7 @@ DEPENDENCIES
   byebug
   capybara
   carrierwave
+  cloudinary
   devise
   devise-i18n
   devise-i18n-views

@@ -22,9 +22,6 @@
         <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
       <% end %>
     </div>
-<% 
-=begin
-%>
     <% if !user_signed_in? %>
       <%= link_to image_tag('/payment_history.png', width: 30), new_user_session_path %>
       <%= link_to '購入履歴', new_user_session_path, class: "btn btn-sm btn-outline-dark" %>
@@ -45,23 +42,14 @@
       <% end %>
       <%= link_to 'カート', carts_path(current_user), class: "btn btn-sm btn-warning" %>
     <% end %>
-<%
-=end
-%>
   </div>
 
   <div class="header-menu row">
     <div class="border-r col-2"><%= link_to 'ご予約', reservations_path, class: "link-lightgray" %></div>
     <div class="border-r col-2"><%= link_to '店舗のご案内', stores_path, class: "link-lightgray" %></div>
     <div class="border-r col-2"><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "link-lightgray" %></div>
-<% 
-=begin
-%>
     <div class="border-r col-2"><%= link_to '商品情報', items_path, class: "link-lightgray" %></div>
     <div class="border-r col-2"><%= link_to 'イベント情報', events_path, class: "link-lightgray" %></div>
-<%
-=end
-%>
     <div class="col-2"><%= link_to '口コミ', header_reviews_path, class: "link-lightgray", 'data-turbolinks': false %></div>
   </div>
 
@@ -69,9 +57,6 @@
     <div class="nav">
       <div class="inner">
         <div class="phone-guest-nav">
-<% 
-=begin
-%>
           <div class="user-payment-info">
             <% if !user_signed_in? %>
               <%= link_to image_tag('/payment_history.png', width: 30), new_user_session_path %>
@@ -94,9 +79,6 @@
               <%= link_to 'カート', carts_path(current_user), class: "btn btn-sm btn-warning" %>
             <% end %>
           </div>
-<%
-=end
-%>
           <div class="mt-3">
             <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -125,14 +107,8 @@
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-store-alt"></span></i><%= link_to '店舗のご案内', stores_path, class: "pl-3" %></li>
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-bars"></i></span><%= link_to 'メニューと料金', treatment_menu_menus_path, class: "pl-3" %></li>
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-calendar-alt"></i></span><%= link_to '施術ご予約', reservations_path, 'data-turbolinks': false, class: "pl-3" %></li>
-<% 
-=begin
-%>
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-cart-arrow-down"></i></span><%= link_to '商品情報', items_path, class: "pl-3" %></li>
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-campground"></i></span><%= link_to 'イベント情報', events_path, class: "pl-3" %></li>
-<%
-=end
-%>
           <li class="display-flex align-items-center"><span class="font-gray"><i class="fas fa-comment-dots"></i></span><%= link_to '口コミ', header_reviews_path, class: "pl-3" %></li>
         </ul>
 

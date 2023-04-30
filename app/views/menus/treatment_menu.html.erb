@@ -13,7 +13,7 @@
               <div class="title"><%= title_menu.category_title %></div>
               <div>
                 <% @menus.where(category: menu.category).where(category_title: title_menu.category_title)
-                          .order(course_number: :asc).each_with_index do |title, index|
+                          .each_with_index do |title, index|
                 %>
                   <% unless index == 0 %>
                     <hr width=90% size=3>

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_034310) do
+ActiveRecord::Schema.define(version: 2023_04_30_094231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", force: :cascade do |t|
+    t.string "brand"
+    t.integer "exp_month"
+    t.integer "exp_year"
+    t.integer "last4"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "carts", force: :cascade do |t|
     t.bigint "user_id"
